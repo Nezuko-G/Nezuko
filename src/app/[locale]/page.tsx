@@ -19,7 +19,7 @@ export default async function HomePage({
         {t('welcome')}
       </h1>
       <p className="text-lg text-gray-600">
-        now locale: {locale}
+        now locale is: {locale}
       </p>
     </div>
   )
