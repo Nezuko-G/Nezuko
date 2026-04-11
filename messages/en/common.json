@@ -1,0 +1,23 @@
+{
+  "welcome": "Welcome",
+  "login": "Login",
+  "logout": "Logout",
+  "settings": "Settings",
+  "dashboard": "Dashboard",
+  "profile": "Profile",
+  "home": "Home",
+  "about": "About",
+  "contact": "Contact",
+  "search": "Search",
+  "loading": "Loading...",
+  "error": "Error",
+  "success": "Success",
+  "cancel": "Cancel",
+  "save": "Save",
+  "delete": "Delete",
+  "edit": "Edit",
+  "create": "Create",
+  "submit": "Submit",
+  "language": "Language",
+  "switchTo": "Switch to"
+}
