@@ -34,7 +34,8 @@ export default function HomePage() {
               <Button className="flex h-14 gap-2 px-8 text-lg">
                 ENTER SYSTEM <ArrowUpRight className="h-6 w-6" aria-hidden="true" />
               </Button>
-            </Link>
+            </Link> 
+            /! note here button inside link will make hydration error and cause unlimited lagg in safari browser
           </div>
         </div>
       </main>
