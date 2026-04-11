@@ -1,15 +1,7 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  reactCompiler: true,
-  turbopack: {
-    resolveAlias: {
-      "@": "./src",
-    },
-  },
-  experimental: {
-    turbopackFileSystemCacheForDev: true,
-  },
+  /* config options here */
 };
 
 export default nextConfig;
