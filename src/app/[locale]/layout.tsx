@@ -1,7 +1,6 @@
 import { NextIntlClientProvider } from 'next-intl'
 import { getMessages } from 'next-intl/server'
 import { getDir, routing } from '@/i18n/routing'
-import { LanguageSwitcher } from '@/components/features/i18n'
 import { Providers } from '@/components/providers/Providers'
 
 export function generateStaticParams() {
@@ -16,19 +15,20 @@ export default async function LocaleLayout({
   params: Promise<{ locale: string }>
 }) {
   const { locale } = await params
-  
   const messages = await getMessages()
+  const direction = getDir(locale) 
 
   return (
-    <NextIntlClientProvider locale={locale} messages={messages}>
-      <Providers>
-        <header className="flex justify-end p-4" dir={getDir(locale)}>
-          <LanguageSwitcher currentLocale={locale} />
-        </header>
-        <main dir={getDir(locale)}>
-          {children}
-        </main>
-      </Providers>
-    </NextIntlClientProvider>
+    <html lang={locale} dir={direction} suppressHydrationWarning>
+      <body className="antialiased">
+        <NextIntlClientProvider locale={locale} messages={messages}>
+          <Providers>
+            <main>
+              {children}
+            </main>
+          </Providers>
+        </NextIntlClientProvider>
+      </body>
+    </html>
   )
 }
