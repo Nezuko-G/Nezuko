@@ -10,11 +10,13 @@ export default getRequestConfig(async ({ requestLocale }) => {
   }
 
   const common = (await import(`../../messages/${locale}/common.json`)).default
+  const landing = (await import(`../../messages/${locale}/landing.json`)).default
   
   return {
     locale: locale as typeof routing.locales[number],
     messages: {
-      common
+      common,
+      landing
     }
   }
 })

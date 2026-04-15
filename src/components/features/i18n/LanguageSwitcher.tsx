@@ -5,44 +5,38 @@ import { useCallback } from 'react'
 
 interface LanguageSwitcherProps {
   currentLocale: string
-  className?: string
 }
 
-export function LanguageSwitcher({ currentLocale, className }: LanguageSwitcherProps) {
+export function LanguageSwitcher({ currentLocale }: LanguageSwitcherProps) {
   const router = useRouter()
   const pathname = usePathname()
 
   const switchLocale = useCallback((newLocale: string) => {
     if (newLocale === currentLocale) return
-
     const segments = pathname.split('/')
-    if (segments[1] === 'en' || segments[1] === 'ar') {
-      segments[1] = newLocale
-    } else {
-      segments.splice(1, 0, newLocale)
-    }
+    segments[1] = newLocale
     const newPath = segments.join('/')
     router.push(newPath)
   }, [pathname, router, currentLocale])
 
   return (
-    <div className={`flex items-center gap-2 ${className || ''}`}>
+    <div className="flex items-center gap-1 bg-secondary-light p-1 rounded-full border border-gray-700">
       <button
         onClick={() => switchLocale('en')}
-        className={`px-3 py-1.5 rounded-full text-sm font-medium transition-colors ${
+        className={`px-3 py-1 rounded-full text-xs font-bold transition-all ${
           currentLocale === 'en'
-            ? 'bg-[#D4FF00] text-black'
-            : 'text-zinc-400 hover:text-white hover:bg-zinc-800'
+            ? 'bg-primary text-secondary' 
+            : 'text-gray-400 hover:text-white'
         }`}
       >
         EN
       </button>
       <button
         onClick={() => switchLocale('ar')}
-        className={`px-3 py-1.5 rounded-full text-sm font-medium transition-colors ${
+        className={`px-3 py-1 rounded-full text-xs font-bold transition-all ${
           currentLocale === 'ar'
-            ? 'bg-[#D4FF00] text-black'
-            : 'text-zinc-400 hover:text-white hover:bg-zinc-800'
+            ? 'bg-primary text-secondary'
+            : 'text-gray-400 hover:text-white'
         }`}
       >
         AR
