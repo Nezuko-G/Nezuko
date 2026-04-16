@@ -1,23 +1,33 @@
 {
-  "welcome": "Welcome",
-  "login": "Login",
-  "logout": "Logout",
-  "settings": "Settings",
-  "dashboard": "Dashboard",
-  "profile": "Profile",
-  "home": "Home",
-  "about": "About",
-  "contact": "Contact",
-  "search": "Search",
-  "loading": "Loading...",
-  "error": "Error",
-  "success": "Success",
-  "cancel": "Cancel",
-  "save": "Save",
-  "delete": "Delete",
-  "edit": "Edit",
-  "create": "Create",
-  "submit": "Submit",
-  "language": "Language",
-  "switchTo": "Switch to"
+  
+  "navbar": {
+    "product": "Product",
+    "solutions": "Solutions",
+    "resources": "Resources",
+    "company": "Company",
+    "pricing": "Pricing",
+    "login": "Login",
+    "demo": "Request a Demo"
+  
+},
+  "footer": {
+    "desc": "A new-age platform for growing businesses to scale HR processes and control spend.",
+    "sections": {
+      "product": "Product",
+      "company": "Company",
+      "legal": "Legal"
+    },
+    "links": {
+      "features": "Features",
+      "pricing": "Pricing",
+      "updates": "Updates",
+      "about": "About Nezuko",
+      "contact": "Contact Us",
+      "careers": "Careers",
+      "privacy": "Privacy Policy",
+      "terms": "Terms & Conditions"
+    },
+    "rights": "All rights reserved © 2026 Nezuko."
+  }
+
 }

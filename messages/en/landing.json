@@ -1,0 +1,99 @@
+{
+  "hero": {
+    "title": "Where HR and Finance move as\none entity",
+    "subtitle": "Discover Nizoku: The new age platform for companies to streamline HR and control expenses.",
+    "cta": "Request a trial",    
+      "placeholders": {
+  "chart": "Sales / Cost Chart Placeholder",
+  "main_image": "Main Image Placeholder",
+  "icon_3d": "3D Icon Placeholder"
+}
+  },
+  "features": {
+    "title": "Everything you need to manage your company smartly",
+    "subtitle": "Integrated tools specially designed to facilitate HR management work",
+    "items": {
+      "attendance": {
+        "title": "Attendance and fingerprint tracking",
+        "description": "Connect fingerprint devices and track your employees' check-in and check-out in real-time."
+      },
+      "payroll": {
+        "title": "Payroll and incentives management",
+        "description": "Calculate salaries, deductions, and overtime with one click and without errors."
+      },
+      "leaves": {
+        "title": "Leave management",
+        "description": "Complete workflow for leave requests from submission to approval or rejection."
+      }
+    }
+  },
+  "bridge": {
+    "title": "End the silos, bridge HR and Finance with Nezuko",
+    "hr": "HR",
+    "finance": "FINANCE",
+    "states": {
+      "disconnected": {
+        "row1": { "l": "Employee changes", "c": "DELAYS", "r": "Payroll payments" },
+        "row2": { "l": "Pay changes", "c": "ERRORS", "r": "Accounting" },
+        "row3": { "l": "Employee expenses", "c": "OVERSPENDING", "r": "Budgeting" }
+      },
+      "connected": {
+        "row1": { "l": "Employee changes", "c": "ON TIME", "r": "Payroll payments" },
+        "row2": { "l": "Pay changes", "c": "AUTOMATED", "r": "Accounting" },
+        "row3": { "l": "Employee expenses", "c": "CONTROL SPEND", "r": "Budgeting" }
+      }
+    }
+  },
+  "roles": {
+  "title": "From HR to Finance, Nezuko is here for you",
+  "items": {
+    "admin": { "title": "HR Admins", "desc": "Simplify and manage every stage of your employees' lifecycle without constant manual work." },
+    "manager": { "title": "HR Managers", "desc": "Scale and automate your HR operations and employee processes to drive HR efficiency." },
+    "chro": { "title": "CHRO", "desc": "Get real-time visibility into your workforce data and make data-driven employee decisions." },
+    "payroll": { "title": "Payroll Managers", "desc": "Run effortless payroll, from processing calculations to accounting integrations." }
+  }
+},
+"mena": {
+  "title": "Built in Egypt,\nmade for MENA",
+  "f1_title": "Local salary data for fair compensation",
+  "f1_desc": "Leverage pay data for Saudi workforce and ensure fair compensation for all.",
+  "f2_title": "Localized for continuous compliance",
+  "f2_desc": "Stay compliant with GOSI, Muqeem, WPS, Mudad and more from day one."
+},
+"gallery": {
+  "title": "A Look Inside",
+  "subtitle": "Carefully designed interfaces to simplify your daily work without complexity.",
+  "screen_title": "Dashboard Screen"
+},
+"cta": {
+  "title": "Ready to transform your company?",
+  "subtitle": "Join thousands of companies relying on Nezuko to grow their business.",
+  "button": "Start Now"
+},
+
+  "testimonials": {
+    "title": "What Our Clients Say",
+    "subtitle": "Success stories from companies that rely on Nezuko daily",
+    "items": {
+      "1": {
+        "quote": "Nezuko has completely transformed our HR department. Efficiency increased by 40% and we now manage payroll in minutes instead of days.",
+        "name": "Sarah Ahmed",
+        "role": "HR Manager",
+        "company": "Tech Ahead"
+      },
+      "2": {
+        "quote": "Finally, our payroll and finances are perfectly synchronized. No more manual data entry errors.",
+        "name": "Khaled Mansour",
+        "role": "CFO",
+        "company": "Global Innovate"
+      },
+      "3": {
+        "quote": "Real-time workforce data allows me to make proactive decisions for our company's future with complete confidence.",
+        "name": "Ayesha Khan",
+        "role": "CEO",
+        "company": "Future Builders"
+      }
+    }
+  }
+  
+}
