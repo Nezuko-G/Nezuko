@@ -8,8 +8,8 @@ export default function LoginPage() {
     const t = useTranslations("auth");
 
     return (
-        <div className="flex min-h-screen flex-row">
-            <div className="w-1/2 bg-secondary text-white p-12 flex flex-col justify-between overflow-hidden relative pb-0">
+        <div className="flex min-h-screen flex-col md:flex-row">
+            <div className="w-full md:w-1/2 min-h-[300px] bg-secondary text-white p-12 flex flex-col justify-between overflow-hidden relative pb-0">
 
                 <div>
                     <h1 className="text-2xl font-bold mb-8">{t("brand")}</h1>
@@ -48,13 +48,13 @@ export default function LoginPage() {
 
             </div>
 
-            <div className="w-1/2 bg-white flex flex-col">
+            <div className="w-full md:w-1/2 bg-white flex flex-col">
 
                 <div className="flex justify-end p-4">
                     <LangSwitcher />
                 </div>
 
-                <div className="flex-1 flex items-center justify-center px-16">
+                <div className="flex-1 flex items-center justify-center px-6 md:px-16">
                     <div className="w-full max-w-md space-y-4">
 
                         {/* Company Email */}
@@ -95,7 +95,6 @@ export default function LoginPage() {
                                 className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-secondary"
                             />
                         </div>
-
 
                         <button className="w-full bg-secondary text-white py-3 rounded-lg font-medium hover:opacity-90 transition-opacity">
                             {t("form.submit")}
