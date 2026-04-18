@@ -11,12 +11,15 @@ export default getRequestConfig(async ({ requestLocale }) => {
 
   const common = (await import(`../../messages/${locale}/common.json`)).default
   const landing = (await import(`../../messages/${locale}/landing.json`)).default
+  const auth = (await import(`../../messages/${locale}/auth.json`)).default
+
   
   return {
     locale: locale as typeof routing.locales[number],
     messages: {
       common,
-      landing
+      landing,
+      auth
     }
   }
 })
