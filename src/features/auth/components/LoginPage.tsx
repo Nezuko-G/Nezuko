@@ -9,7 +9,9 @@ export default function LoginPage() {
 
     return (
         <div className="flex min-h-screen flex-col md:flex-row">
-            <div className="w-full md:w-1/2 min-h-[300px] bg-secondary text-white p-12 flex flex-col justify-between overflow-hidden relative pb-0">
+
+            {/* Left Section (Hidden on Mobile) */}
+            <div className="hidden md:flex md:w-1/2 min-h-[300px] bg-secondary text-white p-12 flex-col justify-between overflow-hidden relative pb-0">
 
                 <div>
                     <h1 className="text-2xl font-bold mb-8">{t("brand")}</h1>
@@ -48,59 +50,74 @@ export default function LoginPage() {
 
             </div>
 
-            <div className="w-full md:w-1/2 bg-white flex flex-col">
+            {/* Right Section */}
+            <div className="w-full md:w-1/2 bg-gray-100 flex flex-col min-h-screen">
 
+                {/* Language Switcher */}
                 <div className="flex justify-end p-4">
                     <LangSwitcher />
                 </div>
 
-                <div className="flex-1 flex items-center justify-center px-6 md:px-16">
-                    <div className="w-full max-w-md space-y-4">
+                {/* Centered Content */}
+                <div className="flex-1 flex flex-col items-center justify-center px-6 md:px-16 space-y-4">
 
-                        {/* Company Email */}
-                        <div>
-                            <label className="text-sm text-gray-600 block mb-1">
-                                {t("form.companyEmail")}
-                            </label>
-                            <input
-                                type="email"
-                                defaultValue="admin@techcorp.com"
-                                placeholder="admin@company.com"
-                                className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-secondary"
-                            />
+                    {/* Title */}
+                    <h1 className="text-5xl md:text-6xl font-extrabold text-gray-800 -mt-20 md:-mt-6 tracking-tight mb-12">
+                        {t("brand")}
+                    </h1>
+
+                    {/* Form Card */}
+                    <div className="w-full max-w-md bg-white shadow-lg rounded-2xl p-6 min-h-[450px] flex flex-col">
+
+                        <div className="space-y-5">
+
+                            {/* Company Email */}
+                            <div>
+                                <label className="text-sm text-gray-600 block mb-1">
+                                    {t("form.companyEmail")}
+                                </label>
+                                <input
+                                    type="email"
+                                    defaultValue="admin@techcorp.com"
+                                    placeholder="admin@company.com"
+                                    className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-secondary"
+                                />
+                            </div>
+
+                            {/* User Email */}
+                            <div>
+                                <label className="text-sm text-gray-600 block mb-1">
+                                    {t("form.userEmail")}
+                                </label>
+                                <input
+                                    type="email"
+                                    defaultValue="hr@techcorp.com"
+                                    placeholder="hr@company.com"
+                                    className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-secondary"
+                                />
+                            </div>
+
+                            {/* Password */}
+                            <div>
+                                <label className="text-sm text-gray-600 block mb-1">
+                                    {t("form.password")}
+                                </label>
+                                <input
+                                    type="password"
+                                    defaultValue="Password123"
+                                    placeholder="••••••••"
+                                    className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-secondary"
+                                />
+                            </div>
+
                         </div>
 
-                        {/* User Email */}
-                        <div>
-                            <label className="text-sm text-gray-600 block mb-1">
-                                {t("form.userEmail")}
-                            </label>
-                            <input
-                                type="email"
-                                defaultValue="hr@techcorp.com"
-                                placeholder="hr@company.com"
-                                className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-secondary"
-                            />
-                        </div>
-
-                        {/* Password */}
-                        <div>
-                            <label className="text-sm text-gray-600 block mb-1">
-                                {t("form.password")}
-                            </label>
-                            <input
-                                type="password"
-                                defaultValue="Password123"
-                                placeholder="••••••••"
-                                className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-secondary"
-                            />
-                        </div>
-
-                        <button className="w-full bg-secondary text-white py-3 rounded-lg font-medium hover:opacity-90 transition-opacity">
+                        <button className="w-full bg-secondary text-white py-3 rounded-lg font-medium hover:opacity-90 transition-opacity mt-10">
                             {t("form.submit")}
                         </button>
 
                     </div>
+
                 </div>
             </div>
 
