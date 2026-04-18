@@ -3,9 +3,12 @@
 import Image from "next/image";
 import LangSwitcher from "./LangSwitcher";
 import { useTranslations } from "next-intl";
+import { useLocale } from "next-intl";
+import { Link } from "@/i18n/navigation";
 
 export default function LoginPage() {
     const t = useTranslations("auth");
+    const locale = useLocale();
 
     return (
         <div className="flex min-h-screen flex-col md:flex-row">
@@ -54,7 +57,10 @@ export default function LoginPage() {
             <div className="w-full md:w-1/2 bg-gray-100 flex flex-col min-h-screen">
 
                 {/* Language Switcher */}
-                <div className="flex justify-end p-4">
+                <div className="flex justify-between p-4">
+                    <Link href="/" className="text-sm text-gray-600 hover:text-black">
+                        ← Home
+                    </Link>
                     <LangSwitcher />
                 </div>
 
