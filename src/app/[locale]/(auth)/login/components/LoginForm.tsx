@@ -6,7 +6,7 @@ import { useTranslations } from "next-intl";
 import { useLocale } from "next-intl";
 import { Link } from "@/i18n/navigation";
 
-export default function LoginPage() {
+export default function LoginForm() {
     const t = useTranslations("auth");
     const locale = useLocale();
 

@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { ChevronDown, Menu, X } from "lucide-react";
 import { useTranslations, useLocale } from "next-intl";
-import { LanguageSwitcher } from "@/components/features/i18n/LanguageSwitcher"; 
+import { LanguageSwitcher } from "@/components/i18n/LanguageSwitcher"; 
 import { cn } from "@/lib/utils";
 
 export default function Navbar() {
