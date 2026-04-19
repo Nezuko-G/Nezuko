@@ -1,6 +1,6 @@
 'use client'
 
-import { useRouter, usePathname } from 'next/navigation'
+import { useRouter, usePathname } from '@/i18n/navigation'
 import { useCallback } from 'react'
 
 interface LanguageSwitcherProps {
@@ -13,10 +13,7 @@ export function LanguageSwitcher({ currentLocale }: LanguageSwitcherProps) {
 
   const switchLocale = useCallback((newLocale: string) => {
     if (newLocale === currentLocale) return
-    const segments = pathname.split('/')
-    segments[1] = newLocale
-    const newPath = segments.join('/')
-    router.push(newPath)
+    router.replace(pathname, { locale: newLocale })
   }, [pathname, router, currentLocale])
 
   return (

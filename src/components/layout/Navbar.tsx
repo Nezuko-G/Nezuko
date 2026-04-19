@@ -31,7 +31,7 @@ export default function Navbar() {
             : "bg-transparent text-white"
         )}
       >
-        <Link href={`/${locale}`} className="text-2xl md:text-2xl font-black tracking-tighter">
+        <Link href={`/`} className="text-2xl md:text-2xl font-black tracking-tighter">
           NEZUKO
         </Link>
 
