@@ -1,7 +1,13 @@
 import { routing } from '@/i18n/routing'
 import Navbar from "@/components/layout/Navbar";
 import Footer from '@/components/layout/Footer';
-import HomeView from "@/features/landing/views/HomeView";
+import HeroSection from "./components/HeroSection";
+import BridgeSection from "./components/BridgeSection";
+import RolesSection from "./components/RolesSection";
+import MenaSection from "./components/MenaSection";
+import GallerySection from "./components/GallerySection";
+import TestimonialsSection from "./components/TestimonialsSection";
+import CTASection from "./components/CTASection";
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }))
@@ -13,10 +19,15 @@ export default async function HomePage() {
     <main className="min-h-screen">
       <Navbar />
       <div className="grow">
-        <HomeView />
+        <HeroSection />
+        <BridgeSection />
+        <RolesSection />
+        <MenaSection />
+        <GallerySection />
+        <TestimonialsSection />
+        <CTASection />
       </div>
       <Footer />
     </main>
   )
 }
-

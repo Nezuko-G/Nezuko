@@ -40,7 +40,7 @@ export default function RolesSection() {
         </h2>
       </div>
 
-      <div className="relative w-full flex overflow-x-hidden group">
+      <div className="relative w-full flex overflow-x-hidden py-10 group">
         <div className="absolute top-0 bottom-0 left-0 w-32 md:w-64 bg-gradient-to-r from-background to-transparent z-20 pointer-events-none" />
         <div className="absolute top-0 bottom-0 right-0 w-32 md:w-64 bg-gradient-to-l from-background to-transparent z-20 pointer-events-none" />
 
