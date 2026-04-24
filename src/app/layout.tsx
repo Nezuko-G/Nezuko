@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import "./globals.css"; 
+import "./globals.css";
 
 export const metadata: Metadata = {
   title: "Nezuko | HR Portal",
@@ -11,5 +11,11 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return children; 
+  return (
+    <html>
+      <body>
+        {children}
+      </body>
+    </html>
+  );
 }

@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { ChevronDown, Menu, X } from "lucide-react";
 import { useTranslations, useLocale } from "next-intl";
-import { LanguageSwitcher } from "@/components/i18n/LanguageSwitcher"; 
+import { LanguageSwitcher } from "@/components/i18n/LanguageSwitcher";
 import { cn } from "@/lib/utils";
 
 export default function Navbar() {
@@ -50,16 +50,18 @@ export default function Navbar() {
           <div className="hidden md:block">
             <LanguageSwitcher currentLocale={locale} />
           </div>
-          
+
           <Link href="/login" className="hidden lg:block font-bold text-xs hover:text-primary transition-colors uppercase">
             {t("login")}
           </Link>
-          
-          <button className="bg-primary hover:bg-primary/90 text-secondary font-black py-2 px-4 md:py-3 md:px-6 rounded-full transition-all active:scale-95 text-[13px] md:text-xs">
-            {t("demo")}
-          </button>
 
-          <button 
+          <Link
+            href="/book-demo"
+            className="bg-primary hover:bg-primary/90 text-secondary font-black py-2 px-4 md:py-3 md:px-6 rounded-full transition-all active:scale-95 text-[13px] md:text-xs"
+          >
+            {t("demo")}
+          </Link>
+          <button
             className="lg:hidden p-1"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           >
@@ -79,7 +81,7 @@ export default function Navbar() {
         <Link href="#" className="font-bold text-white" onClick={() => setIsMobileMenuOpen(false)}>{t("login")}</Link>
 
         <div className="pt-2 w-full flex justify-center border-t border-white/10">
-           <LanguageSwitcher currentLocale={locale} />
+          <LanguageSwitcher currentLocale={locale} />
         </div>
       </div>
     </div>
