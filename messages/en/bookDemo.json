@@ -1,0 +1,43 @@
+{
+    "hero": {
+        "titleLine1": "Bring Together HR",
+        "titleLine2": "and Finance",
+        "titleLine3": "in One Place.",
+        "subtitle": "Transform your record system into an efficient work platform.",
+        "features": {
+            "feature1": "Build the foundation for HR excellence",
+            "feature2": "Manage talent from hiring to retention",
+            "feature3": "Control your company spending from one place"
+        }
+    },
+    "form": {
+        "title": "Get a Personalized Demo",
+        "careersPrompt": "Looking for a job?",
+        "careersLink": "Visit our Careers page",
+        "careersInstead": "instead.",
+        "fields": {
+            "fullName": "Full Name*",
+            "email": "Work Email*",
+            "companyName": "Company Name*",
+            "jobTitle": "Job Title*",
+            "phone": "Phone Number*"
+        },
+        "employees": {
+            "label": "Total Number of Employees*",
+            "range1": "1-25",
+            "range2": "26-100",
+            "range3": "101-250",
+            "range4": "250+"
+        },
+        "interests": {
+            "label": "I'm interested in",
+            "all": "All",
+            "coreHR": "Core HR Package",
+            "talent": "Talent Package",
+            "spend": "Spend Package"
+        },
+        "submit": "Book a Call",
+        "privacyText": "By submitting this form, you agree to our website's privacy policy.",
+        "termsLink": "Terms of Service"
+    }
+}
