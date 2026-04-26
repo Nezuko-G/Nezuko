@@ -2,9 +2,14 @@
 
 import { useState } from "react";
 import { useTranslations } from "next-intl";
+import { useRouter } from "next/navigation";
+import axiosInstance from "@/lib/axios/core/instance";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 
 export default function BookDemoForm() {
     const t = useTranslations("bookDemo");
+    const router = useRouter();
 
     const EMPLOYEE_RANGES = [
         t("form.employees.range1"),
@@ -20,8 +25,16 @@ export default function BookDemoForm() {
         t("form.interests.spend"),
     ];
 
+    const [fullName, setFullName] = useState("");
+    const [email, setEmail] = useState("");
+    const [companyName, setCompanyName] = useState("");
+    const [jobTitle, setJobTitle] = useState("");
+    const [phone, setPhone] = useState("");
     const [selectedRange, setSelectedRange] = useState<string | null>(null);
     const [selectedInterests, setSelectedInterests] = useState<string[]>([]);
+
+    const [isLoading, setIsLoading] = useState(false);
+    const [error, setError] = useState<string | null>(null);
 
     const toggleInterest = (item: string) => {
         const allLabel = t("form.interests.all");
@@ -36,10 +49,65 @@ export default function BookDemoForm() {
         }
     };
 
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+        setIsLoading(true);
+        setError(null);
+
+        if (!fullName || !email || !companyName) {
+            setError(t("form.validation.requiredFields"));
+            setIsLoading(false);
+            return;
+        }
+
+        const rangeMap: Record<string, string> = {
+            [t("form.employees.range1")]: "1-25",
+            [t("form.employees.range2")]: "26-100",
+            [t("form.employees.range3")]: "101-500",
+            [t("form.employees.range4")]: "500+",
+        };
+
+        const interestMap: Record<string, string> = {
+            [t("form.interests.coreHR")]: "CORE_HR",
+            [t("form.interests.talent")]: "TALENT",
+            [t("form.interests.spend")]: "SPEND",
+        };
+
+        const payload: Record<string, any> = {
+            fullName,
+            email,
+            companyName,
+            jobTitle,
+            phone,
+        };
+
+        if (selectedRange) {
+            payload.employeeCount = rangeMap[selectedRange];
+        }
+
+        if (selectedInterests.includes(t("form.interests.all"))) {
+            payload.interests = ["CORE_HR", "TALENT", "SPEND"];
+        } else {
+            payload.interests = selectedInterests
+                .map((item) => interestMap[item])
+                .filter(Boolean);
+        }
+
+        try {
+            await axiosInstance.post("/book-demo", payload);
+            router.push("/dashboard");
+        } catch (err: any) {
+            const errorMessage =
+                err.response?.data?.message || err.message || t("form.validation.bookingError");
+            setError(errorMessage);
+        } finally {
+            setIsLoading(false);
+        }
+    };
+
     return (
         <section className="min-h-screen bg-secondary flex items-center justify-center px-4 sm:px-6 lg:px-8 pt-24 sm:pt-28 lg:pt-32 pb-12 sm:pb-16 lg:pb-20">
             <div className="w-full max-w-6xl grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
-
                 <div className="hidden lg:flex flex-col text-white space-y-6">
                     <h1 className="text-5xl xl:text-6xl font-black tracking-tight leading-tight">
                         {t("hero.titleLine1")} <br />
@@ -67,7 +135,6 @@ export default function BookDemoForm() {
                     </ul>
                 </div>
 
-                {/* Mobile-only hero heading above the form card */}
                 <div className="lg:hidden text-white text-center space-y-3">
                     <h1 className="text-3xl sm:text-4xl font-black tracking-tight leading-tight">
                         {t("hero.titleLine1")}{" "}
@@ -79,8 +146,7 @@ export default function BookDemoForm() {
                     </p>
                 </div>
 
-                {/* Right: Form Card */}
-                <div className="bg-white rounded-2xl sm:rounded-3xl p-5 sm:p-7 lg:p-8 shadow-2xl space-y-5 sm:space-y-6 w-full">
+                <form onSubmit={handleSubmit} className="bg-white rounded-2xl sm:rounded-3xl p-5 sm:p-7 lg:p-8 shadow-2xl space-y-5 sm:space-y-6 w-full">
                     <div>
                         <h2 className="text-gray-900 text-lg sm:text-xl font-bold">{t("form.title")}</h2>
                         <p className="text-gray-500 text-xs sm:text-sm mt-1">
@@ -92,53 +158,68 @@ export default function BookDemoForm() {
                         </p>
                     </div>
 
-                    {/* Name + Email always stacked on mobile, 2-col on sm+ */}
+                    {error && (
+                        <div className="p-3 bg-red-50 text-red-600 rounded-lg text-sm border border-red-200">
+                            {error}
+                        </div>
+                    )}
+
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
-                        <input
+                        <Input
                             type="text"
                             placeholder={t("form.fields.fullName")}
-                            className="w-full bg-gray-50 border border-gray-200 text-gray-900 placeholder-gray-400 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-primary/60 transition"
+                            value={fullName}
+                            onChange={(e) => setFullName(e.target.value)}
+                            className="bg-gray-50 border-gray-200 text-gray-900 placeholder:text-gray-400 focus-visible:ring-primary/60"
                         />
-                        <input
+                        <Input
                             type="email"
                             placeholder={t("form.fields.email")}
-                            className="w-full bg-gray-50 border border-gray-200 text-gray-900 placeholder-gray-400 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-primary/60 transition"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            className="bg-gray-50 border-gray-200 text-gray-900 placeholder:text-gray-400 focus-visible:ring-primary/60"
                         />
-                        <input
+                        <Input
                             type="text"
                             placeholder={t("form.fields.companyName")}
-                            className="w-full bg-gray-50 border border-gray-200 text-gray-900 placeholder-gray-400 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-primary/60 transition"
+                            value={companyName}
+                            onChange={(e) => setCompanyName(e.target.value)}
+                            className="bg-gray-50 border-gray-200 text-gray-900 placeholder:text-gray-400 focus-visible:ring-primary/60"
                         />
-                        <input
+                        <Input
                             type="text"
                             placeholder={t("form.fields.jobTitle")}
-                            className="w-full bg-gray-50 border border-gray-200 text-gray-900 placeholder-gray-400 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-primary/60 transition"
+                            value={jobTitle}
+                            onChange={(e) => setJobTitle(e.target.value)}
+                            className="bg-gray-50 border-gray-200 text-gray-900 placeholder:text-gray-400 focus-visible:ring-primary/60"
                         />
                     </div>
 
-                    {/* Phone */}
-                    <div className="flex items-center gap-2 bg-gray-50 border border-gray-200 rounded-xl px-4 py-3">
+                    <div className="flex items-center gap-2 bg-gray-50 border border-gray-200 rounded-full px-4 h-14">
                         <span className="text-gray-500 text-sm shrink-0">🇸🇦 +966</span>
                         <span className="w-px h-5 bg-gray-200 shrink-0" />
                         <input
                             type="tel"
                             placeholder={t("form.fields.phone")}
+                            value={phone}
+                            onChange={(e) => setPhone(e.target.value)}
                             className="flex-1 min-w-0 bg-transparent text-gray-900 placeholder-gray-400 text-sm focus:outline-none"
                         />
                     </div>
 
-                    {/* Employee Range */}
                     <div className="space-y-2">
                         <label className="text-gray-600 text-sm font-medium">{t("form.employees.label")}</label>
                         <div className="flex gap-2 flex-wrap">
                             {EMPLOYEE_RANGES.map((range) => (
                                 <button
+                                    type="button"
                                     key={range}
                                     onClick={() => setSelectedRange(range)}
-                                    className={`px-3 sm:px-4 py-2 rounded-full text-xs sm:text-sm font-semibold border transition-all ${selectedRange === range
+                                    className={`px-3 sm:px-4 py-2 rounded-full text-xs sm:text-sm font-semibold border transition-all ${
+                                        selectedRange === range
                                             ? "bg-primary text-secondary border-primary"
                                             : "border-gray-200 text-gray-600 hover:border-primary/50 bg-gray-50"
-                                        }`}
+                                    }`}
                                 >
                                     {range}
                                 </button>
@@ -146,7 +227,6 @@ export default function BookDemoForm() {
                         </div>
                     </div>
 
-                    {/* Interests */}
                     <div className="space-y-2">
                         <label className="text-gray-600 text-sm font-medium">{t("form.interests.label")}</label>
                         <div className="grid grid-cols-2 sm:flex sm:flex-wrap gap-x-4 gap-y-2">
@@ -154,10 +234,11 @@ export default function BookDemoForm() {
                                 <label key={item} className="flex items-center gap-2 cursor-pointer group">
                                     <div
                                         onClick={() => toggleInterest(item)}
-                                        className={`w-4 h-4 rounded border flex items-center justify-center shrink-0 transition-all ${selectedInterests.includes(item)
+                                        className={`w-4 h-4 rounded border flex items-center justify-center shrink-0 transition-all ${
+                                            selectedInterests.includes(item)
                                                 ? "bg-primary border-primary"
                                                 : "border-gray-300 group-hover:border-primary/50"
-                                            }`}
+                                        }`}
                                     >
                                         {selectedInterests.includes(item) && (
                                             <svg className="w-2.5 h-2.5 text-secondary" fill="none" viewBox="0 0 10 10">
@@ -171,10 +252,13 @@ export default function BookDemoForm() {
                         </div>
                     </div>
 
-                    {/* Submit */}
-                    <button className="w-full bg-primary hover:bg-primary/90 text-secondary font-black py-3.5 rounded-xl transition-all active:scale-95 tracking-wide uppercase text-sm">
-                        {t("form.submit")}
-                    </button>
+                    <Button
+                        type="submit"
+                        disabled={isLoading}
+                        className="w-full text-secondary font-black tracking-wide uppercase text-sm"
+                    >
+                        {isLoading ? "..." : t("form.submit")}
+                    </Button>
 
                     <p className="text-gray-400 text-xs text-center">
                         {t("form.privacyText")}{" "}
@@ -182,8 +266,7 @@ export default function BookDemoForm() {
                             {t("form.termsLink")}
                         </a>
                     </p>
-                </div>
-
+                </form>
             </div>
         </section>
     );

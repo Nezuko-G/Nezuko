@@ -36,6 +36,10 @@
             "talent": "Talent Package",
             "spend": "Spend Package"
         },
+        "validation": {
+            "bookingError": "An error occurred while booking the demo",
+            "requiredFields": "This field is required"
+        },
         "submit": "Book a Call",
         "privacyText": "By submitting this form, you agree to our website's privacy policy.",
         "termsLink": "Terms of Service"
