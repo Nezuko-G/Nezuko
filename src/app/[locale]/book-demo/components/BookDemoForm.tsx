@@ -6,6 +6,8 @@ import { useRouter } from "next/navigation";
 import axiosInstance from "@/lib/axios/core/instance";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { apis } from "@/lib/api/config";
+import { postRequest } from "@/lib/axios/dist/requests";
 
 export default function BookDemoForm() {
     const t = useTranslations("bookDemo");
@@ -94,7 +96,10 @@ export default function BookDemoForm() {
         }
 
         try {
-            await axiosInstance.post("/book-demo", payload);
+            await postRequest({
+                api: `${apis.book_demo}`,
+                body: payload,
+            });
             router.push("/dashboard");
         } catch (err: any) {
             const errorMessage =

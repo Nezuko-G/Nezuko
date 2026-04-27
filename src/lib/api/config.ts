@@ -26,4 +26,7 @@ export const apis = {
   support: "/support-tickets",
 
   daily: "/api/daily",
+
+
+  book_demo: "/book-demo",
 };
