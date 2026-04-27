@@ -16,19 +16,15 @@ export default async function LocaleLayout({
 }) {
   const { locale } = await params
   const messages = await getMessages()
-  const direction = getDir(locale) 
+  const direction = getDir(locale)
 
   return (
-    <html lang={locale} dir={direction} suppressHydrationWarning>
-      <body className="antialiased">
-        <NextIntlClientProvider locale={locale} messages={messages}>
-          <Providers>
-            <main>
-              {children}
-            </main>
-          </Providers>
-        </NextIntlClientProvider>
-      </body>
-    </html>
+    <NextIntlClientProvider locale={locale} messages={messages}>
+      <Providers>
+        <main dir={direction}>
+          {children}
+        </main>
+      </Providers>
+    </NextIntlClientProvider>
   )
 }
