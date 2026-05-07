@@ -1,5 +1,5 @@
-import Sidebar from "./_components/Sidebar";
-import Navbar from "./_components/Navbar";
+import Sidebar from "./dashboard/components/Sidebar";
+import Navbar from "./dashboard/components/Navbar";
 
 export default function DashboardLayout({
   children,

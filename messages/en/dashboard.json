@@ -3,6 +3,7 @@
       "home": "Home",
       "employees": "Employees",
       "time": "Time",
+      "leave": "Leave",
       "payroll": "Payroll",
       "projects": "Projects",
       "reports": "Reports",
@@ -30,5 +31,46 @@
       "unpaid": "Unpaid Leave",
       "days": "Days",
       "day": "Day"
+    },
+    "leave": {
+      "title": "Leave Management",
+      "myRequests": "My Requests",
+      "allRequests": "All Requests",
+      "balance": "Balance",
+      "requestNew": "New Leave Request",
+      "status": {
+        "pending": "Pending",
+        "approved": "Approved",
+        "rejected": "Rejected",
+        "cancelled": "Cancelled"
+      },
+      "form": {
+        "type": "Leave Type",
+        "startDate": "Start Date",
+        "endDate": "End Date",
+        "reason": "Reason",
+        "reasonPlaceholder": "Enter reason (optional)",
+        "submit": "Submit Request",
+        "cancel": "Cancel"
+      },
+      "table": {
+        "employee": "Employee",
+        "type": "Type",
+        "startDate": "Start Date",
+        "endDate": "End Date",
+        "days": "Days",
+        "status": "Status",
+        "actions": "Actions"
+      },
+      "review": {
+        "approve": "Approve",
+        "reject": "Reject",
+        "note": "Review Note",
+        "notePlaceholder": "Enter note (optional)"
+      },
+      "empty": "No leave requests",
+      "cancelConfirm": "Are you sure you want to cancel this request?",
+      "success": "Request submitted successfully",
+      "error": "An error occurred, please try again"
     }
 }

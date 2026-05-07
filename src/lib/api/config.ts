@@ -28,5 +28,13 @@ export const apis = {
   daily: "/api/daily",
 
 
+  leave: {
+    create: "/leave-requests",
+    getAll: "/leave-requests",
+    getMe: "/leave-requests/me",
+    review: "/leave-requests/{id}/review",
+    cancel: "/leave-requests/{id}/cancel",
+  },
+
   book_demo: "/book-demo",
 };
