@@ -1,0 +1,105 @@
+{
+  "list": {
+    "title": "الأصول والعهد",
+    "search": "ابحث بالاسم، السيريال، أو الماركة...",
+    "registerBtn": "تسجيل أصل جديد",
+    "reportBtn": "تقرير الإهلاك",
+    "table": {
+      "name": "الاسم / الماركة",
+      "category": "الفئة",
+      "serial": "السيريال",
+      "status": "الحالة",
+      "condition": "حالة الجهاز",
+      "assignedTo": "في عهدة",
+      "actions": "إجراءات"
+    },
+    "status": {
+      "AVAILABLE": "متاح",
+      "ASSIGNED": "مُسلم",
+      "UNDER_MAINTENANCE": "صيانة",
+      "RETIRED": "مُكهن"
+    },
+    "condition": {
+      "NEW": "جديد",
+      "GOOD": "جيد",
+      "FAIR": "مقبول",
+      "POOR": "ضعيف",
+      "DAMAGED": "تالف"
+    }
+  },
+  "details": {
+    "purchaseCost": "تكلفة الشراء",
+    "bookValue": "القيمة الدفترية",
+    "custodies": "عدد العهد",
+    "status": "الحالة",
+    "brandModel": "الماركة / الموديل",
+    "serialNumber": "الرقم التسلسلي",
+    "category": "الفئة",
+    "condition": "الحالة",
+    "currentHolder": "الحائز الحالي",
+    "purchaseDate": "تاريخ الشراء",
+    "notes": "ملاحظات",
+    "historyTitle": "سجل العهد (History)",
+    "currency": "$",
+    "assignedTo": "تُسلم إلى {name}",
+    "returnedFrom": "مُسترجع من {name}",
+    "conditionDowngrade": "تم رصد تراجع في حالة الجهاز",
+    "out": "خروج: {condition}",
+    "in": "دخول: {condition}",
+    "by": "بواسطة {name}",
+    "unassigned": "غير مُسلم لأحد",
+    "noNotes": "لا توجد ملاحظات"
+  },
+  "report": {
+    "title": "تقرير الإهلاك",
+    "exportCsv": "تصدير CSV",
+    "totalCost": "إجمالي التكلفة",
+    "totalBookValue": "إجمالي القيمة الدفترية",
+    "totalDepreciated": "إجمالي المُهلك",
+    "fullyDepreciatedCount": "مهلك بالكامل",
+    "table": {
+      "asset": "الأصل",
+      "purchaseCost": "تكلفة الشراء",
+      "age": "العمر (سنوات)",
+      "bookValue": "القيمة الدفترية",
+      "depreciation": "الإهلاك",
+      "status": "الحالة"
+    },
+    "formulaText": "المعادلة: القيمة الدفترية = التكلفة - (التكلفة ÷ ٥) × السنوات. الأصول التي تجاوزت ٥ سنوات تصبح قيمتها صفر.",
+    "depreciatedLabel": "% مُهلك",
+    "fullyDepreciated": "مُهلك بالكامل"
+  },
+  "views": {
+    "myAssets": "عهدتي الشخصية",
+    "employeeAssets": "عهدة الموظف",
+    "noAssets": "لا توجد عهد مسجلة حالياً"
+  },
+  "modals": {
+    "title": {
+      "ASSIGN": "تسليم عهدة — {assetName}",
+      "RETURN": "استرجاع عهدة — {assetName}",
+      "TRANSFER": "نقل عهدة — {assetName}",
+      "EDIT": "تعديل بيانات — {assetName}"
+    },
+    "fields": {
+      "selectEmployee": "اختر الموظف",
+      "transferTo": "نقل إلى",
+      "currentHolder": "الحائز الحالي",
+      "conditionOut": "حالة التسليم",
+      "conditionIn": "حالة الاسترجاع",
+      "conditionOnReturn": "الحالة عند الاسترجاع",
+      "notes": "ملاحظات (سبب النقل، عيوب...)"
+    },
+    "warnings": {
+      "atomicTransfer": "هذا الإجراء سيقوم بتسجيل استرجاع من الموظف الحالي وتسليم للموظف الجديد فوراً في عملية واحدة."
+    },
+    "buttons": {
+      "cancel": "إلغاء",
+      "confirmAssign": "تأكيد التسليم",
+      "confirmReturn": "تأكيد الاسترجاع",
+      "confirmTransfer": "تأكيد النقل"
+    },
+    "readonly": "قراءة فقط",
+    "sameTenantHint": "يجب أن يكون من نفس الشركة"
+  }
+}
