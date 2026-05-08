@@ -1,14 +1,28 @@
 "use client"
 import { useTranslations } from "next-intl";
 import { Search, Plus, Bell, MessageSquare } from "lucide-react";
+import { useAuthStore } from "@/hooks/useAuthStore";
 
 export default function Navbar() {
   const t = useTranslations("dashboard.navbar");
+  const { role, setRole } = useAuthStore(); 
+
+  const toggleRole = () => {
+    if (role === "HR") setRole("EMPLOYEE");
+    else if (role === "EMPLOYEE") setRole("MANAGER");
+    else setRole("HR");
+  };
 
   return (
     <header className="h-20 bg-secondary text-white flex items-center justify-between px-6 sticky top-0 z-10 w-full shrink-0 shadow-sm">
       <div className="flex items-center gap-4 w-1/3">
         <h1 className="text-xl font-bold tracking-tight">{t("title")}</h1>
+        <button 
+          onClick={toggleRole}
+          className="px-2 py-1 bg-status-warning/20 text-status-warning text-xs font-bold rounded-md"
+        >
+          {role} (Test)
+        </button>
       </div>
 
       <div className="w-1/3 flex justify-center">
