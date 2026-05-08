@@ -14,6 +14,9 @@ export default getRequestConfig(async ({ requestLocale }) => {
   const auth = (await import(`../../messages/${locale}/auth.json`)).default
   const bookDemo = (await import(`../../messages/${locale}/bookDemo.json`)).default
   const dashboard = (await import(`../../messages/${locale}/dashboard.json`)).default
+  const assets = (await import(`../../messages/${locale}/assets.json`)).default
+
+
 
 
   return {
@@ -24,6 +27,7 @@ export default getRequestConfig(async ({ requestLocale }) => {
       auth,
       bookDemo,
       dashboard,
+      assets
     }
   }
 })
