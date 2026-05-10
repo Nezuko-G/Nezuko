@@ -22,8 +22,6 @@ export function onResponseError(
     const isLoginPage = pathname === "/login" || pathname.endsWith("/login");
 
     if (status === 401) {
-      localStorage.removeItem('accessToken');
-      localStorage.removeItem('refreshToken');
       if (!isLoginPage && !isRedirectingToLogin) {
         isRedirectingToLogin = true;
         window.location.href = "/login";
