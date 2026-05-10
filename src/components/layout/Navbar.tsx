@@ -43,7 +43,7 @@ export default function Navbar() {
             {t("solutions")} <ChevronDown size={14} />
           </Link>
           <Link href="#" className="hover:text-primary transition-colors">{t("resources")}</Link>
-          <Link href="#" className="hover:text-primary transition-colors">{t("pricing")}</Link>
+          <Link href="/pricing" className="hover:text-primary transition-colors">{t("pricing")}</Link>
         </div>
 
         <div className="flex items-center gap-3 md:gap-6">
