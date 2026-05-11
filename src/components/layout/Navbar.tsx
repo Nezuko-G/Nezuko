@@ -42,7 +42,7 @@ export default function Navbar() {
           <Link href="#" className="flex items-center gap-1 hover:text-primary transition-colors">
             {t("solutions")} <ChevronDown size={14} />
           </Link>
-          <Link href="#" className="hover:text-primary transition-colors">{t("resources")}</Link>
+          <Link href="/services" className="hover:text-primary transition-colors">{t("services")}</Link>
           <Link href="/pricing" className="hover:text-primary transition-colors">{t("pricing")}</Link>
         </div>
 
@@ -77,7 +77,7 @@ export default function Navbar() {
         <Link href="#" className="font-bold text-white" onClick={() => setIsMobileMenuOpen(false)}>{t("product")}</Link>
         <Link href="#" className="font-bold text-white" onClick={() => setIsMobileMenuOpen(false)}>{t("solutions")}</Link>
         <Link href="#" className="font-bold text-white" onClick={() => setIsMobileMenuOpen(false)}>{t("pricing")}</Link>
-        <Link href="#" className="font-bold text-white" onClick={() => setIsMobileMenuOpen(false)}>{t("resources")}</Link>
+        <Link href="#" className="font-bold text-white" onClick={() => setIsMobileMenuOpen(false)}>{t("services")}</Link>
         <Link href="#" className="font-bold text-white" onClick={() => setIsMobileMenuOpen(false)}>{t("login")}</Link>
 
         <div className="pt-2 w-full flex justify-center border-t border-white/10">

@@ -1,15 +1,14 @@
 {
-  
   "navbar": {
     "product": "Product",
     "solutions": "Solutions",
+    "services": "Services",
     "resources": "Resources",
     "company": "Company",
     "pricing": "Pricing",
     "login": "Login",
     "demo": "Request a Demo"
-  
-},
+  },
   "footer": {
     "desc": "A new-age platform for growing businesses to scale HR processes and control spend.",
     "sections": {
@@ -29,5 +28,4 @@
     },
     "rights": "All rights reserved © 2026 Nezuko."
   }
-
 }
