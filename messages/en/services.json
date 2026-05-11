@@ -1,0 +1,89 @@
+{
+    "hero": {
+        "badge": "Our Services",
+        "title1": "Everything You Need",
+        "title2": "to Manage Hiring",
+        "subtitle": "An all-in-one platform that brings together job posting, application intake, and candidate management — all in one place, built specifically for companies.",
+        "cta": "Start Free Trial",
+        "ctaSales": "Talk to Sales"
+    },
+    "services": {
+        "title": "Our Services",
+        "subtitle": "All the recruitment tools your company needs in one platform",
+        "items": {
+            "jobsPortal": "Jobs Portal",
+            "jobsPortalDesc": "Post your jobs professionally on a dedicated portal for your company, and let applicants reach them with ease.",
+            "cvCollection": "CV Collection",
+            "cvCollectionDesc": "A centralized system for receiving and organizing all incoming applications with instant filtering and search.",
+            "candidateMgmt": "Candidate Management",
+            "candidateMgmtDesc": "Track every stage of the hiring process for each candidate — from application all the way to the job offer.",
+            "reports": "Reports & Analytics",
+            "reportsDesc": "An interactive dashboard that gives you a comprehensive view of hiring performance, applicant sources, and time spent at each stage.",
+            "interviews": "Interview Scheduling",
+            "interviewsDesc": "Organize interview appointments and send automatic reminders to candidates and interviewers.",
+            "hrSettings": "HR Settings",
+            "hrSettingsDesc": "Customize the system to match your company structure — departments, job levels, team permissions, and internal workflows."
+        }
+    },
+    "portal": {
+        "badge": "Jobs Portal",
+        "title1": "A Ready-to-Go Portal",
+        "title2": "Built Into Your System from Day One",
+        "subtitle": "No need to build anything from scratch. The portal is ready and fully integrated with the rest of the system — post your first job in minutes.",
+        "features": {
+            "portalPublish": "Easy Job Posting",
+            "portalCV": "Automatic CV Collection",
+            "portalTrack": "Candidate Tracking",
+            "portalNotify": "Instant Notifications",
+            "portalStats": "Live Analytics",
+            "portalSecure": "Secure & Protected Data"
+        },
+        "screenshotLabel": "Drag your image here or click to choose",
+        "screenshotSub": "PNG / JPG — a screenshot from your portal",
+        "screenshotUploaded": "Image uploaded successfully ✓"
+    },
+    "trust": [
+        "High-Level Security",
+        "Fast Performance",
+        "24/7 Support",
+        "4.9 / 5 Rating",
+        "Data Privacy"
+    ],
+    "testimonials": {
+        "title": "Companies That Trust Us",
+        "subtitle": "From our real customers' experiences"
+    },
+    "faq": {
+        "title": "Frequently Asked Questions",
+        "subtitle": "Everything on your mind — answered here",
+        "items": [
+            {
+                "q": "Will the portal appear under my company's name?",
+                "a": "Yes, the portal is set up under a subdomain or custom domain for your company, fully branded with your logo and colors."
+            },
+            {
+                "q": "How do we receive CVs?",
+                "a": "Every CV is automatically added to the system along with the applicant's details, and you get an instant notification. You can export them to Excel or work with them directly from the dashboard."
+            },
+            {
+                "q": "Is there a limit on the number of jobs or applications?",
+                "a": "It varies by plan. The basic plan allows a set number, while higher-tier plans offer unlimited jobs and applications."
+            },
+            {
+                "q": "Can I add members from my HR team?",
+                "a": "Yes, you can add members with different permission levels — admin, interviewer, or view-only — at no extra cost on most plans."
+            },
+            {
+                "q": "Is there a free trial?",
+                "a": "Yes, there's a 14-day free trial with no credit card required. You can explore all the features and decide afterwards."
+            }
+        ]
+    },
+    "cta": {
+        "badge": "Get Started Now",
+        "title": "Ready to Elevate Your Hiring Process?",
+        "subtitle": "Join the companies already using our platform and start working smarter.",
+        "ctaDemo": "Try for Free",
+        "ctaSales": "Talk to Sales"
+    }
+}
