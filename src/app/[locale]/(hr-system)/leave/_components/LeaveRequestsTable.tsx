@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 import { Loader2 } from "lucide-react";
 import type { LeaveRequest } from "@/app/[locale]/(hr-system)/leave/types/leave.dto";
 import { LeaveStatusBadge } from "./LeaveStatusBadge";
@@ -16,6 +17,7 @@ function formatDate(date: Date) {
 }
 
 function ReviewDialog({ request, onClose }: { request: LeaveRequest; onClose: () => void }) {
+  const t = useTranslations("leave");
   const reviewRequest = useReviewLeaveRequest();
   const [status, setStatus] = useState<"APPROVED" | "REJECTED">("APPROVED");
   const [reviewNote, setReviewNote] = useState("");
@@ -33,46 +35,46 @@ function ReviewDialog({ request, onClose }: { request: LeaveRequest; onClose: ()
     <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-50 p-4 backdrop-blur-sm">
       <div className="bg-white rounded-2xl w-full max-w-md shadow-2xl overflow-hidden">
         <div className="flex items-center justify-between px-6 py-4 border-b border-gray-100">
-          <h2 className="text-base font-semibold text-gray-900">Review Leave Request</h2>
+          <h2 className="text-base font-semibold text-gray-900">{t("reviewTitle")}</h2>
           <button onClick={onClose} disabled={reviewRequest.isPending} className="p-1.5 rounded-lg text-gray-400 hover:text-gray-600 hover:bg-gray-100 transition-colors disabled:opacity-50">
             ✕
           </button>
         </div>
         <div className="px-6 py-5 flex flex-col gap-4">
           <div className="bg-gray-50 rounded-lg p-4 text-sm space-y-1">
-            <p><span className="text-gray-500">Employee:</span> <span className="font-medium">{request.user ? `${request.user.firstName} ${request.user.lastName}` : request.userId}</span></p>
-            <p><span className="text-gray-500">Employee Code:</span> <span className="font-medium">{request.user?.employeeCode || "-"}</span></p>
-            <p><span className="text-gray-500">Email:</span> <span className="font-medium">{request.user?.email || "-"}</span></p>
-            <p><span className="text-gray-500">Dates:</span> <span className="font-medium">{formatDate(request.startDate)} → {formatDate(request.endDate)}</span></p>
-            <p><span className="text-gray-500">Reason:</span> {request.reason}</p>
+            <p><span className="text-gray-500">{t("employeeLabel")}</span> <span className="font-medium">{request.user ? `${request.user.firstName} ${request.user.lastName}` : request.userId}</span></p>
+            <p><span className="text-gray-500">{t("employeeCodeLabel")}</span> <span className="font-medium">{request.user?.employeeCode || "-"}</span></p>
+            <p><span className="text-gray-500">{t("emailLabel")}</span> <span className="font-medium">{request.user?.email || "-"}</span></p>
+            <p><span className="text-gray-500">{t("datesLabel")}</span> <span className="font-medium">{formatDate(request.startDate)} → {formatDate(request.endDate)}</span></p>
+            <p><span className="text-gray-500">{t("reasonLabel")}</span> {request.reason}</p>
             {request.reviewNote && (
-              <p><span className="text-gray-500">Previous Note:</span> {request.reviewNote}</p>
+              <p><span className="text-gray-500">{t("previousNote")}</span> {request.reviewNote}</p>
             )}
           </div>
           <div className="flex flex-col gap-1.5">
-            <label className="text-xs font-medium text-gray-600">Decision</label>
+            <label className="text-xs font-medium text-gray-600">{t("decision")}</label>
             <div className="flex gap-2">
               <button
                 onClick={() => setStatus("APPROVED")}
                 disabled={reviewRequest.isPending}
                 className={`flex-1 px-3 py-2 rounded-lg text-sm font-medium border transition-all disabled:opacity-50 ${status === "APPROVED" ? "bg-green-50 text-green-600 border-green-200" : "border-gray-200 text-gray-500 hover:bg-gray-50"}`}
               >
-                Approve
+                {t("approve")}
               </button>
               <button
                 onClick={() => setStatus("REJECTED")}
                 disabled={reviewRequest.isPending}
                 className={`flex-1 px-3 py-2 rounded-lg text-sm font-medium border transition-all disabled:opacity-50 ${status === "REJECTED" ? "bg-red-50 text-red-500 border-red-200" : "border-gray-200 text-gray-500 hover:bg-gray-50"}`}
               >
-                Reject
+                {t("reject")}
               </button>
             </div>
           </div>
           <div className="flex flex-col gap-1.5">
-            <label className="text-xs font-medium text-gray-600">Review Note (optional)</label>
+            <label className="text-xs font-medium text-gray-600">{t("reviewNote")}</label>
             <textarea
               rows={2}
-              placeholder="Add a note..."
+              placeholder={t("reviewNotePlaceholder")}
               value={reviewNote}
               onChange={(e) => setReviewNote(e.target.value)}
               disabled={reviewRequest.isPending}
@@ -82,7 +84,7 @@ function ReviewDialog({ request, onClose }: { request: LeaveRequest; onClose: ()
         </div>
         <div className="flex items-center justify-end gap-3 px-6 py-4 border-t border-gray-100 bg-gray-50">
           <button onClick={onClose} disabled={reviewRequest.isPending} className="text-sm text-gray-500 hover:text-gray-700 disabled:opacity-50 transition-colors">
-            Cancel
+            {t("cancel")}
           </button>
           <button
             onClick={handleSubmit}
@@ -92,10 +94,10 @@ function ReviewDialog({ request, onClose }: { request: LeaveRequest; onClose: ()
             {reviewRequest.isPending ? (
               <>
                 <Loader2 size={14} className="animate-spin" />
-                Submitting...
+                {t("submitting")}
               </>
             ) : (
-              status === "APPROVED" ? "Approve" : "Reject"
+              status === "APPROVED" ? t("approve") : t("reject")
             )}
           </button>
         </div>
@@ -105,6 +107,7 @@ function ReviewDialog({ request, onClose }: { request: LeaveRequest; onClose: ()
 }
 
 export function LeaveRequestsTable({ requests, isHR }: Props) {
+  const t = useTranslations("leave");
   const cancelRequest = useCancelLeaveRequest();
   const [cancellingId, setCancellingId] = useState<string | null>(null);
   const [reviewingRequest, setReviewingRequest] = useState<LeaveRequest | null>(null);
@@ -126,14 +129,14 @@ export function LeaveRequestsTable({ requests, isHR }: Props) {
         <table className="w-full text-sm">
           <thead>
             <tr className="bg-gray-50 border-b border-gray-200">
-              <th className="text-center px-4 py-3 text-xs font-medium text-gray-500">Employee</th>
-              <th className="text-center px-4 py-3 text-xs font-medium text-gray-500">Employee Code</th>
-              <th className="text-center px-4 py-3 text-xs font-medium text-gray-500">Start Date</th>
-              <th className="text-center px-4 py-3 text-xs font-medium text-gray-500">End Date</th>
-              <th className="text-center px-4 py-3 text-xs font-medium text-gray-500">Reason</th>
-              <th className="text-center px-4 py-3 text-xs font-medium text-gray-500">Status</th>
-              {isHR && <th className="text-center px-4 py-3 text-xs font-medium text-gray-500">Reviewer</th>}
-              <th className="text-right px-4 py-3 text-xs font-medium text-gray-500">Actions</th>
+              <th className="text-center px-4 py-3 text-xs font-medium text-gray-500">{t("employee")}</th>
+              <th className="text-center px-4 py-3 text-xs font-medium text-gray-500">{t("employeeCode")}</th>
+              <th className="text-center px-4 py-3 text-xs font-medium text-gray-500">{t("startDate")}</th>
+              <th className="text-center px-4 py-3 text-xs font-medium text-gray-500">{t("endDate")}</th>
+              <th className="text-center px-4 py-3 text-xs font-medium text-gray-500">{t("reason")}</th>
+              <th className="text-center px-4 py-3 text-xs font-medium text-gray-500">{t("status")}</th>
+              {isHR && <th className="text-center px-4 py-3 text-xs font-medium text-gray-500">{t("reviewer")}</th>}
+              <th className="text-right px-4 py-3 text-xs font-medium text-gray-500">{t("actions")}</th>
             </tr>
           </thead>
           <tbody>
@@ -159,7 +162,7 @@ export function LeaveRequestsTable({ requests, isHR }: Props) {
                         onClick={() => setReviewingRequest(request)}
                         className="text-xs font-medium text-primary hover:underline"
                       >
-                        Review
+                        {t("reviewAction")}
                       </button>
                     )}
                     {request.status === "PENDING" && !isHR && (
@@ -171,10 +174,10 @@ export function LeaveRequestsTable({ requests, isHR }: Props) {
                         {cancellingId === request.id ? (
                           <>
                             <Loader2 size={12} className="animate-spin" />
-                            Cancelling...
+                            {t("cancelling")}
                           </>
                         ) : (
-                          "Cancel"
+                          t("cancelAction")
                         )}
                       </button>
                     )}

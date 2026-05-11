@@ -63,7 +63,7 @@ export function useReviewLeaveRequest() {
   const toast = useToast();
 
   return useMutation({
-    mutationFn: ({ id, data }: { id: string; data: { status: string; reviewNote?: string } }) => reviewLeaveRequest(id, data),
+    mutationFn: ({ id, data }: { id: string; data: { status: "APPROVED" | "REJECTED"; reviewNote?: string } }) => reviewLeaveRequest(id, data),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["leave-requests"] });
       toast.success("Leave request reviewed");

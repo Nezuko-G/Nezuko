@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 import { AlertCircle, RefreshCw } from "lucide-react";
 import { useLeaveRequests } from "@/app/[locale]/(hr-system)/leave/hooks/useLeaveRequests";
 import { useAuthStore } from "@/hooks/useAuthStore";
@@ -23,6 +24,7 @@ function SkeletonRow() {
 }
 
 export default function LeavePage() {
+  const t = useTranslations("leave");
   const { role } = useAuthStore();
   const isHR = role === "HR" || role === "MANAGER";
   const [statusFilter, setStatusFilter] = useState<LeaveRequest["status"] | "ALL">("ALL");
@@ -39,7 +41,7 @@ export default function LeavePage() {
       <div className="flex items-center justify-between mb-6">
         <div className="flex items-center gap-3">
           <h1 className="text-2xl font-bold text-secondary">
-            {isHR ? "All Leave Requests" : "My Leave Requests"}
+            {isHR ? t("allRequests") : t("myRequests")}
           </h1>
           {isFetching && !isLoading && (
             <div className="w-4 h-4 border-2 border-primary/30 border-t-primary rounded-full animate-spin" />
@@ -49,7 +51,7 @@ export default function LeavePage() {
           onClick={() => setShowForm(true)}
           className="bg-primary hover:bg-primary/80 text-secondary text-sm font-semibold px-5 py-2.5 rounded-lg transition-colors shadow-lg shadow-primary/20"
         >
-          + Create Request
+          {t("createRequest")}
         </button>
       </div>
 
@@ -62,12 +64,13 @@ export default function LeavePage() {
           <table className="w-full text-sm">
             <thead>
               <tr className="bg-gray-50 border-b border-gray-200">
-                <th className="text-left px-4 py-3 text-xs font-medium text-gray-500">Employee</th>
-                <th className="text-left px-4 py-3 text-xs font-medium text-gray-500">Start Date</th>
-                <th className="text-left px-4 py-3 text-xs font-medium text-gray-500">End Date</th>
-                <th className="text-left px-4 py-3 text-xs font-medium text-gray-500">Reason</th>
-                <th className="text-left px-4 py-3 text-xs font-medium text-gray-500">Status</th>
-                <th className="text-right px-4 py-3 text-xs font-medium text-gray-500">Actions</th>
+                <th className="text-left px-4 py-3 text-xs font-medium text-gray-500">{t("employee")}</th>
+                <th className="text-left px-4 py-3 text-xs font-medium text-gray-500">{t("employeeCode")}</th>
+                <th className="text-left px-4 py-3 text-xs font-medium text-gray-500">{t("startDate")}</th>
+                <th className="text-left px-4 py-3 text-xs font-medium text-gray-500">{t("endDate")}</th>
+                <th className="text-left px-4 py-3 text-xs font-medium text-gray-500">{t("reason")}</th>
+                <th className="text-left px-4 py-3 text-xs font-medium text-gray-500">{t("status")}</th>
+                <th className="text-right px-4 py-3 text-xs font-medium text-gray-500">{t("actions")}</th>
               </tr>
             </thead>
             <tbody>
@@ -85,21 +88,21 @@ export default function LeavePage() {
         <div className="bg-red-50 border border-red-200 rounded-xl p-6 text-center">
           <AlertCircle className="w-10 h-10 text-red-400 mx-auto mb-3" />
           <p className="text-red-600 font-medium mb-4">
-            {error instanceof Error ? error.message : "Failed to load leave requests"}
+            {error instanceof Error ? error.message : t("loadError")}
           </p>
           <button
             onClick={() => refetch()}
             className="inline-flex items-center gap-2 bg-red-500 hover:bg-red-600 text-white text-sm font-medium px-4 py-2 rounded-lg transition-colors"
           >
             <RefreshCw size={16} />
-            Try Again
+            {t("tryAgain")}
           </button>
         </div>
       )}
 
       {!isLoading && !isError && filteredRequests.length === 0 && (
         <div className="text-center py-12">
-          <p className="text-gray-400 text-base">No leave requests found</p>
+          <p className="text-gray-400 text-base">{t("noRequests")}</p>
         </div>
       )}
 

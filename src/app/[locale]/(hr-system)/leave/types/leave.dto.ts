@@ -24,8 +24,8 @@ export const LeaveRequestDTO = z.object({
   reviewedAt: z.string().datetime().nullable(),
   createdAt: z.string().datetime(),
   updatedAt: z.string().datetime(),
-  user: UserDTO.optional().nullable(),
-  reviewer: UserDTO.optional().nullable(),
+  user: UserDTO.nullable(),
+  reviewer: UserDTO.nullable(),
 });
 
 export const CreateLeaveRequestDTO = z.object({

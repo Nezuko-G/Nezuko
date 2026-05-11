@@ -21,8 +21,9 @@ export async function onResponseError(
 ): Promise<AxiosFormattedResponse | any> {
   const originalRequest = error.config as InternalAxiosRequestConfig & { _retry?: boolean };
   const status = error.response?.status;
-  const errorMessage = typeof error.response?.data?.message === 'string' 
-    ? error.response.data.message 
+  const responseData = error.response?.data as Record<string, unknown> | undefined;
+  const errorMessage = typeof responseData?.message === 'string' 
+    ? responseData.message 
     : error.message;
 
   // Handle 401 with token refresh

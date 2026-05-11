@@ -1,5 +1,6 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import type { LeaveRequest } from "@/app/[locale]/(hr-system)/leave/types/leave.dto";
 
 interface Props {
@@ -7,15 +8,17 @@ interface Props {
   onStatusChange: (status: LeaveRequest["status"] | "ALL") => void;
 }
 
-const statusOptions = [
-  { value: "ALL", label: "All" },
-  { value: "PENDING", label: "Pending" },
-  { value: "APPROVED", label: "Approved" },
-  { value: "REJECTED", label: "Rejected" },
-  { value: "CANCELLED", label: "Cancelled" },
-] as const;
-
 export function LeaveFilters({ statusFilter, onStatusChange }: Props) {
+  const t = useTranslations("leave.filters");
+
+  const statusOptions = [
+    { value: "ALL", label: t("all") },
+    { value: "PENDING", label: t("pending") },
+    { value: "APPROVED", label: t("approved") },
+    { value: "REJECTED", label: t("rejected") },
+    { value: "CANCELLED", label: t("cancelled") },
+  ] as const;
+
   return (
     <div className="flex items-center gap-2 flex-wrap">
       {statusOptions.map((opt) => (

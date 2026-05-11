@@ -60,18 +60,9 @@ export async function getAllLeaveRequests(params?: { limit?: number; page?: numb
   if (response.error) throw new Error(response.error);
   if (!response.data) return [];
   
-  // Handle double-wrapped response: apiRequest wraps { data: { leaveRequests: [] } }
   const data = response.data.data?.leaveRequests ?? response.data.leaveRequests ?? [];
-  
-  console.log('[getAllLeaveRequests] Raw data:', JSON.stringify(data, null, 2));
-  console.log('[getAllLeaveRequests] First item user:', data[0]?.user);
-  
-  // Parse with Zod to validate but keep extra fields (user, reviewer)
   const parsed = LeaveRequestDTO.array().safeParse(data);
-  if (!parsed.success) {
-    console.error('[getAllLeaveRequests] Zod parse error:', parsed.error);
-    return [];
-  }
+  if (!parsed.success) return [];
   
   return mapLeaveRequestsFromDTO(parsed.data);
 }

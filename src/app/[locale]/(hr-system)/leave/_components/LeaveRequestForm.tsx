@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 import { X, Loader2 } from "lucide-react";
 import { useCreateLeaveRequest } from "@/app/[locale]/(hr-system)/leave/hooks/useLeaveRequests";
 
@@ -9,6 +10,7 @@ interface Props {
 }
 
 export function LeaveRequestForm({ onClose }: Props) {
+  const t = useTranslations("leave");
   const createLeaveRequest = useCreateLeaveRequest();
 
   const [form, setForm] = useState({
@@ -21,11 +23,11 @@ export function LeaveRequestForm({ onClose }: Props) {
 
   function validate() {
     const e: Record<string, string> = {};
-    if (!form.startDate) e.startDate = "Start date is required";
-    if (!form.endDate) e.endDate = "End date is required";
+    if (!form.startDate) e.startDate = t("validation.startDateRequired");
+    if (!form.endDate) e.endDate = t("validation.endDateRequired");
     if (form.startDate && form.endDate && form.endDate < form.startDate)
-      e.endDate = "End date must be after start date";
-    if (!form.reason.trim()) e.reason = "Reason is required";
+      e.endDate = t("validation.endDateAfter");
+    if (!form.reason.trim()) e.reason = t("validation.reasonRequired");
     return e;
   }
 
@@ -56,7 +58,7 @@ export function LeaveRequestForm({ onClose }: Props) {
     <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-50 p-4 backdrop-blur-sm">
       <div className="bg-white rounded-2xl w-full max-w-md shadow-2xl overflow-hidden">
         <div className="flex items-center justify-between px-6 py-4 border-b border-gray-100">
-          <h2 className="text-base font-semibold text-gray-900">Create Leave Request</h2>
+          <h2 className="text-base font-semibold text-gray-900">{t("createTitle")}</h2>
           <button
             onClick={onClose}
             disabled={createLeaveRequest.isPending}
@@ -70,7 +72,7 @@ export function LeaveRequestForm({ onClose }: Props) {
           <div className="grid grid-cols-2 gap-3">
             <div className="flex flex-col gap-1.5">
               <label className="text-xs font-medium text-gray-600">
-                Start Date <span className="text-red-400">*</span>
+                {t("startDate")} <span className="text-red-400">*</span>
               </label>
               <input
                 type="date"
@@ -86,7 +88,7 @@ export function LeaveRequestForm({ onClose }: Props) {
             </div>
             <div className="flex flex-col gap-1.5">
               <label className="text-xs font-medium text-gray-600">
-                End Date <span className="text-red-400">*</span>
+                {t("endDate")} <span className="text-red-400">*</span>
               </label>
               <input
                 type="date"
@@ -104,11 +106,11 @@ export function LeaveRequestForm({ onClose }: Props) {
 
           <div className="flex flex-col gap-1.5">
             <label className="text-xs font-medium text-gray-600">
-              Reason <span className="text-red-400">*</span>
+              {t("reason")} <span className="text-red-400">*</span>
             </label>
             <textarea
               rows={3}
-              placeholder="Enter the reason for your leave request..."
+              placeholder={t("reasonPlaceholder")}
               value={form.reason}
               onChange={(e) => {
                 setForm({ ...form, reason: e.target.value });
@@ -127,7 +129,7 @@ export function LeaveRequestForm({ onClose }: Props) {
             disabled={createLeaveRequest.isPending}
             className="text-sm text-gray-500 hover:text-gray-700 disabled:opacity-50 transition-colors"
           >
-            Cancel
+            {t("cancel")}
           </button>
           <button
             onClick={handleSubmit}
@@ -137,10 +139,10 @@ export function LeaveRequestForm({ onClose }: Props) {
             {createLeaveRequest.isPending ? (
               <>
                 <Loader2 size={14} className="animate-spin" />
-                Submitting...
+                {t("submitting")}
               </>
             ) : (
-              "Submit Request"
+              t("submit")
             )}
           </button>
         </div>
