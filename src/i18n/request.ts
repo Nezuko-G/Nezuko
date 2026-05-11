@@ -14,6 +14,7 @@ export default getRequestConfig(async ({ requestLocale }) => {
   const auth = (await import(`../../messages/${locale}/auth.json`)).default
   const bookDemo = (await import(`../../messages/${locale}/bookDemo.json`)).default
   const pricing = (await import(`../../messages/${locale}/pricing.json`)).default
+  const services = (await import(`../../messages/${locale}/services.json`)).default
   const dashboard = (await import(`../../messages/${locale}/dashboard.json`)).default
   const assets = (await import(`../../messages/${locale}/assets.json`)).default
 
@@ -29,7 +30,8 @@ export default getRequestConfig(async ({ requestLocale }) => {
       bookDemo,
       dashboard,
       assets,
-      pricing
+      pricing,
+      services
     }
   }
 })
