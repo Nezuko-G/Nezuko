@@ -55,11 +55,25 @@ export async function createLeaveRequest(data: CreateLeaveInput) {
 
 export async function getAllLeaveRequests(params?: { limit?: number; page?: number }) {
   const queryString = params ? `?${new URLSearchParams(params as any).toString()}` : '';
-  const response = await apiRequest<z.infer<typeof LeaveRequestDTO>[]>(`${apis.leaveRequests.base}${queryString}`);
+  const response = await apiRequest<any>(`${apis.leaveRequests.base}${queryString}`);
   
   if (response.error) throw new Error(response.error);
   if (!response.data) return [];
-  return mapLeaveRequestsFromDTO(response.data);
+  
+  // Handle double-wrapped response: apiRequest wraps { data: { leaveRequests: [] } }
+  const data = response.data.data?.leaveRequests ?? response.data.leaveRequests ?? [];
+  
+  console.log('[getAllLeaveRequests] Raw data:', JSON.stringify(data, null, 2));
+  console.log('[getAllLeaveRequests] First item user:', data[0]?.user);
+  
+  // Parse with Zod to validate but keep extra fields (user, reviewer)
+  const parsed = LeaveRequestDTO.array().safeParse(data);
+  if (!parsed.success) {
+    console.error('[getAllLeaveRequests] Zod parse error:', parsed.error);
+    return [];
+  }
+  
+  return mapLeaveRequestsFromDTO(parsed.data);
 }
 
 export async function getMyLeaveRequests(params?: { limit?: number; page?: number }) {

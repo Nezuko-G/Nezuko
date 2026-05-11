@@ -40,9 +40,14 @@ function ReviewDialog({ request, onClose }: { request: LeaveRequest; onClose: ()
         </div>
         <div className="px-6 py-5 flex flex-col gap-4">
           <div className="bg-gray-50 rounded-lg p-4 text-sm space-y-1">
-            <p><span className="text-gray-500">Employee:</span> <span className="font-medium">{request.employeeId}</span></p>
+            <p><span className="text-gray-500">Employee:</span> <span className="font-medium">{request.user ? `${request.user.firstName} ${request.user.lastName}` : request.userId}</span></p>
+            <p><span className="text-gray-500">Employee Code:</span> <span className="font-medium">{request.user?.employeeCode || "-"}</span></p>
+            <p><span className="text-gray-500">Email:</span> <span className="font-medium">{request.user?.email || "-"}</span></p>
             <p><span className="text-gray-500">Dates:</span> <span className="font-medium">{formatDate(request.startDate)} → {formatDate(request.endDate)}</span></p>
             <p><span className="text-gray-500">Reason:</span> {request.reason}</p>
+            {request.reviewNote && (
+              <p><span className="text-gray-500">Previous Note:</span> {request.reviewNote}</p>
+            )}
           </div>
           <div className="flex flex-col gap-1.5">
             <label className="text-xs font-medium text-gray-600">Decision</label>
@@ -117,57 +122,69 @@ export function LeaveRequestsTable({ requests, isHR }: Props) {
 
   return (
     <div className="bg-white rounded-xl border border-gray-200 overflow-hidden">
-      <table className="w-full text-sm">
-        <thead>
-          <tr className="bg-gray-50 border-b border-gray-200">
-            <th className="text-left px-4 py-3 text-xs font-medium text-gray-500">Employee</th>
-            <th className="text-left px-4 py-3 text-xs font-medium text-gray-500">Start Date</th>
-            <th className="text-left px-4 py-3 text-xs font-medium text-gray-500">End Date</th>
-            <th className="text-left px-4 py-3 text-xs font-medium text-gray-500">Reason</th>
-            <th className="text-left px-4 py-3 text-xs font-medium text-gray-500">Status</th>
-            <th className="text-right px-4 py-3 text-xs font-medium text-gray-500">Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {requests.map((request) => (
-            <tr key={request.id} className="border-b border-gray-100 hover:bg-gray-50 transition-colors">
-              <td className="px-4 py-3 font-medium text-gray-800">{request.employeeId.slice(0, 8)}...</td>
-              <td className="px-4 py-3 text-gray-600">{formatDate(request.startDate)}</td>
-              <td className="px-4 py-3 text-gray-600">{formatDate(request.endDate)}</td>
-              <td className="px-4 py-3 text-gray-600 max-w-[200px] truncate">{request.reason}</td>
-              <td className="px-4 py-3"><LeaveStatusBadge status={request.status} /></td>
-              <td className="px-4 py-3">
-                <div className="flex items-center justify-end gap-2">
-                  {isHR && request.status === "PENDING" && (
-                    <button
-                      onClick={() => setReviewingRequest(request)}
-                      className="text-xs font-medium text-primary hover:underline"
-                    >
-                      Review
-                    </button>
-                  )}
-                  {request.status === "PENDING" && (
-                    <button
-                      onClick={() => handleCancel(request.id)}
-                      disabled={cancellingId === request.id}
-                      className="text-xs font-medium text-red-500 hover:underline disabled:opacity-50 flex items-center gap-1"
-                    >
-                      {cancellingId === request.id ? (
-                        <>
-                          <Loader2 size={12} className="animate-spin" />
-                          Cancelling...
-                        </>
-                      ) : (
-                        "Cancel"
-                      )}
-                    </button>
-                  )}
-                </div>
-              </td>
+      <div className="overflow-x-auto">
+        <table className="w-full text-sm">
+          <thead>
+            <tr className="bg-gray-50 border-b border-gray-200">
+              <th className="text-center px-4 py-3 text-xs font-medium text-gray-500">Employee</th>
+              <th className="text-center px-4 py-3 text-xs font-medium text-gray-500">Employee Code</th>
+              <th className="text-center px-4 py-3 text-xs font-medium text-gray-500">Start Date</th>
+              <th className="text-center px-4 py-3 text-xs font-medium text-gray-500">End Date</th>
+              <th className="text-center px-4 py-3 text-xs font-medium text-gray-500">Reason</th>
+              <th className="text-center px-4 py-3 text-xs font-medium text-gray-500">Status</th>
+              {isHR && <th className="text-center px-4 py-3 text-xs font-medium text-gray-500">Reviewer</th>}
+              <th className="text-right px-4 py-3 text-xs font-medium text-gray-500">Actions</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {requests.map((request) => (
+              <tr key={request.id} className="border-b border-gray-100 hover:bg-gray-50 transition-colors">
+                <td className="px-4 py-3 font-medium text-gray-800">
+                  {request.user ? `${request.user.firstName} ${request.user.lastName}` : request.userId.slice(0, 8)}
+                </td>
+                <td className="px-4 py-3 text-gray-600">{request.user?.employeeCode || "-"}</td>
+                <td className="px-4 py-3 text-gray-600">{formatDate(request.startDate)}</td>
+                <td className="px-4 py-3 text-gray-600">{formatDate(request.endDate)}</td>
+                <td className="px-4 py-3 text-gray-600 max-w-[200px] truncate" title={request.reason}>{request.reason}</td>
+                <td className="px-4 py-3"><LeaveStatusBadge status={request.status} /></td>
+                {isHR && (
+                  <td className="px-4 py-3 text-gray-600">
+                    {request.reviewer ? `${request.reviewer.firstName} ${request.reviewer.lastName}` : request.reviewerId || "-"}
+                  </td>
+                )}
+                <td className="px-4 py-3">
+                  <div className="flex items-center justify-end gap-2">
+                    {isHR && request.status === "PENDING" && (
+                      <button
+                        onClick={() => setReviewingRequest(request)}
+                        className="text-xs font-medium text-primary hover:underline"
+                      >
+                        Review
+                      </button>
+                    )}
+                    {request.status === "PENDING" && !isHR && (
+                      <button
+                        onClick={() => handleCancel(request.id)}
+                        disabled={cancellingId === request.id}
+                        className="text-xs font-medium text-red-500 hover:underline disabled:opacity-50 flex items-center gap-1"
+                      >
+                        {cancellingId === request.id ? (
+                          <>
+                            <Loader2 size={12} className="animate-spin" />
+                            Cancelling...
+                          </>
+                        ) : (
+                          "Cancel"
+                        )}
+                      </button>
+                    )}
+                  </div>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
       {reviewingRequest && (
         <ReviewDialog request={reviewingRequest} onClose={() => setReviewingRequest(null)} />
       )}
