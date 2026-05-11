@@ -46,7 +46,7 @@ export default function ProfileSections({ employee, readOnly }: Props) {
                         className={cn(
                             "px-4 py-2 rounded-t-lg text-sm font-semibold transition",
                             activeSection === s
-                                ? "bg-primary text-white"
+                                ? "bg-primary text-secondry"
                                 : "text-content-muted hover:text-secondary hover:bg-gray-100"
                         )}
                     >
@@ -103,7 +103,7 @@ export default function ProfileSections({ employee, readOnly }: Props) {
                         <button
                             onClick={handleSave}
                             disabled={isSaving}
-                            className="flex items-center gap-2 px-5 py-2 rounded-xl bg-primary text-white text-sm font-bold shadow hover:opacity-90 transition disabled:opacity-60"
+                            className="flex items-center gap-2 px-5 py-2 rounded-xl bg-primary text-secondry text-sm font-bold shadow hover:opacity-90 transition disabled:opacity-60"
                         >
                             <Save size={14} />
                             {isSaving ? t("saving") : t("save")}

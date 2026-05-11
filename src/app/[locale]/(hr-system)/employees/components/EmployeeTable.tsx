@@ -27,7 +27,7 @@ export default function EmployeeTable({ onAddClick, onTerminate }: Props) {
         <h1 className="text-2xl font-extrabold text-secondary">{t("title")}</h1>
         <button
           onClick={onAddClick}
-          className="px-4 py-2 rounded-xl bg-primary text-white font-bold text-sm shadow hover:opacity-90 transition"
+          className="px-4 py-2 rounded-xl bg-primary text-secondry font-bold text-sm shadow hover:opacity-90 transition"
         >
           + {t("addEmployee")}
         </button>
