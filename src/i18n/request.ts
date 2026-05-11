@@ -16,6 +16,7 @@ export default getRequestConfig(async ({ requestLocale }) => {
   const pricing = (await import(`../../messages/${locale}/pricing.json`)).default
   const services = (await import(`../../messages/${locale}/services.json`)).default
   const dashboard = (await import(`../../messages/${locale}/dashboard.json`)).default
+  const employees = (await import(`../../messages/${locale}/employees.json`)).default
   const assets = (await import(`../../messages/${locale}/assets.json`)).default
 
 
@@ -31,7 +32,8 @@ export default getRequestConfig(async ({ requestLocale }) => {
       dashboard,
       assets,
       pricing,
-      services
+      services,
+      employees
     }
   }
 })
