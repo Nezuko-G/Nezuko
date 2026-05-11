@@ -2,7 +2,7 @@ import axios from 'axios';
 import { onRequest, onRequestError } from './interceptors/request.interceptor';
 import { onResponse, onResponseError } from './interceptors/response.interceptor';
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api';
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api/v1';
 
 const api = axios.create({
   baseURL: API_BASE_URL,
