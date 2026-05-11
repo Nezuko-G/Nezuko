@@ -8,13 +8,13 @@ export default function Sidebar() {
 
   const menuItems = [
     { icon: Home, label: t("home"), href: "/dashboard" },
-    { icon: Users, label: t("employees"), href: "/dashboard/employees" },
-    { icon: Package, label: t("assets"), href: "/dashboard/assets" },
-    { icon: Briefcase, label: t("payroll"), href: "/dashboard/payroll" },
-    { icon: Folder, label: t("projects"), href: "/dashboard/projects" },
-    { icon: BarChart, label: t("reports"), href: "/dashboard/reports" },
-    { icon: Star, label: t("favorites"), href: "/dashboard/favorites" },
-    { icon: Settings, label: t("settings"), href: "/dashboard/settings" },
+    { icon: Users, label: t("employees"), href: "/employees" },
+    { icon: Package, label: t("assets"), href: "/assets" },
+    { icon: Briefcase, label: t("payroll"), href: "/payroll" },
+    { icon: Folder, label: t("projects"), href: "/projects" },
+    { icon: BarChart, label: t("reports"), href: "/reports" },
+    { icon: Star, label: t("favorites"), href: "/favorites" },
+    { icon: Settings, label: t("settings"), href: "/settings" },
   ];
 
   return (
