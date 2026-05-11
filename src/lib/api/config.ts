@@ -29,4 +29,11 @@ export const apis = {
 
 
   book_demo: "/book-demo",
+
+  leaveRequests: {
+    base: "/leave-requests",
+    me: "/leave-requests/me",
+    review: (id: string) => `/leave-requests/${id}/review`,
+    cancel: (id: string) => `/leave-requests/${id}/cancel`,
+  },
 };

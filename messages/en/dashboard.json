@@ -6,6 +6,7 @@
       "time": "Time",
       "payroll": "Payroll",
       "projects": "Projects",
+      "leave": "Leave",
       "reports": "Reports",
       "favorites": "Favorites",
       "settings": "Settings"
@@ -22,7 +23,7 @@
       "saudiDashboard": "Saudi Dashboard",
       "announcement": "We are pleased to inform you that the National Day holiday will be from January 21 to 23, 2026. We wish you a happy holiday."
     },
-    "leaveBalances": {
+"leaveBalances": {
       "title": "Leave Balances",
       "requestLeave": "Request Leave",
       "annual": "Annual Leave",
@@ -31,5 +32,27 @@
       "unpaid": "Unpaid Leave",
       "days": "Days",
       "day": "Day"
+    },
+    "leave": {
+      "title": "Leave Requests",
+      "create": "Create Request",
+      "myRequests": "My Requests",
+      "allRequests": "All Requests",
+      "startDate": "Start Date",
+      "endDate": "End Date",
+      "reason": "Reason",
+      "status": "Status",
+      "pending": "Pending",
+      "approved": "Approved",
+      "rejected": "Rejected",
+      "cancelled": "Cancelled",
+      "review": "Review",
+      "cancel": "Cancel",
+      "reviewNote": "Review Note",
+      "approve": "Approve",
+      "reject": "Reject",
+      "noRequests": "No leave requests found"
     }
+  }
+}
 }

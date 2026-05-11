@@ -6,6 +6,7 @@
       "time": "الوقت",
       "payroll": "الرواتب",
       "projects": "المشاريع",
+      "leave": "الإجازات",
       "reports": "التقارير",
       "favorites": "المفضلة",
       "settings": "الإعدادات"
@@ -31,6 +32,26 @@
       "unpaid": "اجازات بدون مرتب",
       "days": "أيام",
       "day": "يوم"
+    },
+    "leave": {
+      "title": "طلبات الإجازة",
+      "create": "إنشاء طلب",
+      "myRequests": "طلباتي",
+      "allRequests": "جميع الطلبات",
+      "startDate": "تاريخ البدء",
+      "endDate": "تاريخ الانتهاء",
+      "reason": "السبب",
+      "status": "الحالة",
+      "pending": "قيد الانتظار",
+      "approved": "موافق عليها",
+      "rejected": "مرفوضة",
+      "cancelled": "ملغاة",
+      "review": "مراجعة",
+      "cancel": "إلغاء",
+      "reviewNote": "ملاحظة المراجعة",
+      "approve": "موافقة",
+      "reject": "رفض",
+      "noRequests": "لا توجد طلبات إجازة"
     }
-
+  }
 }
