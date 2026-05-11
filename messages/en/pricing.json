@@ -1,0 +1,147 @@
+{
+    "hero": {
+        "badge": "Simple, Transparent Pricing",
+        "title1": "One plan",
+        "title2": "Everything included",
+        "subtitle": "Start with a free demo. See the system live, ask every question — and only subscribe once you're fully confident it's the right fit.",
+        "cta": "Book Your Free Demo"
+    },
+    "how": {
+        "title": "How it works",
+        "steps": [
+            {
+                "title": "Book a Demo",
+                "desc": "Schedule a free 30-minute session. We'll tailor the walkthrough to your team's size and business needs."
+            },
+            {
+                "title": "See It Live",
+                "desc": "We build a live demo environment with your data so you see exactly how the system works for you."
+            },
+            {
+                "title": "Go Live",
+                "desc": "Pay securely via Paymob and we'll onboard your whole team within 48 hours — fully guided."
+            }
+        ]
+    },
+    "plan": {
+        "title": "One plan, no surprises",
+        "subtitle": "Everything your HR team needs, priced per employee. No hidden fees.",
+        "badge": "Full Access",
+        "price": "35",
+        "currency": "EGP",
+        "per": "/employee/month",
+        "note": "Minimum 10 employees · Billed monthly · Cancel anytime",
+        "desc": "One straightforward price per employee. Scale up or down at any time — your bill adjusts automatically with zero friction.",
+        "ctaDemo": "Book a Free Demo",
+        "ctaSales": "Talk to Sales",
+        "footerLeft": "Prices in EGP · VAT may apply · Minimum 10 employees",
+        "footerRight": "Secured by Paymob · 256-bit SSL",
+        "includedLabel": "Everything included",
+        "included": [
+            "Unlimited employee profiles",
+            "Attendance & leave management",
+            "Full payroll processing",
+            "Multi-branch management",
+            "Advanced analytics dashboard",
+            "Custom approval workflows",
+            "Mobile app (iOS & Android)",
+            "API access & integrations",
+            "Onboarding & offboarding module",
+            "Priority support with 12h SLA",
+            "Dedicated account manager",
+            "Regular feature updates"
+        ]
+    },
+    "features": {
+        "title": "Built for every part of HR",
+        "subtitle": "One subscription covers your entire HR operation — not just one department.",
+        "items": [
+            {
+                "title": "Employee Management",
+                "desc": "Profiles, documents, org chart, and role management all in one place."
+            },
+            {
+                "title": "Attendance & Leave",
+                "desc": "Real-time tracking, automated approvals, and shift scheduling."
+            },
+            {
+                "title": "Payroll Processing",
+                "desc": "Accurate payroll with tax handling, deductions, and full audit trail."
+            },
+            {
+                "title": "Smart Workflows",
+                "desc": "Custom approval flows, automated alerts, and task assignments."
+            },
+            {
+                "title": "Security & Compliance",
+                "desc": "Role-based access, encrypted data, and full compliance logs."
+            },
+            {
+                "title": "Dedicated Support",
+                "desc": "Onboarding specialists, priority support, and a dedicated account manager."
+            }
+        ]
+    },
+    "payment": {
+        "badge": "Secure Payments",
+        "title1": "Pay safely with",
+        "title2": "Paymob",
+        "subtitle": "We use Paymob — Egypt's leading payment gateway — to process all subscriptions. Your financial data is fully encrypted and never stored on our servers.",
+        "tagline": "Egypt's #1 Payment Gateway",
+        "note": "After booking your demo and confirming your plan, you'll be redirected to Paymob's secure checkout to complete your subscription.",
+        "methods": [
+            "Visa, Mastercard & Meeza cards",
+            "Fawry cash payments",
+            "Instapay & bank transfer",
+            "256-bit SSL encryption",
+            "Instant payment confirmation"
+        ]
+    },
+    "testimonials": {
+        "title": "Trusted by growing teams",
+        "subtitle": "Real results from real companies across Egypt."
+    },
+    "trust": [
+        "ISO 27001 Certified",
+        "256-bit Encryption",
+        "GDPR Compliant",
+        "Egyptian-Built"
+    ],
+    "faq": {
+        "title": "Frequently asked questions",
+        "subtitle": "Everything you need to know before signing up.",
+        "items": [
+            {
+                "q": "Do I need to pay before trying the system?",
+                "a": "No — you start with a free demo session. Our team walks you through the full system tailored to your team's size and needs. You only pay once you're fully satisfied and ready to onboard."
+            },
+            {
+                "q": "How does the demo work?",
+                "a": "Book a 30-minute call with one of our product specialists. We'll show you the features most relevant to your business, answer every question you have, and set up a free trial environment for you to explore."
+            },
+            {
+                "q": "Can I add more employees later?",
+                "a": "Yes. Our pricing scales with your headcount. Contact our team at any time and we'll adjust your plan instantly with no hidden fees."
+            },
+            {
+                "q": "Is my data secure?",
+                "a": "All data is encrypted at rest (AES-256) and in transit (TLS 1.3). We are ISO 27001 certified and fully GDPR compliant. Enterprise clients can also opt for on-premise deployment."
+            },
+            {
+                "q": "Which payment methods are supported?",
+                "a": "We accept all major credit and debit cards, Meeza, Fawry, and bank transfers — all processed securely through Paymob, Egypt's leading payment gateway."
+            },
+            {
+                "q": "Is there a minimum commitment or contract?",
+                "a": "No lock-in. The plan is billed monthly and you can cancel at any time. Annual billing is available at a discounted rate upon request."
+            }
+        ]
+    },
+    "cta": {
+        "badge": "Get Started Today",
+        "title": "Ready to simplify your HR?",
+        "subtitle": "Book a free demo. No commitment, no credit card. Just 30 minutes to see if we're the right fit.",
+        "ctaDemo": "Book a Free Demo",
+        "ctaSales": "Talk to Sales"
+    }
+}
