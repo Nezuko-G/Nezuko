@@ -2,7 +2,7 @@
   "list": {
     "title": "Assets",
     "search": "Search by name, serial, brand...",
-    "registerBtn": "Register Asset",
+    "registerBtn": "Add Asset",
     "reportBtn": "Depreciation Report",
     "table": {
       "name": "Name / Brand",

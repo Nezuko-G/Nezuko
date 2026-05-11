@@ -7,7 +7,8 @@
       "projects": "Projects",
       "reports": "Reports",
       "favorites": "Favorites",
-      "settings": "Settings"
+      "settings": "Settings",
+      "assets":"assets"
     },
     "navbar": {
       "title": "HR Management",

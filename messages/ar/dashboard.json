@@ -7,7 +7,8 @@
       "projects": "المشاريع",
       "reports": "التقارير",
       "favorites": "المفضلة",
-      "settings": "الإعدادات"
+      "settings": "الإعدادات",
+      "assets":"العهدات"
     },
     "navbar": {
       "title": "إدارة الموارد البشرية",
