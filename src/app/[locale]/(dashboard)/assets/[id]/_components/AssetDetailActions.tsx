@@ -1,0 +1,41 @@
+"use client";
+
+import { useTranslations } from "next-intl";
+import { useAssetUIStore } from "@/hooks/useAssetUIStore";
+import { Asset } from "@/types/dto/asset.dto";
+import { ArrowRightLeft, CornerDownLeft, Edit2 } from "lucide-react";
+
+export default function AssetDetailActions({ asset }: { asset: Asset }) {
+  const t = useTranslations("assets.list");
+  const { openModal } = useAssetUIStore();
+
+  return (
+    <div className="flex items-center gap-3">
+      {asset.status === "ASSIGNED" && (
+        <>
+          <button
+            onClick={() => openModal("TRANSFER", asset)}
+            className="flex items-center gap-2 px-4 py-2 border border-gray-200 bg-card text-content-dark hover:border-primary hover:text-primary rounded-xl text-sm font-bold transition-all"
+          >
+            <ArrowRightLeft size={16} />
+            <span>{t("table.actions")} (Transfer)</span>
+          </button>
+          <button
+            onClick={() => openModal("RETURN", asset)}
+            className="flex items-center gap-2 px-4 py-2 border border-gray-200 bg-card text-content-dark hover:border-status-warning hover:text-status-warning rounded-xl text-sm font-bold transition-all"
+          >
+            <CornerDownLeft size={16} />
+            <span>{t("table.actions")} (Return)</span>
+          </button>
+        </>
+      )}
+      <button
+        onClick={() => openModal("EDIT", asset)}
+        className="flex items-center gap-2 px-4 py-2 border border-gray-200 bg-card text-content-dark hover:border-secondary hover:text-secondary rounded-xl text-sm font-bold transition-all"
+      >
+        <Edit2 size={16} />
+        <span>{t("table.actions")} (Edit)</span>
+      </button>
+    </div>
+  );
+}

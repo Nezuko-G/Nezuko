@@ -1,7 +1,7 @@
 "use client"
 import Link from "next/link";
 import { useTranslations } from "next-intl";
-import { Home, Users, Clock, Briefcase, Folder, BarChart, Star, Settings } from "lucide-react";
+import { Home, Users, Package, Briefcase, Folder, BarChart, Star, Settings } from "lucide-react";
 
 export default function Sidebar() {
   const t = useTranslations("dashboard.sidebar");
@@ -9,7 +9,7 @@ export default function Sidebar() {
   const menuItems = [
     { icon: Home, label: t("home"), href: "/dashboard" },
     { icon: Users, label: t("employees"), href: "/dashboard/employees" },
-    { icon: Clock, label: t("time"), href: "/dashboard/time" },
+    { icon: Package, label: t("assets"), href: "/dashboard/assets" },
     { icon: Briefcase, label: t("payroll"), href: "/dashboard/payroll" },
     { icon: Folder, label: t("projects"), href: "/dashboard/projects" },
     { icon: BarChart, label: t("reports"), href: "/dashboard/reports" },
