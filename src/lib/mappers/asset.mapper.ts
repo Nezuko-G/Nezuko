@@ -21,10 +21,14 @@ export const mapAssetsFromDTO = (dtos: z.infer<typeof AssetDTO>[]) => {
   return dtos.map(mapAssetFromDTO);
 };
 
-export const mapAssetHistoryFromDTO = (dtos: z.infer<typeof AssetHistoryDTO>[]) => {
-  return dtos.map(dto => ({
-    ...dto,
-    id: String(dto.id),
+export const mapAssetHistoryFromDTO = (data: any[]) => {
+  return data.map(item => ({
+    id: item.id,
+    date: item.assignedAt, 
+    userName: `${item.user?.firstName} ${item.user?.lastName}`, 
+    adminName: `${item.assignedByUser?.firstName} ${item.assignedByUser?.lastName}`,
+    action: item.returnedAt ? "RETURN" : "ASSIGN", 
+    notes: item.notes
   }));
 };
 

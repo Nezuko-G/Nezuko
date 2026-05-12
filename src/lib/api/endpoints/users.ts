@@ -1,36 +1,12 @@
 import { z } from 'zod'
-import apiClient from '../axios'
-import { UserDTO, CreateUserDTO, UpdateUserDTO } from '@/types/dto/user.dto'
-import { mapUserFromDTO, mapUsersFromDTO } from '@/lib/mappers/user.mapper'
+import apiClient from 'axios'
+import { UserDTO } from '@/types/dto/user.dto'
+import { mapUserFromDTO } from '@/lib/mappers/user.mapper'
 import { apis } from '../config'
 
-export async function getUsers() {
-  const response = await apiClient.get<z.infer<typeof UserDTO>[]>('/users')
-  return mapUsersFromDTO(response.data)
-}
 
-export async function getUser(id: string) {
-  const response = await apiClient.get<z.infer<typeof UserDTO>>(`/users/${id}`)
-  return mapUserFromDTO(response.data)
-}
 
-export async function createUser(data: z.infer<typeof CreateUserDTO>) {
-  const validated = CreateUserDTO.parse(data)
-  const response = await apiClient.post<z.infer<typeof UserDTO>>('/users', validated)
-  return mapUserFromDTO(response.data)
-}
-
-export async function updateUser(id: string, data: z.infer<typeof UpdateUserDTO>) {
-  const validated = UpdateUserDTO.parse(data)
-  const response = await apiClient.patch<z.infer<typeof UserDTO>>(`/users/${id}`, validated)
-  return mapUserFromDTO(response.data)
-}
-
-export async function deleteUser(id: string) {
-  await apiClient.delete(`/users/${id}`)
-}
-
-export async function login(email: string, password: string) {
+export async function login(email: string, password: string) {                                                                            
   const response = await apiClient.post(apis.auth.login, { email, password })
   const validated = z.object({
     accessToken: z.string(),

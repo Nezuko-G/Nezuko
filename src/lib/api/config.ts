@@ -31,13 +31,13 @@ export const apis = {
   book_demo: "/book-demo",
 
   assets: {
-    base: "/asset",
-    me: "/asset/me",
-    depreciation: "/asset/report/depreciation",
-    assign: (id: string) => `/asset/${id}/assign`,
-    return: (id: string) => `/asset/${id}/return`,
-    transfer: (id: string) => `/asset/${id}/transfer`,
-    history: (id: string) => `/asset/${id}/history`,
-    employeeAssets: (userId: string) => `/users/${userId}/asset`,
-  },
+  base: "/asset", 
+  me: "/asset/me", 
+  depreciation: "/asset/report", 
+  employeeAssets: (userId: string) => `/asset/employee/${userId}`,
+  assign: (id: string) => `/asset/${id}/assign`,
+  return: (id: string) => `/asset/${id}/return`,
+  transfer: (id: string) => `/asset/${id}/transfer`,
+  history: (id: string) => `/asset/${id}/history`,
+},
 };

@@ -41,7 +41,7 @@ export const DepreciationReportItemDTO = z.object({
 });
 
 export const AssignAssetDTO = z.object({
-  employeeId: z.string().min(1),
+  userId: z.string().min(1),
   conditionOut: AssetConditionEnum,
   notes: z.string().optional(),
 });
