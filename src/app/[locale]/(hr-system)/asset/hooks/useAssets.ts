@@ -4,23 +4,16 @@ import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { 
   getAssets, getAsset, getAssetHistory, getDepreciationReport,
   createAsset, updateAsset, assignAsset, returnAsset, transferAsset, 
-  getEmployeeAssets,
-  getMyAssets
+  getEmployeeAssets, getMyAssets
 } from "@/lib/api/endpoints/assets";
 import { useAssetUIStore } from "./useAssetUIStore";
 
-
-export function useAssets(filters: { 
-  page?: number; 
-  search?: string; 
-  status?: string; 
-  category?: string 
-}) {
+export const useAssets = (params: { page?: number; limit?: number; search?: string; status?: string }) => {
   return useQuery({
-    queryKey: ['assets', filters], 
-    queryFn: () => getAssets(filters),
+    queryKey: ["assets", params], 
+    queryFn: () => getAssets(params),
   });
-}
+};
 
 export function useAsset(id: string) {
   return useQuery({
@@ -60,12 +53,12 @@ export function useEmployeeAssets(userId: string) {
   });
 }
 
-
 export function useAssetMutations() {
   const queryClient = useQueryClient();
   const { closeModal } = useAssetUIStore();
 
   const onSuccessAction = () => {
+    queryClient.invalidateQueries({ queryKey: ["assets"] });
     queryClient.invalidateQueries({ queryKey: ["asset"] });
     queryClient.invalidateQueries({ queryKey: ["asset-history"] });
     closeModal(); 
@@ -73,15 +66,7 @@ export function useAssetMutations() {
 
   const assignMutation = useMutation({
     mutationFn: assignAsset,
-    onSuccess: (response, variables) => {
-      queryClient.invalidateQueries({ queryKey: ['assets'] });
-      
-      queryClient.invalidateQueries({ queryKey: ['asset', variables.id] });
-      
-      queryClient.invalidateQueries({ queryKey: ['asset-history', variables.id] });
-      
-      closeModal();
-    },
+    onSuccess: onSuccessAction,
   });
 
   const returnMutation = useMutation({
@@ -97,7 +82,7 @@ export function useAssetMutations() {
   const createMutation = useMutation({
     mutationFn: createAsset,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["asset"] });
+      queryClient.invalidateQueries({ queryKey: ["assets"] });
       closeModal();
     },
   });
@@ -106,8 +91,6 @@ export function useAssetMutations() {
     mutationFn: updateAsset,
     onSuccess: onSuccessAction,
   });
-
-  
 
   return {
     assignAsset: assignMutation,

@@ -4,13 +4,13 @@ import { z } from 'zod';
 import apiClient from '@/lib/axios/core/instance';
 import { apis } from '../config';
 import { 
-  AssetDTO, AssetHistoryDTO, DepreciationReportItemDTO,
+  AssetDTO, AssetHistoryDTO,
   CreateAssetDTO, UpdateAssetDTO, 
   AssignAssetDTO, ReturnAssetDTO, TransferAssetDTO 
 } from '@/types/dto/asset.dto';
 import { 
   mapAssetFromDTO, mapAssetsFromDTO, 
-  mapAssetHistoryFromDTO, mapDepreciationReportFromDTO 
+  mapAssetHistoryFromDTO, mapDepreciationReport
 } from '@/lib/mappers/asset.mapper';
 
 interface ApiResponse<T> {
@@ -19,12 +19,14 @@ interface ApiResponse<T> {
   meta?: any;
 }
 
-export async function getAssets(params?: { status?: string, category?: string, page?: number, search?: string }) {
-    const response = await apiClient.get<ApiResponse<z.infer<typeof AssetDTO>[]>>(apis.assets.base, { params });
-return {
-        data: mapAssetsFromDTO(response.data.data),
-        meta: response.data.meta 
-    };}
+export async function getAssets(params?: { status?: string, category?: string, page?: number, limit?: number, search?: string }) {
+  const response = await apiClient.get<ApiResponse<z.infer<typeof AssetDTO>[]>>(apis.assets.base, { params });
+  
+  return {
+    data: mapAssetsFromDTO(response.data.data), 
+    meta: response.data.meta 
+  };
+}
 
 export async function getAsset(id: string) {
   const response = await apiClient.get<ApiResponse<z.infer<typeof AssetDTO>>>(`${apis.assets.base}/${id}`);
@@ -47,8 +49,8 @@ export async function getAssetHistory(id: string) {
 }
 
 export async function getDepreciationReport() {
-  const response = await apiClient.get<ApiResponse<z.infer<typeof DepreciationReportItemDTO>[]>>(apis.assets.depreciation);
-  return mapDepreciationReportFromDTO(response.data.data); 
+  const response = await apiClient.get<ApiResponse<any[]>>(apis.assets.depreciation);
+  return mapDepreciationReport(response.data.data); 
 }
 
 export async function createAsset(data: z.infer<typeof CreateAssetDTO>) {
@@ -63,10 +65,9 @@ export async function updateAsset({ id, data }: { id: string, data: z.infer<type
   return mapAssetFromDTO(response.data.data);
 }
 
-
 export async function assignAsset({ id, data }: { id: string, data: z.infer<typeof AssignAssetDTO> }) {
    const validatedData = AssignAssetDTO.parse(data);
-     return await apiClient.post(apis.assets.assign(id), validatedData);
+   return await apiClient.post(apis.assets.assign(id), validatedData);
 }
 
 export async function returnAsset({ id, data }: { id: string, data: z.infer<typeof ReturnAssetDTO> }) {

@@ -33,7 +33,7 @@ export const apis = {
   assets: {
   base: "/asset", 
   me: "/asset/me", 
-  depreciation: "/asset/report", 
+  depreciation: "/asset/report/depreciation", 
   employeeAssets: (userId: string) => `/asset/employee/${userId}`,
   assign: (id: string) => `/asset/${id}/assign`,
   return: (id: string) => `/asset/${id}/return`,

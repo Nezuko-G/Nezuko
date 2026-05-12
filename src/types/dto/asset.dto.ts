@@ -15,7 +15,12 @@ export const AssetDTO = z.object({
   purchaseCost: z.number(),
   purchaseDate: z.string(),
   notes: z.string().nullable().optional(),
+  currentHolder: z.object({
+    id: z.string(),
+    name: z.string(),
+  }).nullable().optional()
 });
+export type Asset = z.infer<typeof AssetDTO>;
 
 export const AssetHistoryDTO = z.object({
   id: z.string(),
@@ -31,14 +36,17 @@ export const AssetHistoryDTO = z.object({
 export const DepreciationReportItemDTO = z.object({
   id: z.string(),
   name: z.string(),
+  serialNumber: z.string().nullable().optional(),
   purchaseCost: z.number(),
   purchaseDate: z.string(),
-  status: AssetStatusEnum,
-  bookValue: z.number(),
-  age: z.number(),
-  depreciationPercentage: z.number(),
-  isFullyDepreciated: z.boolean(),
+  elapsedYears: z.number(), 
+  currentBookValue: z.number(), 
 });
+
+export type DepreciationItem = z.infer<typeof DepreciationReportItemDTO> & {
+  depreciationPercentage: number;
+  isFullyDepreciated: boolean;
+};
 
 export const AssignAssetDTO = z.object({
   userId: z.string().min(1),
@@ -52,8 +60,8 @@ export const ReturnAssetDTO = z.object({
 });
 
 export const TransferAssetDTO = z.object({
-  employeeId: z.string().min(1),
-  conditionIn: AssetConditionEnum,
+  toUserId: z.string().min(1),
+  conditionOut: AssetConditionEnum,
   notes: z.string().optional(),
 });
 
@@ -61,10 +69,12 @@ export const CreateAssetDTO = z.object({
   name: z.string().min(1),
   brand: z.string().min(1),
   category: z.string().min(1),
-  serialNumber: z.string().optional(),
+  model: z.string().optional().nullable(),
+  serialNumber: z.string().optional().nullable(),
   condition: AssetConditionEnum,
   purchaseCost: z.number().positive(),
   purchaseDate: z.string(),
+  notes: z.string().optional().nullable(),
 });
 
 export const UpdateAssetDTO = CreateAssetDTO.partial();
