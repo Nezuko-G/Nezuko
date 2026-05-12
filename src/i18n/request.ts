@@ -9,7 +9,7 @@ export default getRequestConfig(async ({ requestLocale }) => {
     locale = routing.defaultLocale
   }
 
-  const common = (await import(`../../messages/${locale}/common.json`)).default
+const common = (await import(`../../messages/${locale}/common.json`)).default
   const landing = (await import(`../../messages/${locale}/landing.json`)).default
   const auth = (await import(`../../messages/${locale}/auth.json`)).default
   const bookDemo = (await import(`../../messages/${locale}/bookDemo.json`)).default
@@ -17,7 +17,7 @@ export default getRequestConfig(async ({ requestLocale }) => {
   const services = (await import(`../../messages/${locale}/services.json`)).default
   const dashboard = (await import(`../../messages/${locale}/dashboard.json`)).default
   const assets = (await import(`../../messages/${locale}/assets.json`)).default
-
+  const leave = (await import(`../../messages/${locale}/leave.json`)).default
 
 
 
@@ -31,7 +31,8 @@ export default getRequestConfig(async ({ requestLocale }) => {
       dashboard,
       assets,
       pricing,
-      services
+      services,
+      leave
     }
   }
 })

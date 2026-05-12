@@ -11,6 +11,9 @@ export const postRequest = async <T = any>({ api: url, body, config = {} }: Requ
 export const putRequest = async <T = any>({ api: url, body, config = {} }: RequestConfig) =>
   apiWrapper<T>(() => api.put(url, body, { ...config }));
 
+export const patchRequest = async <T = any>({ api: url, body, config = {} }: RequestConfig) =>
+  apiWrapper<T>(() => api.patch(url, body, { ...config }));
+
 export const deleteRequest = async <T = any>({ api: url, config = {} }: RequestConfig) =>
   apiWrapper<T>(() => api.delete(url, { ...config }));
 

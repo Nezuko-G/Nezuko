@@ -1,22 +1,11 @@
 import type { AxiosError, AxiosResponse, InternalAxiosRequestConfig } from "axios";
 import { AxiosFormattedResponse } from "../../types/axios.types";
 import api from '../instance';
-import { apis } from '../../../api/config'; 
+import { apis } from '../../../api/config';
 
 let isRefreshing = false;
-let isRedirectingToLogin = false;
+let refreshPromise: Promise<any> | null = null;
 let failedQueue: Array<{ resolve: () => void; reject: (reason?: unknown) => void }> = [];
-
-const processQueue = (error: AxiosError | null) => {
-  failedQueue.forEach((prom) => {
-    if (error) {
-      prom.reject(error);
-    } else {
-      prom.resolve(); 
-    }
-  });
-  failedQueue = [];
-};
 
 export function onResponse(response: AxiosResponse): AxiosFormattedResponse {
   return {
@@ -32,46 +21,65 @@ export async function onResponseError(
 ): Promise<AxiosFormattedResponse | any> {
   const originalRequest = error.config as InternalAxiosRequestConfig & { _retry?: boolean };
   const status = error.response?.status;
+  const responseData = error.response?.data as Record<string, unknown> | undefined;
+  const errorMessage = typeof responseData?.message === 'string' 
+    ? responseData.message 
+    : error.message;
 
+  // Handle 401 with token refresh
   if (status === 401 && originalRequest && !originalRequest._retry) {
-    if (isRefreshing) {
-      return new Promise<void>((resolve, reject) => {
-        failedQueue.push({ resolve, reject });
-      })
-        .then(() => api(originalRequest))
-        .catch((err) => Promise.reject(err));
+    if (isRefreshing && refreshPromise) {
+      // Wait for existing refresh to complete
+      try {
+        await refreshPromise;
+        return api(originalRequest);
+      } catch {
+        // Refresh failed - return error
+        return Promise.resolve({
+          data: null,
+          error: errorMessage,
+          status: 401,
+          all: error,
+        });
+      }
     }
 
     originalRequest._retry = true;
     isRefreshing = true;
 
-    try {
-      await api.post(apis.auth.refresh); 
-      
-      processQueue(null);
-      return api(originalRequest);
-    } catch (refreshError) {
-      processQueue(refreshError as AxiosError);
-      
-      if (typeof window !== "undefined") {
-        const pathname = window.location.pathname;
-        const isLoginPage = pathname === "/login" || pathname.endsWith("/login");
-
-        if (!isLoginPage && !isRedirectingToLogin) {
-          isRedirectingToLogin = true;
-          window.location.href = "/login";
-        }
-      }
-      return Promise.reject(refreshError);
-    } finally {
+    refreshPromise = api.post(apis.auth.refresh).then(() => {
       isRefreshing = false;
+      refreshPromise = null;
+      failedQueue.forEach(p => p.resolve());
+      failedQueue = [];
+      return true;
+    }).catch((err) => {
+      isRefreshing = false;
+      refreshPromise = null;
+      failedQueue.forEach(p => p.reject(err));
+      failedQueue = [];
+      return false;
+    });
+
+    const success = await refreshPromise;
+    if (success) {
+      return api(originalRequest);
     }
+    // Refresh failed - return error as resolved response
+    return Promise.resolve({
+      data: null,
+      error: errorMessage,
+      status: 401,
+      all: error,
+    });
   }
 
+  // Non-401 errors (403, 404, 500, etc.)
   return Promise.resolve({
     data: null,
-    error: error.response?.data ?? error.message,
+    error: errorMessage,
     status: status ?? (error.code as unknown as number),
     all: error,
+    __authErrorHandled: status === 403,
   });
 }
