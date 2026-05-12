@@ -7,7 +7,7 @@ import { useTranslations } from "next-intl";
 import { useAssetUIStore } from "@/app/[locale]/(hr-system)/asset/hooks/useAssetUIStore";
 import { UpdateAssetDTO } from "@/types/dto/asset.dto";
 import { useAssetMutations } from "@/app/[locale]/(hr-system)/asset/hooks/useAssets";
-import { X } from "lucide-react";
+import { X, Loader2 } from "lucide-react";
 import { z } from "zod";
 
 export default function EditModal() {
@@ -31,10 +31,14 @@ export default function EditModal() {
         name: selectedAsset.name,
         brand: selectedAsset.brand,
         category: selectedAsset.category,
-        serialNumber: selectedAsset.serialNumber,
+        serialNumber: selectedAsset.serialNumber ?? undefined,
         condition: selectedAsset.condition,
         purchaseCost: selectedAsset.purchaseCost,
-        purchaseDate: selectedAsset.purchaseDate,
+        purchaseDate: selectedAsset.purchaseDate
+          ? String(selectedAsset.purchaseDate).split("T")[0]
+          : "",
+        model: selectedAsset.model ?? undefined,
+        notes: selectedAsset.notes ?? undefined,
       });
     }
   }, [selectedAsset, reset]);
@@ -72,6 +76,9 @@ export default function EditModal() {
               {...register("name")}
               className="w-full bg-background border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:border-primary focus:outline-none"
             />
+            {errors.name && (
+              <p className="text-xs text-status-error">{errors.name.message}</p>
+            )}
           </div>
 
           <div className="grid grid-cols-2 gap-4">
@@ -90,7 +97,7 @@ export default function EditModal() {
               </label>
               <input
                 {...register("serialNumber")}
-                className="w-full bg-background border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:border-primary focus:outline-none"
+                className="w-full bg-background border border-gray-100 rounded-xl px-4 py-2.5 text-sm focus:border-primary focus:outline-none"
               />
             </div>
           </div>
@@ -103,11 +110,10 @@ export default function EditModal() {
               {...register("condition")}
               className="w-full bg-background border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:border-primary focus:outline-none"
             >
-              <option value="NEW">New</option>
-              <option value="GOOD">Good</option>
-              <option value="FAIR">Fair</option>
-              <option value="POOR">Poor</option>
-              <option value="DAMAGED">Damaged</option>
+              <option value="NEW">{tList("condition.NEW")}</option>
+              <option value="GOOD">{tList("condition.GOOD")}</option>
+              <option value="FAIR">{tList("condition.FAIR")}</option>
+              <option value="DAMAGED">{tList("condition.DAMAGED")}</option>
             </select>
           </div>
         </form>
@@ -116,16 +122,17 @@ export default function EditModal() {
           <button
             type="button"
             onClick={closeModal}
-            className="px-5 py-2.5 text-content-dark font-bold"
+            className="px-5 py-2.5 text-content-dark font-bold hover:bg-gray-100 rounded-xl transition-colors"
           >
             {t("buttons.cancel")}
           </button>
           <button
             onClick={handleSubmit(onSubmit)}
             disabled={isLoading}
-            className="px-5 py-2.5 bg-secondary text-white rounded-xl text-sm font-bold hover:bg-secondary-hover disabled:opacity-50"
+            className="px-5 py-2.5 bg-secondary text-white rounded-xl text-sm font-bold hover:bg-secondary-hover disabled:opacity-50 flex items-center gap-2"
           >
-            {isLoading ? "..." : tList("table.actions")}
+            {isLoading && <Loader2 size={16} className="animate-spin" />}
+            {t("buttons.save")}
           </button>
         </div>
       </div>
