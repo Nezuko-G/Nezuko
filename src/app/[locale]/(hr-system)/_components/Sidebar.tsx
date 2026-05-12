@@ -1,25 +1,37 @@
-"use client"
+"use client";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
-import { Home, Users, Package, Briefcase, Folder, BarChart, Star, Settings } from "lucide-react";
+import {
+  Home,
+  Users,
+  Package,
+  Briefcase,
+  Folder,
+  BarChart,
+  Star,
+  Settings,
+} from "lucide-react";
 
 export default function Sidebar() {
   const t = useTranslations("dashboard.sidebar");
 
   const menuItems = [
     { icon: Home, label: t("home"), href: "/dashboard" },
-    { icon: Users, label: t("employees"), href: "/dashboard/employees" },
-    { icon: Package, label: t("assets"), href: "/dashboard/assets" },
-    { icon: Briefcase, label: t("payroll"), href: "/dashboard/payroll" },
-    { icon: Folder, label: t("projects"), href: "/dashboard/projects" },
-    { icon: BarChart, label: t("reports"), href: "/dashboard/reports" },
-    { icon: Star, label: t("favorites"), href: "/dashboard/favorites" },
-    { icon: Settings, label: t("settings"), href: "/dashboard/settings" },
+    { icon: Users, label: t("employees"), href: "/employees" },
+    { icon: Package, label: t("assets"), href: "/asset" },
+    { icon: Briefcase, label: t("payroll"), href: "/payroll" },
+    { icon: Folder, label: t("projects"), href: "/projects" },
+    { icon: BarChart, label: t("reports"), href: "/reports" },
+    { icon: Star, label: t("favorites"), href: "/favorites" },
+    { icon: Settings, label: t("settings"), href: "/settings" },
   ];
 
   return (
     <aside className="w-20 bg-secondary min-h-screen flex flex-col items-center py-6 gap-6 sticky top-0 shrink-0 z-20">
-      <Link href="/dashboard" className="w-10 h-10 bg-primary rounded-lg flex items-center justify-center mb-4 transition-transform hover:scale-105">
+      <Link
+        href="/dashboard"
+        className="w-10 h-10 bg-primary rounded-lg flex items-center justify-center mb-4 transition-transform hover:scale-105"
+      >
         <span className="text-secondary font-black text-xl">N</span>
       </Link>
 
