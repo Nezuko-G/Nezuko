@@ -2,7 +2,7 @@
 
 import { useTranslations } from "next-intl";
 import { AssetDTO } from "@/types/dto/asset.dto";
-import { useAssetUIStore } from "@/hooks/useAssetUIStore";
+import { useAssetUIStore } from "@/app/[locale]/(hr-system)/asset/hooks/useAssetUIStore";
 import { useAuthStore } from "@/hooks/useAuthStore";
 import { ArrowRightLeft, CornerDownLeft, UserPlus, Edit2 } from "lucide-react";
 import { useRouter } from "next/navigation";
@@ -78,7 +78,7 @@ export default function AssetTable({
           {assets.map((asset) => (
             <tr
               key={asset.id}
-              onClick={() => router.push(`/dashboard/assets/${asset.id}`)}
+              onClick={() => router.push(`/asset/${asset.id}`)}
               className="border-b border-gray-50 hover:bg-gray-50/50 transition-colors cursor-pointer"
             >
               <td className="px-6 py-4">

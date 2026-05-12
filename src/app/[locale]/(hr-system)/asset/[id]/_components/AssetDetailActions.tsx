@@ -1,12 +1,12 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { useAssetUIStore } from "@/hooks/useAssetUIStore";
+import { useAssetUIStore } from "@/app/[locale]/(hr-system)/asset/hooks/useAssetUIStore";
 import { Asset } from "@/types/dto/asset.dto";
 import { ArrowRightLeft, CornerDownLeft, Edit2, UserPlus } from "lucide-react";
 
 export default function AssetDetailActions({ asset }: { asset: Asset }) {
-  const t = useTranslations("assets.modals"); 
+  const t = useTranslations("assets.modals");
   const { openModal } = useAssetUIStore();
 
   return (
@@ -17,7 +17,7 @@ export default function AssetDetailActions({ asset }: { asset: Asset }) {
           className="flex items-center gap-2 px-4 py-2 border border-gray-200 bg-card text-content-dark hover:border-primary hover:text-primary rounded-xl text-sm font-bold transition-all"
         >
           <UserPlus size={16} />
-          <span>{t("buttons.confirmAssign")}</span> 
+          <span>{t("buttons.confirmAssign")}</span>
         </button>
       )}
 
@@ -45,7 +45,7 @@ export default function AssetDetailActions({ asset }: { asset: Asset }) {
         className="flex items-center gap-2 px-4 py-2 border border-gray-200 bg-card text-content-dark hover:border-secondary hover:text-secondary rounded-xl text-sm font-bold transition-all"
       >
         <Edit2 size={16} />
-        <span>{t("title.EDIT", { assetName: "" }).split(" — ")[0]}</span> 
+        <span>{t("title.EDIT", { assetName: "" }).split(" — ")[0]}</span>
       </button>
     </div>
   );

@@ -10,10 +10,15 @@ import {
 import { useAssetUIStore } from "./useAssetUIStore";
 
 
-export function useAssets(params?: { status?: string; category?: string }) {
+export function useAssets(filters: { 
+  page?: number; 
+  search?: string; 
+  status?: string; 
+  category?: string 
+}) {
   return useQuery({
-    queryKey: ["asset", params],
-    queryFn: () => getAssets(params),
+    queryKey: ['assets', filters], 
+    queryFn: () => getAssets(filters),
   });
 }
 
@@ -68,7 +73,15 @@ export function useAssetMutations() {
 
   const assignMutation = useMutation({
     mutationFn: assignAsset,
-    onSuccess: onSuccessAction,
+    onSuccess: (response, variables) => {
+      queryClient.invalidateQueries({ queryKey: ['assets'] });
+      
+      queryClient.invalidateQueries({ queryKey: ['asset', variables.id] });
+      
+      queryClient.invalidateQueries({ queryKey: ['asset-history', variables.id] });
+      
+      closeModal();
+    },
   });
 
   const returnMutation = useMutation({
