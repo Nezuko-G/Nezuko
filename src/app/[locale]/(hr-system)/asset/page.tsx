@@ -3,57 +3,75 @@
 import { useState } from "react";
 import { useTranslations } from "next-intl";
 import {
-  Search,
   FileText,
   Plus,
   Loader2,
   ChevronLeft,
   ChevronRight,
   Filter,
+  Briefcase,
 } from "lucide-react";
-import { useDebounce } from "use-debounce";
 import AssetTable from "./_components/AssetTable";
 import { Button } from "@/components/ui/button";
 import { useAssets } from "@/app/[locale]/(hr-system)/asset/hooks/useAssets";
-import AssetModalsContainer from "./_components/modals/AssetActionModal";
+import AssetModalsContainer from "./_components/modals/AssetModalsContainer";
 import RoleGuard from "@/components/RoleGuard/RoleGuard";
 import { useAssetUIStore } from "@/app/[locale]/(hr-system)/asset/hooks/useAssetUIStore";
+import { useRouter } from "@/i18n/navigation";
 
 export default function AssetsPage() {
   const t = useTranslations("assets.list");
   const { openModal } = useAssetUIStore();
+  const router = useRouter();
 
-  // 1. States للبحث والفلترة والصفحات
-  const [search, setSearch] = useState("");
   const [status, setStatus] = useState("");
   const [page, setPage] = useState(1);
-
-  // 2. Debounce للبحث (500ms)
-  const [debouncedSearch] = useDebounce(search, 500);
+  const limit = 10;
 
   const { data, isLoading, isError } = useAssets({
     page,
-    search: debouncedSearch,
+    limit,
     status,
   });
 
-  const assets = data?.data || [];
+  const assetsList = data?.data || [];
   const meta = data?.meta;
+  const lastPage = meta?.totalPages || 1;
 
   return (
-    <div className="w-full max-w-7xl mx-auto space-y-6">
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-        <h1 className="text-2xl font-black text-secondary">{t("title")}</h1>
+    <div className="w-full max-w-7xl mx-auto space-y-8 pb-8 text-right">
+      <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
+        <div className="space-y-1">
+          <h1 className="text-3xl flex font-black text-secondary tracking-tight">
+            {t("title")}
+          </h1>
+          <p className="text-sm flex font-medium text-content-muted">
+            {t("subtitle")}
+          </p>
+        </div>
         <div className="flex items-center gap-3">
+          <Button
+            variant="outline"
+            className="gap-2 bg-background border-gray-200 text-secondary hover:border-secondary hover:bg-secondary/5 shadow-sm transition-all font-bold"
+            onClick={() => router.push("/asset/me")}
+          >
+            <Briefcase size={18} />
+            <span className="hidden sm:inline">{t("myAssetsBtn")}</span>
+          </Button>
+
           <RoleGuard allowedRoles={["HR"]}>
             <Button
               variant="outline"
-              className="gap-2 bg-card border-gray-200 text-content-dark hover:border-primary hover:text-primary"
+              className="gap-2 bg-background border-gray-200 text-content-dark hover:border-primary hover:text-primary shadow-sm transition-all font-bold"
+              onClick={() => router.push("/asset/report")}
             >
               <FileText size={18} />
               <span className="hidden sm:inline">{t("reportBtn")}</span>
             </Button>
-            <Button className="gap-2" onClick={() => openModal("CREATE")}>
+            <Button
+              className="gap-2 shadow-md font-bold transition-all"
+              onClick={() => openModal("CREATE")}
+            >
               <Plus size={18} />
               <span>{t("registerBtn")}</span>
             </Button>
@@ -61,48 +79,35 @@ export default function AssetsPage() {
         </div>
       </div>
 
-      {/* شريط البحث والفلترة */}
-      <div className="flex flex-col md:flex-row items-center gap-4 bg-card p-4 rounded-2xl shadow-sm border border-gray-100">
-        <div className="relative w-full md:w-96">
-          <input
-            type="text"
-            placeholder={t("searchPlaceholder")}
-            value={search}
-            onChange={(e) => {
-              setSearch(e.target.value);
-              setPage(1);
-            }}
-            className="w-full bg-background border border-gray-200 text-content placeholder:text-content-muted rounded-xl px-10 py-2.5 text-sm focus:outline-none focus:border-primary transition-all"
-          />
-          <Search
-            className="absolute left-3 top-1/2 -translate-y-1/2 text-content-muted"
-            size={18}
-          />
+      <div className="flex items-center gap-4 bg-card p-3 rounded-2xl shadow-sm border border-gray-100 w-full md:w-fit">
+        <div className="flex items-center justify-center w-10 h-10 rounded-xl bg-gray-50 shrink-0">
+          <Filter size={18} className="text-gray-500" />
         </div>
-
-        <div className="flex items-center gap-2 w-full md:w-auto">
-          <Filter size={18} className="text-content-muted hidden md:block" />
-          <select
-            value={status}
-            onChange={(e) => {
-              setStatus(e.target.value);
-              setPage(1);
-            }}
-            className="w-full md:w-48 bg-background border border-gray-200 text-sm font-bold rounded-xl px-4 py-2.5 focus:outline-none focus:border-primary transition-all cursor-pointer"
-          >
-            <option value="">{t("status.all")}</option>
-            <option value="AVAILABLE">{t("status.AVAILABLE")}</option>
-            <option value="ASSIGNED">{t("status.ASSIGNED")}</option>
-            <option value="MAINTENANCE">{t("status.MAINTENANCE")}</option>
-          </select>
-        </div>
+        <select
+          value={status}
+          onChange={(e) => {
+            setStatus(e.target.value);
+            setPage(1);
+          }}
+          className="w-full md:w-56 bg-transparent text-content-dark text-sm font-bold focus:outline-none cursor-pointer appearance-none px-2"
+        >
+          <option value="">{t("status.all")}</option>
+          <option value="AVAILABLE">{t("status.AVAILABLE")}</option>
+          <option value="ASSIGNED">{t("status.ASSIGNED")}</option>
+          <option value="UNDER_MAINTENANCE">
+            {t("status.UNDER_MAINTENANCE")}
+          </option>
+          <option value="RETIRED">{t("status.RETIRED")}</option>
+        </select>
       </div>
 
-      {/* منطقة الجدول */}
-      <div className="bg-card rounded-2xl border border-gray-100 shadow-sm overflow-hidden flex flex-col min-h-[400px]">
+      <div className="bg-card rounded-3xl border border-gray-100 shadow-sm overflow-hidden flex flex-col min-h-[500px]">
         {isLoading ? (
-          <div className="flex-1 flex items-center justify-center">
+          <div className="flex-1 flex flex-col items-center justify-center gap-3">
             <Loader2 className="animate-spin text-primary" size={40} />
+            <p className="text-sm font-bold text-content-muted animate-pulse">
+              {t("loading")}
+            </p>
           </div>
         ) : isError ? (
           <div className="flex-1 flex items-center justify-center text-status-error font-bold">
@@ -110,34 +115,31 @@ export default function AssetsPage() {
           </div>
         ) : (
           <>
-            <div className="flex-1">
-              <AssetTable assets={assets} />
+            <div className="flex-1 overflow-x-auto">
+              <AssetTable assets={assetsList} />
             </div>
 
-            {/* Pagination Footer */}
-            {meta && meta.last_page > 1 && (
-              <div className="p-4 border-t border-gray-50 flex items-center justify-between bg-gray-50/30">
+            {lastPage > 1 && (
+              <div className="px-6 py-4 border-t border-gray-50 flex items-center justify-center gap-5 bg-gray-50/50">
                 <p className="text-sm text-content-muted font-bold">
-                  {t("pagination", { current: page, total: meta.last_page })}
+                  {t("pagination", { current: page, total: lastPage })}
                 </p>
-                <div className="flex gap-2">
+                <div className="flex items-center gap-2">
                   <Button
                     variant="outline"
-                    size="sm"
-                    disabled={page <= 1}
-                    onClick={() => setPage((p) => p - 1)}
-                    className="h-9 w-9 p-0 rounded-lg"
+                    disabled={page >= lastPage}
+                    onClick={() => setPage((p) => p + 1)}
+                    className="h-9 w-9 p-0 rounded-xl bg-background border-gray-200 hover:bg-gray-100 text-content-dark transition-all disabled:opacity-50"
                   >
-                    <ChevronLeft size={18} />
+                    <ChevronRight size={18} />
                   </Button>
                   <Button
                     variant="outline"
-                    size="sm"
-                    disabled={page >= meta.last_page}
-                    onClick={() => setPage((p) => p + 1)}
-                    className="h-9 w-9 p-0 rounded-lg"
+                    disabled={page <= 1}
+                    onClick={() => setPage((p) => p - 1)}
+                    className="h-9 w-9 p-0 rounded-xl bg-background border-gray-200 hover:bg-gray-100 text-content-dark transition-all disabled:opacity-50"
                   >
-                    <ChevronRight size={18} />
+                    <ChevronLeft size={18} />
                   </Button>
                 </div>
               </div>

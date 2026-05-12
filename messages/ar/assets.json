@@ -1,26 +1,30 @@
 {
   "list": {
-    "title": "الأصول والعهد",
-    "search": "ابحث بالاسم، السيريال، أو الماركة...",
-    "registerBtn": "تسجيل أصل جديد",
+    "title": "الأصول",
+    "subtitle": "إدارة ومتابعة موارد ومعدات الشركة",
+    "registerBtn": "إضافة أصل",
     "reportBtn": "تقرير الإهلاك",
-    "searchPlaceholder": "ابحث بالاسم، الرقم التسلسلي، أو البراند...",
+    "myAssetsBtn": "أصولي الشخصية",
+    "loading": "جاري تحميل الأصول...",
     "pagination": "صفحة {current} من {total}",
     "table": {
       "name": "الاسم / الماركة",
       "category": "الفئة",
       "serial": "السيريال",
       "status": "الحالة",
-      "condition": "حالة الجهاز",
+      "condition": "حالة الأصل",
       "assignedTo": "في عهدة",
       "actions": "إجراءات"
+    },
+    "errors": {
+      "fetch": "فشل تحميل الأصول. يرجى المحاولة مرة أخرى."
     },
     "status": {
       "all": "كل الحالات",
       "AVAILABLE": "متاح",
-      "ASSIGNED": "مُسلم (عهدة)",
-      "MAINTENANCE": "صيانة",
-      "loadingEmployees": "جاري تحميل الموظفين..."
+      "ASSIGNED": "في عهدة",
+      "UNDER_MAINTENANCE": "في الصيانة",
+      "RETIRED": "خارج الخدمة"
     },
     "condition": {
       "NEW": "جديد",
@@ -29,92 +33,105 @@
       "POOR": "ضعيف",
       "DAMAGED": "تالف"
     },
-    "errors": {
-      "fetch": "فشل في تحميل الأصول. يرجى المحاولة مرة أخرى."
+    "actions": {
+      "assign": "تسليم عهدة",
+      "return": "استرجاع الأصل",
+      "transfer": "نقل عهدة",
+      "edit": "تعديل البيانات"
     },
     "history": {
-    "title": "سجل العهدة",
-    "assignedBy": "سُلّمت بواسطة",
-    "to": "إلى",
-    "on": "في تاريخ",
-    "condition": "الحالة",
-    "noHistory": "لا يوجد سجل عهدة لهذا الأصل"
-  }
+      "title": "سجل العهدة",
+      "assignedBy": "بواسطة",
+      "to": "إلى",
+      "on": "في",
+      "condition": "الحالة",
+      "noHistory": "لا يوجد سجل متاح لهذا الأصل"
+    }
   },
   "details": {
     "purchaseCost": "تكلفة الشراء",
     "bookValue": "القيمة الدفترية",
-    "custodies": "عدد العهد",
-    "status": "الحالة",
+    "custodies": "سجل العهد",
     "brandModel": "الماركة / الموديل",
     "serialNumber": "الرقم التسلسلي",
     "category": "الفئة",
-    "condition": "الحالة",
     "currentHolder": "الحائز الحالي",
     "purchaseDate": "تاريخ الشراء",
     "notes": "ملاحظات",
-    "historyTitle": "سجل العهد (History)",
+    "assignedTo": "تم التسليم إلى {name}",
+    "returnedFrom": "تم الاستلام من {name}",
+    "conditionDowngrade": "تم رصد تراجع في حالة الأصل",
+    "out": "عند التسليم: {condition}",
+    "in": "عند الاستلام: {condition}",
+    "unassigned": "غير مسلّم",
+    "back": "رجوع",
     "currency": "$",
-    "assignedTo": "تُسلم إلى {name}",
-    "returnedFrom": "مُسترجع من {name}",
-    "conditionDowngrade": "تم رصد تراجع في حالة الجهاز",
-    "out": "خروج: {condition}",
-    "in": "دخول: {condition}",
-    "by": "بواسطة {name}",
-    "unassigned": "غير مُسلم لأحد",
-    "noNotes": "لا توجد ملاحظات",
-    "back": "العودة"
+    "status": "الحالة الحالية",
+    "condition": "حالة الأصل",
+    "historyTitle": "سجل تحركات العهدة",
+    "noNotes": "لا توجد ملاحظات مسجلة",
+    "notFound": "الأصل غير موجود",
+    "unknownUser": "مستخدم غير معروف",
+    "to": "إلى",
+    "by": "بواسطة"
   },
   "report": {
-    "title": "تقرير الإهلاك",
-    "exportCsv": "تصدير CSV",
-    "totalCost": "إجمالي التكلفة",
-    "totalBookValue": "إجمالي القيمة الدفترية",
-    "totalDepreciated": "إجمالي المُهلك",
-    "fullyDepreciatedCount": "مهلك بالكامل",
-    "table": {
-      "asset": "الأصل",
-      "purchaseCost": "تكلفة الشراء",
-      "age": "العمر (سنوات)",
-      "bookValue": "القيمة الدفترية",
-      "depreciation": "الإهلاك",
-      "status": "الحالة"
+    "title": "تقرير إهلاك الأصول",
+    "subtitle": "متابعة القيمة الدفترية وتناقص أصول الشركة بمرور الوقت",
+    "stats": {
+      "totalCost": "إجمالي تكلفة الشراء",
+      "currentValue": "القيمة الدفترية الحالية",
+      "avgDepreciation": "متوسط نسبة الإهلاك"
     },
-    "formulaText": "المعادلة: القيمة الدفترية = التكلفة - (التكلفة ÷ ٥) × السنوات. الأصول التي تجاوزت ٥ سنوات تصبح قيمتها صفر.",
-    "depreciatedLabel": "% مُهلك",
-    "fullyDepreciated": "مُهلك بالكامل"
+    "table": {
+      "purchaseDate": "تاريخ الشراء",
+      "originalCost": "التكلفة الأصلية",
+      "age": "العمر (سنوات)",
+      "currentValue": "القيمة الحالية",
+      "depreciation": "الإهلاك"
+    }
   },
   "views": {
-    "myAssets": "عهدتي الشخصية",
-    "employeeAssets": "عهدة الموظف",
-    "noAssets": "لا توجد عهد مسجلة حالياً"
+    "myAssets": "أصولي الشخصية",
+    "employeeAssets": "أصول الموظف",
+    "noAssets": "لا توجد أصول مسجلة حالياً"
   },
   "modals": {
     "title": {
       "ASSIGN": "تسليم عهدة — {assetName}",
       "RETURN": "استرجاع عهدة — {assetName}",
       "TRANSFER": "نقل عهدة — {assetName}",
-      "EDIT": "تعديل بيانات — {assetName}"
+      "EDIT": "تعديل أصل — {assetName}",
+      "CREATE": "إضافة أصل جديد"
     },
     "fields": {
+      "brand": "الماركة",
+      "model": "الموديل",
+      "cost": "تكلفة الشراء",
+      "purchaseDate": "تاريخ الشراء",
       "selectEmployee": "اختر الموظف",
       "transferTo": "نقل إلى",
-      "currentHolder": "الحائز الحالي",
-      "conditionOut": "حالة التسليم",
-      "conditionIn": "حالة الاسترجاع",
-      "conditionOnReturn": "الحالة عند الاسترجاع",
-      "notes": "ملاحظات (سبب النقل، عيوب...)"
+      "currentHolder": "الموظف الحالي",
+      "conditionOut": "الحالة عند التسليم",
+      "conditionIn": "الحالة عند الاستلام",
+      "conditionOnReturn": "الحالة عند الإرجاع",
+      "notes": "ملاحظات إضافية"
+    },
+    "states": {
+      "loadingEmployees": "جاري تحميل قائمة الموظفين..."
     },
     "warnings": {
-      "atomicTransfer": "هذا الإجراء سيقوم بتسجيل استرجاع من الموظف الحالي وتسليم للموظف الجديد فوراً في عملية واحدة."
+      "atomicTransfer": "سيؤدي هذا الإجراء إلى تسجيل استرجاع من الموظف الحالي وتسليم فوري للموظف الجديد في عملية واحدة."
     },
     "buttons": {
       "cancel": "إلغاء",
+      "create": "إضافة الأصل",
       "confirmAssign": "تأكيد التسليم",
-      "confirmReturn": "تأكيد الاسترجاع",
-      "confirmTransfer": "تأكيد النقل"
+      "confirmReturn": "تأكيد الاستلام",
+      "confirmTransfer": "تأكيد النقل",
+      "save": "حفظ التغييرات"
     },
-    "readonly": "قراءة فقط",
-    "sameTenantHint": "يجب أن يكون من نفس الشركة"
+    "readonly": "للقراءة فقط",
+    "sameTenantHint": "يجب أن يكون في نفس النطاق"
   }
 }

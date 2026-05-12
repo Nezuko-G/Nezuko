@@ -7,12 +7,11 @@ import {
   useAssetHistory,
 } from "@/app/[locale]/(hr-system)/asset/hooks/useAssets";
 import AssetDetailActions from "./_components/AssetDetailActions";
-import AssetModalsContainer from "../_components/modals/AssetActionModal";
+import AssetModalsContainer from "../_components/modals/AssetModalsContainer";
 import { useEffect, useState } from "react";
 import {
   Clock,
   UserPlus,
-  ShieldCheck,
   Loader2,
   CalendarClock,
 } from "lucide-react";
@@ -108,16 +107,7 @@ export default function AssetDetailPage() {
   const holderName = record.userName || (record.user ? `${record.user.firstName} ${record.user.lastName}` : tDetails("unknownUser"));
   const adminName = record.adminName || (record.assignedByUser ? `${record.assignedByUser.firstName} ${record.assignedByUser.lastName}` : "");
   const displayDate = record.date || record.assignedAt;
-const displayCondition = record.condition || record.conditionOut || record.conditionIn || "UNKNOWN";  const initial = (record.user?.firstName?.charAt(0) || record.userName?.charAt(0)) || "?";
-
-  const getConditionStyles = (condition: string) => {
-    switch (condition?.toUpperCase()) {
-      case "NEW": return "bg-status-success/10 text-status-success border-status-success/20";
-      case "GOOD": return "bg-blue-50 text-blue-600 border-blue-100";
-      case "DAMAGED": return "bg-status-error/10 text-status-error border-status-error/20";
-      default: return "bg-status-warning/10 text-status-warning border-status-warning/20";
-    }
-  };
+  const initial = (record.user?.firstName?.charAt(0) || record.userName?.charAt(0)) || "?";
 
   return (
     <div key={record.id} className="relative bg-card border border-gray-100 rounded-3xl p-6 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-5 hover:border-primary-light transition-colors">
@@ -141,11 +131,6 @@ const displayCondition = record.condition || record.conditionOut || record.condi
           <span className="flex items-center gap-1.5 px-3 py-1 bg-gray-100 text-content-muted rounded-full text-[11px] font-bold border border-gray-100">
             <CalendarClock size={14} />
             {isMounted && displayDate ? new Date(displayDate).toLocaleDateString() : "---"}
-          </span>
-          
-          <span className={`flex items-center gap-1 px-3 py-1 rounded-full text-[11px] font-black uppercase border ${getConditionStyles(displayCondition)}`}>
-            <ShieldCheck size={14} />
-            {tList(`condition.${displayCondition}`) || displayCondition}
           </span>
         </div>
 

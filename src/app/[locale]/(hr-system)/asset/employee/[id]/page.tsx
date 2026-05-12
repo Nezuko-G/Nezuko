@@ -4,7 +4,7 @@ import { useParams } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { useEmployeeAssets } from "@/app/[locale]/(hr-system)/asset/hooks/useAssets";
 import AssetTable from "../../_components/AssetTable";
-import AssetModalsContainer from "../../_components/modals/AssetActionModal";
+import AssetModalsContainer from "../../_components/modals/AssetModalsContainer";
 import { Loader2 } from "lucide-react";
 
 export default function EmployeeAssetsPage() {

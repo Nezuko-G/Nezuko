@@ -1,10 +1,11 @@
 {
   "list": {
     "title": "Assets",
-    "search": "Search by name, serial, brand...",
+    "subtitle": "Manage and track company hardware and resources",
     "registerBtn": "Add Asset",
     "reportBtn": "Depreciation Report",
-    "searchPlaceholder": "Search by name, serial, or brand...",
+    "myAssetsBtn": "My Assets",
+    "loading": "Loading assets...",
     "pagination": "Page {current} of {total}",
     "table": {
       "name": "Name / Brand",
@@ -22,8 +23,8 @@
       "all": "All Statuses",
       "AVAILABLE": "Available",
       "ASSIGNED": "Assigned",
-      "MAINTENANCE": "Maintenance",
-      "loadingEmployees": "Loading employees..."
+      "UNDER_MAINTENANCE": "Under Maintenance",
+      "RETIRED": "Retired"
     },
     "condition": {
       "NEW": "New",
@@ -31,15 +32,21 @@
       "FAIR": "Fair",
       "POOR": "Poor",
       "DAMAGED": "Damaged"
-      },
+    },
+    "actions": {
+      "assign": "Assign Asset",
+      "return": "Return Asset",
+      "transfer": "Transfer Custody",
+      "edit": "Edit Details"
+    },
     "history": {
-    "title": "Custody History",
-    "assignedBy": "Assigned by",
-    "to": "to",
-    "on": "on",
-    "condition": "Condition",
-    "noHistory": "No history available for this asset"
-  }
+      "title": "Custody History",
+      "assignedBy": "Assigned by",
+      "to": "to",
+      "on": "on",
+      "condition": "Condition",
+      "noHistory": "No history available for this asset"
+    }
   },
   "details": {
     "purchaseCost": "Purchase cost",
@@ -69,23 +76,20 @@
     "by": "By"
   },
   "report": {
-    "title": "Depreciation report",
-    "exportCsv": "Export CSV",
-    "totalCost": "Total cost",
-    "totalBookValue": "Total book value",
-    "totalDepreciated": "Total depreciated",
-    "fullyDepreciatedCount": "Fully depreciated",
-    "table": {
-      "asset": "Asset",
-      "purchaseCost": "Purchase cost",
-      "age": "Age (yrs)",
-      "bookValue": "Book value",
-      "depreciation": "Depreciation",
-      "status": "Status"
+    "title": "Asset Depreciation Report",
+    "subtitle": "Track the book value and depreciation of company assets over time",
+    "stats": {
+      "totalCost": "Total Purchase Cost",
+      "currentValue": "Current Book Value",
+      "avgDepreciation": "Avg. Depreciation Rate"
     },
-    "formulaText": "Formula: Book value = purchaseCost - (purchaseCost ÷ 5) × elapsedYears. Assets older than 5 years show $0.",
-    "depreciatedLabel": "% depreciated",
-    "fullyDepreciated": "Fully depreciated"
+    "table": {
+      "purchaseDate": "Purchase Date",
+      "originalCost": "Original Cost",
+      "age": "Age (Years)",
+      "currentValue": "Current Value",
+      "depreciation": "Depreciation"
+    }
   },
   "views": {
     "myAssets": "My Assets",
@@ -97,9 +101,14 @@
       "ASSIGN": "Assign asset — {assetName}",
       "RETURN": "Return asset — {assetName}",
       "TRANSFER": "Transfer asset — {assetName}",
-      "EDIT": "Edit asset — {assetName}"
+      "EDIT": "Edit asset — {assetName}",
+      "CREATE": "Add New Asset"
     },
     "fields": {
+      "brand": "Brand",
+      "model": "Model",
+      "cost": "Purchase Cost",
+      "purchaseDate": "Purchase Date",
       "selectEmployee": "Select employee",
       "transferTo": "Transfer to",
       "currentHolder": "Current holder",
@@ -108,16 +117,19 @@
       "conditionOnReturn": "Condition on return",
       "notes": "Notes"
     },
+    "states": {
+      "loadingEmployees": "Loading employees..."
+    },
     "warnings": {
       "atomicTransfer": "This will record a return from the current holder and immediately assign to the new employee in a single transaction."
     },
     "buttons": {
       "cancel": "Cancel",
-      "create": "Create",
+      "create": "Create Asset",
       "confirmAssign": "Confirm assign",
       "confirmReturn": "Confirm return",
       "confirmTransfer": "Confirm transfer",
-      "save": "Save"
+      "save": "Save Changes"
     },
     "readonly": "read-only",
     "sameTenantHint": "Must be in same tenant"
