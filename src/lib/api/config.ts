@@ -30,6 +30,17 @@ export const apis = {
 
   book_demo: "/book-demo",
 
+  assets: {
+  base: "/asset", 
+  me: "/asset/me", 
+  depreciation: "/asset/report/depreciation", 
+  employeeAssets: (userId: string) => `/asset/employee/${userId}`,
+  assign: (id: string) => `/asset/${id}/assign`,
+  return: (id: string) => `/asset/${id}/return`,
+  transfer: (id: string) => `/asset/${id}/transfer`,
+  history: (id: string) => `/asset/${id}/history`,
+},
+};
   leaveRequests: {
     base: "/leave-requests",
     me: "/leave-requests/me",

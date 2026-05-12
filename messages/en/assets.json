@@ -1,9 +1,12 @@
 {
   "list": {
     "title": "Assets",
-    "search": "Search by name, serial, brand...",
-    "registerBtn": "Register Asset",
+    "subtitle": "Manage and track company hardware and resources",
+    "registerBtn": "Add Asset",
     "reportBtn": "Depreciation Report",
+    "myAssetsBtn": "My Assets",
+    "loading": "Loading assets...",
+    "pagination": "Page {current} of {total}",
     "table": {
       "name": "Name / Brand",
       "category": "Category",
@@ -13,10 +16,14 @@
       "assignedTo": "Assigned To",
       "actions": "Actions"
     },
+    "errors": {
+      "fetch": "Failed to load assets. Please try again."
+    },
     "status": {
+      "all": "All Statuses",
       "AVAILABLE": "Available",
       "ASSIGNED": "Assigned",
-      "UNDER_MAINTENANCE": "Maintenance",
+      "UNDER_MAINTENANCE": "Under Maintenance",
       "RETIRED": "Retired"
     },
     "condition": {
@@ -25,49 +32,64 @@
       "FAIR": "Fair",
       "POOR": "Poor",
       "DAMAGED": "Damaged"
+    },
+    "actions": {
+      "assign": "Assign Asset",
+      "return": "Return Asset",
+      "transfer": "Transfer Custody",
+      "edit": "Edit Details"
+    },
+    "history": {
+      "title": "Custody History",
+      "assignedBy": "Assigned by",
+      "to": "to",
+      "on": "on",
+      "condition": "Condition",
+      "noHistory": "No history available for this asset"
     }
   },
   "details": {
     "purchaseCost": "Purchase cost",
     "bookValue": "Book value",
     "custodies": "Custodies",
-    "status": "Status",
     "brandModel": "Brand / Model",
     "serialNumber": "Serial number",
     "category": "Category",
-    "condition": "Condition",
     "currentHolder": "Current holder",
     "purchaseDate": "Purchase date",
     "notes": "Notes",
-    "historyTitle": "Custody history",
-    "currency": "$",
     "assignedTo": "Assigned to {name}",
     "returnedFrom": "Returned from {name}",
     "conditionDowngrade": "Condition downgrade flagged",
     "out": "Out: {condition}",
     "in": "In: {condition}",
-    "by": "by {name}",
     "unassigned": "Unassigned",
-    "noNotes": "No notes available"
+    "back": "Back",
+    "currency": "$",
+    "status": "Current Status",
+    "condition": "Condition",
+    "historyTitle": "Custody History",
+    "noNotes": "No history available for this asset",
+    "notFound": "Asset not found",
+    "unknownUser": "Unknown User",
+    "to": "To",
+    "by": "By"
   },
   "report": {
-    "title": "Depreciation report",
-    "exportCsv": "Export CSV",
-    "totalCost": "Total cost",
-    "totalBookValue": "Total book value",
-    "totalDepreciated": "Total depreciated",
-    "fullyDepreciatedCount": "Fully depreciated",
-    "table": {
-      "asset": "Asset",
-      "purchaseCost": "Purchase cost",
-      "age": "Age (yrs)",
-      "bookValue": "Book value",
-      "depreciation": "Depreciation",
-      "status": "Status"
+    "title": "Asset Depreciation Report",
+    "subtitle": "Track the book value and depreciation of company assets over time",
+    "stats": {
+      "totalCost": "Total Purchase Cost",
+      "currentValue": "Current Book Value",
+      "avgDepreciation": "Avg. Depreciation Rate"
     },
-    "formulaText": "Formula: Book value = purchaseCost - (purchaseCost ÷ 5) × elapsedYears. Assets older than 5 years show $0.",
-    "depreciatedLabel": "% depreciated",
-    "fullyDepreciated": "Fully depreciated"
+    "table": {
+      "purchaseDate": "Purchase Date",
+      "originalCost": "Original Cost",
+      "age": "Age (Years)",
+      "currentValue": "Current Value",
+      "depreciation": "Depreciation"
+    }
   },
   "views": {
     "myAssets": "My Assets",
@@ -79,9 +101,14 @@
       "ASSIGN": "Assign asset — {assetName}",
       "RETURN": "Return asset — {assetName}",
       "TRANSFER": "Transfer asset — {assetName}",
-      "EDIT": "Edit asset — {assetName}"
+      "EDIT": "Edit asset — {assetName}",
+      "CREATE": "Add New Asset"
     },
     "fields": {
+      "brand": "Brand",
+      "model": "Model",
+      "cost": "Purchase Cost",
+      "purchaseDate": "Purchase Date",
       "selectEmployee": "Select employee",
       "transferTo": "Transfer to",
       "currentHolder": "Current holder",
@@ -90,14 +117,19 @@
       "conditionOnReturn": "Condition on return",
       "notes": "Notes"
     },
+    "states": {
+      "loadingEmployees": "Loading employees..."
+    },
     "warnings": {
       "atomicTransfer": "This will record a return from the current holder and immediately assign to the new employee in a single transaction."
     },
     "buttons": {
       "cancel": "Cancel",
+      "create": "Create Asset",
       "confirmAssign": "Confirm assign",
       "confirmReturn": "Confirm return",
-      "confirmTransfer": "Confirm transfer"
+      "confirmTransfer": "Confirm transfer",
+      "save": "Save Changes"
     },
     "readonly": "read-only",
     "sameTenantHint": "Must be in same tenant"
