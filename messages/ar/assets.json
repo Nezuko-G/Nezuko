@@ -4,6 +4,8 @@
     "search": "ابحث بالاسم، السيريال، أو الماركة...",
     "registerBtn": "تسجيل أصل جديد",
     "reportBtn": "تقرير الإهلاك",
+    "searchPlaceholder": "ابحث بالاسم، الرقم التسلسلي، أو البراند...",
+    "pagination": "صفحة {current} من {total}",
     "table": {
       "name": "الاسم / الماركة",
       "category": "الفئة",
@@ -14,10 +16,11 @@
       "actions": "إجراءات"
     },
     "status": {
+      "all": "كل الحالات",
       "AVAILABLE": "متاح",
-      "ASSIGNED": "مُسلم",
-      "UNDER_MAINTENANCE": "صيانة",
-      "RETIRED": "مُكهن"
+      "ASSIGNED": "مُسلم (عهدة)",
+      "MAINTENANCE": "صيانة",
+      "loadingEmployees": "جاري تحميل الموظفين..."
     },
     "condition": {
       "NEW": "جديد",
@@ -25,7 +28,18 @@
       "FAIR": "مقبول",
       "POOR": "ضعيف",
       "DAMAGED": "تالف"
-    }
+    },
+    "errors": {
+      "fetch": "فشل في تحميل الأصول. يرجى المحاولة مرة أخرى."
+    },
+    "history": {
+    "title": "سجل العهدة",
+    "assignedBy": "سُلّمت بواسطة",
+    "to": "إلى",
+    "on": "في تاريخ",
+    "condition": "الحالة",
+    "noHistory": "لا يوجد سجل عهدة لهذا الأصل"
+  }
   },
   "details": {
     "purchaseCost": "تكلفة الشراء",
@@ -48,7 +62,8 @@
     "in": "دخول: {condition}",
     "by": "بواسطة {name}",
     "unassigned": "غير مُسلم لأحد",
-    "noNotes": "لا توجد ملاحظات"
+    "noNotes": "لا توجد ملاحظات",
+    "back": "العودة"
   },
   "report": {
     "title": "تقرير الإهلاك",
