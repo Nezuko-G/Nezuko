@@ -1,16 +1,7 @@
-"use client";
-import Link from "next/link";
+"use client"
 import { useTranslations } from "next-intl";
-import {
-  Home,
-  Users,
-  Package,
-  Briefcase,
-  Folder,
-  BarChart,
-  Star,
-  Settings,
-} from "lucide-react";
+import { Home, Users, Package, Briefcase, Folder, BarChart, Star, Settings, CalendarDays } from "lucide-react";
+import { Link } from "@/i18n/navigation";
 
 export default function Sidebar() {
   const t = useTranslations("dashboard.sidebar");
@@ -18,9 +9,10 @@ export default function Sidebar() {
   const menuItems = [
     { icon: Home, label: t("home"), href: "/dashboard" },
     { icon: Users, label: t("employees"), href: "/employees" },
-    { icon: Package, label: t("assets"), href: "/asset" },
+    { icon: Package, label: t("assets"), href: "/assets" },
     { icon: Briefcase, label: t("payroll"), href: "/payroll" },
     { icon: Folder, label: t("projects"), href: "/projects" },
+    { icon: CalendarDays, label: t("leave"), href: "/leave" },
     { icon: BarChart, label: t("reports"), href: "/reports" },
     { icon: Star, label: t("favorites"), href: "/favorites" },
     { icon: Settings, label: t("settings"), href: "/settings" },

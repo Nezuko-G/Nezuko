@@ -41,3 +41,10 @@ export const apis = {
   history: (id: string) => `/asset/${id}/history`,
 },
 };
+  leaveRequests: {
+    base: "/leave-requests",
+    me: "/leave-requests/me",
+    review: (id: string) => `/leave-requests/${id}/review`,
+    cancel: (id: string) => `/leave-requests/${id}/cancel`,
+  },
+};

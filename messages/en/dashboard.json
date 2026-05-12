@@ -1,35 +1,56 @@
 {
-    "sidebar": {
-      "home": "Home",
-      "employees": "Employees",
-      "time": "Time",
-      "payroll": "Payroll",
-      "projects": "Projects",
-      "reports": "Reports",
-      "favorites": "Favorites",
-      "settings": "Settings",
-      "assets":"assets"
-    },
-    "navbar": {
-      "title": "HR Management",
-      "searchPlaceholder": "Search...",
-      "aiChat": "AI Chat",
-      "quickAdd": "Quick Add"
-    },
-    "hero": {
-      "greeting": "Dashboard Welcome",
-      "mainPage": "Main Page",
-      "saudiDashboard": "Saudi Dashboard",
-      "announcement": "We are pleased to inform you that the National Day holiday will be from January 21 to 23, 2026. We wish you a happy holiday."
-    },
-    "leaveBalances": {
-      "title": "Leave Balances",
-      "requestLeave": "Request Leave",
-      "annual": "Annual Leave",
-      "sick": "Sick Leave",
-      "official": "Official Holidays",
-      "unpaid": "Unpaid Leave",
-      "days": "Days",
-      "day": "Day"
-    }
+  "sidebar": {
+    "home": "Home",
+    "employees": "Employees",
+    "assets": "Assets",
+    "time": "Time",
+    "payroll": "Payroll",
+    "projects": "Projects",
+    "leave": "Leave",
+    "reports": "Reports",
+    "favorites": "Favorites",
+    "settings": "Settings"
+  },
+  "navbar": {
+    "title": "HR Management",
+    "searchPlaceholder": "Search...",
+    "aiChat": "AI Chat",
+    "quickAdd": "Quick Add"
+  },
+  "hero": {
+    "greeting": "Dashboard Welcome",
+    "mainPage": "Main Page",
+    "saudiDashboard": "Saudi Dashboard",
+    "announcement": "We are pleased to inform you that the National Day holiday will be from January 21 to 23, 2026. We wish you a happy holiday."
+  },
+  "leaveBalances": {
+    "title": "Leave Balances",
+    "requestLeave": "Request Leave",
+    "annual": "Annual Leave",
+    "sick": "Sick Leave",
+    "official": "Official Holidays",
+    "unpaid": "Unpaid Leave",
+    "days": "Days",
+    "day": "Day"
+  },
+  "leave": {
+    "title": "Leave Requests",
+    "create": "Create Request",
+    "myRequests": "My Requests",
+    "allRequests": "All Requests",
+    "startDate": "Start Date",
+    "endDate": "End Date",
+    "reason": "Reason",
+    "status": "Status",
+    "pending": "Pending",
+    "approved": "Approved",
+    "rejected": "Rejected",
+    "cancelled": "Cancelled",
+    "review": "Review",
+    "cancel": "Cancel",
+    "reviewNote": "Review Note",
+    "approve": "Approve",
+    "reject": "Reject",
+    "noRequests": "No leave requests found"
+  }
 }
