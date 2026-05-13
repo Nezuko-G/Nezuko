@@ -1,11 +1,14 @@
 "use client"
 import { useTranslations } from "next-intl";
-import { Search, Plus, Bell, MessageSquare } from "lucide-react";
+import { Search, Plus, Bell, MessageSquare, X, Menu } from "lucide-react";
 import { useAuthStore } from "@/hooks/useAuthStore";
+import { useState } from "react";
 
 export default function Navbar() {
   const t = useTranslations("dashboard.navbar");
-  const { role, setRole } = useAuthStore(); 
+  const { role, setRole } = useAuthStore();
+  const [searchOpen, setSearchOpen] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   const toggleRole = () => {
     if (role === "HR") setRole("EMPLOYEE");
@@ -14,48 +17,125 @@ export default function Navbar() {
   };
 
   return (
-    <header className="h-20 bg-secondary text-white flex items-center justify-between px-6 sticky top-0 z-10 w-full shrink-0 shadow-sm">
-      <div className="flex items-center gap-4 w-1/3">
-        <h1 className="text-xl font-bold tracking-tight">{t("title")}</h1>
-        <button 
-          onClick={toggleRole}
-          className="px-2 py-1 bg-status-warning/20 text-status-warning text-xs font-bold rounded-md"
+    <header className="h-16 md:h-20 bg-secondary text-white sticky top-0 z-10 w-full shrink-0 shadow-sm">
+      <div className="flex items-center justify-between px-4 md:px-6 h-full gap-3">
+
+        {/* Left: Title + Role Badge */}
+        <div className="flex items-center gap-2 md:gap-4 min-w-0 shrink-0">
+          {/* Mobile menu toggle */}
+          <button
+            onClick={() => setMenuOpen(!menuOpen)}
+            className="md:hidden p-2 hover:bg-white/10 rounded-lg transition-colors"
+          >
+            {menuOpen ? <X size={20} /> : <Menu size={20} />}
+          </button>
+
+          <h1 className="text-base md:text-xl font-bold tracking-tight truncate">
+            {t("title")}
+          </h1>
+
+          <button
+            onClick={toggleRole}
+            className="hidden sm:inline-flex px-2 py-1 bg-status-warning/20 text-status-warning text-xs font-bold rounded-md shrink-0"
+          >
+            {role} (Test)
+          </button>
+        </div>
+
+        {/* Center: Search — hidden on mobile unless toggled */}
+        <div
+          className={`
+            absolute inset-x-0 top-0 h-16 md:h-20 px-4 bg-secondary flex items-center
+            transition-all duration-200
+            md:static md:inset-auto md:h-auto md:px-0 md:flex md:justify-center md:flex-1
+            ${searchOpen ? "flex z-20" : "hidden md:flex"}
+          `}
         >
-          {role} (Test)
-        </button>
-      </div>
+          {/* Close button on mobile */}
+          {searchOpen && (
+            <button
+              onClick={() => setSearchOpen(false)}
+              className="md:hidden mr-3 p-1 hover:bg-white/10 rounded-full transition-colors"
+            >
+              <X size={20} />
+            </button>
+          )}
 
-      <div className="w-1/3 flex justify-center">
-        <div className="relative w-full max-w-md">
-          <input
-            type="text"
-            placeholder={t("searchPlaceholder")}
-            className="w-full bg-white/5 text-white placeholder-white/40 border border-transparent focus:border-primary/50 focus:bg-white/10 rounded-full px-10 py-2.5 text-sm focus:outline-none transition-all"
-          />
-          <Search className="absolute right-4 top-1/2 -translate-y-1/2 text-white/40" size={18} />
+          <div className="relative w-full max-w-md">
+            <input
+              type="text"
+              placeholder={t("searchPlaceholder")}
+              autoFocus={searchOpen}
+              className="w-full bg-white/5 text-white placeholder-white/40 border border-transparent focus:border-primary/50 focus:bg-white/10 rounded-full px-4 pr-10 py-2 md:py-2.5 text-sm focus:outline-none transition-all"
+            />
+            <Search
+              className="absolute right-4 top-1/2 -translate-y-1/2 text-white/40"
+              size={16}
+            />
+          </div>
+        </div>
+
+        {/* Right: Actions */}
+        <div className="flex items-center gap-1 sm:gap-2 md:gap-3 shrink-0">
+          {/* Search icon — mobile only */}
+          <button
+            onClick={() => setSearchOpen(true)}
+            className="md:hidden p-2 hover:bg-white/10 rounded-full transition-colors"
+          >
+            <Search size={18} className="text-white/70" />
+          </button>
+
+          {/* AI Chat */}
+          <button className="hidden sm:flex items-center gap-2 hover:bg-white/10 px-2 md:px-3 py-2 rounded-lg transition-colors text-sm font-medium">
+            <MessageSquare size={18} className="text-primary" />
+            <span className="hidden lg:inline-block">{t("aiChat")}</span>
+          </button>
+
+          {/* Quick Add */}
+          <button className="hidden sm:flex items-center gap-2 hover:bg-white/10 px-2 md:px-3 py-2 rounded-lg transition-colors text-sm font-medium">
+            <Plus size={18} className="text-primary" />
+            <span className="hidden lg:inline-block">{t("quickAdd")}</span>
+          </button>
+
+          {/* Notifications */}
+          <button className="relative p-2 hover:bg-white/10 rounded-full transition-colors group">
+            <Bell size={20} className="group-hover:text-primary transition-colors" />
+            <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-status-error rounded-full ring-2 ring-secondary" />
+          </button>
+
+          {/* Avatar */}
+          <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-zinc-800 border-2 border-primary/20 overflow-hidden shrink-0 cursor-pointer hover:border-primary transition-colors">
+            <img
+              src="https://i.pravatar.cc/150?img=11"
+              alt="Profile"
+              className="w-full h-full object-cover"
+            />
+          </div>
         </div>
       </div>
 
-      <div className="w-1/3 flex items-center justify-end gap-3 sm:gap-4">
-        <button className="flex items-center gap-2 hover:bg-white/10 px-3 py-2 rounded-lg transition-colors text-sm font-medium">
-          <MessageSquare size={18} className="text-primary" />
-          <span className="hidden sm:inline-block">{t("aiChat")}</span>
-        </button>
-        
-        <button className="flex items-center gap-2 hover:bg-white/10 px-3 py-2 rounded-lg transition-colors text-sm font-medium">
-          <Plus size={18} className="text-primary" />
-          <span className="hidden sm:inline-block">{t("quickAdd")}</span>
-        </button>
+      {/* Mobile dropdown menu */}
+      {menuOpen && (
+        <div className="md:hidden bg-secondary border-t border-white/10 px-4 py-3 flex flex-col gap-2 shadow-lg">
+          {/* Role badge in menu */}
+          <button
+            onClick={toggleRole}
+            className="self-start px-2 py-1 bg-status-warning/20 text-status-warning text-xs font-bold rounded-md"
+          >
+            {role} (Test)
+          </button>
 
-        <button className="relative p-2 hover:bg-white/10 rounded-full transition-colors group">
-          <Bell size={20} className="group-hover:text-primary transition-colors" />
-          <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-status-error rounded-full ring-2 ring-secondary"></span>
-        </button>
+          <button className="flex items-center gap-3 hover:bg-white/10 px-3 py-2.5 rounded-lg transition-colors text-sm font-medium w-full">
+            <MessageSquare size={18} className="text-primary" />
+            {t("aiChat")}
+          </button>
 
-        <div className="w-10 h-10 rounded-full bg-zinc-800 border-2 border-primary/20 overflow-hidden shrink-0 cursor-pointer hover:border-primary transition-colors">
-          <img src="https://i.pravatar.cc/150?img=11" alt="Profile" className="w-full h-full object-cover" /> {/* temporary  */}
+          <button className="flex items-center gap-3 hover:bg-white/10 px-3 py-2.5 rounded-lg transition-colors text-sm font-medium w-full">
+            <Plus size={18} className="text-primary" />
+            {t("quickAdd")}
+          </button>
         </div>
-      </div>
+      )}
     </header>
   );
 }

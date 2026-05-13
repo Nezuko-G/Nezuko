@@ -38,10 +38,16 @@
         },
         "validation": {
             "bookingError": "An error occurred while booking the demo",
-            "requiredFields": "This field is required"
+            "requiredFields": "Please fill in all required fields"
         },
         "submit": "Book a Call",
+        "submitting": "Sending...",
         "privacyText": "By submitting this form, you agree to our website's privacy policy.",
         "termsLink": "Terms of Service"
+    },
+    "success": {
+        "title": "You're all set!",
+        "message": "We've received your request and will be in touch within 1 business day.",
+        "cta": "Got it"
     }
 }
