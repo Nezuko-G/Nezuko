@@ -5,18 +5,21 @@ export const apis = {
     forgetPassword: "/auth/forget-password",
     refresh: "/auth/refresh",
   },
+
   home: {
     stats: "/home/count",
     kickStart: "/home/kickstart",
   },
 
   aboutUs: "/about-us",
+
   legal: {
     privacy: "/privacy-policy",
     terms: "/terms-conditions",
   },
 
-  contact: "contact-us",
+  contact: "/contact-us",
+
   FAQ: "/faqs",
 
   images: {
@@ -27,20 +30,19 @@ export const apis = {
 
   daily: "/api/daily",
 
-
   book_demo: "/book-demo",
 
   assets: {
-  base: "/asset", 
-  me: "/asset/me", 
-  depreciation: "/asset/report/depreciation", 
-  employeeAssets: (userId: string) => `/asset/employee/${userId}`,
-  assign: (id: string) => `/asset/${id}/assign`,
-  return: (id: string) => `/asset/${id}/return`,
-  transfer: (id: string) => `/asset/${id}/transfer`,
-  history: (id: string) => `/asset/${id}/history`,
-},
-};
+    base: "/asset",
+    me: "/asset/me",
+    depreciation: "/asset/report/depreciation",
+    employeeAssets: (userId: string) => `/asset/employee/${userId}`,
+    assign: (id: string) => `/asset/${id}/assign`,
+    return: (id: string) => `/asset/${id}/return`,
+    transfer: (id: string) => `/asset/${id}/transfer`,
+    history: (id: string) => `/asset/${id}/history`,
+  },
+
   leaveRequests: {
     base: "/leave-requests",
     me: "/leave-requests/me",
