@@ -7,7 +7,8 @@
     "company": "Company",
     "pricing": "Pricing",
     "login": "Login",
-    "demo": "Request a Demo"
+    "demo": "Request a Demo",
+    "blogs":"blogs"
   },
   "footer": {
     "desc": "A new-age platform for growing businesses to scale HR processes and control spend.",
