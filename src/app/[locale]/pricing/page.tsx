@@ -17,8 +17,7 @@ import {
     PAYMENT_METHODS,
     ICON_MAP,
     type IconName,
-} from "./utils/pricing.utils";   // adjust path to match your folder structure
-
+} from "./utils/pricing.utils";
 
 const DARK_BG = "bg-[#000028]";
 const LIGHT_BG = "bg-[#f8fafc]";

@@ -39,9 +39,8 @@ export default function Navbar() {
           <Link href="#" className="flex items-center gap-1 hover:text-primary transition-colors">
             {t("product")} <ChevronDown size={14} />
           </Link>
-          <Link href="#" className="flex items-center gap-1 hover:text-primary transition-colors">
-            {t("solutions")} <ChevronDown size={14} />
-          </Link>
+
+          <Link href="/blog" className="hover:text-primary transition-colors">{t("blogs")}</Link>
           <Link href="/services" className="hover:text-primary transition-colors">{t("services")}</Link>
           <Link href="/pricing" className="hover:text-primary transition-colors">{t("pricing")}</Link>
         </div>
@@ -75,7 +74,7 @@ export default function Navbar() {
         isMobileMenuOpen ? "opacity-100 scale-100 translate-y-0" : "opacity-0 scale-95 -translate-y-4 pointer-events-none"
       )}>
         <Link href="#" className="font-bold text-white" onClick={() => setIsMobileMenuOpen(false)}>{t("product")}</Link>
-        <Link href="#" className="font-bold text-white" onClick={() => setIsMobileMenuOpen(false)}>{t("solutions")}</Link>
+        <Link href="#" className="font-bold text-white" onClick={() => setIsMobileMenuOpen(false)}>{t("blogs")}</Link>
         <Link href="#" className="font-bold text-white" onClick={() => setIsMobileMenuOpen(false)}>{t("pricing")}</Link>
         <Link href="#" className="font-bold text-white" onClick={() => setIsMobileMenuOpen(false)}>{t("services")}</Link>
         <Link href="#" className="font-bold text-white" onClick={() => setIsMobileMenuOpen(false)}>{t("login")}</Link>
