@@ -49,4 +49,8 @@ export const apis = {
     review: (id: string) => `/leave-requests/${id}/review`,
     cancel: (id: string) => `/leave-requests/${id}/cancel`,
   },
+  departments: {
+    base: "/department",
+    byId: (id: string) => `/department/${id}`,
+    },
 };
