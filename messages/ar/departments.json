@@ -1,0 +1,73 @@
+{
+  
+    "list": {
+      "title": "إدارة الأقسام",
+      "subtitle": "هيكلة الشركة وإدارة فرق العمل",
+      "registerBtn": "إضافة قسم",
+      "searchPlaceholder": "ابحث عن قسم...",
+      "filterAll": "الكل (القسم الأب)",
+      "pagination": "صفحة {current} من {total}",
+      "errors": {
+        "fetch": "فشل تحميل الأقسام"
+      },
+      "table": {
+        "name": "اسم القسم",
+        "manager": "المدير",
+        "employees": "الموظفين",
+        "parent": "يتبع لـ",
+        "status": "الحالة",
+        "actions": "إجراءات",
+        "unassigned": "غير معين",
+        "root": "رئيسي"
+      }
+    },
+    "status": {
+      "ACTIVE": "نشط"
+    },
+    "details": {
+      "notFound": "القسم غير موجود",
+      "breadcrumbs": {
+        "list": "الأقسام"
+      },
+      "actions": {
+        "edit": "تعديل القسم",
+        "delete": "حذف"
+      },
+      "stats": {
+        "employees": "موظف",
+        "subDepartments": "قسم فرعي"
+      },
+      "info": {
+        "description": "الوصف",
+        "manager": "مدير القسم",
+        "parent": "القسم الأب",
+        "root": "قسم رئيسي (لا يتبع لأحد)"
+      },
+      "subDepartmentsTitle": "الأقسام التابعة",
+      "errors": {
+        "notEmpty": "لا يمكن حذف قسم يحتوي على موظفين"
+      }
+    },
+    "modals": {
+      "title": {
+        "CREATE": "إضافة قسم جديد",
+        "EDIT": "تعديل القسم"
+      },
+      "fields": {
+        "name": "اسم القسم",
+        "description": "الوصف",
+        "manager": "المدير المباشر",
+        "selectManager": "اختر مديراً",
+        "parent": "يتبع لـ",
+        "root": "رئيسي (Root)"
+      },
+      "states": {
+        "loading": "جاري التحميل..."
+      },
+      "buttons": {
+        "cancel": "إلغاء",
+        "create": "إضافة",
+        "save": "حفظ التعديلات"
+      }
+    }
+  }
