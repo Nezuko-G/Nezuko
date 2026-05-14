@@ -1,4 +1,4 @@
-import type { Employee, Department, EmployeeDocument } from "../types";
+import type { Employee, Department, EmployeeDocument } from "../types/employees.dto";
 
 export const MOCK_DEPARTMENTS: Department[] = [
     { id: "d1", name: "Engineering" },

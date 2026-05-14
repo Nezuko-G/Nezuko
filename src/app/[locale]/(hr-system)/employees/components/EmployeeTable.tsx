@@ -7,7 +7,7 @@ import { Eye, Pencil, UserX } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useEmployeeStore } from "../stores/employee.store";
 import { MOCK_DEPARTMENTS } from "../utils/mock-data";
-import type { Employee } from "../types";
+import type { Employee } from "../types/employees.dto";
 
 interface Props {
   onAddClick: () => void;

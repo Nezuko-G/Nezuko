@@ -5,7 +5,7 @@ import { useTranslations } from "next-intl";
 import { Upload, Trash2, FileText } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useEmployeeStore } from "../../stores/employee.store";
-import type { EmployeeDocument } from "../../types";
+import type { EmployeeDocument } from "../../types/employees.dto";
 
 interface Props {
     employeeId: string;

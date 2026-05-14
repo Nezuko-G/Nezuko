@@ -56,4 +56,8 @@ export const apis = {
   dashboard: {
     base: "/dashboard/overview",
   },
+  employees: {
+    base: "/employee",
+    byId: (id: string) => `/employee/${id}`,
+  }
 };

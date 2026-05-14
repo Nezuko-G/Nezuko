@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { AlertTriangle } from "lucide-react";
 import { useEmployeeStore } from "../stores/employee.store";
-import type { Employee } from "../types";
+import type { Employee } from "../types/employees.dto";
 
 interface Props {
     employee: Employee | null;

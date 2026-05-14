@@ -6,7 +6,7 @@ import { Save } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useEmployeeStore } from "../../stores/employee.store";
 import DocumentsTab from "./DocumentsTab";
-import type { Employee } from "../../types";
+import type { Employee } from "../../types/employees.dto";
 
 type Section = "personal" | "job" | "address" | "emergency" | "documents";
 
