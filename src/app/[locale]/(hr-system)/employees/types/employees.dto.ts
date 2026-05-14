@@ -19,32 +19,67 @@ export const GenderEnum = z.enum([
     "OTHER",
 ]);
 
+// ─── Shared Meta ────────────────────────────────────────────────────────────
 
+const PaginationMetaDTO = z.object({
+    total: z.number(),
+    page: z.number(),
+    limit: z.number(),
+    totalPages: z.number(),
+});
+
+// ─── Departments ─────────────────────────────────────────────────────────────
+
+export const DepartmentDTO = z.object({
+    id: z.string(),
+    tenantId: z.string(),
+    name: z.string(),
+    description: z.string().nullable(),
+    managerId: z.string().nullable(),
+    parentId: z.string().nullable(),
+    createdAt: z.string().datetime(),
+    updatedAt: z.string().datetime(),
+    employeeCount: z.number(),
+});
+
+export const GetAllDepartmentsResponseDTO = z.object({
+    success: z.literal(true),
+    data: z.array(DepartmentDTO),
+    meta: PaginationMetaDTO,
+});
+
+// ─── Employees ───────────────────────────────────────────────────────────────
+
+const DepartmentSummaryDTO = z.object({
+    id: z.string(),
+    name: z.string(),
+    managerId: z.string().nullable(),
+});
 
 const EmployeeSummaryDTO = z.object({
-    id: z.string().uuid(),
+    id: z.string(),
     firstName: z.string(),
     lastName: z.string(),
-    email: z.string().email(),
+    email: z.string(),
     salary: z.number().nullable(),
     role: EmployeeRoleEnum,
     jobTitle: z.string().nullable(),
-    employeeCode: z.string(),
+    employeeCode: z.string().nullable(),
     status: EmployeeStatusEnum,
-    gender: GenderEnum,
+    gender: GenderEnum.nullable(),
     phone: z.string().nullable(),
     hireDate: z.string().datetime().nullable(),
-    departmentId: z.string().uuid().nullable(),
+    departmentId: z.string().nullable(),
     createdAt: z.string().datetime(),
+    department: DepartmentSummaryDTO.nullable(),
 });
 
 export const GetAllEmployeesResponseDTO = z.object({
-    status: z.literal("success"),
     data: z.object({
         employees: z.array(EmployeeSummaryDTO),
+        meta: PaginationMetaDTO,
     }),
 });
-
 
 export const GetEmployeeResponseDTO = z.object({
     status: z.literal("success"),
@@ -52,7 +87,6 @@ export const GetEmployeeResponseDTO = z.object({
         employee: EmployeeSummaryDTO,
     }),
 });
-
 
 export const CreateEmployeeRequestDTO = z.object({
     firstName: z.string().min(1),
@@ -71,7 +105,6 @@ export const CreateEmployeeResponseDTO = z.object({
         employee: EmployeeSummaryDTO,
     }),
 });
-
 
 export const UpdateEmployeeRequestDTO = z.object({
     firstName: z.string().min(1).optional(),
@@ -96,8 +129,6 @@ export const UpdateEmployeeResponseDTO = z.object({
     }),
 });
 
-
-
 export const DeleteEmployeeResponseDTO = z.object({
     status: z.literal("success"),
     data: z.object({
@@ -106,8 +137,10 @@ export const DeleteEmployeeResponseDTO = z.object({
 });
 
 
-export type EmployeeSummary = z.infer<typeof EmployeeSummaryDTO>;
+export type Department = z.infer<typeof DepartmentDTO>;
+export type GetAllDepartmentsResponse = z.infer<typeof GetAllDepartmentsResponseDTO>;
 
+export type EmployeeSummary = z.infer<typeof EmployeeSummaryDTO>;
 export type GetAllEmployeesResponse = z.infer<typeof GetAllEmployeesResponseDTO>;
 export type GetEmployeeResponse = z.infer<typeof GetEmployeeResponseDTO>;
 

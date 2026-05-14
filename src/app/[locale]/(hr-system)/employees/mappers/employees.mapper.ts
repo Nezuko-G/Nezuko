@@ -42,6 +42,7 @@ function mapEmployeeFromDTO(dto: EmployeeSummaryDTOType): EmployeeSummary {
         hireDate: dto.hireDate,
         departmentId: dto.departmentId,
         createdAt: dto.createdAt,
+        department: dto.department ?? null,
     };
 }
 
@@ -51,13 +52,12 @@ export function mapGetAllEmployeesFromDTO(
     dto: GetAllEmployeesResponseDTOType
 ): GetAllEmployeesResponse {
     return {
-        status: dto.status,
         data: {
             employees: dto.data.employees.map(mapEmployeeFromDTO),
+            meta: dto.data.meta,
         },
     };
 }
-
 export function mapGetEmployeeFromDTO(
     dto: GetEmployeeResponseDTOType
 ): GetEmployeeResponse {

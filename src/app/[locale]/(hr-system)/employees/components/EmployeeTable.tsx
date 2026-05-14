@@ -1,25 +1,46 @@
 "use client";
 
-import { useEffect } from "react";
 import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 import { Eye, Pencil, UserX } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { useEmployeeStore } from "../stores/employee.store";
-import { MOCK_DEPARTMENTS } from "../utils/mock-data";
-import type { Employee } from "../types/employees.dto";
+import { useEmployees } from "../hooks/useEmployees";
+import { useDepartments } from "@/app/[locale]/(hr-system)/departments/hooks/useDepartments";
+import type { EmployeeSummary } from "../types/employees.dto";
 
 interface Props {
   onAddClick: () => void;
-  onTerminate: (employee: Employee) => void;
+  onTerminate: (employee: EmployeeSummary) => void;
 }
+
+import { useState } from "react";
 
 export default function EmployeeTable({ onAddClick, onTerminate }: Props) {
   const t = useTranslations("employees");
   const router = useRouter();
-  const { employees, filters, isLoading, fetchEmployees, setFilters } = useEmployeeStore();
 
-  useEffect(() => { fetchEmployees(); }, []);
+  const [search, setSearch] = useState("");
+  const [departmentId, setDepartmentId] = useState("");
+  const [status, setStatus] = useState("");
+
+  const { data: employeesData, isLoading } = useEmployees();
+  const { data: departmentsData } = useDepartments({});
+
+  const employees = employeesData?.data?.employees ?? [];
+  const departments = departmentsData?.data ?? [];
+
+  const filtered = employees.filter((emp) => {
+    const matchSearch =
+      !search ||
+      `${emp.firstName} ${emp.lastName}`.toLowerCase().includes(search.toLowerCase()) ||
+      emp.email.toLowerCase().includes(search.toLowerCase()) ||
+      (emp.employeeCode?.toLowerCase().includes(search.toLowerCase()) ?? false);
+
+    const matchDepartment = !departmentId || emp.departmentId === departmentId;
+    const matchStatus = !status || emp.status === status;
+
+    return matchSearch && matchDepartment && matchStatus;
+  });
 
   return (
     <div className="flex flex-col gap-4">
@@ -37,24 +58,23 @@ export default function EmployeeTable({ onAddClick, onTerminate }: Props) {
         <input
           type="text"
           placeholder={t("searchPlaceholder")}
-          value={filters.search}
-          onChange={(e) => setFilters({ search: e.target.value })}
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
           className="flex-1 px-4 py-2 rounded-xl border border-gray-200 bg-card text-content text-sm focus:outline-none focus:ring-2 focus:ring-primary/30"
         />
         <select
-          value={filters.departmentId}
-          onChange={(e) => setFilters({ departmentId: e.target.value })}
+          value={departmentId}
+          onChange={(e) => setDepartmentId(e.target.value)}
           className="px-3 py-2 rounded-xl border border-gray-200 bg-card text-content text-sm focus:outline-none"
         >
           <option value="">{t("allDepartments")}</option>
-          {MOCK_DEPARTMENTS.map((d) => (
+          {departments.map((d) => (
             <option key={d.id} value={d.id}>{d.name}</option>
           ))}
         </select>
         <select
-          value={filters.status}
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          onChange={(e) => setFilters({ status: e.target.value as any })}
+          value={status}
+          onChange={(e) => setStatus(e.target.value)}
           className="px-3 py-2 rounded-xl border border-gray-200 bg-card text-content text-sm focus:outline-none"
         >
           <option value="">{t("allStatuses")}</option>
@@ -78,14 +98,18 @@ export default function EmployeeTable({ onAddClick, onTerminate }: Props) {
           <tbody>
             {isLoading ? (
               <tr>
-                <td colSpan={6} className="py-16 text-center text-content-muted">{t("loading")}</td>
+                <td colSpan={6} className="py-16 text-center text-content-muted">
+                  {t("loading")}
+                </td>
               </tr>
-            ) : employees.length === 0 ? (
+            ) : filtered.length === 0 ? (
               <tr>
-                <td colSpan={6} className="py-16 text-center text-content-muted">{t("noResults")}</td>
+                <td colSpan={6} className="py-16 text-center text-content-muted">
+                  {t("noResults")}
+                </td>
               </tr>
             ) : (
-              employees.map((emp) => {
+              filtered.map((emp) => {
                 const isTerminated = emp.status === "TERMINATED";
                 const initials = `${emp.firstName[0]}${emp.lastName[0]}`;
                 return (
@@ -102,27 +126,37 @@ export default function EmployeeTable({ onAddClick, onTerminate }: Props) {
                           {initials}
                         </div>
                         <div>
-                          <p className="font-semibold text-secondary">{emp.firstName} {emp.lastName}</p>
+                          <p className="font-semibold text-secondary">
+                            {emp.firstName} {emp.lastName}
+                          </p>
                           <p className="text-content-muted text-xs">{emp.email}</p>
                         </div>
                       </div>
                     </td>
                     <td className="px-5 py-4">
-                      <span className="font-mono text-xs text-content-muted">{emp.employeeCode}</span>
+                      <span className="font-mono text-xs text-content-muted">
+                        {emp.employeeCode}
+                      </span>
                     </td>
                     <td className="px-5 py-4">
                       <span className="px-2 py-1 rounded-md bg-primary/10 text-primary text-xs font-semibold">
-                        {emp.department.name}
+                        {emp.department?.name ?? "—"}
                       </span>
                     </td>
-                    <td className="px-5 py-4 text-content-muted">{emp.hireDate}</td>
+                    <td className="px-5 py-4 text-content-muted">
+                      {emp.hireDate
+                        ? new Date(emp.hireDate).toLocaleDateString()
+                        : "—"}
+                    </td>
                     <td className="px-5 py-4">
-                      <span className={cn(
-                        "px-2 py-1 rounded-md text-xs font-bold",
-                        isTerminated
-                          ? "bg-status-error/10 text-status-error"
-                          : "bg-status-success/10 text-status-success"
-                      )}>
+                      <span
+                        className={cn(
+                          "px-2 py-1 rounded-md text-xs font-bold",
+                          isTerminated
+                            ? "bg-status-error/10 text-status-error"
+                            : "bg-status-success/10 text-status-success"
+                        )}
+                      >
                         {t(`status.${emp.status.toLowerCase()}`)}
                       </span>
                     </td>

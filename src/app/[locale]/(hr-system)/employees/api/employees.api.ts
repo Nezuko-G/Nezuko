@@ -27,6 +27,8 @@ import type {
 export async function getAllEmployees(): Promise<GetAllEmployeesResponse> {
     const response = await api.get(apis.employees.base);
 
+    console.log("RAW RESPONSE:", JSON.stringify(response.data, null, 2));
+
     const parsed = GetAllEmployeesResponseDTO.safeParse(response.data);
 
     if (!parsed.success) {
@@ -36,7 +38,6 @@ export async function getAllEmployees(): Promise<GetAllEmployeesResponse> {
 
     return mapGetAllEmployeesFromDTO(parsed.data);
 }
-
 export async function getEmployee(id: string): Promise<GetEmployeeResponse> {
     const response = await api.get(apis.employees.byId(id));
 
