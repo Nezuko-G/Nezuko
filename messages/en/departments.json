@@ -1,0 +1,72 @@
+{
+    "list": {
+      "title": "Departments",
+      "subtitle": "Manage company structure and teams",
+      "registerBtn": "New Department",
+      "searchPlaceholder": "Search departments...",
+      "filterAll": "All Parents",
+      "pagination": "Page {current} of {total}",
+      "errors": {
+        "fetch": "Failed to load departments"
+      },
+      "table": {
+        "name": "Name",
+        "manager": "Manager",
+        "employees": "Employees",
+        "parent": "Parent",
+        "status": "Status",
+        "actions": "Actions",
+        "unassigned": "Unassigned",
+        "root": "Root"
+      }
+    },
+    "status": {
+      "ACTIVE": "Active"
+    },
+    "details": {
+      "notFound": "Department not found",
+      "breadcrumbs": {
+        "list": "Departments"
+      },
+      "actions": {
+        "edit": "Edit Department",
+        "delete": "Delete"
+      },
+      "stats": {
+        "employees": "Employees",
+        "subDepartments": "Sub-departments"
+      },
+      "info": {
+        "description": "Description",
+        "manager": "Manager",
+        "parent": "Parent Department",
+        "root": "Root (No parent)"
+      },
+      "subDepartmentsTitle": "Sub-departments",
+      "errors": {
+        "notEmpty": "Cannot delete a department with active employees"
+      }
+    },
+    "modals": {
+      "title": {
+        "CREATE": "Create Department",
+        "EDIT": "Edit Department"
+      },
+      "fields": {
+        "name": "Name",
+        "description": "Description",
+        "manager": "Manager",
+        "selectManager": "Select user",
+        "parent": "Parent Department",
+        "root": "None (root)"
+      },
+      "states": {
+        "loading": "Loading..."
+      },
+      "buttons": {
+        "cancel": "Cancel",
+        "create": "Create",
+        "save": "Save Changes"
+      }
+    }
+}
