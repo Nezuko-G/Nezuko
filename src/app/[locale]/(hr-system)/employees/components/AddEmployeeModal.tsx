@@ -56,7 +56,8 @@ export default function AddEmployeeModal({ open, onClose }: Props) {
             setEmailError(t("errors.emailRequired"));
             return;
         }
-        if (!form.gender) return; // gender is required by CreateEmployeeRequest
+        if (!form.gender) return;
+        if (!form.departmentId) return;
 
         const payload: CreateEmployeeRequest = {
             firstName: form.firstName,
@@ -67,8 +68,8 @@ export default function AddEmployeeModal({ open, onClose }: Props) {
             gender: form.gender,
             dateOfBirth: form.dateOfBirth,
             phone: form.phone,
+            departmentId: form.departmentId,
         };
-
         await createEmployee(payload);
         resetForm();
         onClose();

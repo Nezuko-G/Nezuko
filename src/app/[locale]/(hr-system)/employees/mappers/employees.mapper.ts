@@ -58,14 +58,9 @@ export function mapGetAllEmployeesFromDTO(
         },
     };
 }
-export function mapGetEmployeeFromDTO(
-    dto: GetEmployeeResponseDTOType
-): GetEmployeeResponse {
+export function mapGetEmployeeFromDTO(dto: z.infer<typeof GetEmployeeResponseDTO>): GetEmployeeResponse {
     return {
-        status: dto.status,
-        data: {
-            employee: mapEmployeeFromDTO(dto.data.employee),
-        },
+        data: mapEmployeeFromDTO(dto.data),
     };
 }
 
@@ -73,21 +68,15 @@ export function mapCreateEmployeeFromDTO(
     dto: CreateEmployeeResponseDTOType
 ): CreateEmployeeResponse {
     return {
-        status: dto.status,
-        data: {
-            employee: mapEmployeeFromDTO(dto.data.employee),
-        },
+        message: dto.message,
+        data: mapEmployeeFromDTO(dto.data),
     };
 }
 
-export function mapUpdateEmployeeFromDTO(
-    dto: UpdateEmployeeResponseDTOType
-): UpdateEmployeeResponse {
+export function mapUpdateEmployeeFromDTO(dto: z.infer<typeof UpdateEmployeeResponseDTO>): UpdateEmployeeResponse {
     return {
-        status: dto.status,
-        data: {
-            employee: mapEmployeeFromDTO(dto.data.employee),
-        },
+        message: dto.message,
+        data: mapEmployeeFromDTO(dto.data),
     };
 }
 

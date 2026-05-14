@@ -64,18 +64,10 @@ export async function createEmployee(data: CreateEmployeeRequest): Promise<Creat
     return mapCreateEmployeeFromDTO(parsed.data);
 }
 
-export async function updateEmployee(id: string, data: UpdateEmployeeRequest): Promise<UpdateEmployeeResponse> {
-    const response = await api.patch(apis.employees.byId(id), data);
-
-    const parsed = UpdateEmployeeResponseDTO.safeParse(response.data);
-
-    if (!parsed.success) {
-        console.error("Zod Parsing Error:", parsed.error.format());
-        throw new Error("Invalid employee data structure received from API");
-    }
-
-    return mapUpdateEmployeeFromDTO(parsed.data);
+export async function updateEmployee(id: string, data: UpdateEmployeeRequest): Promise<void> {
+    await api.patch(apis.employees.byId(id), data);
 }
+
 
 export async function deleteEmployee(id: string): Promise<DeleteEmployeeResponse> {
     const response = await api.delete(apis.employees.byId(id));

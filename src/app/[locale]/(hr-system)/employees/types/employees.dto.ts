@@ -19,7 +19,6 @@ export const GenderEnum = z.enum([
     "OTHER",
 ]);
 
-// ─── Shared Meta ────────────────────────────────────────────────────────────
 
 const PaginationMetaDTO = z.object({
     total: z.number(),
@@ -28,7 +27,6 @@ const PaginationMetaDTO = z.object({
     totalPages: z.number(),
 });
 
-// ─── Departments ─────────────────────────────────────────────────────────────
 
 export const DepartmentDTO = z.object({
     id: z.string(),
@@ -48,7 +46,6 @@ export const GetAllDepartmentsResponseDTO = z.object({
     meta: PaginationMetaDTO,
 });
 
-// ─── Employees ───────────────────────────────────────────────────────────────
 
 const DepartmentSummaryDTO = z.object({
     id: z.string(),
@@ -71,7 +68,7 @@ const EmployeeSummaryDTO = z.object({
     hireDate: z.string().datetime().nullable(),
     departmentId: z.string().nullable(),
     createdAt: z.string().datetime(),
-    department: DepartmentSummaryDTO.nullable(),
+    department: DepartmentSummaryDTO.nullish(),
 });
 
 export const GetAllEmployeesResponseDTO = z.object({
@@ -82,10 +79,7 @@ export const GetAllEmployeesResponseDTO = z.object({
 });
 
 export const GetEmployeeResponseDTO = z.object({
-    status: z.literal("success"),
-    data: z.object({
-        employee: EmployeeSummaryDTO,
-    }),
+    data: EmployeeSummaryDTO,
 });
 
 export const CreateEmployeeRequestDTO = z.object({
@@ -97,13 +91,12 @@ export const CreateEmployeeRequestDTO = z.object({
     gender: GenderEnum,
     dateOfBirth: z.string().date(),
     phone: z.string().min(1),
+    departmentId: z.string().min(1),
 });
 
 export const CreateEmployeeResponseDTO = z.object({
-    status: z.literal("success"),
-    data: z.object({
-        employee: EmployeeSummaryDTO,
-    }),
+    message: z.string(),
+    data: EmployeeSummaryDTO,
 });
 
 export const UpdateEmployeeRequestDTO = z.object({
@@ -123,11 +116,10 @@ export const UpdateEmployeeRequestDTO = z.object({
 });
 
 export const UpdateEmployeeResponseDTO = z.object({
-    status: z.literal("success"),
-    data: z.object({
-        employee: EmployeeSummaryDTO,
-    }),
+    message: z.string(),
+    data: EmployeeSummaryDTO,
 });
+
 
 export const DeleteEmployeeResponseDTO = z.object({
     status: z.literal("success"),
