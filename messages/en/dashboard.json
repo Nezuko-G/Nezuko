@@ -52,5 +52,53 @@
     "approve": "Approve",
     "reject": "Reject",
     "noRequests": "No leave requests found"
+  },
+  "header": {
+    "badge": "HR Overview",
+    "title1": "Company",
+    "title2": "Dashboard",
+    "subtitle": "Real-time insights across your organization"
+  },
+  "sections": {
+    "metrics": "Key Metrics",
+    "charts": "Analytics"
+  },
+  "metrics": {
+    "totalEmployees": "Total Employees",
+    "totalDepartments": "Departments",
+    "totalProjects": "Projects",
+    "totalTasks": "Tasks",
+    "pendingLeaves": "Pending Leaves",
+    "attendanceRate": "Attendance Rate",
+    "activeBadge": "Active",
+    "pendingBadge": "Pending Review",
+    "overdueBadge": "Overdue",
+    "attendanceBadge": "This Month"
+  },
+  "charts": {
+    "employeesByGender": "Employees by Gender",
+    "projectStatus": "Project Status",
+    "taskStatus": "Task Status"
+  },
+  "gender": {
+    "Male": "Male",
+    "Female": "Female",
+    "MALE": "Male",
+    "FEMALE": "Female",
+    "Not Specified": "Not Specified",
+    "Other": "Other"
+  },
+  "projectStatus": {
+    "ACTIVE": "Active",
+    "COMPLETED": "Completed",
+    "PLANNING": "Planning",
+    "ON_HOLD": "On Hold",
+    "CANCELLED": "Cancelled"
+  },
+  "taskStatus": {
+    "TODO": "To Do",
+    "IN_PROGRESS": "In Progress",
+    "DONE": "Done",
+    "CANCELLED": "Cancelled"
   }
 }

@@ -54,6 +54,6 @@ export const apis = {
     byId: (id: string) => `/department/${id}`,
   },
   dashboard: {
-    base: "/dashboard",
+    base: "/dashboard/overview",
   },
 };

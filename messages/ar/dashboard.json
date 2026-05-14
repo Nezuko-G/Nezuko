@@ -1,7 +1,7 @@
 {
   "sidebar": {
     "home": "الرئيسية",
-    "employees": "الموظفين",
+    "employees": "الموظفون",
     "assets": "الأصول",
     "time": "الوقت",
     "payroll": "الرواتب",
@@ -13,23 +13,23 @@
   },
   "navbar": {
     "title": "إدارة الموارد البشرية",
-    "searchPlaceholder": "عملية البحث",
-    "aiChat": "محادثة Ai",
+    "searchPlaceholder": "بحث...",
+    "aiChat": "محادثة الذكاء الاصطناعي",
     "quickAdd": "إضافة سريعة"
   },
   "hero": {
-    "greeting": "لوحة التحكم هلا والله",
+    "greeting": "مرحباً بك في لوحة التحكم",
     "mainPage": "الصفحة الرئيسية",
-    "saudiDashboard": "لوحة المعلومات السعودية",
-    "announcement": "يسرنا إبلاغكم بأن إجازة اليوم الوطني ستكون من ٢١ إلى ٢٣ يناير ٢٠٢٦ نتمنى لكم إجازة سعيدة وعودة موفقة للعمل"
+    "saudiDashboard": "لوحة التحكم السعودية",
+    "announcement": "يسعدنا إعلامكم بأن إجازة اليوم الوطني ستكون من 21 إلى 23 يناير 2026. نتمنى لكم إجازة سعيدة."
   },
   "leaveBalances": {
-    "title": "رصيد الاجازات",
-    "requestLeave": "اطلب اجازة",
-    "annual": "اجازات سنوية",
-    "sick": "اجازات مرضية",
-    "official": "عطلات رسمية",
-    "unpaid": "اجازات بدون مرتب",
+    "title": "أرصدة الإجازات",
+    "requestLeave": "طلب إجازة",
+    "annual": "الإجازة السنوية",
+    "sick": "إجازة مرضية",
+    "official": "العطل الرسمية",
+    "unpaid": "إجازة بدون راتب",
     "days": "أيام",
     "day": "يوم"
   },
@@ -38,19 +38,67 @@
     "create": "إنشاء طلب",
     "myRequests": "طلباتي",
     "allRequests": "جميع الطلبات",
-    "startDate": "تاريخ البدء",
-    "endDate": "تاريخ الانتهاء",
+    "startDate": "تاريخ البداية",
+    "endDate": "تاريخ النهاية",
     "reason": "السبب",
     "status": "الحالة",
     "pending": "قيد الانتظار",
-    "approved": "موافق عليها",
-    "rejected": "مرفوضة",
-    "cancelled": "ملغاة",
+    "approved": "موافق عليه",
+    "rejected": "مرفوض",
+    "cancelled": "ملغى",
     "review": "مراجعة",
     "cancel": "إلغاء",
     "reviewNote": "ملاحظة المراجعة",
     "approve": "موافقة",
     "reject": "رفض",
     "noRequests": "لا توجد طلبات إجازة"
+  },
+  "header": {
+    "badge": "نظرة عامة على الموارد البشرية",
+    "title1": "لوحة تحكم",
+    "title2": "الشركة",
+    "subtitle": "رؤى فورية عبر مؤسستك"
+  },
+  "sections": {
+    "metrics": "المؤشرات الرئيسية",
+    "charts": "التحليلات"
+  },
+  "metrics": {
+    "totalEmployees": "إجمالي الموظفين",
+    "totalDepartments": "الأقسام",
+    "totalProjects": "المشاريع",
+    "totalTasks": "المهام",
+    "pendingLeaves": "الإجازات المعلقة",
+    "attendanceRate": "نسبة الحضور",
+    "activeBadge": "نشط",
+    "pendingBadge": "قيد المراجعة",
+    "overdueBadge": "متأخر",
+    "attendanceBadge": "هذا الشهر"
+  },
+  "charts": {
+    "employeesByGender": "الموظفون حسب الجنس",
+    "projectStatus": "حالة المشاريع",
+    "taskStatus": "حالة المهام"
+  },
+  "gender": {
+    "Male": "ذكر",
+    "Female": "أنثى",
+    "MALE": "ذكر",
+    "FEMALE": "أنثى",
+    "Not Specified": "غير محدد",
+    "Other": "أخرى"
+  },
+  "projectStatus": {
+    "ACTIVE": "نشط",
+    "COMPLETED": "مكتمل",
+    "PLANNING": "قيد التخطيط",
+    "ON_HOLD": "معلق",
+    "CANCELLED": "ملغى"
+  },
+  "taskStatus": {
+    "TODO": "للتنفيذ",
+    "IN_PROGRESS": "قيد التنفيذ",
+    "DONE": "مكتمل",
+    "CANCELLED": "ملغى"
   }
 }

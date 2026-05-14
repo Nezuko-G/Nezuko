@@ -199,6 +199,7 @@ export type Insights = Omit<z.infer<typeof InsightsDTO>, "recentHires"> & {
 export type KeyMetrics = z.infer<typeof KeyMetricsDTO>;
 export type Charts = z.infer<typeof ChartsDTO>;
 export type RawData = z.infer<typeof RawDataDTO>;
+export type DashboardResponseDTOType = z.infer<typeof DashboardResponseDTO>;
 
 export type DashboardResponse = {
     status: "success";
