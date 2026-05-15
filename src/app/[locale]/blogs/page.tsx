@@ -166,7 +166,7 @@ export default function BlogsPage() {
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ duration: 0.7, delay: 0.2 }}
                             >
-                                <Link href={`/blog/${featured.slug}`} className="group block">
+                                <Link href={`/blogs/${featured.slug}`} className="group block">
                                     <div className="relative rounded-[2rem] overflow-hidden border border-white/10 shadow-2xl">
                                         <div className="relative h-64 md:h-[420px] w-full">
                                             <Image

@@ -40,7 +40,7 @@ export default function Navbar() {
             {t("product")} <ChevronDown size={14} />
           </Link>
 
-          <Link href="/blog" className="hover:text-primary transition-colors">{t("blogs")}</Link>
+          <Link href="/blogs" className="hover:text-primary transition-colors">{t("blogs")}</Link>
           <Link href="/services" className="hover:text-primary transition-colors">{t("services")}</Link>
           <Link href="/pricing" className="hover:text-primary transition-colors">{t("pricing")}</Link>
         </div>
