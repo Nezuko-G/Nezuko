@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 import {
   useAttendanceSettings,
   useUpdateAttendanceSettings,
@@ -8,58 +9,70 @@ import {
 import type { UpdateAttendanceSettingsRequest } from "../types/company.dto";
 import { useAuthStore } from "@/hooks/useAuthStore";
 import { Button } from "@/components/ui/button";
+import Toggle from "@/components/ui/toggle";
 
 const EDIT_ROLES = ["HR"];
-const DAY_LABELS = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
+
+const DEFAULTS = {
+  workDayStart: "09:00",
+  workDayEnd: "17:00",
+  workingDays: [0, 1, 2, 3, 4] as number[],
+  lateGraceMinutes: 15,
+  earlyLeaveGrace: 10,
+  overtimeThreshold: 30,
+  roundingEnabled: false,
+  roundingMinutes: 15,
+  requireBiometric: false,
+  geofenceEnabled: false,
+  locationAttendanceEnabled: false,
+  requireLocation: false,
+  geofenceLat: 0,
+  geofenceLng: 0,
+  geofenceRadiusM: 500,
+};
+
+type FormState = typeof DEFAULTS;
+type FormKey = keyof FormState;
+
+type NumberField = { key: FormKey; labelKey: string; min?: number; max?: number };
+type GeoField = { key: FormKey; labelKey: string; min?: number; step?: string };
+
+const graceFields: NumberField[] = [
+  { key: "lateGraceMinutes", labelKey: "lateGraceMinutes", min: 0, max: 120 },
+  { key: "earlyLeaveGrace", labelKey: "earlyLeaveGrace", min: 0, max: 120 },
+  { key: "overtimeThreshold", labelKey: "overtimeThreshold", min: 0 },
+];
+
+const geofenceFields: GeoField[] = [
+  { key: "geofenceLat", labelKey: "geofenceLat", step: "any" },
+  { key: "geofenceLng", labelKey: "geofenceLng", step: "any" },
+  { key: "geofenceRadiusM", labelKey: "geofenceRadiusM", min: 1 },
+];
+
+function mergeWithDefaults(api: { [K in FormKey]?: FormState[K] | null }): FormState {
+  const out = { ...DEFAULTS };
+  for (const key of Object.keys(DEFAULTS) as FormKey[]) {
+    if (api[key] != null) out[key] = api[key] as never;
+  }
+  return out;
+}
 
 export default function AttendanceSettingsForm() {
+  const t = useTranslations("company.attendanceSettings");
   const { data, isLoading } = useAttendanceSettings();
   const updateMutation = useUpdateAttendanceSettings();
   const { role } = useAuthStore();
   const canEdit = EDIT_ROLES.includes(role);
 
-  const [form, setForm] = useState({
-    workDayStart: "09:00",
-    workDayEnd: "17:00",
-    workingDays: [0, 1, 2, 3, 4] as number[],
-    lateGraceMinutes: 15,
-    earlyLeaveGrace: 10,
-    overtimeThreshold: 30,
-    roundingEnabled: false,
-    roundingMinutes: 15,
-    requireBiometric: false,
-    geofenceEnabled: false,
-    locationAttendanceEnabled: false,
-    requireLocation: false,
-    geofenceLat: 0,
-    geofenceLng: 0,
-    geofenceRadiusM: 500,
-  });
+  const [form, setForm] = useState<FormState>(DEFAULTS);
   const [initialized, setInitialized] = useState(false);
 
   if (data && !initialized) {
-    const s = data.data;
-    setForm({
-      workDayStart: s.workDayStart ?? "09:00",
-      workDayEnd: s.workDayEnd ?? "17:00",
-      workingDays: s.workingDays ?? [0, 1, 2, 3, 4],
-      lateGraceMinutes: s.lateGraceMinutes ?? 15,
-      earlyLeaveGrace: s.earlyLeaveGrace ?? 10,
-      overtimeThreshold: s.overtimeThreshold ?? 30,
-      roundingEnabled: s.roundingEnabled ?? false,
-      roundingMinutes: s.roundingMinutes ?? 15,
-      requireBiometric: s.requireBiometric ?? false,
-      geofenceEnabled: s.geofenceEnabled ?? false,
-      locationAttendanceEnabled: s.locationAttendanceEnabled ?? false,
-      requireLocation: s.requireLocation ?? false,
-      geofenceLat: s.geofenceLat ?? 0,
-      geofenceLng: s.geofenceLng ?? 0,
-      geofenceRadiusM: s.geofenceRadiusM ?? 500,
-    });
+    setForm(mergeWithDefaults(data.data));
     setInitialized(true);
   }
 
-  const update = (key: string, value: string | number | boolean | number[]) => {
+  const update = <K extends FormKey>(key: K, value: FormState[K]) => {
     setForm((prev) => ({ ...prev, [key]: value }));
   };
 
@@ -67,28 +80,10 @@ export default function AttendanceSettingsForm() {
     const next = form.workingDays.includes(day)
       ? form.workingDays.filter((d) => d !== day)
       : [...form.workingDays, day];
-    update("workingDays", next);
+    update("workingDays", next as FormState["workingDays"]);
   };
 
-  const resetToDefaults = () => {
-    setForm({
-      workDayStart: "09:00",
-      workDayEnd: "17:00",
-      workingDays: [0, 1, 2, 3, 4],
-      lateGraceMinutes: 15,
-      earlyLeaveGrace: 10,
-      overtimeThreshold: 30,
-      roundingEnabled: false,
-      roundingMinutes: 15,
-      requireBiometric: false,
-      geofenceEnabled: false,
-      locationAttendanceEnabled: false,
-      requireLocation: false,
-      geofenceLat: 0,
-      geofenceLng: 0,
-      geofenceRadiusM: 500,
-    });
-  };
+  const resetToDefaults = () => setForm({ ...DEFAULTS });
 
   const handleSave = () => {
     const payload: UpdateAttendanceSettingsRequest = {
@@ -119,26 +114,22 @@ export default function AttendanceSettingsForm() {
   };
 
   if (isLoading) {
-    return <div className="text-content-muted p-6">Loading...</div>;
+    return <div className="text-content-muted p-6">{t("states.loading")}</div>;
   }
 
   const labelClass = "block text-sm font-medium text-content mb-1";
   const inputClass =
     "w-full rounded-lg border border-gray-300 bg-white px-4 py-2.5 text-sm text-content focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary disabled:opacity-50 disabled:cursor-not-allowed";
   const fieldRow = "grid grid-cols-1 md:grid-cols-2 gap-4";
-  const toggleClass = (on: boolean) =>
-    `relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
-      on ? "bg-primary" : "bg-gray-300"
-    } disabled:opacity-50 disabled:cursor-not-allowed`;
 
   return (
     <div className="space-y-8">
       {/* ── Work Schedule ── */}
       <div className="rounded-xl border border-gray-200 bg-card p-6">
-        <h3 className="text-base font-semibold text-content-dark mb-4">Work Schedule</h3>
+        <h3 className="text-base font-semibold text-content-dark mb-4">{t("sections.workSchedule")}</h3>
         <div className={fieldRow}>
           <div>
-            <label className={labelClass}>Work Day Start</label>
+            <label className={labelClass}>{t("fields.workDayStart")}</label>
             <input
               type="time"
               className={inputClass}
@@ -148,7 +139,7 @@ export default function AttendanceSettingsForm() {
             />
           </div>
           <div>
-            <label className={labelClass}>Work Day End</label>
+            <label className={labelClass}>{t("fields.workDayEnd")}</label>
             <input
               type="time"
               className={inputClass}
@@ -162,9 +153,9 @@ export default function AttendanceSettingsForm() {
 
       {/* ── Working Days ── */}
       <div className="rounded-xl border border-gray-200 bg-card p-6">
-        <h3 className="text-base font-semibold text-content-dark mb-4">Working Days</h3>
+        <h3 className="text-base font-semibold text-content-dark mb-4">{t("sections.workingDays")}</h3>
         <div className="flex flex-wrap gap-2">
-          {DAY_LABELS.map((label, i) => {
+          {[0, 1, 2, 3, 4, 5, 6].map((i) => {
             const active = form.workingDays.includes(i);
             return (
               <button
@@ -178,7 +169,7 @@ export default function AttendanceSettingsForm() {
                     : "bg-gray-100 text-content-muted hover:bg-gray-200"
                 } disabled:cursor-not-allowed`}
               >
-                {label}
+                {t(`days.${i}`)}
               </button>
             );
           })}
@@ -187,69 +178,41 @@ export default function AttendanceSettingsForm() {
 
       {/* ── Grace Periods ── */}
       <div className="rounded-xl border border-gray-200 bg-card p-6">
-        <h3 className="text-base font-semibold text-content-dark mb-4">Grace Periods</h3>
+        <h3 className="text-base font-semibold text-content-dark mb-4">{t("sections.gracePeriods")}</h3>
         <div className={fieldRow}>
-          <div>
-            <label className={labelClass}>Late Grace (minutes)</label>
-            <input
-              type="number"
-              min={0}
-              max={120}
-              className={inputClass}
-              value={form.lateGraceMinutes}
-              onChange={(e) => update("lateGraceMinutes", Number(e.target.value))}
-              disabled={!canEdit}
-            />
-          </div>
-          <div>
-            <label className={labelClass}>Early Leave Grace (minutes)</label>
-            <input
-              type="number"
-              min={0}
-              max={120}
-              className={inputClass}
-              value={form.earlyLeaveGrace}
-              onChange={(e) => update("earlyLeaveGrace", Number(e.target.value))}
-              disabled={!canEdit}
-            />
-          </div>
-          <div>
-            <label className={labelClass}>Overtime Threshold (minutes)</label>
-            <input
-              type="number"
-              min={0}
-              className={inputClass}
-              value={form.overtimeThreshold}
-              onChange={(e) => update("overtimeThreshold", Number(e.target.value))}
-              disabled={!canEdit}
-            />
-          </div>
+          {graceFields.map(({ key, labelKey, min, max }) => (
+            <div key={key}>
+              <label className={labelClass}>{t(`fields.${labelKey}`)}</label>
+              <input
+                type="number"
+                min={min}
+                max={max}
+                className={inputClass}
+                value={form[key] as number}
+                onChange={(e) => update(key, Number(e.target.value))}
+                disabled={!canEdit}
+              />
+            </div>
+          ))}
         </div>
       </div>
 
       {/* ── Rounding ── */}
       <div className="rounded-xl border border-gray-200 bg-card p-6">
         <div className="flex items-center justify-between mb-4">
-          <h3 className="text-base font-semibold text-content-dark">Rounding</h3>
-          <button
-            type="button"
+          <h3 className="text-base font-semibold text-content-dark">{t("sections.rounding")}</h3>
+          <Toggle
+            checked={form.roundingEnabled}
+            onChange={(v) => update("roundingEnabled", v)}
             disabled={!canEdit}
-            onClick={() => update("roundingEnabled", !form.roundingEnabled)}
-            className={toggleClass(form.roundingEnabled)}
-          >
-            <span
-              className={`inline-block h-5 w-5 transform rounded-full bg-white transition-transform ${
-                form.roundingEnabled ? "translate-x-6" : "translate-x-0.5"
-              }`}
-            />
-          </button>
+          />
         </div>
         {form.roundingEnabled && (
           <div className="max-w-xs">
-            <label className={labelClass}>Rounding Interval (minutes)</label>
+            <label className={labelClass}>{t("fields.roundingInterval")}</label>
             <select
               value={form.roundingMinutes}
-              onChange={(e) => update("roundingMinutes", Number(e.target.value))}
+              onChange={(e) => update("roundingMinutes", Number(e.target.value) as FormState["roundingMinutes"])}
               disabled={!canEdit}
               className={inputClass}
             >
@@ -265,74 +228,41 @@ export default function AttendanceSettingsForm() {
       {/* ── Biometric ── */}
       <div className="rounded-xl border border-gray-200 bg-card p-6">
         <div className="flex items-center justify-between">
-          <h3 className="text-base font-semibold text-content-dark">Require Biometric</h3>
-          <button
-            type="button"
+          <h3 className="text-base font-semibold text-content-dark">{t("sections.biometric")}</h3>
+          <Toggle
+            checked={form.requireBiometric}
+            onChange={(v) => update("requireBiometric", v)}
             disabled={!canEdit}
-            onClick={() => update("requireBiometric", !form.requireBiometric)}
-            className={toggleClass(form.requireBiometric)}
-          >
-            <span
-              className={`inline-block h-5 w-5 transform rounded-full bg-white transition-transform ${
-                form.requireBiometric ? "translate-x-6" : "translate-x-0.5"
-              }`}
-            />
-          </button>
+          />
         </div>
       </div>
 
       {/* ── Geofence ── */}
       <div className="rounded-xl border border-gray-200 bg-card p-6">
         <div className="flex items-center justify-between mb-4">
-          <h3 className="text-base font-semibold text-content-dark">Geofence</h3>
-          <button
-            type="button"
+          <h3 className="text-base font-semibold text-content-dark">{t("sections.geofence")}</h3>
+          <Toggle
+            checked={form.geofenceEnabled}
+            onChange={(v) => update("geofenceEnabled", v)}
             disabled={!canEdit}
-            onClick={() => update("geofenceEnabled", !form.geofenceEnabled)}
-            className={toggleClass(form.geofenceEnabled)}
-          >
-            <span
-              className={`inline-block h-5 w-5 transform rounded-full bg-white transition-transform ${
-                form.geofenceEnabled ? "translate-x-6" : "translate-x-0.5"
-              }`}
-            />
-          </button>
+          />
         </div>
         {form.geofenceEnabled && (
           <div className={fieldRow}>
-            <div>
-              <label className={labelClass}>Latitude</label>
-              <input
-                type="number"
-                step="any"
-                className={inputClass}
-                value={form.geofenceLat}
-                onChange={(e) => update("geofenceLat", Number(e.target.value))}
-                disabled={!canEdit}
-              />
-            </div>
-            <div>
-              <label className={labelClass}>Longitude</label>
-              <input
-                type="number"
-                step="any"
-                className={inputClass}
-                value={form.geofenceLng}
-                onChange={(e) => update("geofenceLng", Number(e.target.value))}
-                disabled={!canEdit}
-              />
-            </div>
-            <div>
-              <label className={labelClass}>Radius (meters)</label>
-              <input
-                type="number"
-                min={1}
-                className={inputClass}
-                value={form.geofenceRadiusM}
-                onChange={(e) => update("geofenceRadiusM", Number(e.target.value))}
-                disabled={!canEdit}
-              />
-            </div>
+            {geofenceFields.map(({ key, labelKey, min, step }) => (
+              <div key={key}>
+                <label className={labelClass}>{t(`fields.${labelKey}`)}</label>
+                <input
+                  type="number"
+                  step={step}
+                  min={min}
+                  className={inputClass}
+                  value={form[key] as number}
+                  onChange={(e) => update(key, Number(e.target.value))}
+                  disabled={!canEdit}
+                />
+              </div>
+            ))}
           </div>
         )}
       </div>
@@ -340,10 +270,10 @@ export default function AttendanceSettingsForm() {
       {canEdit && (
         <div className="flex items-center justify-between">
           <Button type="button" variant="outline" onClick={resetToDefaults}>
-            Reset to Defaults
+            {t("buttons.reset")}
           </Button>
           <Button onClick={handleSave} disabled={updateMutation.isPending}>
-            {updateMutation.isPending ? "Saving..." : "Save Changes"}
+            {updateMutation.isPending ? t("buttons.saving") : t("buttons.save")}
           </Button>
         </div>
       )}

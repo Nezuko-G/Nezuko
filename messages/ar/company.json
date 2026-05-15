@@ -38,6 +38,36 @@
       "loading": "جارٍ التحميل..."
     }
   },
+  "attendanceSettings": {
+    "sections": {
+      "workSchedule": "جدول العمل",
+      "workingDays": "أيام العمل",
+      "gracePeriods": "فترات السماح",
+      "rounding": "التقريب",
+      "biometric": "طلب بصمة",
+      "geofence": "السياج الجغرافي"
+    },
+    "fields": {
+      "workDayStart": "بداية يوم العمل",
+      "workDayEnd": "نهاية يوم العمل",
+      "lateGraceMinutes": "سماح التأخير (دقائق)",
+      "earlyLeaveGrace": "سماح الانصراف المبكر (دقائق)",
+      "overtimeThreshold": "حد العمل الإضافي (دقائق)",
+      "roundingInterval": "فترة التقريب (دقائق)",
+      "geofenceLat": "خط العرض",
+      "geofenceLng": "خط الطول",
+      "geofenceRadiusM": "نصف القطر (متر)"
+    },
+    "days": ["ح", "ن", "ث", "أ", "خ", "ج", "س"],
+    "buttons": {
+      "save": "حفظ التغييرات",
+      "saving": "جارٍ الحفظ...",
+      "reset": "إعادة تعيين"
+    },
+    "states": {
+      "loading": "جارٍ التحميل..."
+    }
+  },
   "info": {
     "sections": {
       "logo": "الشعار",

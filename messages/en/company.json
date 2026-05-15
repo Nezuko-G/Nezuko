@@ -38,6 +38,36 @@
       "loading": "Loading..."
     }
   },
+  "attendanceSettings": {
+    "sections": {
+      "workSchedule": "Work Schedule",
+      "workingDays": "Working Days",
+      "gracePeriods": "Grace Periods",
+      "rounding": "Rounding",
+      "biometric": "Require Biometric",
+      "geofence": "Geofence"
+    },
+    "fields": {
+      "workDayStart": "Work Day Start",
+      "workDayEnd": "Work Day End",
+      "lateGraceMinutes": "Late Grace (minutes)",
+      "earlyLeaveGrace": "Early Leave Grace (minutes)",
+      "overtimeThreshold": "Overtime Threshold (minutes)",
+      "roundingInterval": "Rounding Interval (minutes)",
+      "geofenceLat": "Latitude",
+      "geofenceLng": "Longitude",
+      "geofenceRadiusM": "Radius (meters)"
+    },
+    "days": ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"],
+    "buttons": {
+      "save": "Save Changes",
+      "saving": "Saving...",
+      "reset": "Reset to Defaults"
+    },
+    "states": {
+      "loading": "Loading..."
+    }
+  },
   "info": {
     "sections": {
       "logo": "Logo",
