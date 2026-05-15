@@ -57,10 +57,16 @@ export const UpdateGeneralSettingsRequestDTO = z.object({
 
 // ─── Attendance Settings ─────────────────────────────────────────
 
+const DAY_NAME_MAP: Record<string, number> = {
+  Sunday: 0, Monday: 1, Tuesday: 2, Wednesday: 3, Thursday: 4, Friday: 5, Saturday: 6,
+};
+
+const dayNameToNum = z.string().transform((val) => DAY_NAME_MAP[val]).pipe(z.number().int().min(0).max(6));
+
 export const AttendanceSettingsDTO = z.object({
   workDayStart: z.string(),
   workDayEnd: z.string(),
-  workingDays: z.array(z.number().int().min(0).max(6)),
+  workingDays: z.array(dayNameToNum),
   lateGraceMinutes: z.number().int().min(0).max(120),
   earlyLeaveGrace: z.number().int().min(0).max(120),
   overtimeThreshold: z.number().int(),
@@ -68,8 +74,8 @@ export const AttendanceSettingsDTO = z.object({
   roundingMinutes: z.number().int().nullable(),
   requireBiometric: z.boolean(),
   geofenceEnabled: z.boolean(),
-  locationAttendanceEnabled: z.boolean(),
-  requireLocation: z.boolean(),
+  locationAttendanceEnabled: z.boolean().nullable().default(false),
+  requireLocation: z.boolean().nullable().default(false),
   geofenceLat: z.number().nullable(),
   geofenceLng: z.number().nullable(),
   geofenceRadiusM: z.number().nullable(),

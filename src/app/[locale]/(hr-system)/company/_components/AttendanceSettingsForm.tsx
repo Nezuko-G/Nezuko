@@ -91,7 +91,7 @@ export default function AttendanceSettingsForm() {
   };
 
   const handleSave = () => {
-    updateMutation.mutate({
+    const payload: UpdateAttendanceSettingsRequest = {
       workDayStart: form.workDayStart,
       workDayEnd: form.workDayEnd,
       workingDays: form.workingDays,
@@ -99,15 +99,23 @@ export default function AttendanceSettingsForm() {
       earlyLeaveGrace: form.earlyLeaveGrace,
       overtimeThreshold: form.overtimeThreshold,
       roundingEnabled: form.roundingEnabled,
-      roundingMinutes: form.roundingEnabled ? form.roundingMinutes : null,
       requireBiometric: form.requireBiometric,
       geofenceEnabled: form.geofenceEnabled,
-      locationAttendanceEnabled: form.geofenceEnabled ? form.locationAttendanceEnabled : false,
-      requireLocation: form.geofenceEnabled ? form.requireLocation : false,
-      geofenceLat: form.geofenceEnabled ? form.geofenceLat : null,
-      geofenceLng: form.geofenceEnabled ? form.geofenceLng : null,
-      geofenceRadiusM: form.geofenceEnabled ? form.geofenceRadiusM : null,
-    } satisfies UpdateAttendanceSettingsRequest);
+    };
+
+    if (form.roundingEnabled) {
+      payload.roundingMinutes = form.roundingMinutes;
+    }
+
+    if (form.geofenceEnabled) {
+      payload.locationAttendanceEnabled = form.locationAttendanceEnabled;
+      payload.requireLocation = form.requireLocation;
+      payload.geofenceLat = form.geofenceLat;
+      payload.geofenceLng = form.geofenceLng;
+      payload.geofenceRadiusM = form.geofenceRadiusM;
+    }
+
+    updateMutation.mutate(payload);
   };
 
   if (isLoading) {
