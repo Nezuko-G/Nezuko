@@ -21,8 +21,7 @@ export default getRequestConfig(async ({ requestLocale }) => {
   const leave = (await import(`../../messages/${locale}/leave.json`)).default
   const employees = (await import(`../../messages/${locale}/employees.json`)).default
   const departments = (await import(`../../messages/${locale}/departments.json`)).default
-
-
+  const timesheet = (await import(`../../messages/${locale}/timesheet.json`)).default
 
   return {
     locale: locale as typeof routing.locales[number],
@@ -38,8 +37,8 @@ export default getRequestConfig(async ({ requestLocale }) => {
       leave,
       blogs,
       departments,
-      employees
-
+      employees,
+      timesheet,
     }
   }
 })

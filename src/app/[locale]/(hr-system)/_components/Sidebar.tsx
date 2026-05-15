@@ -1,6 +1,6 @@
 "use client"
 import { useTranslations } from "next-intl";
-import { Home, Users, Package, Briefcase, Folder, BarChart, Star, Settings, CalendarDays } from "lucide-react";
+import { Home, Users, Package, Briefcase, Folder, BarChart, Star, Settings, CalendarDays, Clock } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 
 export default function Sidebar() {
@@ -12,6 +12,7 @@ export default function Sidebar() {
     { icon: Package, label: t("assets"), href: "/assets" },
     { icon: Briefcase, label: t("payroll"), href: "/payroll" },
     { icon: Folder, label: t("projects"), href: "/projects" },
+    { icon: Clock, label: t("attendance"), href: "/attendance" },
     { icon: CalendarDays, label: t("leave"), href: "/leave" },
     { icon: BarChart, label: t("reports"), href: "/reports" },
     { icon: Star, label: t("favorites"), href: "/favorites" },
