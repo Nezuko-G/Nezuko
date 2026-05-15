@@ -59,5 +59,11 @@ export const apis = {
   employees: {
     base: "/employee",
     byId: (id: string) => `/employee/${id}`,
+  },
+  company: {
+    info: "/company/info",
+    logo: "/company/logo",
+    settings: "/company/settings",
+    attendance: "/company/attendance-settings",
   }
 };
