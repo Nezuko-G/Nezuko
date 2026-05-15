@@ -10,6 +10,7 @@ import type { UpdateAttendanceSettingsRequest } from "../types/company.dto";
 import { useAuthStore } from "@/hooks/useAuthStore";
 import { Button } from "@/components/ui/button";
 import Toggle from "@/components/ui/toggle";
+import { MapPin, Loader2 as Spinner } from "lucide-react";
 
 const EDIT_ROLES = ["HR"];
 
@@ -66,6 +67,8 @@ export default function AttendanceSettingsForm() {
 
   const [form, setForm] = useState<FormState>(DEFAULTS);
   const [initialized, setInitialized] = useState(false);
+  const [geoLoading, setGeoLoading] = useState(false);
+  const [geoError, setGeoError] = useState<string | null>(null);
 
   if (data && !initialized) {
     setForm(mergeWithDefaults(data.data));
@@ -81,6 +84,32 @@ export default function AttendanceSettingsForm() {
       ? form.workingDays.filter((d) => d !== day)
       : [...form.workingDays, day];
     update("workingDays", next as FormState["workingDays"]);
+  };
+
+  const getCurrentPosition = () => {
+    if (!navigator.geolocation) {
+      setGeoError(t("geoErrors.unsupported"));
+      return;
+    }
+    setGeoLoading(true);
+    setGeoError(null);
+    navigator.geolocation.getCurrentPosition(
+      (pos) => {
+        update("geofenceLat", pos.coords.latitude);
+        update("geofenceLng", pos.coords.longitude);
+        setGeoLoading(false);
+      },
+      (err) => {
+        setGeoLoading(false);
+        const map: Record<number, string> = {
+          [err.PERMISSION_DENIED]: t("geoErrors.denied"),
+          [err.POSITION_UNAVAILABLE]: t("geoErrors.unavailable"),
+          [err.TIMEOUT]: t("geoErrors.timeout"),
+        };
+        setGeoError(map[err.code] ?? t("geoErrors.unavailable"));
+      },
+      { enableHighAccuracy: true, timeout: 10000, maximumAge: 300000 },
+    );
   };
 
   const resetToDefaults = () => setForm({ ...DEFAULTS });
@@ -248,22 +277,43 @@ export default function AttendanceSettingsForm() {
           />
         </div>
         {form.geofenceEnabled && (
-          <div className={fieldRow}>
-            {geofenceFields.map(({ key, labelKey, min, step }) => (
-              <div key={key}>
-                <label className={labelClass}>{t(`fields.${labelKey}`)}</label>
-                <input
-                  type="number"
-                  step={step}
-                  min={min}
-                  className={inputClass}
-                  value={form[key] as number}
-                  onChange={(e) => update(key, Number(e.target.value))}
-                  disabled={!canEdit}
-                />
-              </div>
-            ))}
-          </div>
+          <>
+            <div className="flex items-center gap-2 mb-3">
+              <Button
+                type="button"
+                variant="outline"
+                size="sm"
+                disabled={!canEdit || geoLoading}
+                onClick={getCurrentPosition}
+              >
+                {geoLoading ? (
+                  <Spinner size={14} className="animate-spin" />
+                ) : (
+                  <MapPin size={14} />
+                )}
+                {t("buttons.getLocation")}
+              </Button>
+              {geoError && (
+                <span className="text-xs text-status-error">{geoError}</span>
+              )}
+            </div>
+            <div className={fieldRow}>
+              {geofenceFields.map(({ key, labelKey, min, step }) => (
+                <div key={key}>
+                  <label className={labelClass}>{t(`fields.${labelKey}`)}</label>
+                  <input
+                    type="number"
+                    step={step}
+                    min={min}
+                    className={inputClass}
+                    value={form[key] as number}
+                    onChange={(e) => update(key, Number(e.target.value))}
+                    disabled={!canEdit}
+                  />
+                </div>
+              ))}
+            </div>
+          </>
         )}
       </div>
 

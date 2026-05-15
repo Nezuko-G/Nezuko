@@ -71,10 +71,17 @@
     "buttons": {
       "save": "Save Changes",
       "saving": "Saving...",
-      "reset": "Reset to Defaults"
+      "reset": "Reset to Defaults",
+      "getLocation": "Get Current Location"
     },
     "states": {
       "loading": "Loading..."
+    },
+    "geoErrors": {
+      "denied": "Location permission denied",
+      "unavailable": "Location unavailable",
+      "timeout": "Location request timed out",
+      "unsupported": "Geolocation not supported"
     }
   },
   "info": {
