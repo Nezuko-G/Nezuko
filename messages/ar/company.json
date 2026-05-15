@@ -1,0 +1,44 @@
+{
+  "info": {
+    "sections": {
+      "logo": "الشعار",
+      "general": "عام",
+      "location": "الموقع",
+      "legal": "قانوني ومالي"
+    },
+    "fields": {
+      "name": "الاسم",
+      "industry": "الصناعة",
+      "country": "الدولة",
+      "city": "المدينة",
+      "address": "العنوان",
+      "phone": "الهاتف",
+      "website": "الموقع الإلكتروني",
+      "taxNumber": "الرقم الضريبي",
+      "commercialReg": "السجل التجاري",
+      "currency": "العملة",
+      "timezone": "المنطقة الزمنية"
+    },
+    "logo": {
+      "upload": "رفع",
+      "change": "تغيير",
+      "remove": "إزالة",
+      "uploading": "جارِ الرفع",
+      "removing": "جارِ الإزالة",
+      "dropHere": "أفلت هنا",
+      "acceptedFormats": "JPEG، PNG، WebP أو SVG. الحد الأقصى 5 ميجابايت.",
+      "changeOverlay": "تغيير",
+      "errors": {
+        "fileType": "يُسمح فقط بملفات JPEG و PNG و WebP و SVG.",
+        "fileSize": "يجب أن يكون حجم الملف أقل من 5 ميجابايت."
+      }
+    },
+    "buttons": {
+      "save": "حفظ التغييرات",
+      "saving": "جارٍ الحفظ..."
+    },
+    "states": {
+      "loading": "جارٍ التحميل..."
+    }
+  }
+}

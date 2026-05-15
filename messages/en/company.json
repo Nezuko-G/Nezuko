@@ -1,0 +1,44 @@
+{
+  "info": {
+    "sections": {
+      "logo": "Logo",
+      "general": "General",
+      "location": "Location",
+      "legal": "Legal & Financial"
+    },
+    "fields": {
+      "name": "Name",
+      "industry": "Industry",
+      "country": "Country",
+      "city": "City",
+      "address": "Address",
+      "phone": "Phone",
+      "website": "Website",
+      "taxNumber": "Tax Number",
+      "commercialReg": "Commercial Registration",
+      "currency": "Currency",
+      "timezone": "Timezone"
+    },
+    "logo": {
+      "upload": "Upload",
+      "change": "Change",
+      "remove": "Remove",
+      "uploading": "Uploading",
+      "removing": "Removing",
+      "dropHere": "Drop here",
+      "acceptedFormats": "JPEG, PNG, WebP or SVG. Max 5MB.",
+      "changeOverlay": "Change",
+      "errors": {
+        "fileType": "Only JPEG, PNG, WebP, and SVG files are allowed.",
+        "fileSize": "File size must be under 5MB."
+      }
+    },
+    "buttons": {
+      "save": "Save Changes",
+      "saving": "Saving..."
+    },
+    "states": {
+      "loading": "Loading..."
+    }
+  }
+}
