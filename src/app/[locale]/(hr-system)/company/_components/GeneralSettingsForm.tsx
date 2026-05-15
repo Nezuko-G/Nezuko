@@ -1,16 +1,13 @@
 "use client";
 
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 import { useGeneralSettings, useUpdateGeneralSettings } from "../hooks/useCompany";
 import type { UpdateGeneralSettingsRequest } from "../types/company.dto";
 import { useAuthStore } from "@/hooks/useAuthStore";
 import { Button } from "@/components/ui/button";
 
 const EDIT_ROLES = ["HR"];
-const MONTHS = [
-  "January", "February", "March", "April", "May", "June",
-  "July", "August", "September", "October", "November", "December",
-];
 
 type SegmentedProps = {
   label: string;
@@ -46,6 +43,7 @@ function SegmentedControl({ label, options, value, onChange, disabled }: Segment
 }
 
 export default function GeneralSettingsForm() {
+  const t = useTranslations("company.generalSettings");
   const { data, isLoading } = useGeneralSettings();
   const updateMutation = useUpdateGeneralSettings();
   const { role } = useAuthStore();
@@ -68,20 +66,24 @@ export default function GeneralSettingsForm() {
   };
 
   if (isLoading) {
-    return <div className="text-content-muted p-6">Loading...</div>;
+    return <div className="text-content-muted p-6">{t("states.loading")}</div>;
   }
 
   const fyStart = new Date(2024, fiscalYearStart - 1, 1);
   const fyEnd = new Date(2025, fiscalYearStart - 1, 0);
+  const fyStartLabel = fyStart.toLocaleDateString("en-US", { month: "long", year: "numeric" });
+  const fyEndLabel = fyEnd.toLocaleDateString("en-US", { month: "long", year: "numeric" });
 
   return (
     <div className="space-y-8">
       <div className="rounded-xl border border-gray-200 bg-card p-6 space-y-6">
+        <h3 className="text-base font-semibold text-content-dark">{t("sectionTitle")}</h3>
+
         <SegmentedControl
-          label="Language"
+          label={t("fields.language")}
           options={[
-            { value: "ar", label: "Arabic" },
-            { value: "en", label: "English" },
+            { value: "ar", label: t("languages.ar") },
+            { value: "en", label: t("languages.en") },
           ]}
           value={language}
           onChange={setLanguage}
@@ -89,11 +91,11 @@ export default function GeneralSettingsForm() {
         />
 
         <SegmentedControl
-          label="Date Format"
+          label={t("fields.dateFormat")}
           options={[
-            { value: "DD/MM/YYYY", label: "DD/MM/YYYY" },
-            { value: "MM/DD/YYYY", label: "MM/DD/YYYY" },
-            { value: "YYYY-MM-DD", label: "YYYY-MM-DD" },
+            { value: "DD/MM/YYYY", label: t("dateFormats.DD/MM/YYYY") },
+            { value: "MM/DD/YYYY", label: t("dateFormats.MM/DD/YYYY") },
+            { value: "YYYY-MM-DD", label: t("dateFormats.YYYY-MM-DD") },
           ]}
           value={dateFormat}
           onChange={setDateFormat}
@@ -101,21 +103,19 @@ export default function GeneralSettingsForm() {
         />
 
         <div>
-          <label className="block text-sm font-medium text-content mb-2">Fiscal Year Start</label>
+          <label className="block text-sm font-medium text-content mb-2">{t("fields.fiscalYearStart")}</label>
           <select
             value={fiscalYearStart}
             onChange={(e) => setFiscalYearStart(Number(e.target.value))}
             disabled={!canEdit}
             className="w-full max-w-xs rounded-lg border border-gray-300 bg-white px-4 py-2.5 text-sm text-content focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            {MONTHS.map((name, i) => (
-              <option key={i + 1} value={i + 1}>{name}</option>
+            {Array.from({ length: 12 }, (_, i) => i + 1).map((n) => (
+              <option key={n} value={n}>{t(`months.${n}`)}</option>
             ))}
           </select>
           <p className="mt-1 text-xs text-content-muted">
-            Fiscal year: {fyStart.toLocaleDateString("en-US", { month: "long", year: "numeric" })}
-            {" → "}
-            {fyEnd.toLocaleDateString("en-US", { month: "long", year: "numeric" })}
+            {t("fiscalYearHint", { start: fyStartLabel, end: fyEndLabel })}
           </p>
         </div>
       </div>
@@ -123,7 +123,7 @@ export default function GeneralSettingsForm() {
       {canEdit && (
         <div className="flex justify-end">
           <Button onClick={handleSave} disabled={updateMutation.isPending}>
-            {updateMutation.isPending ? "Saving..." : "Save Changes"}
+            {updateMutation.isPending ? t("buttons.saving") : t("buttons.save")}
           </Button>
         </div>
       )}

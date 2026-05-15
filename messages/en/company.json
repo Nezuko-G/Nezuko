@@ -1,4 +1,43 @@
 {
+  "generalSettings": {
+    "sectionTitle": "General Settings",
+    "fields": {
+      "language": "Language",
+      "dateFormat": "Date Format",
+      "fiscalYearStart": "Fiscal Year Start"
+    },
+    "languages": {
+      "ar": "Arabic",
+      "en": "English"
+    },
+    "dateFormats": {
+      "DD/MM/YYYY": "DD/MM/YYYY",
+      "MM/DD/YYYY": "MM/DD/YYYY",
+      "YYYY-MM-DD": "YYYY-MM-DD"
+    },
+    "months": {
+      "1": "January",
+      "2": "February",
+      "3": "March",
+      "4": "April",
+      "5": "May",
+      "6": "June",
+      "7": "July",
+      "8": "August",
+      "9": "September",
+      "10": "October",
+      "11": "November",
+      "12": "December"
+    },
+    "fiscalYearHint": "Fiscal year: {start} → {end}",
+    "buttons": {
+      "save": "Save Changes",
+      "saving": "Saving..."
+    },
+    "states": {
+      "loading": "Loading..."
+    }
+  },
   "info": {
     "sections": {
       "logo": "Logo",

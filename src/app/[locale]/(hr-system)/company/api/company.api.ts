@@ -54,6 +54,7 @@ export async function deleteLogo(): Promise<void> {
 
 export async function getGeneralSettings(): Promise<GeneralSettingsResponse> {
   const response = await api.get(apis.company.settings);
+  throwIfError(response);
   const parsed = GeneralSettingsResponseDTO.safeParse(response.data);
   if (!parsed.success) {
     console.error("Zod Parse Error (general settings):", parsed.error.format());

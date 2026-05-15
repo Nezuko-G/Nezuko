@@ -1,4 +1,43 @@
 {
+  "generalSettings": {
+    "sectionTitle": "الإعدادات العامة",
+    "fields": {
+      "language": "اللغة",
+      "dateFormat": "تنسيق التاريخ",
+      "fiscalYearStart": "بداية السنة المالية"
+    },
+    "languages": {
+      "ar": "العربية",
+      "en": "الإنجليزية"
+    },
+    "dateFormats": {
+      "DD/MM/YYYY": "DD/MM/YYYY",
+      "MM/DD/YYYY": "MM/DD/YYYY",
+      "YYYY-MM-DD": "YYYY-MM-DD"
+    },
+    "months": {
+      "1": "يناير",
+      "2": "فبراير",
+      "3": "مارس",
+      "4": "أبريل",
+      "5": "مايو",
+      "6": "يونيو",
+      "7": "يوليو",
+      "8": "أغسطس",
+      "9": "سبتمبر",
+      "10": "أكتوبر",
+      "11": "نوفمبر",
+      "12": "ديسمبر"
+    },
+    "fiscalYearHint": "السنة المالية: {start} ← {end}",
+    "buttons": {
+      "save": "حفظ التغييرات",
+      "saving": "جارٍ الحفظ..."
+    },
+    "states": {
+      "loading": "جارٍ التحميل..."
+    }
+  },
   "info": {
     "sections": {
       "logo": "الشعار",
