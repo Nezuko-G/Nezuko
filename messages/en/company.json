@@ -1,4 +1,13 @@
 {
+  "page": {
+    "title": "Company Settings",
+    "subtitle": "Manage your company profile and preferences"
+  },
+  "tabs": {
+    "info": "Company Info",
+    "general": "General Settings",
+    "attendance": "Attendance Settings"
+  },
   "generalSettings": {
     "sectionTitle": "General Settings",
     "fields": {

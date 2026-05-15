@@ -1,4 +1,13 @@
 {
+  "page": {
+    "title": "إعدادات الشركة",
+    "subtitle": "إدارة ملف الشركة وتفضيلاتها"
+  },
+  "tabs": {
+    "info": "معلومات الشركة",
+    "general": "الإعدادات العامة",
+    "attendance": "إعدادات الحضور"
+  },
   "generalSettings": {
     "sectionTitle": "الإعدادات العامة",
     "fields": {
