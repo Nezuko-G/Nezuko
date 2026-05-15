@@ -1,15 +1,31 @@
 "use client";
 
-import { useState } from "react";
+import { useSearchParams, useRouter, usePathname } from "next/navigation";
+import { useCallback } from "react";
 import CompanyTabs from "./_components/CompanyTabs";
 import CompanyInfoForm from "./_components/CompanyInfoForm";
 import GeneralSettingsForm from "./_components/GeneralSettingsForm";
 import AttendanceSettingsForm from "./_components/AttendanceSettingsForm";
 
 type Tab = "info" | "general" | "attendance";
+const TABS: readonly Tab[] = ["info", "general", "attendance"];
 
 export default function CompanyPage() {
-  const [activeTab, setActiveTab] = useState<Tab>("info");
+  const searchParams = useSearchParams();
+  const router = useRouter();
+  const pathname = usePathname();
+
+  const rawTab = searchParams.get("tab") as Tab | null;
+  const activeTab: Tab = rawTab && TABS.includes(rawTab) ? rawTab : "info";
+
+  const setActiveTab = useCallback(
+    (tab: Tab) => {
+      const params = new URLSearchParams(searchParams.toString());
+      params.set("tab", tab);
+      router.replace(`${pathname}?${params.toString()}`, { scroll: false });
+    },
+    [searchParams, router, pathname],
+  );
 
   return (
     <div className="max-w-3xl mx-auto">
