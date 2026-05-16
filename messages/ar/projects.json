@@ -1,0 +1,125 @@
+{
+    "title": "المشاريع",
+    "newProject": "مشروع جديد",
+    "noProjects": "لا توجد مشاريع",
+    "searchPlaceholder": "ابحث في المشاريع…",
+    "filterByStatus": "تصفية بالحالة",
+    "allStatuses": "جميع الحالات",
+    "status": {
+        "PLANNING": "تخطيط",
+        "ACTIVE": "نشط",
+        "ON_HOLD": "معلق",
+        "COMPLETED": "مكتمل",
+        "CANCELLED": "ملغي"
+    },
+    "fields": {
+        "name": "اسم المشروع",
+        "description": "الوصف",
+        "status": "الحالة",
+        "owner": "المالك",
+        "startDate": "تاريخ البداية",
+        "dueDate": "تاريخ الاستحقاق",
+        "createdAt": "تاريخ الإنشاء",
+        "updatedAt": "آخر تحديث"
+    },
+    "actions": {
+        "create": "إنشاء مشروع",
+        "edit": "تعديل المشروع",
+        "cancel": "إلغاء المشروع",
+        "save": "حفظ التغييرات",
+        "discard": "تجاهل"
+    },
+    "cancelDialog": {
+        "title": "إلغاء المشروع؟",
+        "description": "سيؤدي هذا إلى تعيين جميع المهام غير المكتملة إلى محظورة ولا يمكن التراجع عنه.",
+        "confirm": "نعم، إلغاء المشروع",
+        "abort": "الإبقاء على المشروع"
+    },
+    "detail": {
+        "progress": "التقدم",
+        "overdueCount": "المهام المتأخرة",
+        "hoursVariance": "فارق الساعات",
+        "completedOf": "{completed} من {total} مهمة مكتملة",
+        "tasks": "المهام",
+        "noTasks": "لا توجد مهام في هذا المشروع بعد"
+    },
+    "form": {
+        "createTitle": "إنشاء مشروع جديد",
+        "editTitle": "تعديل المشروع",
+        "namePlaceholder": "مثال: إطلاق منتج الربع الثالث",
+        "descriptionPlaceholder": "صف أهداف المشروع…",
+        "startDateLabel": "تاريخ البداية",
+        "dueDateLabel": "تاريخ الاستحقاق",
+        "dueDateAfterStart": "يجب أن يكون تاريخ الاستحقاق بعد تاريخ البداية",
+        "nameRequired": "اسم المشروع مطلوب"
+    },
+    "errors": {
+        "loadFailed": "فشل تحميل المشاريع",
+        "createFailed": "فشل إنشاء المشروع",
+        "updateFailed": "فشل تحديث المشروع",
+        "cancelFailed": "فشل إلغاء المشروع"
+    },
+    "tasks": {
+        "title": "المهام",
+        "myTasks": "مهامي",
+        "newTask": "مهمة جديدة",
+        "noTasks": "لا توجد مهام",
+        "addSubTask": "+ إضافة مهمة فرعية",
+        "subTasks": "المهام الفرعية",
+        "status": {
+            "TODO": "للتنفيذ",
+            "IN_PROGRESS": "قيد التنفيذ",
+            "IN_REVIEW": "قيد المراجعة",
+            "DONE": "مكتملة",
+            "BLOCKED": "محظورة"
+        },
+        "priority": {
+            "LOW": "منخفضة",
+            "MEDIUM": "متوسطة",
+            "HIGH": "عالية",
+            "URGENT": "عاجلة"
+        },
+        "fields": {
+            "title": "العنوان",
+            "description": "الوصف",
+            "status": "الحالة",
+            "priority": "الأولوية",
+            "assignee": "المسؤول",
+            "project": "المشروع",
+            "dueDate": "تاريخ الاستحقاق",
+            "estimatedHours": "الساعات المقدرة",
+            "actualHours": "الساعات الفعلية"
+        },
+        "actions": {
+            "create": "إنشاء مهمة",
+            "edit": "تعديل المهمة",
+            "save": "حفظ التغييرات",
+            "discard": "تجاهل",
+            "moveStatus": "تغيير الحالة"
+        },
+        "warnings": {
+            "openSubTasks": "أكمل جميع المهام الفرعية قبل وضع علامة مكتملة على هذه المهمة",
+            "overdueDate": "هذه المهمة متأخرة عن موعدها"
+        },
+        "form": {
+            "createTitle": "إنشاء مهمة جديدة",
+            "editTitle": "تعديل المهمة",
+            "titlePlaceholder": "مثال: تصميم شاشة تسجيل الدخول",
+            "descriptionPlaceholder": "تفاصيل المهمة…",
+            "titleRequired": "عنوان المهمة مطلوب",
+            "standaloneOrProject": "ربط بمشروع (اختياري)"
+        },
+        "errors": {
+            "loadFailed": "فشل تحميل المهام",
+            "createFailed": "فشل إنشاء المهمة",
+            "updateFailed": "فشل تحديث المهمة",
+            "statusFailed": "فشل تحديث حالة المهمة"
+        },
+        "overdueReport": {
+            "title": "تقرير المتأخرات",
+            "groupedByAssignee": "مجمّع حسب المسؤول",
+            "noOverdue": "لا توجد مهام متأخرة",
+            "taskCount": "{count} مهمة متأخرة"
+        }
+    }
+}
