@@ -1,0 +1,137 @@
+{
+  "plans": {
+    "title": "Health Insurance Plans",
+    "subtitle": "Manage insurance packages and customize deduction rates",
+    "createBtn": "New Plan",
+    "coverageReportBtn": "Coverage Report",
+    "filters": {
+      "allTypes": "All Types",
+      "allStatuses": "All Statuses"
+    },
+    "status": {
+      "active": "Active",
+      "inactive": "Inactive"
+    },
+    "table": {
+      "name": "Plan Name",
+      "type": "Category",
+      "salaryPercentage": "Deduction Percentage",
+      "maxDependents": "Max Dependents",
+      "status": "Status",
+      "actions": "Actions",
+      "enroll": "Enroll Employee"
+    },
+    "errors": {
+      "fetch": "Failed to load plans"
+    }
+  },
+  "types": {
+    "BASIC": "Basic",
+    "STANDARD": "Standard",
+    "PREMIUM": "Premium"
+  },
+  "drawers": {
+    "plan": {
+      "titleCreate": "Create Insurance Plan",
+      "titleEdit": "Edit Insurance Plan",
+      "fields": {
+        "name": "Plan Name",
+        "type": "Coverage Type",
+        "salaryPercentage": "Salary Deduction Percentage",
+        "maxDependents": "Maximum Dependents",
+        "coverageDetails": "Coverage Details"
+      },
+      "buttons": {
+        "cancel": "Cancel",
+        "create": "Create Plan",
+        "save": "Save Changes"
+      }
+    }
+  },
+  "enroll": {
+    "title": "Enroll Employee in Insurance",
+    "breadcrumbs": {
+      "plans": "Insurance Plans",
+      "enroll": "New Enrollment"
+    },
+    "fields": {
+      "employee": "Employee",
+      "selectEmployee": "Select an employee",
+      "startDate": "Start Date",
+      "endDate": "End Date (Optional)"
+    },
+    "preview": {
+      "title": "Cost Preview",
+      "selectPrompt": "Select an employee to see estimated cost",
+      "salary": "Base Salary",
+      "percentage": "Plan Percentage",
+      "monthlyDeduction": "Estimated Monthly Deduction",
+      "error": "Failed to calculate preview"
+    },
+    "buttons": {
+      "confirm": "Confirm Enrollment"
+    },
+    "currency": "EGP",
+    "states": {
+      "loadingEmployees": "Loading..."
+    }
+  },
+  "report": {
+    "title": "Insurance Coverage Report",
+    "subtitle": "Analysis of total costs and enrolled employees",
+    "exportCsv": "Export CSV",
+    "stats": {
+      "totalCost": "Total Monthly Cost",
+      "enrolled": "Enrolled Employees",
+      "activePlans": "Active Plans"
+    },
+    "table": {
+      "planName": "Plan Name",
+      "type": "Type",
+      "enrolled": "Enrolled",
+      "monthlyCost": "Total Cost"
+    },
+    "currency": "EGP",
+    "empty": "No data available at the moment"
+  },
+  "employee": {
+    "title": "My Health Insurance",
+    "monthlyCost": "Monthly Cost",
+    "startDate": "Enrollment Date",
+    "salaryPercentage": "Deduction Percentage",
+    "maxDependents": "Max Dependents",
+    "currency": "EGP",
+    "noEnrollment": {
+      "title": "No Active Enrollment",
+      "message": "You are not currently enrolled in any insurance plan. Please contact HR."
+    },
+    "dependents": {
+      "title": "Dependents",
+      "addBtn": "Add Dependent",
+      "limitReached": "You have reached the maximum number of dependents for this plan",
+      "empty": "No dependents added yet",
+      "removeConfirm": "Are you sure you want to remove this dependent from coverage?"
+    }
+  },
+  "relations": {
+    "SPOUSE": "Spouse",
+    "CHILD": "Child",
+    "PARENT": "Parent"
+  },
+  "modals": {
+    "deactivate": {
+      "title": "Deactivate Plan",
+      "message": "Are you sure you want to deactivate the plan {name}?",
+      "warning": "Note: Current employee enrollments will not be affected by this action."
+    },
+    "buttons": {
+      "cancel": "Cancel",
+      "confirmDeactivate": "Confirm Deactivation"
+    }
+  },
+  "errors": {
+    "duplicatePlan": "A plan with this name already exists in this scope",
+    "duplicateEnrollment": "This employee is already enrolled in an active insurance plan",
+    "genericError": "Something went wrong, please try again later"
+  }
+}
