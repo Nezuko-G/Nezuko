@@ -1,52 +1,67 @@
 "use client";
 
-import { useProjects } from "../_hooks/useProjects";
-import { Project } from "../types/project.types";
+import { useTranslations } from "next-intl";
+import { AlertTriangle, Loader2 } from "lucide-react";
 
-interface Props {
-    project: Project;
+interface CancelProjectDialogProps {
+    projectName: string;
+    open: boolean;
+    loading?: boolean;
+    onConfirm: () => void;
     onClose: () => void;
 }
 
-export function CancelProjectDialog({ project, onClose }: Props) {
-    const { cancelProject, loading } = useProjects();
+export function CancelProjectDialog({
+    projectName,
+    open,
+    loading = false,
+    onConfirm,
+    onClose,
+}: CancelProjectDialogProps) {
+    const t = useTranslations("projects.cancelDialog");
 
-    async function handleConfirm() {
-        const success = await cancelProject(project.id);
-        if (success) onClose();
-    }
+    if (!open) return null;
 
     return (
-        <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50 p-4">
-            <div className="bg-white rounded-2xl p-6 w-full max-w-sm shadow-xl">
+        <div
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm"
+            onClick={onClose}
+        >
+            <div
+                className="bg-white rounded-2xl shadow-xl p-6 max-w-md w-full mx-4 flex flex-col gap-4"
+                onClick={(e) => e.stopPropagation()}
+            >
+                {/* Icon + Title */}
+                <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-full bg-red-50 flex items-center justify-center flex-shrink-0">
+                        <AlertTriangle size={20} className="text-status-error" />
+                    </div>
+                    <h2 className="text-lg font-bold text-content-dark">{t("title")}</h2>
+                </div>
 
-                <h2 className="text-base font-medium text-gray-900 mb-2">
-                    Cancel project?
-                </h2>
-
-                <p className="text-sm text-gray-500 mb-3">
-                    You&apos;re about to cancel{" "}
-                    <span className="font-medium text-gray-800">{project.name}</span>.
+                {/* Description */}
+                <p className="text-sm text-content-muted leading-relaxed">
+                    <span className="font-semibold text-content-dark">{projectName}</span>
+                    {" — "}
+                    {t("description")}
                 </p>
 
-                <p className="text-sm text-amber-700 bg-amber-50 border border-amber-200 rounded-lg px-3 py-2 mb-5">
-                    All tasks that are not DONE will be set to BLOCKED.
-                </p>
-
-                <div className="flex justify-end gap-3">
+                {/* Actions */}
+                <div className="flex items-center justify-end gap-3 pt-2">
                     <button
                         onClick={onClose}
                         disabled={loading}
-                        className="text-sm text-gray-500 hover:text-gray-700 disabled:opacity-50"
+                        className="px-4 py-2 rounded-xl text-sm font-medium text-content-muted border border-gray-200 hover:bg-gray-50 transition-colors disabled:opacity-50"
                     >
-                        Go back
+                        {t("abort")}
                     </button>
                     <button
-                        onClick={handleConfirm}
+                        onClick={onConfirm}
                         disabled={loading}
-                        className="bg-red-500 text-white text-sm px-4 py-2 rounded-lg hover:bg-red-600 disabled:opacity-50 transition-colors"
+                        className="px-4 py-2 rounded-xl text-sm font-semibold text-white bg-status-error hover:bg-red-600 transition-colors disabled:opacity-50 flex items-center gap-2"
                     >
-                        {loading ? "Cancelling..." : "Yes, cancel"}
+                        {loading && <Loader2 size={14} className="animate-spin" />}
+                        {t("confirm")}
                     </button>
                 </div>
             </div>
