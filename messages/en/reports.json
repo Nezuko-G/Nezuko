@@ -1,0 +1,95 @@
+{
+  "hub": {
+    "title": "Reports & Statistics Center",
+    "subtitle": "Browse and extract performance and HR reports",
+    "historyBtn": "Report History",
+    "emptyTitle": "No reports available",
+    "emptyMessage": "No report types found that you are authorized to access.",
+    "generateBtn": "Generate Report",
+    "types": {
+      "headcount": {
+        "name": "Workforce Headcount",
+        "description": "Shows total active employees distributed by department."
+      },
+      "leave-summary": {
+        "name": "Leave Summary",
+        "description": "Leave records (approved, rejected, pending) per employee for a specific period."
+      },
+      "overtime": {
+        "name": "Overtime Report",
+        "description": "Total overtime hours recorded by employees in attendance logs."
+      },
+      "asset-custody": {
+        "name": "Asset Custody Report",
+        "description": "Assets currently assigned to employees, categorized by employee or asset class."
+      },
+      "task-completion": {
+        "name": "Task Completion Report",
+        "description": "Task completion rate analysis per project or assigned employee."
+      },
+      "unknown": {
+        "name": "Unknown Report"
+      }
+    }
+  },
+  "filters": {
+    "startDate": "Start Date",
+    "endDate": "End Date",
+    "department": "Department",
+    "allDepartments": "All Departments",
+    "employee": "Employee",
+    "allEmployees": "All Employees",
+    "departmentId": "Filter by Department",
+    "userId": "Filter by Employee",
+    "generateBtn": "Preview Data",
+    "loading": "Loading...",
+    "errors": {
+      "dateRange": "End date must be greater than or equal to start date"
+    }
+  },
+  "columns": {
+    "employeeName": "Employee Name",
+    "employeeCode": "Employee Code",
+    "departmentName": "Department",
+    "employeeCount": "Number of Employees",
+    "approvedLeaves": "Approved Leaves",
+    "rejectedLeaves": "Rejected",
+    "pendingLeaves": "Pending",
+    "overtimeHours": "Overtime Hours",
+    "entries": "Entry Count",
+    "assetName": "Asset Name",
+    "serialNumber": "Serial Number",
+    "category": "Category",
+    "status": "Status",
+    "projectName": "Project Name",
+    "assigneeName": "Assignee",
+    "completedTasks": "Completed Tasks",
+    "pendingTasks": "Pending Tasks",
+    "completionRate": "Completion Rate"
+  },
+  "preview": {
+    "emptyTitle": "No data to display",
+    "emptyMessage": "Use the filters above and try a different date range or department."
+  },
+  "generator": {
+    "exportDisabledTooltip": "Generate the preview first before exporting",
+    "pagination": "Page {current} of {total}"
+  },
+  "history": {
+    "title": "Exported Reports History",
+    "subtitle": "Track all previously extracted reports and download them again",
+    "empty": "You haven't extracted any reports yet",
+    "noAccess": "You are not authorized to access this page",
+    "table": {
+      "report": "Report Name",
+      "date": "Export Date",
+      "format": "Format",
+      "actions": "Actions",
+      "regenerate": "Rebuild report with filters",
+      "downloadAgain": "Download file again"
+    }
+  },
+  "errors": {
+    "downloadFailed": "File download failed, please try again."
+  }
+}

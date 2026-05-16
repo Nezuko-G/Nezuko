@@ -110,9 +110,9 @@ export default function DepartmentsPage() {
         </div>
       </div>
 
-      <div className="bg-card rounded-3xl border border-gray-100 shadow-sm overflow-hidden flex flex-col min-h-[500px]">
+      <div className="bg-card rounded-3xl border border-gray-100 shadow-sm overflow-hidden flex flex-col">
         {isLoading ? (
-          <div className="flex-1 flex flex-col items-center justify-center gap-3">
+          <div className="flex-1 flex flex-col items-center justify-center gap-3 min-h-[500px]">
             <Loader2 className="animate-spin text-primary" size={40} />
           </div>
         ) : isError ? (
