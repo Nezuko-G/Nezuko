@@ -3,18 +3,18 @@ import { z } from "zod";
 export const TimesheetStatusEnum = z.enum(["DRAFT", "SUBMITTED", "APPROVED", "REJECTED"]);
 
 export const UserSummaryDTO = z.object({
-  id: z.string().uuid(),
+  id: z.string(),
   firstName: z.string(),
   lastName: z.string(),
   email: z.string().email(),
-  employeeCode: z.string().nullable(),
-  departmentId: z.string().uuid().nullable(),
+  employeeCode: z.string().nullable().optional(),
+  departmentId: z.string().uuid().nullable().optional(),
   role: z.string(),
 });
 
 export const TimesheetDTO = z.object({
   id: z.string().uuid(),
-  tenantId: z.string().uuid(),
+  tenantId: z.string(),
   userId: z.string().uuid(),
   date: z.string().datetime(),
   checkIn: z.string().datetime().nullable(),
@@ -23,7 +23,7 @@ export const TimesheetDTO = z.object({
   overtimeHours: z.number(),
   status: TimesheetStatusEnum,
   notes: z.string().nullable(),
-  submittedBy: z.string().uuid().nullable(),
+  submittedBy: z.string().nullable(),
   createdAt: z.string().datetime(),
   updatedAt: z.string().datetime(),
   user: UserSummaryDTO.nullable(),
