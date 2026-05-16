@@ -6,10 +6,12 @@
     "time": "الوقت",
     "payroll": "الرواتب",
     "projects": "المشاريع",
+    "attendance": "الحضور",
     "leave": "الإجازات",
     "reports": "التقارير",
     "favorites": "المفضلة",
-    "settings": "الإعدادات"
+    "settings": "الإعدادات",
+    "company": "الشركة"
   },
   "navbar": {
     "title": "إدارة الموارد البشرية",

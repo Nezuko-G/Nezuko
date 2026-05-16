@@ -6,10 +6,12 @@
     "time": "Time",
     "payroll": "Payroll",
     "projects": "Projects",
+    "attendance": "Attendance",
     "leave": "Leave",
     "reports": "Reports",
     "favorites": "Favorites",
-    "settings": "Settings"
+    "settings": "Settings",
+    "company": "Company"
   },
   "navbar": {
     "title": "HR Management",

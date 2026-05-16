@@ -71,5 +71,15 @@ export const apis = {
       dependents: (enrollmentId: string) => `/insurance-enrollments/${enrollmentId}/dependents`,
       dependentById: (enrollmentId: string, depId: string) => `/insurance-enrollments/${enrollmentId}/dependents/${depId}`,
     }
+  attendance: {
+    mark: "/attendance/location/mark",
+    timesheets: "/attendance/timesheets",
+    me: "/attendance/timesheets/me",
+  },
+  company: {
+    info: "/company/info",
+    logo: "/company/logo",
+    settings: "/company/settings",
+    attendance: "/company/attendance-settings",
   }
 };

@@ -65,7 +65,7 @@ export default function BlogPostClient({
 
             <main className="w-full overflow-hidden">
 
-                {/* ══════ HERO ══════ */}
+                {/* HERO */}
                 <div className={`w-full ${DARK_BG} pt-28 md:pt-32 pb-0`}>
                     <div className="max-w-4xl mx-auto px-4 md:px-6 pb-10">
 
@@ -149,7 +149,7 @@ export default function BlogPostClient({
                     </motion.div>
                 </div>
 
-                {/* ══════ ARTICLE BODY ══════ */}
+                {/* ARTICLE BODY */}
                 <div className="w-full bg-[#f8fafc] px-4 md:px-6 py-16 md:py-20">
                     <div className="max-w-3xl mx-auto">
                         {post.content?.map((section, i) => (
@@ -187,7 +187,7 @@ export default function BlogPostClient({
                     </div>
                 </div>
 
-                {/* ══════ RELATED POSTS ══════ */}
+                {/* RELATED POSTS */}
                 {related.length > 0 && (
                     <div className="w-full bg-white px-4 md:px-6 py-16 border-t border-gray-100">
                         <div className="max-w-4xl mx-auto">
@@ -234,7 +234,7 @@ export default function BlogPostClient({
                     </div>
                 )}
 
-                {/* ══════ BACK TO BLOG ══════ */}
+                {/* BACK TO BLOG */}
                 <div className={`w-full ${DARK_BG} px-4 py-12 text-center`}>
                     <Link
                         href="/blogs"
