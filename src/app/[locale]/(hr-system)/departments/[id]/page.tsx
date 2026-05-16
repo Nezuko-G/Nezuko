@@ -16,7 +16,7 @@ import {
   ChevronRight,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-// import toast from "react-hot-toast";
+import toast from "react-hot-toast";
 import RoleGuard from "@/components/RoleGuard/RoleGuard";
 import DepartmentModalsContainer from "../_components/modals/DepartmentModalsContainer";
 
@@ -43,7 +43,7 @@ export default function DepartmentDetailPage() {
 
   const handleDelete = () => {
     if (department.employeeCount > 0) {
-      // toast.error(t("errors.notEmpty"));
+      toast.error(t("errors.notEmpty"));
       return;
     }
     deleteDepartment.mutate(department.id, {
