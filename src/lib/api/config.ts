@@ -67,10 +67,14 @@ export const apis = {
     coverageReport: "/insurance-plans/coverage-report",
     enrollments: {
       me: "/insurance-enrollments/me",
-      costPreview: (planId: string) => `/insurance-enrollments/${planId}/cost-preview`,
-      dependents: (enrollmentId: string) => `/insurance-enrollments/${enrollmentId}/dependents`,
-      dependentById: (enrollmentId: string, depId: string) => `/insurance-enrollments/${enrollmentId}/dependents/${depId}`,
-    }
+      costPreview: (planId: string) =>
+        `/insurance-enrollments/${planId}/cost-preview`,
+      dependents: (enrollmentId: string) =>
+        `/insurance-enrollments/${enrollmentId}/dependents`,
+      dependentById: (enrollmentId: string, depId: string) =>
+        `/insurance-enrollments/${enrollmentId}/dependents/${depId}`,
+    },
+  },
   attendance: {
     mark: "/attendance/location/mark",
     timesheets: "/attendance/timesheets",
@@ -81,5 +85,5 @@ export const apis = {
     logo: "/company/logo",
     settings: "/company/settings",
     attendance: "/company/attendance-settings",
-  }
+  },
 };

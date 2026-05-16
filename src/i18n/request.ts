@@ -46,8 +46,6 @@ export default getRequestConfig(async ({ requestLocale }) => {
 
       timesheet,
       company,
-    }
-      
     },
   }
 })
