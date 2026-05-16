@@ -59,5 +59,17 @@ export const apis = {
   employees: {
     base: "/employee",
     byId: (id: string) => `/employee/${id}`,
+  },
+  insurance: {
+    plans: "/insurance-plans",
+    planById: (id: string) => `/insurance-plans/${id}`,
+    enroll: (id: string) => `/insurance-plans/${id}/enroll`,
+    coverageReport: "/insurance-plans/coverage-report",
+    enrollments: {
+      me: "/insurance-enrollments/me",
+      costPreview: (planId: string) => `/insurance-enrollments/${planId}/cost-preview`,
+      dependents: (enrollmentId: string) => `/insurance-enrollments/${enrollmentId}/dependents`,
+      dependentById: (enrollmentId: string, depId: string) => `/insurance-enrollments/${enrollmentId}/dependents/${depId}`,
+    }
   }
 };

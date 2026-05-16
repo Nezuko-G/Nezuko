@@ -9,7 +9,7 @@ export default function Sidebar() {
   const menuItems = [
     { icon: Home, label: t("home"), href: "/dashboard" },
     { icon: Users, label: t("employees"), href: "/employees" },
-    { icon: Package, label: t("assets"), href: "/assets" },
+    { icon: Package, label: t("assets"), href: "/asset" },
     { icon: Briefcase, label: t("payroll"), href: "/payroll" },
     { icon: Folder, label: t("projects"), href: "/projects" },
     { icon: CalendarDays, label: t("leave"), href: "/leave" },
