@@ -86,4 +86,12 @@ export const apis = {
     settings: "/company/settings",
     attendance: "/company/attendance-settings",
   },
+  reports: {
+    types: "/reports/types",
+    data: (type: string) => `/reports/${type}`,
+    preview: (type: string) => `/reports/${type}/preview`,
+    exportCsv: (type: string) => `/reports/${type}/export`,
+    exportPdf: (type: string) => `/reports/${type}/export/pdf`,
+    history: "/reports/history",
+  },
 };
