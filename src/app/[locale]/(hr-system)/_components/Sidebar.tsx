@@ -1,7 +1,17 @@
-"use client"
+"use client";
 import { useTranslations } from "next-intl";
-import { Home, Users, Package, Briefcase, Folder, BarChart, Star, Settings, CalendarDays, Clock, Building2 } from "lucide-react";
-
+import {
+  Home,
+  Users,
+  Package,
+  ShieldAlert,
+  Folder,
+  Clock,
+  CalendarDays,
+  FilePieChart,
+  Network,
+  Building2,
+} from "lucide-react";
 import { Link, usePathname } from "@/i18n/navigation";
 
 export default function Sidebar() {
@@ -11,16 +21,17 @@ export default function Sidebar() {
   const menuItems = [
     { icon: Home, label: t("home"), href: "/dashboard" },
     { icon: Users, label: t("employees"), href: "/employees" },
-    { icon: Package, label: t("assets"), href: "/asset" },
-    { icon: Briefcase, label: t("payroll"), href: "/payroll" },
+    { icon: Package, label: t("assets"), href: "/assets" },
+    { icon: ShieldAlert, label: t("insurance"), href: "/insurance" },
     { icon: Folder, label: t("projects"), href: "/projects" },
     { icon: Clock, label: t("attendance"), href: "/attendance" },
     { icon: CalendarDays, label: t("leave"), href: "/leave" },
-    { icon: BarChart, label: t("reports"), href: "/reports" },
-    { icon: Star, label: t("favorites"), href: "/favorites" },
+    { icon: FilePieChart, label: t("reports"), href: "/reports" },
+    { icon: Network, label: t("departments"), href: "/departments" },
     { icon: Building2, label: t("company"), href: "/company" },
   ];
 
+  
   return (
     <aside className="w-20 bg-secondary min-h-screen flex flex-col items-center py-6 gap-6 sticky top-0 shrink-0 z-20">
       <Link
@@ -33,7 +44,8 @@ export default function Sidebar() {
       <nav className="flex flex-col gap-4 w-full px-4">
         {menuItems.map((item, index) => {
           const Icon = item.icon;
-          const isActive = pathname === item.href || pathname.startsWith(`${item.href}/`);
+          const isActive =
+            pathname === item.href || pathname.startsWith(`${item.href}/`);
           return (
             <Link
               key={index}

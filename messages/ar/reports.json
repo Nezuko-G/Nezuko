@@ -1,0 +1,95 @@
+{
+  "hub": {
+    "title": "مركز التقارير والإحصائيات",
+    "subtitle": "استعرض واستخرج تقارير الأداء والموارد البشرية",
+    "historyBtn": "سجل التقارير",
+    "emptyTitle": "لا توجد تقارير متاحة",
+    "emptyMessage": "لم يتم العثور على أي أنواع تقارير مصرح لك بالوصول إليها.",
+    "generateBtn": "إصدار التقرير",
+    "types": {
+      "headcount": {
+        "name": "حصر القوى العاملة",
+        "description": "يعرض إجمالي عدد الموظفين النشطين موزعين حسب الأقسام."
+      },
+      "leave-summary": {
+        "name": "ملخص الإجازات",
+        "description": "سجل الإجازات (المقبولة، المرفوضة، المعلقة) لكل موظف خلال فترة محددة."
+      },
+      "overtime": {
+        "name": "تقرير الوقت الإضافي",
+        "description": "إجمالي ساعات العمل الإضافية للموظفين المسجلة في جداول الحضور والانصراف."
+      },
+      "asset-custody": {
+        "name": "عُهد الأصول",
+        "description": "الأصول المسلمة حالياً للموظفين مصنفة حسب الموظف أو فئة الأصل."
+      },
+      "task-completion": {
+        "name": "إنجاز المهام",
+        "description": "تحليل نسب إنجاز المهام لكل مشروع أو موظف مكلف."
+      },
+      "unknown": {
+        "name": "غير معروف"
+      }
+    }
+  },
+  "filters": {
+    "startDate": "تاريخ البدء",
+    "endDate": "تاريخ الانتهاء",
+    "department": "القسم",
+    "allDepartments": "كل الأقسام",
+    "employee": "الموظف",
+    "allEmployees": "كل الموظفين",
+    "departmentId": "تصفية بالقسم",
+    "userId": "تصفية بالموظف",
+    "generateBtn": "معاينة الداتا",
+    "loading": "جاري التحميل...",
+    "errors": {
+      "dateRange": "تاريخ الانتهاء يجب أن يكون أكبر من أو يساوي تاريخ البدء"
+    }
+  },
+  "columns": {
+    "employeeName": "اسم الموظف",
+    "employeeCode": "الكود الوظيفي",
+    "departmentName": "القسم",
+    "employeeCount": "عدد الموظفين",
+    "approvedLeaves": "إجازات مقبولة",
+    "rejectedLeaves": "مرفوضة",
+    "pendingLeaves": "قيد الانتظار",
+    "overtimeHours": "ساعات إضافية",
+    "entries": "عدد مرات الإضافة",
+    "assetName": "اسم الأصل",
+    "serialNumber": "الرقم التسلسلي",
+    "category": "الفئة",
+    "status": "الحالة",
+    "projectName": "اسم المشروع",
+    "assigneeName": "المنفذ",
+    "completedTasks": "المهام المنجزة",
+    "pendingTasks": "مهام معلقة",
+    "completionRate": "نسبة الإنجاز"
+  },
+  "preview": {
+    "emptyTitle": "لا توجد بيانات للعرض",
+    "emptyMessage": "استخدم الفلاتر أعلاه وجرب نطاق زمني أو قسماً آخر."
+  },
+  "generator": {
+    "exportDisabledTooltip": "قم بتوليد المعاينة أولاً قبل التصدير",
+    "pagination": "صفحة {current} من {total}"
+  },
+  "history": {
+    "title": "سجل التقارير المُصدرة",
+    "subtitle": "تتبع كل التقارير التي تم استخراجها مسبقاً وتنزيلها مرة أخرى",
+    "empty": "لم تقم باستخراج أي تقارير حتى الآن",
+    "noAccess": "غير مصرح لك بالدخول إلى هذه الصفحة",
+    "table": {
+      "report": "اسم التقرير",
+      "date": "تاريخ الإصدار",
+      "format": "الصيغة",
+      "actions": "إجراءات",
+      "regenerate": "إعادة بناء التقرير بالفلاتر",
+      "downloadAgain": "تحميل الملف مرة أخرى"
+    }
+  },
+  "errors": {
+    "downloadFailed": "فشل تحميل الملف، يرجى المحاولة مرة أخرى."
+  }
+}
