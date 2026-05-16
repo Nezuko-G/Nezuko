@@ -65,4 +65,10 @@ export const apis = {
     timesheets: "/attendance/timesheets",
     me: "/attendance/timesheets/me",
   },
+  company: {
+    info: "/company/info",
+    logo: "/company/logo",
+    settings: "/company/settings",
+    attendance: "/company/attendance-settings",
+  }
 };

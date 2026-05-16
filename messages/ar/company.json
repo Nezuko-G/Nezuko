@@ -1,0 +1,129 @@
+{
+  "page": {
+    "title": "إعدادات الشركة",
+    "subtitle": "إدارة ملف الشركة وتفضيلاتها"
+  },
+  "tabs": {
+    "info": "معلومات الشركة",
+    "general": "الإعدادات العامة",
+    "attendance": "إعدادات الحضور"
+  },
+  "generalSettings": {
+    "sectionTitle": "الإعدادات العامة",
+    "fields": {
+      "language": "اللغة",
+      "dateFormat": "تنسيق التاريخ",
+      "fiscalYearStart": "بداية السنة المالية"
+    },
+    "languages": {
+      "ar": "العربية",
+      "en": "الإنجليزية"
+    },
+    "dateFormats": {
+      "DD/MM/YYYY": "DD/MM/YYYY",
+      "MM/DD/YYYY": "MM/DD/YYYY",
+      "YYYY-MM-DD": "YYYY-MM-DD"
+    },
+    "months": {
+      "1": "يناير",
+      "2": "فبراير",
+      "3": "مارس",
+      "4": "أبريل",
+      "5": "مايو",
+      "6": "يونيو",
+      "7": "يوليو",
+      "8": "أغسطس",
+      "9": "سبتمبر",
+      "10": "أكتوبر",
+      "11": "نوفمبر",
+      "12": "ديسمبر"
+    },
+    "fiscalYearHint": "السنة المالية: {start} ← {end}",
+    "buttons": {
+      "save": "حفظ التغييرات",
+      "saving": "جارٍ الحفظ..."
+    },
+    "states": {
+      "loading": "جارٍ التحميل..."
+    }
+  },
+  "attendanceSettings": {
+    "sections": {
+      "workSchedule": "جدول العمل",
+      "workingDays": "أيام العمل",
+      "gracePeriods": "فترات السماح",
+      "rounding": "التقريب",
+      "biometric": "طلب بصمة",
+      "geofence": "السياج الجغرافي"
+    },
+    "fields": {
+      "workDayStart": "بداية يوم العمل",
+      "workDayEnd": "نهاية يوم العمل",
+      "lateGraceMinutes": "سماح التأخير (دقائق)",
+      "earlyLeaveGrace": "سماح الانصراف المبكر (دقائق)",
+      "overtimeThreshold": "حد العمل الإضافي (دقائق)",
+      "roundingInterval": "فترة التقريب (دقائق)",
+      "geofenceLat": "خط العرض",
+      "geofenceLng": "خط الطول",
+      "geofenceRadiusM": "نصف القطر (متر)"
+    },
+    "days": ["ح", "ن", "ث", "أ", "خ", "ج", "س"],
+    "buttons": {
+      "save": "حفظ التغييرات",
+      "saving": "جارٍ الحفظ...",
+      "reset": "إعادة تعيين",
+      "getLocation": "الحصول على الموقع الحالي"
+    },
+    "states": {
+      "loading": "جارٍ التحميل..."
+    },
+    "geoErrors": {
+      "denied": "تم رفض إذن الموقع",
+      "unavailable": "الموقع غير متاح",
+      "timeout": "انتهت مهلة طلب الموقع",
+      "unsupported": "تحديد الموقع الجغرافي غير مدعوم"
+    }
+  },
+  "info": {
+    "sections": {
+      "logo": "الشعار",
+      "general": "عام",
+      "location": "الموقع",
+      "legal": "قانوني ومالي"
+    },
+    "fields": {
+      "name": "الاسم",
+      "industry": "الصناعة",
+      "country": "الدولة",
+      "city": "المدينة",
+      "address": "العنوان",
+      "phone": "الهاتف",
+      "website": "الموقع الإلكتروني",
+      "taxNumber": "الرقم الضريبي",
+      "commercialReg": "السجل التجاري",
+      "currency": "العملة",
+      "timezone": "المنطقة الزمنية"
+    },
+    "logo": {
+      "upload": "رفع",
+      "change": "تغيير",
+      "remove": "إزالة",
+      "uploading": "جارِ الرفع",
+      "removing": "جارِ الإزالة",
+      "dropHere": "أفلت هنا",
+      "acceptedFormats": "JPEG، PNG، WebP أو SVG. الحد الأقصى 5 ميجابايت.",
+      "changeOverlay": "تغيير",
+      "errors": {
+        "fileType": "يُسمح فقط بملفات JPEG و PNG و WebP و SVG.",
+        "fileSize": "يجب أن يكون حجم الملف أقل من 5 ميجابايت."
+      }
+    },
+    "buttons": {
+      "save": "حفظ التغييرات",
+      "saving": "جارٍ الحفظ..."
+    },
+    "states": {
+      "loading": "جارٍ التحميل..."
+    }
+  }
+}

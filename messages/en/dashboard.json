@@ -10,7 +10,8 @@
     "leave": "Leave",
     "reports": "Reports",
     "favorites": "Favorites",
-    "settings": "Settings"
+    "settings": "Settings",
+    "company": "Company"
   },
   "navbar": {
     "title": "HR Management",

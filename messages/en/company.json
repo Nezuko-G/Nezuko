@@ -1,0 +1,129 @@
+{
+  "page": {
+    "title": "Company Settings",
+    "subtitle": "Manage your company profile and preferences"
+  },
+  "tabs": {
+    "info": "Company Info",
+    "general": "General Settings",
+    "attendance": "Attendance Settings"
+  },
+  "generalSettings": {
+    "sectionTitle": "General Settings",
+    "fields": {
+      "language": "Language",
+      "dateFormat": "Date Format",
+      "fiscalYearStart": "Fiscal Year Start"
+    },
+    "languages": {
+      "ar": "Arabic",
+      "en": "English"
+    },
+    "dateFormats": {
+      "DD/MM/YYYY": "DD/MM/YYYY",
+      "MM/DD/YYYY": "MM/DD/YYYY",
+      "YYYY-MM-DD": "YYYY-MM-DD"
+    },
+    "months": {
+      "1": "January",
+      "2": "February",
+      "3": "March",
+      "4": "April",
+      "5": "May",
+      "6": "June",
+      "7": "July",
+      "8": "August",
+      "9": "September",
+      "10": "October",
+      "11": "November",
+      "12": "December"
+    },
+    "fiscalYearHint": "Fiscal year: {start} → {end}",
+    "buttons": {
+      "save": "Save Changes",
+      "saving": "Saving..."
+    },
+    "states": {
+      "loading": "Loading..."
+    }
+  },
+  "attendanceSettings": {
+    "sections": {
+      "workSchedule": "Work Schedule",
+      "workingDays": "Working Days",
+      "gracePeriods": "Grace Periods",
+      "rounding": "Rounding",
+      "biometric": "Require Biometric",
+      "geofence": "Geofence"
+    },
+    "fields": {
+      "workDayStart": "Work Day Start",
+      "workDayEnd": "Work Day End",
+      "lateGraceMinutes": "Late Grace (minutes)",
+      "earlyLeaveGrace": "Early Leave Grace (minutes)",
+      "overtimeThreshold": "Overtime Threshold (minutes)",
+      "roundingInterval": "Rounding Interval (minutes)",
+      "geofenceLat": "Latitude",
+      "geofenceLng": "Longitude",
+      "geofenceRadiusM": "Radius (meters)"
+    },
+    "days": ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"],
+    "buttons": {
+      "save": "Save Changes",
+      "saving": "Saving...",
+      "reset": "Reset to Defaults",
+      "getLocation": "Get Current Location"
+    },
+    "states": {
+      "loading": "Loading..."
+    },
+    "geoErrors": {
+      "denied": "Location permission denied",
+      "unavailable": "Location unavailable",
+      "timeout": "Location request timed out",
+      "unsupported": "Geolocation not supported"
+    }
+  },
+  "info": {
+    "sections": {
+      "logo": "Logo",
+      "general": "General",
+      "location": "Location",
+      "legal": "Legal & Financial"
+    },
+    "fields": {
+      "name": "Name",
+      "industry": "Industry",
+      "country": "Country",
+      "city": "City",
+      "address": "Address",
+      "phone": "Phone",
+      "website": "Website",
+      "taxNumber": "Tax Number",
+      "commercialReg": "Commercial Registration",
+      "currency": "Currency",
+      "timezone": "Timezone"
+    },
+    "logo": {
+      "upload": "Upload",
+      "change": "Change",
+      "remove": "Remove",
+      "uploading": "Uploading",
+      "removing": "Removing",
+      "dropHere": "Drop here",
+      "acceptedFormats": "JPEG, PNG, WebP or SVG. Max 5MB.",
+      "changeOverlay": "Change",
+      "errors": {
+        "fileType": "Only JPEG, PNG, WebP, and SVG files are allowed.",
+        "fileSize": "File size must be under 5MB."
+      }
+    },
+    "buttons": {
+      "save": "Save Changes",
+      "saving": "Saving..."
+    },
+    "states": {
+      "loading": "Loading..."
+    }
+  }
+}
