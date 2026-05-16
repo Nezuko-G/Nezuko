@@ -1,0 +1,33 @@
+{
+  "title": "Timesheets",
+  "loadError": "Failed to load timesheets",
+  "tryAgain": "Try Again",
+  "empty": "No timesheets found",
+  "myAttendance": "My Attendance",
+  "comingSoon": "Employee attendance check-in/out coming soon.",
+  "filters": {
+    "all": "All",
+    "draft": "Draft",
+    "submitted": "Submitted",
+    "approved": "Approved",
+    "rejected": "Rejected",
+    "from": "From",
+    "to": "To"
+  },
+  "table": {
+    "employee": "Employee",
+    "employeeCode": "Code",
+    "date": "Date",
+    "checkIn": "Check In",
+    "checkOut": "Check Out",
+    "totalHours": "Total Hours",
+    "overtime": "Overtime",
+    "status": "Status"
+  },
+  "status": {
+    "DRAFT": "Draft",
+    "SUBMITTED": "Submitted",
+    "APPROVED": "Approved",
+    "REJECTED": "Rejected"
+  }
+}

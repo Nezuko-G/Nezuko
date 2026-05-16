@@ -21,6 +21,7 @@ export default getRequestConfig(async ({ requestLocale }) => {
   const leave = (await import(`../../messages/${locale}/leave.json`)).default
   const employees = (await import(`../../messages/${locale}/employees.json`)).default
   const departments = (await import(`../../messages/${locale}/departments.json`)).default
+  const timesheet = (await import(`../../messages/${locale}/timesheet.json`)).default
   const company = (await import(`../../messages/${locale}/company.json`)).default
 
   return {
@@ -38,7 +39,10 @@ export default getRequestConfig(async ({ requestLocale }) => {
       blogs,
       departments,
       employees,
+      timesheet,
       company,
+    }
+      
     },
   }
 })

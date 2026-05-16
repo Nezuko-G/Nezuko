@@ -60,6 +60,11 @@ export const apis = {
     base: "/employee",
     byId: (id: string) => `/employee/${id}`,
   },
+  attendance: {
+    mark: "/attendance/location/mark",
+    timesheets: "/attendance/timesheets",
+    me: "/attendance/timesheets/me",
+  },
   company: {
     info: "/company/info",
     logo: "/company/logo",

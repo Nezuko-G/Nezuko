@@ -1,0 +1,33 @@
+{
+  "title": "سجلات الحضور",
+  "loadError": "فشل تحميل سجلات الحضور",
+  "tryAgain": "حاول مرة أخرى",
+  "empty": "لا توجد سجلات حضور",
+  "myAttendance": "الحضور الخاص بي",
+  "comingSoon": "تسجيل الحضور والانصراف قريباً",
+  "filters": {
+    "all": "الكل",
+    "draft": "مسودة",
+    "submitted": "مقدم",
+    "approved": "تمت الموافقة",
+    "rejected": "مرفوض",
+    "from": "من",
+    "to": "إلى"
+  },
+  "table": {
+    "employee": "الموظف",
+    "employeeCode": "الكود",
+    "date": "التاريخ",
+    "checkIn": "تسجيل الدخول",
+    "checkOut": "تسجيل الخروج",
+    "totalHours": "إجمالي الساعات",
+    "overtime": "ساعات إضافية",
+    "status": "الحالة"
+  },
+  "status": {
+    "DRAFT": "مسودة",
+    "SUBMITTED": "مقدم",
+    "APPROVED": "تمت الموافقة",
+    "REJECTED": "مرفوض"
+  }
+}
