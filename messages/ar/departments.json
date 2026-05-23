@@ -1,73 +1,74 @@
 {
-  
-    "list": {
-      "title": "إدارة الأقسام",
-      "subtitle": "هيكلة الشركة وإدارة فرق العمل",
-      "registerBtn": "إضافة قسم",
-      "searchPlaceholder": "ابحث عن قسم...",
-      "filterAll": "الكل (القسم الأب)",
-      "pagination": "صفحة {current} من {total}",
-      "errors": {
-        "fetch": "فشل تحميل الأقسام"
-      },
-      "table": {
-        "name": "اسم القسم",
-        "manager": "المدير",
-        "employees": "الموظفين",
-        "parent": "يتبع لـ",
-        "status": "الحالة",
-        "actions": "إجراءات",
-        "unassigned": "غير معين",
-        "root": "رئيسي"
-      }
+  "list": {
+    "title": "الأقسام",
+    "subtitle": "إدارة هيكل الشركة والفرق",
+    "registerBtn": "قسم جديد",
+    "searchPlaceholder": "البحث عن الأقسام...",
+    "filterAll": "جميع الأقسام الأم",
+    "pagination": "الصفحة {current} من {total}",
+    "errors": {
+      "fetch": "فشل تحميل الأقسام"
     },
-    "status": {
-      "ACTIVE": "نشط"
+    "table": {
+      "name": "الاسم",
+      "manager": "المدير",
+      "employees": "الموظفون",
+      "parent": "القسم الأم",
+      "status": "الحالة",
+      "actions": "الإجراءات",
+      "unassigned": "غير معين",
+      "root": "الجذر",
+      "edit": "تعديل"
+    }
+  },
+  "status": {
+    "ACTIVE": "نشط"
+  },
+  "details": {
+    "notFound": "القسم غير موجود",
+    "unassigned": "غير معين",
+    "breadcrumbs": {
+      "list": "الأقسام"
     },
-    "details": {
-      "notFound": "القسم غير موجود",
-      "breadcrumbs": {
-        "list": "الأقسام"
-      },
-      "actions": {
-        "edit": "تعديل القسم",
-        "delete": "حذف"
-      },
-      "stats": {
-        "employees": "موظف",
-        "subDepartments": "قسم فرعي"
-      },
-      "info": {
-        "description": "الوصف",
-        "manager": "مدير القسم",
-        "parent": "القسم الأب",
-        "root": "قسم رئيسي (لا يتبع لأحد)"
-      },
-      "subDepartmentsTitle": "الأقسام التابعة",
-      "errors": {
-        "notEmpty": "لا يمكن حذف قسم يحتوي على موظفين"
-      }
+    "actions": {
+      "edit": "تعديل القسم",
+      "delete": "حذف"
     },
-    "modals": {
-      "title": {
-        "CREATE": "إضافة قسم جديد",
-        "EDIT": "تعديل القسم"
-      },
-      "fields": {
-        "name": "اسم القسم",
-        "description": "الوصف",
-        "manager": "المدير المباشر",
-        "selectManager": "اختر مديراً",
-        "parent": "يتبع لـ",
-        "root": "رئيسي (Root)"
-      },
-      "states": {
-        "loading": "جاري التحميل..."
-      },
-      "buttons": {
-        "cancel": "إلغاء",
-        "create": "إضافة",
-        "save": "حفظ التعديلات"
-      }
+    "stats": {
+      "employees": "الموظفون",
+      "subDepartments": "الأقسام الفرعية"
+    },
+    "info": {
+      "description": "الوصف",
+      "manager": "المدير",
+      "parent": "القسم الأم",
+      "root": "الجذر (لا يوجد قسم أم)"
+    },
+    "subDepartmentsTitle": "الأقسام الفرعية",
+    "errors": {
+      "notEmpty": "لا يمكن حذف قسم يحتوي على موظفين نشطين"
+    }
+  },
+  "modals": {
+    "title": {
+      "CREATE": "إنشاء قسم",
+      "EDIT": "تعديل القسم"
+    },
+    "fields": {
+      "name": "الاسم",
+      "description": "الوصف",
+      "manager": "المدير",
+      "selectManager": "اختر مستخدمًا",
+      "parent": "القسم الأم",
+      "root": "لا يوجد (الجذر)"
+    },
+    "states": {
+      "loading": "جاري التحميل..."
+    },
+    "buttons": {
+      "cancel": "إلغاء",
+      "create": "إنشاء",
+      "save": "حفظ التغييرات"
     }
   }
+}

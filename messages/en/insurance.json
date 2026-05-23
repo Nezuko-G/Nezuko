@@ -4,6 +4,7 @@
     "subtitle": "Manage insurance packages and customize deduction rates",
     "createBtn": "New Plan",
     "coverageReportBtn": "Coverage Report",
+    "pagination": "Page {current} of {total}",
     "filters": {
       "allTypes": "All Types",
       "allStatuses": "All Statuses"
@@ -19,7 +20,9 @@
       "maxDependents": "Max Dependents",
       "status": "Status",
       "actions": "Actions",
-      "enroll": "Enroll Employee"
+      "enroll": "Enroll Employee",
+      "edit": "Edit",
+      "deactivate": "Deactivate"
     },
     "errors": {
       "fetch": "Failed to load plans"

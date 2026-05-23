@@ -1,12 +1,12 @@
 {
   "list": {
     "title": "Assets",
-    "subtitle": "Manage and track company hardware and resources",
     "registerBtn": "Add Asset",
     "reportBtn": "Depreciation Report",
     "myAssetsBtn": "My Assets",
     "loading": "Loading assets...",
     "pagination": "Page {current} of {total}",
+    "searchPlaceholder": "Search by name, brand, or serial...",
     "table": {
       "name": "Name / Brand",
       "category": "Category",
