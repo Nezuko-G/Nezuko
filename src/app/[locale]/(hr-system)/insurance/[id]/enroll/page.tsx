@@ -45,7 +45,7 @@ export default function EnrollEmployeePage() {
   };
 
   return (
-    <div className="w-full max-w-5xl mx-auto space-y-6 text-right pb-10">
+    <div className="w-full max-w-5xl mx-auto space-y-6 text-right p-4 md:p-8">
       <div
         className="flex items-center gap-2 text-content-muted text-sm font-bold mb-4 cursor-pointer"
         onClick={() => router.push("/insurance")}

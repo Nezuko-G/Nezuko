@@ -10,7 +10,7 @@ export default function MyAssetsPage() {
   const { data: assets, isLoading } = useMyAssets();
 
   return (
-    <div className="w-full max-w-7xl mx-auto space-y-6">
+    <div className="w-full max-w-6xl mx-auto space-y-6 p-4 md:p-8 ">
       <h1 className="text-2xl font-black text-secondary">{t("myAssets")}</h1>
       {isLoading ? (
         <div className="h-64 flex items-center justify-center">

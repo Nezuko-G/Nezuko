@@ -4,9 +4,10 @@ import { useTranslations } from "next-intl";
 import { AssetDTO } from "@/types/dto/asset.dto";
 import { useAssetUIStore } from "@/app/[locale]/(hr-system)/asset/hooks/useAssetUIStore";
 import { useAuthStore } from "@/hooks/useAuthStore";
-import { ArrowRightLeft, CornerDownLeft, UserPlus, Edit2 } from "lucide-react";
-import { useRouter } from "next/navigation";
+import { ArrowRightLeft, CornerDownLeft, UserPlus, Pencil } from "lucide-react";
+import { useRouter } from "@/i18n/navigation";
 import { z } from "zod";
+import { cn } from "@/lib/utils";
 
 type Asset = z.infer<typeof AssetDTO>;
 
@@ -30,7 +31,7 @@ export default function AssetTable({
       case "AVAILABLE":
         return "bg-status-success/10 text-status-success";
       case "ASSIGNED":
-        return "bg-primary-light text-secondary-hover";
+        return "bg-primary/10 text-primary";
       case "UNDER_MAINTENANCE":
         return "bg-status-warning/10 text-status-warning";
       case "RETIRED":
@@ -45,35 +46,29 @@ export default function AssetTable({
     switch (cond) {
       case "NEW":
       case "GOOD":
-        return "bg-status-success text-white";
+        return "bg-status-success/10 text-status-success";
       case "FAIR":
-        return "bg-status-warning text-white";
+        return "bg-status-warning/10 text-status-warning";
       case "POOR":
       case "DAMAGED":
-        return "bg-status-error text-white";
+        return "bg-status-error/10 text-status-error";
       default:
-        return "bg-gray-400 text-white";
+        return "bg-gray-100 text-content-muted";
     }
   };
 
   return (
-    <div className="w-full overflow-x-auto bg-card rounded-2xl shadow-sm border border-gray-100">
+    <div className="overflow-x-auto rounded-2xl border border-gray-100 bg-card shadow-sm">
       <table className="w-full text-sm text-right">
-        <thead className="bg-background text-content-muted border-b border-gray-100 uppercase text-xs">
-          <tr>
-            <th className="px-6 py-4 font-bold">{t("table.name")}</th>
-            <th className="px-6 py-4 font-bold">{t("table.category")}</th>
-            <th className="px-6 py-4 font-bold">{t("table.serial")}</th>
-            <th className="px-6 py-4 font-bold text-center">
-              {t("table.status")}
-            </th>
-            <th className="px-6 py-4 font-bold text-center">
-              {t("table.condition")}
-            </th>
+        <thead>
+          <tr className="border-b border-gray-100 text-content-muted text-xs font-bold uppercase tracking-wider">
+            <th className="px-5 py-4 text-right">{t("table.name")}</th>
+            <th className="px-5 py-4 text-right">{t("table.category")}</th>
+            <th className="px-5 py-4 text-right">{t("table.serial")}</th>
+            <th className="px-5 py-4 text-center">{t("table.status")}</th>
+            <th className="px-5 py-4 text-center">{t("table.condition")}</th>
             {!actuallyReadOnly && (
-              <th className="px-6 py-4 font-bold text-center">
-                {t("table.actions")}
-              </th>
+              <th className="px-5 py-4 text-left pl-8">{t("table.actions")}</th>
             )}
           </tr>
         </thead>
@@ -85,28 +80,40 @@ export default function AssetTable({
               <tr
                 key={asset.id}
                 onClick={() => router.push(`/asset/${asset.id}`)}
-                className="border-b border-gray-50 hover:bg-gray-50/50 transition-colors cursor-pointer"
+                className="border-b border-gray-50 last:border-0 hover:bg-gray-50/60 transition-colors cursor-pointer"
               >
-                <td className="px-6 py-4">
-                  <p className="font-bold text-content-dark">{asset.name}</p>
-                  <p className="text-xs text-content-muted">{asset.brand}</p>
+                <td className="px-5 py-4">
+                  <div className="flex flex-col">
+                    <p className="font-semibold text-secondary">{asset.name}</p>
+                    <p className="text-content-muted text-xs">{asset.brand}</p>
+                  </div>
                 </td>
-                <td className="px-6 py-4 text-content font-medium">
-                  {asset.category}
+                <td className="px-5 py-4">
+                  <span className="px-2.5 py-1 rounded-md bg-gray-50 text-content-dark text-xs font-semibold border border-gray-100">
+                    {asset.category}
+                  </span>
                 </td>
-                <td className="px-6 py-4 text-content font-mono text-xs">
-                  {asset.serialNumber || "—"}
+                <td className="px-5 py-4">
+                  <span className="font-mono text-xs text-content-muted">
+                    {asset.serialNumber || "—"}
+                  </span>
                 </td>
-                <td className="px-6 py-4 text-center">
+                <td className="px-5 py-4 text-center">
                   <span
-                    className={`px-3 py-1 rounded-full text-xs font-bold ${getStatusColor(asset.status)}`}
+                    className={cn(
+                      "px-2.5 py-1 rounded-md text-xs font-bold",
+                      getStatusColor(asset.status),
+                    )}
                   >
                     {t(`status.${asset.status}`)}
                   </span>
                 </td>
-                <td className="px-6 py-4 text-center">
+                <td className="px-5 py-4 text-center">
                   <span
-                    className={`px-2 py-1 rounded-md text-xs font-bold ${getConditionColor(asset.condition)}`}
+                    className={cn(
+                      "px-2.5 py-1 rounded-md text-xs font-bold",
+                      getConditionColor(asset.condition),
+                    )}
                   >
                     {asset.condition
                       ? t(`condition.${safeCondition}`) ===
@@ -118,8 +125,8 @@ export default function AssetTable({
                 </td>
 
                 {!actuallyReadOnly && (
-                  <td className="px-6 py-4">
-                    <div className="flex items-center justify-center gap-2">
+                  <td className="px-5 py-4">
+                    <div className="flex items-center justify-end gap-2 pl-3">
                       {asset.status === "AVAILABLE" && (
                         <button
                           title={t("actions.assign")}
@@ -127,9 +134,9 @@ export default function AssetTable({
                             e.stopPropagation();
                             openModal("ASSIGN", asset);
                           }}
-                          className="p-2 text-content hover:text-primary hover:bg-primary-light rounded-lg transition-colors"
+                          className="p-1.5 rounded-lg hover:bg-primary/10 text-content-muted hover:text-primary transition-colors"
                         >
-                          <UserPlus size={16} />
+                          <UserPlus size={15} />
                         </button>
                       )}
                       {asset.status === "ASSIGNED" && (
@@ -140,9 +147,9 @@ export default function AssetTable({
                               e.stopPropagation();
                               openModal("RETURN", asset);
                             }}
-                            className="p-2 text-content hover:text-status-warning hover:bg-status-warning/10 rounded-lg transition-colors"
+                            className="p-1.5 rounded-lg hover:bg-status-warning/10 text-content-muted hover:text-status-warning transition-colors"
                           >
-                            <CornerDownLeft size={16} />
+                            <CornerDownLeft size={15} />
                           </button>
                           <button
                             title={t("actions.transfer")}
@@ -150,9 +157,9 @@ export default function AssetTable({
                               e.stopPropagation();
                               openModal("TRANSFER", asset);
                             }}
-                            className="p-2 text-content hover:text-primary hover:bg-primary-light rounded-lg transition-colors"
+                            className="p-1.5 rounded-lg hover:bg-primary/10 text-content-muted hover:text-primary transition-colors"
                           >
-                            <ArrowRightLeft size={16} />
+                            <ArrowRightLeft size={15} />
                           </button>
                         </>
                       )}
@@ -162,9 +169,9 @@ export default function AssetTable({
                           e.stopPropagation();
                           openModal("EDIT", asset);
                         }}
-                        className="p-2 text-content hover:text-secondary hover:bg-gray-100 rounded-lg transition-colors"
+                        className="p-1.5 rounded-lg hover:bg-gray-100 text-content-muted hover:text-secondary transition-colors"
                       >
-                        <Edit2 size={16} />
+                        <Pencil size={15} />
                       </button>
                     </div>
                   </td>
