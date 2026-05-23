@@ -1,12 +1,13 @@
 {
   "plans": {
     "title": "خطط التأمين الصحي",
-    "subtitle": "إدارة باقات التأمين وتخصيص نسب الاستقطاع",
+    "subtitle": "إدارة باقات التأمين وتخصيص نسب الخصم",
     "createBtn": "خطة جديدة",
     "coverageReportBtn": "تقرير التغطية",
+    "pagination": "الصفحة {current} من {total}",
     "filters": {
-      "allTypes": "كل الأنواع",
-      "allStatuses": "كل الحالات"
+      "allTypes": "جميع الأنواع",
+      "allStatuses": "جميع الحالات"
     },
     "status": {
       "active": "نشط",
@@ -15,11 +16,13 @@
     "table": {
       "name": "اسم الخطة",
       "type": "الفئة",
-      "salaryPercentage": "نسبة الاستقطاع",
-      "maxDependents": "أقصى عدد تابعين",
+      "salaryPercentage": "نسبة الخصم",
+      "maxDependents": "الحد الأقصى للمُعالين",
       "status": "الحالة",
-      "actions": "إجراءات",
-      "enroll": "تسجيل موظف"
+      "actions": "الإجراءات",
+      "enroll": "تسجيل موظف",
+      "edit": "تعديل",
+      "deactivate": "إلغاء التنشيط"
     },
     "errors": {
       "fetch": "فشل تحميل الخطط"
@@ -28,7 +31,7 @@
   "types": {
     "BASIC": "أساسي",
     "STANDARD": "قياسي",
-    "PREMIUM": "مميز"
+    "PREMIUM": "متميز"
   },
   "drawers": {
     "plan": {
@@ -37,13 +40,13 @@
       "fields": {
         "name": "اسم الخطة",
         "type": "نوع التغطية",
-        "salaryPercentage": "نسبة الاستقطاع من الراتب",
-        "maxDependents": "الحد الأقصى للتابعين",
+        "salaryPercentage": "نسبة خصم الراتب",
+        "maxDependents": "الحد الأقصى للمُعالين",
         "coverageDetails": "تفاصيل التغطية"
       },
       "buttons": {
         "cancel": "إلغاء",
-        "create": "إنشاء الخطة",
+        "create": "إنشاء خطة",
         "save": "حفظ التغييرات"
       }
     }
@@ -57,81 +60,81 @@
     "fields": {
       "employee": "الموظف",
       "selectEmployee": "اختر موظفاً",
-      "startDate": "تاريخ البدء",
-      "endDate": "تاريخ الانتهاء (اختياري)"
+      "startDate": "تاريخ البداية",
+      "endDate": "تاريخ النهاية (اختياري)"
     },
     "preview": {
-      "title": "معاينة التكلفة",
-      "selectPrompt": "اختر موظفاً لعرض التكلفة المتوقعة",
+      "title": "عرض التكلفة",
+      "selectPrompt": "اختر موظفاً لرؤية التكلفة التقديرية",
       "salary": "الراتب الأساسي",
       "percentage": "نسبة الخطة",
-      "monthlyDeduction": "الاستقطاع الشهري المتوقع",
-      "error": "فشل حساب المعاينة"
+      "monthlyDeduction": "الخصم الشهري التقديري",
+      "error": "فشل حساب العرض التقديري"
     },
     "buttons": {
       "confirm": "تأكيد التسجيل"
     },
-    "currency": "ج.م",
+    "currency": "EGP",
     "states": {
       "loadingEmployees": "جاري التحميل..."
     }
   },
   "report": {
     "title": "تقرير التغطية التأمينية",
-    "subtitle": "تحليل التكاليف الإجمالية وأعداد الموظفين المسجلين",
+    "subtitle": "تحليل إجمالي التكاليف والموظفين المسجلين",
     "exportCsv": "تصدير CSV",
     "stats": {
       "totalCost": "إجمالي التكلفة الشهرية",
-      "enrolled": "موظف مسجل",
-      "activePlans": "خطة نشطة"
+      "enrolled": "الموظفون المسجلون",
+      "activePlans": "الخطط النشطة"
     },
     "table": {
       "planName": "اسم الخطة",
       "type": "النوع",
-      "enrolled": "المسجلين",
-      "monthlyCost": "التكلفة الإجمالية"
+      "enrolled": "المسجلون",
+      "monthlyCost": "إجمالي التكلفة"
     },
-    "currency": "ج.م",
+    "currency": "EGP",
     "empty": "لا توجد بيانات متاحة حالياً"
   },
   "employee": {
-    "title": "تأميني الصحي",
+    "title": "التأمين الصحي الخاص بي",
     "monthlyCost": "التكلفة الشهرية",
-    "startDate": "تاريخ الاشتراك",
-    "salaryPercentage": "النسبة المستقطعة",
-    "maxDependents": "حد التابعين الأقصى",
-    "currency": "ج.م",
+    "startDate": "تاريخ التسجيل",
+    "salaryPercentage": "نسبة الخصم",
+    "maxDependents": "الحد الأقصى للمُعالين",
+    "currency": "EGP",
     "noEnrollment": {
-      "title": "لا يوجد اشتراك نشط",
-      "message": "أنت غير مسجل في أي خطة تأمين حالياً. يرجى مراجعة إدارة الموارد البشرية."
+      "title": "لا يوجد تسجيل نشط",
+      "message": "أنت غير مسجل حالياً في أي خطة تأمين. يُرجى التواصل مع قسم الموارد البشرية."
     },
     "dependents": {
-      "title": "التابعين",
-      "addBtn": "إضافة تابع",
-      "limitReached": "لقد وصلت للحد الأقصى للتابعين في هذه الخطة",
-      "empty": "لم يتم إضافة تابعين بعد",
-      "removeConfirm": "هل أنت متأكد من حذف هذا التابع من التغطية؟"
+      "title": "المُعالون",
+      "addBtn": "إضافة مُعال",
+      "limitReached": "لقد وصلت إلى الحد الأقصى لعدد المُعالين في هذه الخطة",
+      "empty": "لم تتم إضافة أي مُعالين بعد",
+      "removeConfirm": "هل أنت متأكد من رغبتك في إزالة هذا المُعال من التغطية؟"
     }
   },
   "relations": {
-    "SPOUSE": "الزوج/الزوجة",
-    "CHILD": "ابن/ابنة",
-    "PARENT": "أب/أم"
+    "SPOUSE": "زوج/زوجة",
+    "CHILD": "طفل",
+    "PARENT": "والد/والدة"
   },
   "modals": {
     "deactivate": {
       "title": "إلغاء تنشيط الخطة",
-      "message": "هل أنت متأكد من إلغاء تنشيط خطة {name}؟",
-      "warning": "ملاحظة: الاشتراكات الحالية للموظفين لن تتأثر بهذا الإجراء."
+      "message": "هل أنت متأكد من رغبتك في إلغاء تنشيط الخطة {name}؟",
+      "warning": "ملاحظة: لن تتأثر تسجيلات الموظفين الحالية بهذا الإجراء."
     },
     "buttons": {
       "cancel": "إلغاء",
-      "confirmDeactivate": "تأكيد الإلغاء"
+      "confirmDeactivate": "تأكيد إلغاء التنشيط"
     }
   },
   "errors": {
     "duplicatePlan": "خطة بهذا الاسم موجودة بالفعل في هذا النطاق",
-    "duplicateEnrollment": "هذا الموظف مسجل بالفعل في تأمين نشط",
-    "genericError": "حدث خطأ ما، يرجى المحاولة لاحقاً"
+    "duplicateEnrollment": "هذا الموظف مسجل بالفعل في خطة تأمين نشطة",
+    "genericError": "حدث خطأ ما، يُرجى المحاولة مرة أخرى لاحقاً"
   }
 }

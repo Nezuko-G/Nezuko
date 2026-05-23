@@ -1,12 +1,12 @@
 {
   "list": {
     "title": "الأصول",
-    "subtitle": "إدارة ومتابعة موارد ومعدات الشركة",
     "registerBtn": "إضافة أصل",
     "reportBtn": "تقرير الإهلاك",
     "myAssetsBtn": "أصولي الشخصية",
     "loading": "جاري تحميل الأصول...",
     "pagination": "صفحة {current} من {total}",
+    "searchPlaceholder": "ابحث بالأسم، الماركة، أو السيريال...",
     "table": {
       "name": "الاسم / الماركة",
       "category": "الفئة",
