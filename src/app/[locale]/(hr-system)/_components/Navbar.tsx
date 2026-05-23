@@ -1,11 +1,15 @@
-"use client"
-import { useTranslations } from "next-intl";
-import { Search, Plus, Bell, MessageSquare, X, Menu } from "lucide-react";
+"use client";
+
+import { useLocale, useTranslations } from "next-intl";
+import { Search, Bell, MessageSquare, X, Menu } from "lucide-react";
 import { useAuthStore } from "@/hooks/useAuthStore";
 import { useState } from "react";
 
+import { LanguageSwitcher } from "../../../../components/i18n/LanguageSwitcher";
+
 export default function Navbar() {
   const t = useTranslations("dashboard.navbar");
+  const locale = useLocale(); 
   const { role, setRole } = useAuthStore();
   const [searchOpen, setSearchOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -19,7 +23,6 @@ export default function Navbar() {
   return (
     <header className="h-16 md:h-20 bg-secondary text-white sticky top-0 z-10 w-full shrink-0 shadow-sm">
       <div className="flex items-center justify-between px-4 md:px-6 h-full gap-3">
-
         {/* Left: Title + Role Badge */}
         <div className="flex items-center gap-2 md:gap-4 min-w-0 shrink-0">
           {/* Mobile menu toggle */}
@@ -91,15 +94,17 @@ export default function Navbar() {
             <span className="hidden lg:inline-block">{t("aiChat")}</span>
           </button>
 
-          {/* Quick Add */}
-          <button className="hidden sm:flex items-center gap-2 hover:bg-white/10 px-2 md:px-3 py-2 rounded-lg transition-colors text-sm font-medium">
-            <Plus size={18} className="text-primary" />
-            <span className="hidden lg:inline-block">{t("quickAdd")}</span>
-          </button>
+          {/* Language Switcher (Desktop) */}
+          <div className="hidden sm:flex items-center px-1">
+            <LanguageSwitcher currentLocale={locale} />
+          </div>
 
           {/* Notifications */}
           <button className="relative p-2 hover:bg-white/10 rounded-full transition-colors group">
-            <Bell size={20} className="group-hover:text-primary transition-colors" />
+            <Bell
+              size={20}
+              className="group-hover:text-primary transition-colors"
+            />
             <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-status-error rounded-full ring-2 ring-secondary" />
           </button>
 
@@ -120,7 +125,7 @@ export default function Navbar() {
           {/* Role badge in menu */}
           <button
             onClick={toggleRole}
-            className="self-start px-2 py-1 bg-status-warning/20 text-status-warning text-xs font-bold rounded-md"
+            className="self-start px-2 py-1 bg-status-warning/20 text-status-warning text-xs font-bold rounded-md mb-1"
           >
             {role} (Test)
           </button>
@@ -130,10 +135,11 @@ export default function Navbar() {
             {t("aiChat")}
           </button>
 
-          <button className="flex items-center gap-3 hover:bg-white/10 px-3 py-2.5 rounded-lg transition-colors text-sm font-medium w-full">
-            <Plus size={18} className="text-primary" />
-            {t("quickAdd")}
-          </button>
+          {/* Language Switcher (Mobile) */}
+          <div className="flex items-center justify-between hover:bg-white/10 px-3 py-2.5 rounded-lg transition-colors w-full">
+            <span className="text-sm font-medium text-white">Language</span>
+            <LanguageSwitcher currentLocale={locale} />
+          </div>
         </div>
       )}
     </header>
