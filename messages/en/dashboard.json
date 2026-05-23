@@ -7,8 +7,10 @@
     "insurance": "Insurance",
     "projects": "Projects",
     "attendance": "Attendance",
+    "timesheets": "Timesheets",
     "leave": "Leave",
     "reports": "Reports",
+    "departments": "Departments",
     "favorites": "Favorites",
     "settings": "Settings",
     "company": "Company"

@@ -23,7 +23,7 @@ export async function apiWrapper<T = any>(
 
     if (response.error) {
       console.log('[apiWrapper] Response has error:', response.error);
-      throw response.error;
+      throw { error: response.error, status: response.status };
     }
 
     console.log('[apiWrapper] Success, returning data');

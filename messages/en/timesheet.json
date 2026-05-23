@@ -12,7 +12,9 @@
     "approved": "Approved",
     "rejected": "Rejected",
     "from": "From",
-    "to": "To"
+    "to": "To",
+    "employee": "Employee",
+    "department": "Department"
   },
   "table": {
     "employee": "Employee",
@@ -22,12 +24,88 @@
     "checkOut": "Check Out",
     "totalHours": "Total Hours",
     "overtime": "Overtime",
-    "status": "Status"
+    "status": "Status",
+    "submittedBy": "Submitted By",
+    "notes": "Notes",
+    "actions": "Actions"
   },
   "status": {
     "DRAFT": "Draft",
     "SUBMITTED": "Submitted",
     "APPROVED": "Approved",
     "REJECTED": "Rejected"
-  }
+  },
+  "submit": {
+    "title": "Submit Work Hours",
+    "employee": "Employee",
+    "date": "Date",
+    "checkIn": "Check In",
+    "checkOut": "Check Out",
+    "notes": "Notes",
+    "notesPlaceholder": "Optional notes...",
+    "totalHours": "Total Hours",
+    "overtimeHours": "Overtime Hours",
+    "addEntry": "Add Another Entry",
+    "submit": "Submit",
+    "saveDraft": "Save as Draft",
+    "searchPlaceholder": "Search employees...",
+    "requiredEmployee": "Employee is required",
+    "requiredDate": "Date is required",
+    "requiredCheckIn": "Check-in time is required",
+    "requiredCheckOut": "Check-out time is required",
+    "checkOutAfterCheckIn": "Check-out must be after check-in",
+    "cancel": "Cancel",
+    "submitting": "Submitting...",
+    "success": "Timesheet submitted successfully",
+    "draftSaved": "Timesheet saved as draft",
+    "futureDateError": "Cannot submit timesheet for a future date",
+    "duplicateError": "A timesheet already exists for this employee on this date"
+  },
+  "edit": {
+    "title": "Edit Timesheet",
+    "employee": "Employee",
+    "date": "Date",
+    "checkIn": "Check In",
+    "checkOut": "Check Out",
+    "notes": "Notes",
+    "notesPlaceholder": "Optional notes...",
+    "cancel": "Cancel",
+    "saving": "Saving...",
+    "save": "Save Changes",
+    "success": "Timesheet updated successfully"
+  },
+  "review": {
+    "title": "Review Timesheet",
+    "approve": "Approve",
+    "reject": "Reject",
+    "note": "Review Note",
+    "notePlaceholder": "Optional note...",
+    "decision": "Decision",
+    "cancel": "Cancel",
+    "processing": "Processing...",
+    "success": "Timesheet reviewed successfully"
+  },
+  "overtime": {
+    "title": "Overtime Report",
+    "totalOvertime": "Total Overtime Hours",
+    "employee": "Employee",
+    "department": "Department",
+    "date": "Date",
+    "totalHours": "Total Hours",
+    "overtimeHours": "Overtime Hours",
+    "from": "From",
+    "to": "To",
+    "departmentId": "Department ID",
+    "loadError": "Failed to load overtime report",
+    "tryAgain": "Try Again",
+    "hours": "hrs",
+    "exportCsv": "Export CSV",
+    "noData": "No overtime data found",
+    "selectDateRange": "Select a date range to view overtime"
+  },
+  "myTimesheets": {
+    "title": "My Timesheets",
+    "empty": "You have no timesheet records yet"
+  },
+  "locked": "Approved timesheets cannot be edited"
 }

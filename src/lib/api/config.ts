@@ -80,6 +80,13 @@ export const apis = {
     timesheets: "/attendance/timesheets",
     me: "/attendance/timesheets/me",
   },
+  timesheets: {
+    base: "/timesheets",
+    me: "/timesheets/me",
+    byId: (id: string) => `/timesheets/${id}`,
+    status: (id: string) => `/timesheets/${id}/status`,
+    overtime: "/timesheets/report/overtime",
+  },
   company: {
     info: "/company/info",
     logo: "/company/logo",

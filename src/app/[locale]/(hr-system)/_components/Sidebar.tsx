@@ -11,6 +11,7 @@ import {
   FilePieChart,
   Network,
   Building2,
+  FileText,
 } from "lucide-react";
 import { Link, usePathname } from "@/i18n/navigation";
 
@@ -25,6 +26,7 @@ export default function Sidebar() {
     { icon: ShieldAlert, label: t("insurance"), href: "/insurance" },
     { icon: Folder, label: t("projects"), href: "/projects" },
     { icon: Clock, label: t("attendance"), href: "/attendance" },
+    { icon: FileText, label: t("timesheets"), href: "/timesheets" },
     { icon: CalendarDays, label: t("leave"), href: "/leave" },
     { icon: FilePieChart, label: t("reports"), href: "/reports" },
     { icon: Network, label: t("departments"), href: "/departments" },
