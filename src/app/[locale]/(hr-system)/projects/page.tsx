@@ -72,7 +72,7 @@ export default function ProjectsPage({ currentUserId, canManage }: ProjectsPageP
     const STATUS_OPTIONS = ["", ...Object.values(ProjectStatus)] as const;
 
     return (
-        <div className="flex flex-col gap-6">
+        <div className="flex flex-col gap-4 w-full max-w-6xl mx-auto p-4 md:p-8">
             {/* Header */}
             <div className="flex items-center justify-between">
                 <h1 className="text-2xl font-black text-secondary">{t("title")}</h1>

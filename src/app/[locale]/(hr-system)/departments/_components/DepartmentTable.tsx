@@ -4,7 +4,7 @@ import { useTranslations } from "next-intl";
 import { Department } from "@/types/dto/department.dto";
 import { useDepartmentUIStore } from "@/app/[locale]/(hr-system)/departments/hooks/useDepartmentUIStore";
 import { useAuthStore } from "@/hooks/useAuthStore";
-import { Edit2, CornerDownRight } from "lucide-react";
+import { Pencil, CornerDownRight } from "lucide-react";
 import { useRouter } from "@/i18n/navigation";
 
 interface DepartmentTableProps {
@@ -20,21 +20,17 @@ export default function DepartmentTable({ departments }: DepartmentTableProps) {
   const canEdit = role === "HR" || role === "TENANT_OWNER";
 
   return (
-    <div className="w-full overflow-x-auto bg-card rounded-2xl shadow-sm border border-gray-100">
+    <div className="overflow-x-auto rounded-2xl border border-gray-100 bg-card shadow-sm">
       <table className="w-full text-sm text-right">
-        <thead className="bg-background text-content-muted border-b border-gray-100 uppercase text-xs">
-          <tr>
-            <th className="px-6 py-4 font-bold">{t("name")}</th>
-            <th className="px-6 py-4 font-bold">{t("manager")}</th>
-            <th className="px-6 py-4 font-bold text-center">
-              {t("employees")}
-            </th>
-            <th className="px-6 py-4 font-bold">{t("parent")}</th>
-            <th className="px-6 py-4 font-bold text-center">{t("status")}</th>
+        <thead>
+          <tr className="border-b border-gray-100 text-content-muted text-xs font-bold uppercase tracking-wider">
+            <th className="px-5 py-4 text-right">{t("name")}</th>
+            <th className="px-5 py-4 text-right">{t("manager")}</th>
+            <th className="px-5 py-4 text-center">{t("employees")}</th>
+            <th className="px-5 py-4 text-right">{t("parent")}</th>
+            <th className="px-5 py-4 text-center">{t("status")}</th>
             {canEdit && (
-              <th className="px-6 py-4 font-bold text-center">
-                {t("actions")}
-              </th>
+              <th className="px-5 py-4 text-left pl-8">{t("actions")}</th>
             )}
           </tr>
         </thead>
@@ -43,58 +39,64 @@ export default function DepartmentTable({ departments }: DepartmentTableProps) {
             <tr
               key={dept.id}
               onClick={() => router.push(`/departments/${dept.id}`)}
-              className="border-b border-gray-50 hover:bg-gray-50/50 transition-colors cursor-pointer group"
+              className="border-b border-gray-50 last:border-0 hover:bg-gray-50/60 transition-colors cursor-pointer group"
             >
-              <td className="px-6 py-4">
+              <td className="px-5 py-4">
                 <div className="flex items-center gap-2">
                   {dept.parentId && (
-                    <CornerDownRight size={16} className="text-gray-300" />
+                    <CornerDownRight
+                      size={14}
+                      className="text-gray-300 shrink-0 select-none"
+                    />
                   )}
-                  <span
-                    className={`font-bold text-content-dark ${dept.parentId ? "text-sm" : "text-base"}`}
-                  >
+                  <span className="font-semibold text-secondary">
                     {dept.name}
                   </span>
                 </div>
               </td>
-              <td className="px-6 py-4">
+              <td className="px-5 py-4">
                 {dept.manager ? (
                   <div className="flex items-center gap-2">
-                    <div className="w-6 h-6 rounded-full bg-secondary text-primary flex items-center justify-center text-xs font-bold shrink-0">
-                      {dept.manager.firstName.charAt(0)}
+                    <div className="w-6 h-6 rounded-full bg-primary/10 text-primary flex items-center justify-center text-xs font-bold shrink-0">
+                      {dept.manager.firstName.charAt(0).toUpperCase()}
                     </div>
-                    <span className="font-medium text-content-dark">
+                    <span className="font-medium text-secondary">
                       {dept.manager.firstName} {dept.manager.lastName}
                     </span>
                   </div>
                 ) : (
-                  <span className="text-content-muted">{t("unassigned")}</span>
+                  <span className="text-content-muted text-xs font-normal">
+                    {t("unassigned")}
+                  </span>
                 )}
               </td>
-              <td className="px-6 py-4 text-center">
-                <span className="px-3 py-1 bg-blue-50 text-blue-600 rounded-full font-bold text-xs">
+              <td className="px-5 py-4 text-center">
+                <span className="px-2.5 py-1 bg-primary/10 text-primary rounded-md font-semibold text-xs">
                   {dept.employeeCount}
                 </span>
               </td>
-              <td className="px-6 py-4 text-content-muted text-xs font-medium">
-                {dept.parent ? dept.parent.name : t("root")}
+              <td className="px-5 py-4">
+                <span className="px-2 py-0.5 rounded-md bg-gray-50 border border-gray-100 text-content-muted text-xs font-medium">
+                  {dept.parent ? dept.parent.name : t("root")}
+                </span>
               </td>
-              <td className="px-6 py-4 text-center">
-                <span className="px-3 py-1 rounded-full text-xs font-bold bg-status-success/10 text-status-success">
+              <td className="px-5 py-4 text-center">
+                <span className="px-2.5 py-1 rounded-md text-xs font-bold bg-status-success/10 text-status-success">
                   {tStatus("ACTIVE")}
                 </span>
               </td>
               {canEdit && (
-                <td className="px-6 py-4">
-                  <div className="flex items-center justify-center gap-2">
+                <td className="px-5 py-4">
+                  <div className="flex items-center justify-end gap-2 pl-3">
                     <button
                       onClick={(e) => {
                         e.stopPropagation();
                         openModal("EDIT", dept);
                       }}
-                      className="p-2 text-content hover:text-secondary hover:bg-gray-100 rounded-lg transition-colors"
+                      className="p-1.5 rounded-lg hover:bg-gray-100 text-content-muted hover:text-secondary transition-colors"
+                      title={t("edit") || "Edit"}
                     >
-                      <Edit2 size={16} />
+                      <Pencil size={15} />
                     </button>
                   </div>
                 </td>

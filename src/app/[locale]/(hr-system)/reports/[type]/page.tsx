@@ -71,9 +71,9 @@ export default function ReportGeneratorPage() {
   if (!reportConfig) return null;
 
   return (
-    <div className="w-full max-w-7xl mx-auto space-y-6 pb-10 text-right">
+    <div className="flex flex-col gap-4 w-full max-w-6xl mx-auto p-4 md:p8 text-right">
       <div
-        className="flex items-center gap-2 text-content-muted text-sm font-bold mb-4 cursor-pointer"
+        className="flex items-center gap-2 text-content-muted text-sm font-bold mb-1 cursor-pointer"
         onClick={() => router.push("/reports")}
       >
         <span>{tHub("title")}</span>
@@ -81,84 +81,85 @@ export default function ReportGeneratorPage() {
         <span className="text-primary">{tHub(`types.${type}.name`)}</span>
       </div>
 
-      <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
-        <div className="space-y-1">
-          <h1 className="text-3xl flex font-black text-secondary">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+        <div className="space-y-0.5">
+          <h1 className="text-2xl font-extrabold text-secondary">
             {tHub(`types.${type}.name`)}
           </h1>
-          <p className="text-sm flex font-medium text-content-muted">
-            {tHub(`types.${type}.description`)}
-          </p>
         </div>
-        <div className="flex items-center gap-3">
+
+        <div className="flex flex-wrap items-center gap-2 w-full sm:w-auto justify-end">
           <button
             onClick={() => exportCsv(type as string, filters)}
             disabled={!canExport || isDownloadingCsv}
             title={!canExport ? t("exportDisabledTooltip") : ""}
-            className="px-5 py-2.5 bg-card border border-gray-200 text-content-dark rounded-xl text-sm font-bold hover:border-primary hover:text-primary transition-all flex items-center justify-center gap-2 shadow-sm disabled:opacity-50 disabled:cursor-not-allowed"
+            className="flex items-center gap-2 px-4 py-2 rounded-xl border border-gray-200 bg-card text-secondary font-bold text-sm shadow-sm hover:bg-gray-50 transition disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {isDownloadingCsv ? (
               <Loader2 size={16} className="animate-spin" />
             ) : (
               <Download size={16} />
             )}
-            CSV
+            <span>CSV</span>
           </button>
+
           <button
             onClick={() => exportPdf(type as string, filters)}
             disabled={!canExport || isDownloadingPdf}
             title={!canExport ? t("exportDisabledTooltip") : ""}
-            className="px-5 py-2.5 bg-primary text-white rounded-xl text-sm font-bold hover:bg-primary/90 transition-all flex items-center justify-center gap-2 shadow-sm disabled:opacity-50 disabled:cursor-not-allowed"
+            className="flex items-center gap-2 px-4 py-2 rounded-xl bg-primary text-secondary font-bold text-sm shadow hover:opacity-90 transition disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {isDownloadingPdf ? (
               <Loader2 size={16} className="animate-spin" />
             ) : (
               <FileText size={16} />
             )}
-            PDF
+            <span>PDF</span>
           </button>
         </div>
       </div>
 
-      <ReportFilterBar
-        supportedFilters={reportConfig.supportedFilters}
-        initialFilters={filters}
-        isLoading={isPreviewLoading}
-        onGenerate={handleGenerate}
-      />
+      <div className="pt-2">
+        <ReportFilterBar
+          supportedFilters={reportConfig.supportedFilters}
+          initialFilters={filters}
+          isLoading={isPreviewLoading}
+          onGenerate={handleGenerate}
+        />
+      </div>
 
       <div
-        className={`rounded-3xl border border-gray-100 shadow-sm overflow-hidden flex flex-col ${isPreviewLoading || previewData.length === 0 ? "bg-card min-h-[400px]" : ""}`}
+        className={`rounded-2xl border border-gray-100 shadow-sm overflow-hidden flex flex-col ${isPreviewLoading || previewData.length === 0 ? "bg-card" : ""}`}
       >
-        {" "}
         {isPreviewLoading ? (
-          <div className="flex-1 flex items-center justify-center">
-            <Loader2 className="animate-spin text-primary" size={40} />
+          <div className="flex-1 flex items-center justify-center min-h-[400px]">
+            <Loader2 className="animate-spin text-primary" size={36} />
           </div>
         ) : (
           <>
-            <div className="flex-1 overflow-x-auto">
+            <div className="flex-1">
               <ReportPreviewTable columns={columns} data={previewData} />
             </div>
+
             {lastPage > 1 && (
-              <div className="px-6 py-4 border-t border-gray-50 flex items-center justify-between bg-gray-50/50">
+              <div className="px-6 py-4 border-t border-gray-50 flex items-center justify-center gap-4 bg-gray-50/50">
                 <p className="text-sm text-content-muted font-bold">
                   {t("pagination", { current: page, total: lastPage })}
                 </p>
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-1.5">
                   <button
                     disabled={page >= lastPage}
                     onClick={() => setPage((p) => p + 1)}
-                    className="h-9 w-9 flex items-center justify-center rounded-xl hover:bg-gray-200 border border-gray-200 bg-white disabled:opacity-50"
+                    className="h-8 w-8 flex items-center justify-center rounded-lg border border-gray-200 bg-white hover:bg-gray-50 text-content-dark transition disabled:opacity-50"
                   >
-                    <ChevronLeft size={18} />
+                    <ChevronRight size={16} />
                   </button>
                   <button
                     disabled={page <= 1}
                     onClick={() => setPage((p) => p - 1)}
-                    className="h-9 w-9 flex items-center justify-center rounded-xl hover:bg-gray-200 border border-gray-200 bg-white disabled:opacity-50"
+                    className="h-8 w-8 flex items-center justify-center rounded-lg border border-gray-200 bg-white hover:bg-gray-50 text-content-dark transition disabled:opacity-50"
                   >
-                    <ChevronRight size={18} />
+                    <ChevronLeft size={16} />
                   </button>
                 </div>
               </div>
