@@ -17,7 +17,7 @@ export const ReportPreviewMetaDTO = z.object({
 
 export const ReportPreviewDTO = z.object({
   type: z.string(),
-  data: z.array(z.record(z.any())),
+  data: z.array(z.record(z.string(), z.any())),
   meta: ReportPreviewMetaDTO,
 });
 
@@ -30,7 +30,7 @@ export const ReportHistoryItemDTO = z.object({
   format: z.string(),
   fileName: z.string(),
   downloadUrl: z.string(),
-  filters: z.record(z.any()).optional(),
+  filters: z.record(z.string(), z.any()).optional(),
 });
 
 export type ReportHistoryItem = z.infer<typeof ReportHistoryItemDTO>;

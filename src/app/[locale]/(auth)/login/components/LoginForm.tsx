@@ -6,6 +6,7 @@ import { useTranslations } from "next-intl";
 import { useLocale } from "next-intl";
 import { Link, useRouter } from "@/i18n/navigation";
 import { useState } from "react";
+import { useAuthStore } from "@/hooks/useAuthStore";
 
 export default function LoginForm() {
   const t = useTranslations("auth");
@@ -50,6 +51,7 @@ export default function LoginForm() {
         }
       }
 
+      useAuthStore.getState().setRole(userRole || "HR");
       router.push("/dashboard");
     } catch {
       setError("Network error, please try again");

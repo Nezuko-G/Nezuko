@@ -9,15 +9,15 @@ import { Button } from "@/components/ui/button";
 
 const EDIT_ROLES = ["HR"];
 
-type SegmentedProps = {
+type SegmentedProps<T extends string> = {
   label: string;
-  options: { value: string; label: string }[];
-  value: string;
-  onChange: (v: string) => void;
+  options: { value: T; label: string }[];
+  value: T;
+  onChange: (v: T) => void;
   disabled: boolean;
 };
 
-function SegmentedControl({ label, options, value, onChange, disabled }: SegmentedProps) {
+function SegmentedControl<T extends string>({ label, options, value, onChange, disabled }: SegmentedProps<T>) {
   return (
     <div>
       <label className="block text-sm font-medium text-content mb-2">{label}</label>
@@ -49,8 +49,8 @@ export default function GeneralSettingsForm() {
   const { role } = useAuthStore();
   const canEdit = EDIT_ROLES.includes(role);
 
-  const [language, setLanguage] = useState("ar");
-  const [dateFormat, setDateFormat] = useState("DD/MM/YYYY");
+  const [language, setLanguage] = useState<"ar" | "en">("ar");
+  const [dateFormat, setDateFormat] = useState<"DD/MM/YYYY" | "MM/DD/YYYY" | "YYYY-MM-DD">("DD/MM/YYYY");
   const [fiscalYearStart, setFiscalYearStart] = useState(1);
   const [initialized, setInitialized] = useState(false);
 

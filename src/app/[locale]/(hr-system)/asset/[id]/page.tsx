@@ -161,33 +161,27 @@ export default function AssetDetailPage() {
         ) : (
           <div className="grid grid-cols-1 gap-2">
             {history.map((record) => {
-              const holderName = record.userName;
-              const adminName = record.adminName;
-              const displayDate = record.date ;
-              const initial =
-                record.userName?.charAt(0) ;
-              return (
-                <div
-                  key={record.id}
-                  className="bg-card border border-gray-100 rounded-2xl p-5 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4 hover:border-primary/20 transition-all group"
-                >
-                  <div className="flex items-center gap-3 text-right">
-                    <div className="w-9 h-9 rounded-full bg-primary/10 text-primary flex items-center justify-center text-sm font-bold shrink-0">
-                      {initial.toUpperCase()}
-                    </div>
-                    <div className="space-y-0.5">
-                      <p className="font-semibold text-secondary text-sm">
-                        {tDetails("to")}: {holderName}
-                      </p>
-                      <p className="text-xs font-medium text-content-muted flex items-center gap-1">
-                        <UserPlus size={13} className="text-gray-400" />
-                        {tDetails("by")}:{" "}
-                        <span className="text-secondary font-semibold">
-                          {adminName}
-                        </span>
-                      </p>
-                    </div>
-                  </div>
+  const holderName = record.userName || tDetails("unknownUser");
+  const adminName = record.adminName || "";
+  const displayDate = record.date;
+  const initial = record.userName?.charAt(0) || "?";
+
+  return (
+    <div key={record.id} className="relative bg-card border border-gray-100 rounded-3xl p-6 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-5 hover:border-primary-light transition-colors">
+      <div className="flex items-center gap-4 text-right">
+        <div className="w-12 h-12 rounded-full bg-secondary text-primary flex items-center justify-center text-xl font-black shadow-inner border-2 border-white shrink-0">
+          {initial}
+        </div>
+        <div className="space-y-0.5">
+          <p className="font-extrabold text-content-dark text-base">
+            {tDetails("to")}: {holderName}
+          </p>
+          <p className="text-xs font-bold text-content-muted flex items-center gap-1">
+            <UserPlus size={14} className="text-gray-400" />
+            {tDetails("by")}: <span className="text-secondary font-bold">{adminName}</span>
+          </p>
+        </div>
+      </div>
 
                   <div className="flex flex-col md:items-end gap-1.5 text-right pl-2">
                     <div className="flex items-center gap-3">

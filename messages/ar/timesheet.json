@@ -1,8 +1,8 @@
 {
-  "title": "سجلات الحضور",
-  "loadError": "فشل تحميل سجلات الحضور",
+  "title": "سجلات الدوام",
+  "loadError": "فشل تحميل سجلات الدوام",
   "tryAgain": "حاول مرة أخرى",
-  "empty": "لا توجد سجلات حضور",
+  "empty": "لا توجد سجلات دوام",
   "myAttendance": "الحضور الخاص بي",
   "comingSoon": "تسجيل الحضور والانصراف قريباً",
   "filters": {
@@ -12,7 +12,9 @@
     "approved": "تمت الموافقة",
     "rejected": "مرفوض",
     "from": "من",
-    "to": "إلى"
+    "to": "إلى",
+    "employee": "الموظف",
+    "department": "القسم"
   },
   "table": {
     "employee": "الموظف",
@@ -22,12 +24,88 @@
     "checkOut": "تسجيل الخروج",
     "totalHours": "إجمالي الساعات",
     "overtime": "ساعات إضافية",
-    "status": "الحالة"
+    "status": "الحالة",
+    "submittedBy": "مقدم بواسطة",
+    "notes": "ملاحظات",
+    "actions": "الإجراءات"
   },
   "status": {
     "DRAFT": "مسودة",
     "SUBMITTED": "مقدم",
     "APPROVED": "تمت الموافقة",
     "REJECTED": "مرفوض"
-  }
+  },
+  "submit": {
+    "title": "تسجيل ساعات العمل",
+    "employee": "الموظف",
+    "date": "التاريخ",
+    "checkIn": "تسجيل الدخول",
+    "checkOut": "تسجيل الخروج",
+    "notes": "ملاحظات",
+    "notesPlaceholder": "ملاحظات اختيارية...",
+    "totalHours": "إجمالي الساعات",
+    "overtimeHours": "ساعات إضافية",
+    "addEntry": "إضافة إدخال آخر",
+    "submit": "تقديم",
+    "saveDraft": "حفظ كمسودة",
+    "searchPlaceholder": "البحث عن موظفين...",
+    "requiredEmployee": "الموظف مطلوب",
+    "requiredDate": "التاريخ مطلوب",
+    "requiredCheckIn": "وقت تسجيل الدخول مطلوب",
+    "requiredCheckOut": "وقت تسجيل الخروج مطلوب",
+    "checkOutAfterCheckIn": "يجب أن يكون وقت الخروج بعد وقت الدخول",
+    "cancel": "إلغاء",
+    "submitting": "جاري التقديم...",
+    "success": "تم تقديم ساعات العمل بنجاح",
+    "draftSaved": "تم حفظ ساعات العمل كمسودة",
+    "futureDateError": "لا يمكن تقديم ساعات العمل لتاريخ مستقبلي",
+    "duplicateError": "سجل دوام موجود بالفعل لهذا الموظف في هذا التاريخ"
+  },
+  "edit": {
+    "title": "تعديل سجل الدوام",
+    "employee": "الموظف",
+    "date": "التاريخ",
+    "checkIn": "تسجيل الدخول",
+    "checkOut": "تسجيل الخروج",
+    "notes": "ملاحظات",
+    "notesPlaceholder": "ملاحظات اختيارية...",
+    "cancel": "إلغاء",
+    "saving": "جاري الحفظ...",
+    "save": "حفظ التغييرات",
+    "success": "تم تحديث سجل الدوام بنجاح"
+  },
+  "review": {
+    "title": "مراجعة سجل الدوام",
+    "approve": "موافقة",
+    "reject": "رفض",
+    "note": "ملاحظة المراجعة",
+    "notePlaceholder": "ملاحظة اختيارية...",
+    "decision": "القرار",
+    "cancel": "إلغاء",
+    "processing": "جاري المعالجة...",
+    "success": "تمت مراجعة سجل الدوام بنجاح"
+  },
+  "overtime": {
+    "title": "تقرير الساعات الإضافية",
+    "totalOvertime": "إجمالي الساعات الإضافية",
+    "employee": "الموظف",
+    "department": "القسم",
+    "date": "التاريخ",
+    "totalHours": "إجمالي الساعات",
+    "overtimeHours": "ساعات إضافية",
+    "from": "من",
+    "to": "إلى",
+    "departmentId": "معرف القسم",
+    "loadError": "فشل تحميل تقرير الساعات الإضافية",
+    "tryAgain": "حاول مرة أخرى",
+    "hours": "ساعة",
+    "exportCsv": "تصدير CSV",
+    "noData": "لا توجد بيانات ساعات إضافية",
+    "selectDateRange": "اختر نطاق تاريخ لعرض الساعات الإضافية"
+  },
+  "myTimesheets": {
+    "title": "سجلات الدوام الخاصة بي",
+    "empty": "لا توجد لديك سجلات دوام بعد"
+  },
+  "locked": "لا يمكن تعديل سجلات الدوام بعد الموافقة عليها"
 }

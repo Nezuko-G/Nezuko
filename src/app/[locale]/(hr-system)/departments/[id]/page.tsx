@@ -109,8 +109,8 @@ export default function DepartmentDetailPage() {
             <p className="text-content-muted font-bold text-xs uppercase tracking-wider">
               {t("stats.subDepartments")}
             </p>
-            <p className="text-3xl font-black text-secondary mt-1">
-              {department.children.length}
+            <p className="text-3xl font-black text-content-dark">
+              {department.children?.length ?? 0}
             </p>
           </div>
         </div>
@@ -167,8 +167,8 @@ export default function DepartmentDetailPage() {
           <h3 className="text-lg font-extrabold text-secondary">
             {t("subDepartmentsTitle")}
           </h3>
-          <div className="grid grid-cols-1 gap-2">
-            {department.children.map((child) => (
+          <div className="grid grid-cols-1 gap-3">
+            {department.children.map((child: any) => (
               <div
                 key={child.id}
                 onClick={() => router.push(`/departments/${child.id}`)}

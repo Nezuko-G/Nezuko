@@ -6,13 +6,14 @@ import { useAuthStore, UserRole } from "@/hooks/useAuthStore";
 interface RoleGuardProps {
   allowedRoles: UserRole[];
   children: ReactNode;
+  fallback?: ReactNode;
 }
 
-export default function RoleGuard({ allowedRoles, children }: RoleGuardProps) {
+export default function RoleGuard({ allowedRoles, children, fallback }: RoleGuardProps) {
   const { role } = useAuthStore();
 
   if (!allowedRoles.includes(role)) {
-    return null; 
+    return fallback ?? null;
   }
 
   return <>{children}</>;
