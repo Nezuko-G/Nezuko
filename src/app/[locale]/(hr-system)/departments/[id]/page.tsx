@@ -107,7 +107,7 @@ export default function DepartmentDetailPage() {
               {t("stats.subDepartments")}
             </p>
             <p className="text-3xl font-black text-content-dark">
-              {department.children.length}
+              {department.children?.length ?? 0}
             </p>
           </div>
         </div>
@@ -157,7 +157,7 @@ export default function DepartmentDetailPage() {
             {t("subDepartmentsTitle")}
           </h3>
           <div className="grid grid-cols-1 gap-3">
-            {department.children.map((child) => (
+            {department.children.map((child: any) => (
               <div
                 key={child.id}
                 onClick={() => router.push(`/departments/${child.id}`)}

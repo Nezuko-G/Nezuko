@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { X, Loader2 } from "lucide-react";
 import type { Timesheet } from "@/app/[locale]/(hr-system)/timesheets/types/timesheet.dto";
+import { combineDateAndTime } from "@/lib/api/utils";
 
 interface Props {
   timesheet: Timesheet;
@@ -13,7 +14,7 @@ interface Props {
 
 function toTimeInput(date: Date | null): string {
   if (!date) return "";
-  return date.toLocaleTimeString("en-GB", { hour: "2-digit", minute: "2-digit", hour12: false });
+  return date.toLocaleTimeString(undefined, { hour: "2-digit", minute: "2-digit", hour12: false });
 }
 
 export function TimesheetEditDrawer({ timesheet, onClose, onSave }: Props) {
@@ -27,8 +28,8 @@ export function TimesheetEditDrawer({ timesheet, onClose, onSave }: Props) {
     setSaving(true);
     try {
       await onSave({
-        ...(checkIn && { checkIn: `${timesheet.date.toISOString().split("T")[0]}T${checkIn}:00Z` }),
-        ...(checkOut && { checkOut: `${timesheet.date.toISOString().split("T")[0]}T${checkOut}:00Z` }),
+        ...(checkIn && { checkIn: combineDateAndTime(timesheet.date, checkIn) }),
+        ...(checkOut && { checkOut: combineDateAndTime(timesheet.date, checkOut) }),
         ...(notes !== (timesheet.notes || "") && { notes }),
       });
     } catch {
@@ -54,7 +55,7 @@ export function TimesheetEditDrawer({ timesheet, onClose, onSave }: Props) {
         <div className="px-6 py-5 flex flex-col gap-4">
           <div className="bg-gray-50 rounded-lg p-3 text-xs text-gray-600 space-y-1">
             <p><span className="text-gray-500">{t("employee")}:</span> {timesheet.user ? `${timesheet.user.firstName} ${timesheet.user.lastName}` : timesheet.userId}</p>
-            <p><span className="text-gray-500">{t("date")}:</span> {timesheet.date.toLocaleDateString("en-GB")}</p>
+            <p><span className="text-gray-500">{t("date")}:</span> {timesheet.date.toLocaleDateString(undefined)}</p>
           </div>
 
           <div className="grid grid-cols-2 gap-3">

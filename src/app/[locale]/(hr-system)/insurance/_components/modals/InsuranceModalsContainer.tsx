@@ -63,7 +63,7 @@ export default function InsuranceModalsContainer() {
           {t("deactivate.title")}
         </h2>
         <p className="text-content-muted font-medium text-sm">
-          {t("deactivate.message", { name: selectedPlan?.name })}
+          {t("deactivate.message", { name: selectedPlan?.name ?? "" })}
         </p>
         <div className="bg-gray-50 border border-gray-100 rounded-xl p-3 w-full text-xs font-bold text-content-dark">
           {t("deactivate.warning")}
@@ -185,7 +185,7 @@ export default function InsuranceModalsContainer() {
           {t("removeDependent.title")}
         </h2>
         <p className="text-content-muted font-medium text-sm">
-          {t("removeDependent.message", { name: selectedDependent?.name })}
+          {t("removeDependent.message", { name: selectedDependent?.name ?? "" })}
         </p>
       </div>
       <div className="p-4 border-t border-gray-100 flex items-center justify-end gap-3 bg-gray-50/50">

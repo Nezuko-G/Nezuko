@@ -16,12 +16,12 @@ interface Props {
 }
 
 function formatDate(date: Date) {
-  return date.toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" });
+  return date.toLocaleDateString(undefined, { day: "numeric", month: "short", year: "numeric" });
 }
 
 function formatTime(date: Date | null) {
-  if (!date) return "—";
-  return date.toLocaleTimeString("en-GB", { hour: "2-digit", minute: "2-digit" });
+  if (!date) return "\u2014";
+  return date.toLocaleTimeString(undefined, { hour: "2-digit", minute: "2-digit" });
 }
 
 function formatHours(hours: number) {
@@ -56,7 +56,7 @@ function TimesheetRow({ sheet, isHR }: { sheet: Timesheet; isHR: boolean }) {
         <td className="px-4 py-3 font-medium text-gray-800">
           {sheet.user ? `${sheet.user.firstName} ${sheet.user.lastName}` : sheet.userId.slice(0, 8)}
         </td>
-        <td className="px-4 py-3 text-gray-600">{sheet.user?.employeeCode || "—"}</td>
+        <td className="px-4 py-3 text-gray-600">{sheet.user?.employeeCode || "\u2014"}</td>
         <td className="px-4 py-3 text-gray-600">{formatDate(sheet.date)}</td>
         <td className="px-4 py-3 text-gray-600">{formatTime(sheet.checkIn)}</td>
         <td className="px-4 py-3 text-gray-600">{formatTime(sheet.checkOut)}</td>

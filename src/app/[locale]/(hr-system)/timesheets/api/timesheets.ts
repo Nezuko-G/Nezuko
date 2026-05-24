@@ -1,13 +1,18 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { getRequest, postRequest, patchRequest } from "@/lib/axios/dist/requests";
+import { throwIfError, extractList } from "@/lib/api/utils";
 import type {
   Timesheet,
   SubmitTimesheetInput,
   EditTimesheetInput,
   ReviewTimesheetInput,
   OvertimeReport,
-  OvertimeReportItem,
 } from "@/app/[locale]/(hr-system)/timesheets/types/timesheet.dto";
-import { mapTimesheetsFromDTO, mapTimesheetFromDTO } from "@/app/[locale]/(hr-system)/timesheets/mappers/timesheet.mapper";
+import {
+  mapTimesheetsFromDTO,
+  mapTimesheetFromDTO,
+  mapOvertimeReportFromDTO,
+} from "@/app/[locale]/(hr-system)/timesheets/mappers/timesheet.mapper";
 import { apis } from "@/lib/api/config";
 
 export interface TimesheetListFilters {
@@ -23,14 +28,9 @@ export async function getTimesheets(filters?: TimesheetListFilters): Promise<Tim
     config: { params: filters },
   });
 
-  if (response.error) {
-    const error = new Error(String(response.error));
-    (error as any).status = response.status;
-    throw error;
-  }
+  throwIfError(response);
 
-  const data = response.data?.data ?? response.data ?? [];
-  const raw = Array.isArray(data) ? data : data.timesheets ?? [];
+  const raw = extractList(response);
   return mapTimesheetsFromDTO(raw);
 }
 
@@ -39,14 +39,9 @@ export async function getMyTimesheets(): Promise<Timesheet[]> {
     api: apis.timesheets.me,
   });
 
-  if (response.error) {
-    const error = new Error(String(response.error));
-    (error as any).status = response.status;
-    throw error;
-  }
+  throwIfError(response);
 
-  const data = response.data?.data ?? response.data ?? [];
-  const raw = Array.isArray(data) ? data : data.timesheets ?? [];
+  const raw = extractList(response);
   return mapTimesheetsFromDTO(raw);
 }
 
@@ -56,11 +51,8 @@ export async function submitTimesheet(data: SubmitTimesheetInput) {
     body: data,
   });
 
-  if (response.error) {
-    const error = new Error(String(response.error));
-    (error as any).status = response.status;
-    throw error;
-  }
+  throwIfError(response);
+
   return mapTimesheetFromDTO(response.data);
 }
 
@@ -70,11 +62,8 @@ export async function editTimesheet(id: string, data: EditTimesheetInput) {
     body: data,
   });
 
-  if (response.error) {
-    const error = new Error(String(response.error));
-    (error as any).status = response.status;
-    throw error;
-  }
+  throwIfError(response);
+
   return mapTimesheetFromDTO(response.data);
 }
 
@@ -84,11 +73,8 @@ export async function reviewTimesheet(id: string, data: ReviewTimesheetInput) {
     body: data,
   });
 
-  if (response.error) {
-    const error = new Error(String(response.error));
-    (error as any).status = response.status;
-    throw error;
-  }
+  throwIfError(response);
+
   return mapTimesheetFromDTO(response.data);
 }
 
@@ -104,24 +90,8 @@ export async function getOvertimeReport(filters: OvertimeReportFilters): Promise
     config: { params: filters },
   });
 
-  if (response.error) {
-    const error = new Error(String(response.error));
-    (error as any).status = response.status;
-    throw error;
-  }
+  throwIfError(response);
 
-  const rawTimesheets: any[] = response.data?.data?.timesheets ?? [];
-  const items: OvertimeReportItem[] = rawTimesheets.map((ts) => ({
-    userId: ts.userId,
-    employeeName: ts.user ? `${ts.user.firstName} ${ts.user.lastName}` : "Unknown",
-    departmentId: ts.user?.departmentId ?? null,
-    departmentName: null,
-    date: ts.date,
-    totalHours: ts.totalHours,
-    overtimeHours: ts.overtimeHours,
-  }));
-
-  const totalOvertime = items.reduce((sum, item) => sum + item.overtimeHours, 0);
-
-  return { items, totalOvertime };
+  const raw = extractList(response, "timesheets");
+  return mapOvertimeReportFromDTO(raw);
 }

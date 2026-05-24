@@ -104,10 +104,10 @@ export default function AssetDetailPage() {
         ) : (
           <div className="space-y-3">
             {history.map((record) => {
-  const holderName = record.userName || (record.user ? `${record.user.firstName} ${record.user.lastName}` : tDetails("unknownUser"));
-  const adminName = record.adminName || (record.assignedByUser ? `${record.assignedByUser.firstName} ${record.assignedByUser.lastName}` : "");
-  const displayDate = record.date || record.assignedAt;
-  const initial = (record.user?.firstName?.charAt(0) || record.userName?.charAt(0)) || "?";
+  const holderName = record.userName || tDetails("unknownUser");
+  const adminName = record.adminName || "";
+  const displayDate = record.date;
+  const initial = record.userName?.charAt(0) || "?";
 
   return (
     <div key={record.id} className="relative bg-card border border-gray-100 rounded-3xl p-6 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-5 hover:border-primary-light transition-colors">

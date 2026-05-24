@@ -1,6 +1,22 @@
 import { z } from "zod";
 
-export const DepartmentDTO = z.object({
+interface DepartmentShape {
+  id: string;
+  name: string;
+  description?: string | null;
+  managerId?: string | null;
+  manager?: { id: string; firstName: string; lastName: string } | null;
+  parentId?: string | null;
+  parent?: { id: string; name: string } | null;
+  employeeCount: number;
+  subDepartmentsCount: number;
+  status: string;
+  createdAt?: string;
+  updatedAt?: string;
+  children?: DepartmentShape[];
+}
+
+export const DepartmentDTO: z.ZodType<DepartmentShape> = z.object({
   id: z.string(),
   name: z.string(),
   description: z.string().nullable().optional(),

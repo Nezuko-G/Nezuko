@@ -2,21 +2,10 @@
 
 import { useState, useMemo } from "react";
 import { useTranslations } from "next-intl";
-import { AlertCircle, RefreshCw, Download } from "lucide-react";
+import { Download } from "lucide-react";
 import RoleGuard from "@/components/RoleGuard/RoleGuard";
 import { useOvertimeReport } from "@/app/[locale]/(hr-system)/timesheets/hooks/useTimesheets";
-
-function SkeletonRow() {
-  return (
-    <tr className="border-b border-gray-100">
-      <td className="px-4 py-3"><div className="h-4 w-28 bg-gray-200 rounded animate-pulse" /></td>
-      <td className="px-4 py-3"><div className="h-4 w-20 bg-gray-200 rounded animate-pulse" /></td>
-      <td className="px-4 py-3"><div className="h-4 w-24 bg-gray-200 rounded animate-pulse" /></td>
-      <td className="px-4 py-3"><div className="h-4 w-16 bg-gray-200 rounded animate-pulse" /></td>
-      <td className="px-4 py-3"><div className="h-4 w-16 bg-gray-200 rounded animate-pulse" /></td>
-    </tr>
-  );
-}
+import { TableSkeleton, ErrorState, EmptyState, SpinnerIndicator } from "@/components/ui/data-states";
 
 export default function OvertimeReportPage() {
   const t = useTranslations("timesheet.overtime");
@@ -54,15 +43,21 @@ export default function OvertimeReportPage() {
     URL.revokeObjectURL(url);
   }
 
+  const skeletonColumns = [
+    { key: "employee", label: t("employee") },
+    { key: "department", label: t("department") },
+    { key: "date", label: t("date") },
+    { key: "totalHours", label: t("totalHours") },
+    { key: "overtimeHours", label: t("overtimeHours") },
+  ];
+
   return (
     <RoleGuard allowedRoles={["HR", "MANAGER"]}>
       <div className="p-6">
         <div className="flex items-center justify-between mb-6">
           <div className="flex items-center gap-3">
             <h1 className="text-2xl font-bold text-secondary">{t("title")}</h1>
-            {isFetching && !isLoading && (
-              <div className="w-4 h-4 border-2 border-primary/30 border-t-primary rounded-full animate-spin" />
-            )}
+            <SpinnerIndicator show={isFetching && !isLoading} />
           </div>
           {report && report.items.length > 0 && (
             <button
@@ -107,50 +102,20 @@ export default function OvertimeReportPage() {
         </div>
 
         {!hasFilters && !isLoading && (
-          <div className="text-center py-12">
-            <p className="text-gray-400 text-base">{t("selectDateRange")}</p>
-          </div>
+          <EmptyState message={t("selectDateRange")} />
         )}
 
-        {isLoading && (
-          <div className="bg-white rounded-xl border border-gray-200 overflow-hidden">
-            <table className="w-full text-sm">
-              <thead>
-                <tr className="bg-gray-50 border-b border-gray-200">
-                  <th className="text-left px-4 py-3 text-xs font-medium text-gray-500">{t("employee")}</th>
-                  <th className="text-left px-4 py-3 text-xs font-medium text-gray-500">{t("department")}</th>
-                  <th className="text-left px-4 py-3 text-xs font-medium text-gray-500">{t("date")}</th>
-                  <th className="text-left px-4 py-3 text-xs font-medium text-gray-500">{t("totalHours")}</th>
-                  <th className="text-left px-4 py-3 text-xs font-medium text-gray-500">{t("overtimeHours")}</th>
-                </tr>
-              </thead>
-              <tbody>
-                <SkeletonRow /><SkeletonRow /><SkeletonRow />
-              </tbody>
-            </table>
-          </div>
-        )}
+        {isLoading && <TableSkeleton columns={skeletonColumns} rows={3} />}
 
         {isError && !isLoading && (
-          <div className="bg-red-50 border border-red-200 rounded-xl p-6 text-center">
-            <AlertCircle className="w-10 h-10 text-red-400 mx-auto mb-3" />
-            <p className="text-red-600 font-medium mb-4">
-              {error instanceof Error ? error.message : t("loadError")}
-            </p>
-            <button
-              onClick={() => refetch()}
-              className="inline-flex items-center gap-2 bg-red-500 hover:bg-red-600 text-white text-sm font-medium px-4 py-2 rounded-lg transition-colors"
-            >
-              <RefreshCw size={16} />
-              {t("tryAgain")}
-            </button>
-          </div>
+          <ErrorState
+            message={error instanceof Error ? error.message : t("loadError")}
+            onRetry={() => refetch()}
+          />
         )}
 
         {hasFilters && !isLoading && !isError && report && report.items.length === 0 && (
-          <div className="text-center py-12">
-            <p className="text-gray-400 text-base">{t("noData")}</p>
-          </div>
+          <EmptyState message={t("noData")} />
         )}
 
         {hasFilters && !isLoading && !isError && report && report.items.length > 0 && (

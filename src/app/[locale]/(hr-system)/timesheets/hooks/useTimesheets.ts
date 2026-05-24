@@ -15,20 +15,31 @@ import { useAuthStore } from "@/hooks/useAuthStore";
 import { useToast } from "@/components/ui/toast";
 import type { SubmitTimesheetInput, EditTimesheetInput, ReviewTimesheetInput } from "@/app/[locale]/(hr-system)/timesheets/types/timesheet.dto";
 
+const PROJECT_STALE_TIME = 60_000;
+const PROJECT_GC_TIME = 300_000;
+
 interface ApiErrorType extends Error {
   status?: number;
 }
 
+export function canManageTimesheets(role: string): boolean {
+  return role === "HR" || role === "MANAGER";
+}
+
+export function canSubmitTimesheets(role: string): boolean {
+  return role === "HR";
+}
+
 export function useTimesheets(filters?: TimesheetListFilters) {
   const { role } = useAuthStore();
-  const isHR = role === "HR" || role === "MANAGER";
+  const canManage = canManageTimesheets(role);
   const toast = useToast();
 
   return useQuery({
-    queryKey: ["timesheets", filters, isHR],
+    queryKey: ["timesheets", filters, canManage],
     queryFn: async () => {
       try {
-        return isHR ? await getTimesheets(filters) : await getMyTimesheets();
+        return canManage ? await getTimesheets(filters) : await getMyTimesheets();
       } catch (error) {
         const err = error as ApiErrorType;
         toast.error(err?.message || "Failed to load timesheets");
@@ -36,8 +47,8 @@ export function useTimesheets(filters?: TimesheetListFilters) {
       }
     },
     retry: false,
-    staleTime: 0,
-    gcTime: 0,
+    staleTime: PROJECT_STALE_TIME,
+    gcTime: PROJECT_GC_TIME,
   });
 }
 
@@ -111,8 +122,8 @@ export function useMyTimesheets() {
       }
     },
     retry: false,
-    staleTime: 0,
-    gcTime: 0,
+    staleTime: PROJECT_STALE_TIME,
+    gcTime: PROJECT_GC_TIME,
   });
 }
 
@@ -131,8 +142,8 @@ export function useOvertimeReport(filters: OvertimeReportFilters) {
       }
     },
     retry: false,
-    staleTime: 0,
-    gcTime: 0,
+    staleTime: PROJECT_STALE_TIME,
+    gcTime: PROJECT_GC_TIME,
     enabled: !!filters.startDate && !!filters.endDate,
   });
 }

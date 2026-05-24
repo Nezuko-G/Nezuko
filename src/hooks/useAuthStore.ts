@@ -1,6 +1,6 @@
 import { create } from "zustand";
 
-export type UserRole = "HR" | "MANAGER" | "EMPLOYEE";
+export type UserRole = "HR" | "MANAGER" | "EMPLOYEE" | "TENANT_OWNER";
 
 interface AuthState {
   role: UserRole;
