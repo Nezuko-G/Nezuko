@@ -1,15 +1,24 @@
-"use client"
-import { useTranslations } from "next-intl";
-import { Search, Plus, Bell, MessageSquare, X, Menu } from "lucide-react";
+"use client";
 
+import { useLocale, useTranslations } from "next-intl";
+import { Search, Bell, MessageSquare, X, Menu } from "lucide-react";
+import { useAuthStore } from "@/hooks/useAuthStore";
 import { useState } from "react";
 
 import { LanguageSwitcher } from "../../../../components/i18n/LanguageSwitcher";
 
 export default function Navbar() {
   const t = useTranslations("dashboard.navbar");
+  const locale = useLocale(); 
+  const { role, setRole } = useAuthStore();
   const [searchOpen, setSearchOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+
+  const toggleRole = () => {
+    if (role === "HR") setRole("EMPLOYEE");
+    else if (role === "EMPLOYEE") setRole("MANAGER");
+    else setRole("HR");
+  };
 
   return (
     <header className="h-16 md:h-20 bg-secondary text-white sticky top-0 z-10 w-full shrink-0 shadow-sm">
@@ -28,6 +37,12 @@ export default function Navbar() {
             {t("title")}
           </h1>
 
+          <button
+            onClick={toggleRole}
+            className="hidden sm:inline-flex px-2 py-1 bg-status-warning/20 text-status-warning text-xs font-bold rounded-md shrink-0"
+          >
+            {role} (Test)
+          </button>
         </div>
 
         {/* Center: Search — hidden on mobile unless toggled */}
@@ -107,6 +122,14 @@ export default function Navbar() {
       {/* Mobile dropdown menu */}
       {menuOpen && (
         <div className="md:hidden bg-secondary border-t border-white/10 px-4 py-3 flex flex-col gap-2 shadow-lg">
+          {/* Role badge in menu */}
+          <button
+            onClick={toggleRole}
+            className="self-start px-2 py-1 bg-status-warning/20 text-status-warning text-xs font-bold rounded-md mb-1"
+          >
+            {role} (Test)
+          </button>
+
           <button className="flex items-center gap-3 hover:bg-white/10 px-3 py-2.5 rounded-lg transition-colors text-sm font-medium w-full">
             <MessageSquare size={18} className="text-primary" />
             {t("aiChat")}

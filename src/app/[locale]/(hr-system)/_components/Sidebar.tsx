@@ -1,7 +1,6 @@
 "use client";
 import { useTranslations } from "next-intl";
 import {
-  Home,
   Users,
   Package,
   ShieldAlert,
@@ -12,6 +11,7 @@ import {
   Network,
   Building2,
   FileText,
+  Briefcase
 } from "lucide-react";
 import { Link, usePathname } from "@/i18n/navigation";
 
@@ -20,8 +20,8 @@ export default function Sidebar() {
   const pathname = usePathname();
 
   const menuItems = [
-    { icon: Home, label: t("home"), href: "/dashboard" },
     { icon: Users, label: t("employees"), href: "/employees" },
+    { icon: Briefcase, label: "Jobs", href: "/jobs" }, 
     { icon: Package, label: t("assets"), href: "/asset" },
     { icon: ShieldAlert, label: t("insurance"), href: "/insurance" },
     { icon: Folder, label: t("projects"), href: "/projects" },
@@ -53,7 +53,7 @@ export default function Sidebar() {
               key={index}
               href={item.href}
               title={item.label}
-              className={`p-3 rounded-xl flex items-center justify-center transition-all duration-200 ${
+              className={`p-2 rounded-xl flex items-center justify-center transition-all duration-200 ${
                 isActive
                   ? "bg-primary text-secondary shadow-lg shadow-primary/20"
                   : "text-white/60 hover:bg-white/10 hover:text-white"
