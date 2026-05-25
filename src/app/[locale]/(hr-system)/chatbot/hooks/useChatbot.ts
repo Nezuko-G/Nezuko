@@ -1,37 +1,29 @@
-
 import { useState, useEffect, useRef, useCallback } from "react";
 import api from "@/lib/axios/core/instance";
-import { ChatbotConfig, ChatbotMessages, Message } from "../types/chatbot.types";
-
+import type { ChatbotConfig, Message } from "../types/chatbot.types";
 
 export default function useChatbot() {
     const [messages, setMessages] = useState<Message[]>([]);
-    const [uiMessages, setUiMessages] = useState<ChatbotMessages | null>(null);
     const [config, setConfig] = useState<ChatbotConfig | null>(null);
     const [isLoading, setIsLoading] = useState(false);
     const [isInitializing, setIsInitializing] = useState(true);
     const [error, setError] = useState<string | null>(null);
+    const sessionIdRef = useRef<string | null>(null);
 
     useEffect(() => {
         const init = async () => {
             try {
-                const [configRes, messagesRes] = await Promise.all([
-                    api.get("/chatbot/config"),
-                    api.get("/chatbot/messages"),
-                ]);
+                const configRes = await api.get("/chatbot/config");
 
                 const cfg: ChatbotConfig = configRes.data.data;
-                const msgs: ChatbotMessages = messagesRes.data.data;
 
                 setConfig(cfg);
-                setUiMessages(msgs);
 
-                // Add welcome message
                 setMessages([
                     {
                         id: "welcome",
                         role: "assistant",
-                        content: cfg.welcomeMessage || msgs.welcome,
+                        content: "Hello! I'm the HR Assistant. How can I help you today?",
                         timestamp: new Date(),
                     },
                 ]);
@@ -60,8 +52,17 @@ export default function useChatbot() {
             setError(null);
 
             try {
-                const res = await api.post("/chatbot/message", { message: text.trim() });
-                const reply = res.data?.data || res.data?.message || uiMessages?.noResponse;
+                const res = await api.post("/chatbot/message", {
+                    message: text.trim(),
+                    ...(sessionIdRef.current ? { sessionId: sessionIdRef.current } : {}),
+                });
+
+                const sessionId = res.data?.data?.sessionId;
+                const reply = res.data?.data?.reply || "No response received";
+
+                if (sessionId) {
+                    sessionIdRef.current = sessionId;
+                }
 
                 const botMsg: Message = {
                     id: `bot-${Date.now()}`,
@@ -71,17 +72,15 @@ export default function useChatbot() {
                 };
                 setMessages((prev) => [...prev, botMsg]);
             } catch (err: unknown) {
-                const errMsg =
-                    (err as { response?: { data?: { message?: string } } })?.response?.data?.message ||
-                    uiMessages?.errorSending ||
-                    "Something went wrong.";
+                const errRes = (err as { response?: { data?: { error?: string } } })?.response?.data;
+                const errMsg = errRes?.error || "Something went wrong.";
                 setError(errMsg);
             } finally {
                 setIsLoading(false);
             }
         },
-        [isLoading, uiMessages]
+        [isLoading],
     );
 
-    return { messages, uiMessages, config, isLoading, isInitializing, error, sendMessage };
+    return { messages, config, isLoading, isInitializing, error, sendMessage };
 }
