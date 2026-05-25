@@ -1,11 +1,8 @@
 "use client"
 import { useTranslations, useLocale } from "next-intl";
-import { Search, Plus, Bell, MessageSquare, X, Menu } from "lucide-react";
+import Image from "next/image";
+import { Bell, MessageSquare, X, Menu } from "lucide-react";
 import { Link } from "@/i18n/navigation";
-
-import { useLocale, useTranslations } from "next-intl";
-import { Search, Bell, MessageSquare, X, Menu } from "lucide-react";
-import { useAuthStore } from "@/hooks/useAuthStore";
 import { useState } from "react";
 
 import { LanguageSwitcher } from "../../../../components/i18n/LanguageSwitcher";
@@ -13,16 +10,7 @@ import { LanguageSwitcher } from "../../../../components/i18n/LanguageSwitcher";
 export default function Navbar() {
   const locale = useLocale();
   const t = useTranslations("dashboard.navbar");
-  const locale = useLocale(); 
-  const { role, setRole } = useAuthStore();
-  const [searchOpen, setSearchOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
-
-  const toggleRole = () => {
-    if (role === "HR") setRole("EMPLOYEE");
-    else if (role === "EMPLOYEE") setRole("MANAGER");
-    else setRole("HR");
-  };
 
   return (
     <header className="h-16 md:h-20 bg-secondary text-white sticky top-0 z-10 w-full shrink-0 shadow-sm">
@@ -41,56 +29,14 @@ export default function Navbar() {
             {t("title")}
           </h1>
 
-          <button
-            onClick={toggleRole}
-            className="hidden sm:inline-flex px-2 py-1 bg-status-warning/20 text-status-warning text-xs font-bold rounded-md shrink-0"
-          >
-            {role} (Test)
-          </button>
+
         </div>
 
-        {/* Center: Search — hidden on mobile unless toggled */}
-        <div
-          className={`
-            absolute inset-x-0 top-0 h-16 md:h-20 px-4 bg-secondary flex items-center
-            transition-all duration-200
-            md:static md:inset-auto md:h-auto md:px-0 md:flex md:justify-center md:flex-1
-            ${searchOpen ? "flex z-20" : "hidden md:flex"}
-          `}
-        >
-          {/* Close button on mobile */}
-          {/* {searchOpen && (
-            <button
-              onClick={() => setSearchOpen(false)}
-              className="md:hidden mr-3 p-1 hover:bg-white/10 rounded-full transition-colors"
-            >
-              <X size={20} />
-            </button>
-          )}
-
-          <div className="relative w-full max-w-md">
-            <input
-              type="text"
-              placeholder={t("searchPlaceholder")}
-              autoFocus={searchOpen}
-              className="w-full bg-white/5 text-white placeholder-white/40 border border-transparent focus:border-primary/50 focus:bg-white/10 rounded-full px-4 pr-10 py-2 md:py-2.5 text-sm focus:outline-none transition-all"
-            />
-            <Search
-              className="absolute right-4 top-1/2 -translate-y-1/2 text-white/40"
-              size={16}
-            />
-          </div> */}
-        </div>
+        {/* Spacer */}
+        <div className="flex-1" />
 
         {/* Right: Actions */}
         <div className="flex items-center gap-1 sm:gap-2 md:gap-3 shrink-0">
-          {/* Search icon — mobile only */}
-          {/* <button
-            onClick={() => setSearchOpen(true)}
-            className="md:hidden p-2 hover:bg-white/10 rounded-full transition-colors"
-          >
-            <Search size={18} className="text-white/70" />
-          </button> */}
 
           {/* AI Chat */}
           <Link
@@ -117,9 +63,11 @@ export default function Navbar() {
 
           {/* Avatar */}
           <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-zinc-800 border-2 border-primary/20 overflow-hidden shrink-0 cursor-pointer hover:border-primary transition-colors">
-            <img
+            <Image
               src="https://i.pravatar.cc/150?img=11"
               alt="Profile"
+              width={40}
+              height={40}
               className="w-full h-full object-cover"
             />
           </div>

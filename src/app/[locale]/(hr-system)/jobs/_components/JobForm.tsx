@@ -100,9 +100,9 @@ export default function JobForm({
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const payload = { ...formData };
+    const payload = { ...formData } as Record<string, unknown>;
     if (payload.expirationDate) {
-      payload.expirationDate = new Date(payload.expirationDate).toISOString();
+      payload.expirationDate = new Date(payload.expirationDate as string).toISOString();
     }
     delete payload._id;
     delete payload.createdAt;
@@ -111,7 +111,7 @@ export default function JobForm({
     delete payload.slug;
     delete payload.is_active;
     delete payload.is_deleted;
-    onSubmit(payload);
+    onSubmit(payload as CreateJobInput);
   };
 
   return (
