@@ -1,0 +1,118 @@
+{
+  "list": {
+    "title": "وظائف التوظيف",
+    "subtitle": "إدارة الإعلانات الوظيفية ومراجعة المتقدمين الخارجيين",
+    "createBtn": "إنشاء وظيفة جديدة",
+    "pagination": "صفحة {current} من {total}",
+    "all": "الكل",
+    "reset": "إعادة تعيين الفلاتر",
+    "errors": {
+      "fetch": "فشل تحميل الوظائف أو غير مصرح لك بالوصول."
+    },
+    "table": {
+      "title": "المسمى الوظيفي",
+      "company": "الشركة",
+      "jobType": "نوع العمل",
+      "status": "الحالة",
+      "actions": "إجراءات",
+      "edit": "تعديل",
+      "delete": "حذف",
+      "toggle": "تغيير الحالة",
+      "empty": "لم يتم العثور على أي وظائف."
+    }
+  },
+  "create": {
+    "title": "إنشاء وظيفة",
+    "subtitle": "نشر إعلان وظيفي جديد على البوابة الخارجية",
+    "breadcrumbs": {
+      "list": "الوظائف"
+    }
+  },
+  "edit": {
+    "title": "تعديل الوظيفة",
+    "notFound": "لم يتم العثور على الوظيفة.",
+    "breadcrumbs": {
+      "list": "الوظائف"
+    }
+  },
+  "details": {
+    "notFound": "لم يتم العثور على الوظيفة.",
+    "breadcrumbs": {
+      "list": "الوظائف"
+    },
+    "stats": {
+      "location": "الموقع",
+      "type": "نوع الوظيفة",
+      "workMode": "نظام العمل",
+      "expires": "تاريخ الانتهاء",
+      "posted": "تاريخ النشر"
+    },
+    "info": {
+      "description": "الوصف الوظيفي",
+      "requirements": "المتطلبات",
+      "responsibilities": "المهام والمسؤوليات",
+    "classification": "التصنيف"
+    }
+  },
+  "form": {
+    "sections": {
+      "basic": "المعلومات الأساسية",
+      "details": "تفاصيل الوظيفة",
+      "classification": "التصنيف والموقع",
+      "responsibilities": "المهام والمسؤوليات",
+      "requirements": "المتطلبات والشروط"
+    },
+    "fields": {
+      "titleAr": "المسمى الوظيفي (عربي)",
+      "titleEn": "المسمى الوظيفي (إنجليزي)",
+      "jobId": "الرقم المرجعي للوظيفة",
+      "company": "اسم الشركة",
+      "organization": "القسم / المؤسسة",
+      "expirationDate": "تاريخ الانتهاء",
+      "descAr": "الوصف الوظيفي (عربي)",
+      "descEn": "الوصف الوظيفي (إنجليزي)",
+      "locationAr": "تفاصيل الموقع (عربي)",
+      "locationEn": "تفاصيل الموقع (إنجليزي)",
+      "durationAr": "المدة (عربي)",
+      "durationEn": "المدة (إنجليزي)",
+      "jobType": "نوع الوظيفة",
+      "employmentType": "طبيعة العقد",
+      "workMode": "نظام العمل",
+      "countryId": "معرف الدولة (ID)",
+      "fieldOfWorkId": "معرف مجال العمل (ID)",
+      "experienceLevelId": "معرف مستوى الخبرة (ID)"
+    },
+    "options": {
+      "fullTime": "دوام كامل",
+      "partTime": "دوام جزئي",
+      "internship": "تدريب",
+      "permanent": "دائم",
+      "contract": "عقد",
+      "fixedTerm": "مدة محددة",
+      "office": "من المقر",
+      "remote": "عن بُعد",
+      "hybrid": "هجين"
+    },
+    "placeholders": {
+      "ar": "اكتب باللغة العربية...",
+      "en": "اكتب باللغة الإنجليزية...",
+      "search": "بحث..."
+    },
+    "buttons": {
+      "add": "إضافة عنصر",
+      "cancel": "إلغاء",
+      "save": "حفظ الوظيفة"
+    }
+  },
+  "status": {
+    "active": "نشط",
+    "inactive": "غير نشط"
+  },
+  "messages": {
+    "createSuccess": "تم نشر الوظيفة بنجاح",
+    "updateSuccess": "تم تحديث بيانات الوظيفة بنجاح",
+    "deleteSuccess": "تم حذف الوظيفة بنجاح",
+    "toggleSuccess": "تم تغيير حالة الوظيفة بنجاح",
+    "error": "حدث خطأ أثناء معالجة طلبك"
+  }
+}
