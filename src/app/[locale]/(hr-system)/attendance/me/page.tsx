@@ -1,14 +1,14 @@
 "use client";
 
-import { useTranslations } from "next-intl";
+import { useEffect } from "react";
+import { useRouter } from "@/i18n/navigation";
 
-export default function MyAttendancePage() {
-  const t = useTranslations("timesheet");
+export default function MyAttendanceRedirect() {
+  const router = useRouter();
 
-  return (
-    <div className="p-6">
-      <h1 className="text-2xl font-bold text-secondary mb-4">{t("myAttendance")}</h1>
-      <p className="text-gray-400">{t("comingSoon")}</p>
-    </div>
-  );
+  useEffect(() => {
+    router.replace("/attendance");
+  }, [router]);
+
+  return null;
 }

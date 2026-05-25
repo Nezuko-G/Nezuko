@@ -107,5 +107,23 @@
     "title": "My Timesheets",
     "empty": "You have no timesheet records yet"
   },
-  "locked": "Approved timesheets cannot be edited"
+  "locked": "Approved timesheets cannot be edited",
+  "widget": {
+    "checkIn": "Check In",
+    "checkOut": "Check Out",
+    "complete": "Attendance Complete",
+    "locationDetected": "Location detected",
+    "locationDenied": "Location access denied",
+    "locationDeniedWarning": "Location access is denied. Please enable GPS to check in.",
+    "locationUnavailable": "Location unavailable",
+    "detectingLocation": "Detecting location...",
+    "locationTimeout": "Location detection timed out.",
+    "retryLocation": "Retry",
+    "checkInSuccess": "Checked in successfully",
+    "checkOutSuccess": "Checked out successfully",
+    "totalHours": "Total Hours",
+    "overtimeHours": "Overtime Hours",
+    "disabledMessage": "Location attendance is not enabled for your organization. Contact HR for assistance.",
+    "submitting": "Submitting..."
+  }
 }

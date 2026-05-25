@@ -1,12 +1,14 @@
 "use client"
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 import { Search, Plus, Bell, MessageSquare, X, Menu } from "lucide-react";
+import { Link } from "@/i18n/navigation";
 
 import { useState } from "react";
 
 import { LanguageSwitcher } from "../../../../components/i18n/LanguageSwitcher";
 
 export default function Navbar() {
+  const locale = useLocale();
   const t = useTranslations("dashboard.navbar");
   const [searchOpen, setSearchOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -40,7 +42,7 @@ export default function Navbar() {
           `}
         >
           {/* Close button on mobile */}
-          {searchOpen && (
+          {/* {searchOpen && (
             <button
               onClick={() => setSearchOpen(false)}
               className="md:hidden mr-3 p-1 hover:bg-white/10 rounded-full transition-colors"
@@ -60,24 +62,27 @@ export default function Navbar() {
               className="absolute right-4 top-1/2 -translate-y-1/2 text-white/40"
               size={16}
             />
-          </div>
+          </div> */}
         </div>
 
         {/* Right: Actions */}
         <div className="flex items-center gap-1 sm:gap-2 md:gap-3 shrink-0">
           {/* Search icon — mobile only */}
-          <button
+          {/* <button
             onClick={() => setSearchOpen(true)}
             className="md:hidden p-2 hover:bg-white/10 rounded-full transition-colors"
           >
             <Search size={18} className="text-white/70" />
-          </button>
+          </button> */}
 
           {/* AI Chat */}
-          <button className="hidden sm:flex items-center gap-2 hover:bg-white/10 px-2 md:px-3 py-2 rounded-lg transition-colors text-sm font-medium">
+          <Link
+            href="/chatbot"
+            className="hidden sm:flex items-center gap-2 hover:bg-white/10 px-2 md:px-3 py-2 rounded-lg transition-colors text-sm font-medium"
+          >
             <MessageSquare size={18} className="text-primary" />
             <span className="hidden lg:inline-block">{t("aiChat")}</span>
-          </button>
+          </Link>
 
           {/* Language Switcher (Desktop) */}
           <div className="hidden sm:flex items-center px-1">
@@ -107,10 +112,14 @@ export default function Navbar() {
       {/* Mobile dropdown menu */}
       {menuOpen && (
         <div className="md:hidden bg-secondary border-t border-white/10 px-4 py-3 flex flex-col gap-2 shadow-lg">
-          <button className="flex items-center gap-3 hover:bg-white/10 px-3 py-2.5 rounded-lg transition-colors text-sm font-medium w-full">
+          <Link
+            href="/chatbot"
+            onClick={() => setMenuOpen(false)}
+            className="flex items-center gap-3 hover:bg-white/10 px-3 py-2.5 rounded-lg transition-colors text-sm font-medium w-full"
+          >
             <MessageSquare size={18} className="text-primary" />
             {t("aiChat")}
-          </button>
+          </Link>
 
           {/* Language Switcher (Mobile) */}
           <div className="flex items-center justify-between hover:bg-white/10 px-3 py-2.5 rounded-lg transition-colors w-full">

@@ -44,7 +44,7 @@ function StatusBadge({ status }: { status: string }) {
   );
 }
 
-export function TimesheetTable({ timesheets }: Props) {
+export function MyTimesheetsTable({ timesheets }: Props) {
   const t = useTranslations("timesheet");
 
   return (
@@ -53,8 +53,6 @@ export function TimesheetTable({ timesheets }: Props) {
         <table className="w-full text-sm">
           <thead>
             <tr className="bg-gray-50 border-b border-gray-200">
-              <th className="text-left px-4 py-3 text-xs font-medium text-gray-500">{t("table.employee")}</th>
-              <th className="text-left px-4 py-3 text-xs font-medium text-gray-500">{t("table.employeeCode")}</th>
               <th className="text-left px-4 py-3 text-xs font-medium text-gray-500">{t("table.date")}</th>
               <th className="text-left px-4 py-3 text-xs font-medium text-gray-500">{t("table.checkIn")}</th>
               <th className="text-left px-4 py-3 text-xs font-medium text-gray-500">{t("table.checkOut")}</th>
@@ -66,11 +64,7 @@ export function TimesheetTable({ timesheets }: Props) {
           <tbody>
             {timesheets.map((ts) => (
               <tr key={ts.id} className="border-b border-gray-100 hover:bg-gray-50 transition-colors">
-                <td className="px-4 py-3 font-medium text-gray-800">
-                  {ts.user ? `${ts.user.firstName} ${ts.user.lastName}` : ts.userId.slice(0, 8)}
-                </td>
-                <td className="px-4 py-3 text-gray-600">{ts.user?.employeeCode || "—"}</td>
-                <td className="px-4 py-3 text-gray-600">{formatDate(ts.date)}</td>
+                <td className="px-4 py-3 text-gray-800 font-medium">{formatDate(ts.date)}</td>
                 <td className="px-4 py-3 text-gray-600">{formatTime(ts.checkIn)}</td>
                 <td className="px-4 py-3 text-gray-600">{formatTime(ts.checkOut)}</td>
                 <td className="px-4 py-3 text-gray-600">{formatHours(ts.totalHours)}</td>

@@ -54,9 +54,11 @@
       "gracePeriods": "Grace Periods",
       "rounding": "Rounding",
       "biometric": "Require Biometric",
-      "geofence": "Geofence"
+      "geofence": "Geofence",
+      "locationAttendance": "Location Attendance"
     },
     "fields": {
+      "requireLocation": "Require Location on check-in",
       "workDayStart": "Work Day Start",
       "workDayEnd": "Work Day End",
       "lateGraceMinutes": "Late Grace (minutes)",
