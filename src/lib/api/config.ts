@@ -101,4 +101,13 @@ export const apis = {
     exportPdf: (type: string) => `/reports/${type}/export/pdf`,
     history: "/reports/history",
   },
+  jobs: {
+  list: "/job",
+  details: (id: string) => `/job/${id}`,
+  create: "/job",
+  update: (id: string) => `/job/${id}`,
+  delete: (id: string) => `/job/${id}`,
+  toggleActivation: (id: string) => `/job/toggle-activation/${id}`,
+  login: "/auth/login",
+},
 };
