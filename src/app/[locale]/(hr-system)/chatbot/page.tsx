@@ -2,7 +2,8 @@
 
 import { useState, useEffect, useRef } from "react";
 import ReactMarkdown from "react-markdown";
-import { Message } from "./types/chatbot.types";
+import { useTranslations } from "next-intl";
+import type { Message } from "./types/chatbot.types";
 import useChatbot from "./hooks/useChatbot";
 
 function TypingIndicator() {
@@ -106,17 +107,21 @@ function MessageBubble({ message }: { message: Message }) {
 }
 
 function QuickActions({
-    generalHelp,
-    contactHR,
+    generalHelpLabel,
+    contactHRLabel,
+    generalHelpMessage,
+    hrMessage,
     onSelect,
 }: {
-    generalHelp: string;
-    contactHR: string;
+    generalHelpLabel: string;
+    contactHRLabel: string;
+    generalHelpMessage: string;
+    hrMessage: string;
     onSelect: (msg: string) => void;
 }) {
     const actions = [
-        { label: "General Help", value: generalHelp, icon: "💡" },
-        { label: "Contact HR", value: contactHR, icon: "👥" },
+        { label: generalHelpLabel, value: generalHelpMessage, icon: "💡" },
+        { label: contactHRLabel, value: hrMessage, icon: "👥" },
     ];
 
     return (
@@ -161,7 +166,8 @@ function SendIcon() {
 }
 
 export default function ChatbotPage() {
-    const { messages, uiMessages, config, isLoading, isInitializing, error, sendMessage } =
+    const t = useTranslations("chatbot");
+    const { messages, config, isLoading, isInitializing, error, sendMessage } =
         useChatbot();
     const [input, setInput] = useState("");
     const bottomRef = useRef<HTMLDivElement>(null);
@@ -171,11 +177,12 @@ export default function ChatbotPage() {
         bottomRef.current?.scrollIntoView({ behavior: "smooth" });
     }, [messages, isLoading]);
 
+
+
     const handleSend = () => {
         if (!input.trim() || isLoading) return;
         sendMessage(input);
         setInput("");
-        // reset textarea height
         if (inputRef.current) {
             inputRef.current.style.height = "auto";
         }
@@ -197,7 +204,7 @@ export default function ChatbotPage() {
                         <BotIcon size={26} />
                     </div>
                     <p className="text-sm text-[var(--color-content-muted)] font-medium tracking-wide">
-                        Starting HR Assistant…
+                        {t("status.initializing")}
                     </p>
                 </div>
             </div>
@@ -205,17 +212,6 @@ export default function ChatbotPage() {
     }
 
     return (
-        /**
-         * FIX SUMMARY:
-         * ─────────────────────────────────────────────────
-         * 1. `h-full` instead of `h-screen` → fits inside the parent layout
-         *    without creating a second scroll context
-         * 2. `overflow-hidden` on root → prevents outer scroll leaking
-         * 3. `flex-1 min-h-0` on messages → the magic combo that lets a flex
-         *    child shrink below its content size and actually scroll
-         * 4. `flex-shrink-0` on header / actions / input → they never collapse
-         * ─────────────────────────────────────────────────
-         */
         <div className="flex flex-col h-full w-full overflow-hidden bg-[var(--color-background)]">
 
             {/* Header */}
@@ -224,11 +220,11 @@ export default function ChatbotPage() {
                     <BotIcon size={20} />
                 </div>
                 <div className="flex-1 min-w-0">
-                    <h1 className="text-white font-semibold text-sm tracking-wide">HR Assistant</h1>
+                    <h1 className="text-white font-semibold text-sm tracking-wide">{t("header.title")}</h1>
                     <div className="flex items-center gap-1.5 mt-0.5">
                         <span className="w-2 h-2 rounded-full bg-[var(--color-primary)] animate-pulse shadow-[0_0_6px_var(--color-primary)]" />
                         <span className="text-[11px] text-[var(--color-primary)] font-medium truncate">
-                            {config?.model ?? "Online"}
+                            {config?.model ?? t("header.online")}
                         </span>
                     </div>
                 </div>
@@ -251,11 +247,13 @@ export default function ChatbotPage() {
                 <div ref={bottomRef} />
             </div>
 
-            {/* Quick Actions */}
-            {uiMessages && messages.length <= 1 && (
+            {/* Quick Actions — show only when there's just the welcome message */}
+            {messages.length <= 1 && (
                 <QuickActions
-                    generalHelp={uiMessages.generalHelp}
-                    contactHR={uiMessages.contactHR}
+                    generalHelpLabel={t("labels.generalHelp")}
+                    contactHRLabel={t("labels.contactHR")}
+                    generalHelpMessage={t("quickActions.generalHelp")}
+                    hrMessage={t("quickActions.contactHR")}
                     onSelect={sendMessage}
                 />
             )}
@@ -274,7 +272,7 @@ export default function ChatbotPage() {
                             e.target.style.height = `${Math.min(e.target.scrollHeight, 112)}px`;
                         }}
                         onKeyDown={handleKeyDown}
-                        placeholder="Type a message…"
+                        placeholder={t("input.placeholder")}
                         rows={1}
                         disabled={isLoading}
                         className="flex-1 resize-none bg-transparent text-sm text-[var(--color-content)]
@@ -290,14 +288,14 @@ export default function ChatbotPage() {
                             hover:bg-[var(--color-secondary-hover)] hover:shadow-md
                             disabled:opacity-40 disabled:cursor-not-allowed
                             transition-all duration-200 active:scale-90 cursor-pointer"
-                        aria-label="Send message"
+                        aria-label={t("input.send")}
                     >
                         <SendIcon />
                     </button>
                 </div>
                 <p className="text-center text-[10px] text-[var(--color-content-muted)] mt-2">
-                    <kbd className="font-mono bg-gray-100 px-1 rounded">Enter</kbd> to send ·{" "}
-                    <kbd className="font-mono bg-gray-100 px-1 rounded">Shift+Enter</kbd> for new line
+                    <kbd className="font-mono bg-gray-100 px-1 rounded">Enter</kbd> {t("input.enterToSend")} ·{" "}
+                    <kbd className="font-mono bg-gray-100 px-1 rounded">Shift+Enter</kbd> {t("input.shiftEnterForNewLine")}
                 </p>
             </div>
         </div>

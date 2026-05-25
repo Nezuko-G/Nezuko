@@ -7,18 +7,14 @@ export interface Message {
 
 export interface ChatbotConfig {
     model: string;
-    welcomeMessage: string;
-    generalHelp: string;
-    contactHR: string;
+    systemPrompt: string;
 }
 
-export interface ChatbotMessages {
-    welcome: string;
-    generalHelp: string;
-    contactHR: string;
-    sessionStarted: string;
-    typing: string;
-    noResponse: string;
-    errorSending: string;
-    errorServiceUnavailable: string;
+export interface SendMessageResponse {
+    success: boolean;
+    data?: {
+        sessionId: string;
+        reply: string;
+    };
+    error?: string;
 }

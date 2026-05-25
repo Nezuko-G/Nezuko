@@ -1,0 +1,26 @@
+{
+  "header": {
+    "title": "مساعد الموارد البشرية",
+    "online": "متصل"
+  },
+  "quickActions": {
+    "generalHelp": "أود معرفة خدمات الموارد البشرية المتاحة",
+    "contactHR": "أحتاج للتواصل مع قسم الموارد البشرية"
+  },
+  "input": {
+    "placeholder": "اكتب رسالة…",
+    "send": "إرسال الرسالة",
+    "enterToSend": "لإرسال",
+    "shiftEnterForNewLine": "لسطر جديد"
+  },
+  "welcomeMessage": "مرحباً! أنا مساعد الموارد البشرية. كيف يمكنني مساعدتك اليوم؟",
+  "status": {
+    "initializing": "جاري تشغيل المساعد…",
+    "failedToInit": "فشل في تشغيل المساعد.",
+    "noResponse": "لم يتم تلقي رد"
+  },
+  "labels": {
+    "generalHelp": "مساعدة عامة",
+    "contactHR": "اتصل بالموارد البشرية"
+  }
+}

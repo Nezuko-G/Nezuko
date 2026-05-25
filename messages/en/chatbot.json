@@ -1,0 +1,26 @@
+{
+  "header": {
+    "title": "HR Assistant",
+    "online": "Online"
+  },
+  "quickActions": {
+    "generalHelp": "I'd like to know what HR services are available",
+    "contactHR": "I need to contact HR for further assistance"
+  },
+  "input": {
+    "placeholder": "Type a message…",
+    "send": "Send message",
+    "enterToSend": "to send",
+    "shiftEnterForNewLine": "for new line"
+  },
+  "welcomeMessage": "Hello! I'm the HR Assistant. How can I help you today?",
+  "status": {
+    "initializing": "Starting HR Assistant…",
+    "failedToInit": "Failed to initialize chatbot.",
+    "noResponse": "No response received"
+  },
+  "labels": {
+    "generalHelp": "General Help",
+    "contactHR": "Contact HR"
+  }
+}
