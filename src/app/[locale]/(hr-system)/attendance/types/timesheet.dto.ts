@@ -19,15 +19,15 @@ export const TimesheetDTO = z.object({
   date: z.string().datetime(),
   checkIn: z.string().datetime().nullable(),
   checkOut: z.string().datetime().nullable(),
-  totalHours: z.number(),
-  overtimeHours: z.number(),
+  totalHours: z.number().nullable(),
+  overtimeHours: z.number().nullable(),
   status: TimesheetStatusEnum,
   notes: z.string().nullable(),
   submittedBy: z.string().nullable(),
   createdAt: z.string().datetime(),
   updatedAt: z.string().datetime(),
-  user: UserSummaryDTO.nullable(),
-  submitter: UserSummaryDTO.nullable(),
+  user: UserSummaryDTO.nullish(),
+  submitter: UserSummaryDTO.nullish(),
 });
 
 export type TimesheetStatus = z.infer<typeof TimesheetStatusEnum>;
@@ -39,8 +39,8 @@ export type Timesheet = {
   date: Date;
   checkIn: Date | null;
   checkOut: Date | null;
-  totalHours: number;
-  overtimeHours: number;
+  totalHours: number | null;
+  overtimeHours: number | null;
   status: TimesheetStatus;
   notes: string | null;
   submittedBy: string | null;

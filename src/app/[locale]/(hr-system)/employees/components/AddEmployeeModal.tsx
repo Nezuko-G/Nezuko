@@ -29,7 +29,7 @@ export default function AddEmployeeModal({ open, onClose }: Props) {
         jobTitle: "",
         departmentId: "",
         hireDate: "",
-        gender: "" as "MALE" | "FEMALE" | "OTHER" | "",
+        gender: "" as "MALE" | "FEMALE" | "",
         dateOfBirth: "",
         phone: "",
     });
@@ -125,7 +125,6 @@ export default function AddEmployeeModal({ open, onClose }: Props) {
                             options={[
                                 { value: "MALE", label: t("gender.male") },
                                 { value: "FEMALE", label: t("gender.female") },
-                                { value: "OTHER", label: t("gender.other") },
                             ]}
                         />
                     </div>

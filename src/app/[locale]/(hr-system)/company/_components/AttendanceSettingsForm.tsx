@@ -131,9 +131,10 @@ export default function AttendanceSettingsForm() {
       payload.roundingMinutes = form.roundingMinutes;
     }
 
+    payload.locationAttendanceEnabled = form.locationAttendanceEnabled;
+    payload.requireLocation = form.requireLocation;
+
     if (form.geofenceEnabled) {
-      payload.locationAttendanceEnabled = form.locationAttendanceEnabled;
-      payload.requireLocation = form.requireLocation;
       payload.geofenceLat = form.geofenceLat;
       payload.geofenceLng = form.geofenceLng;
       payload.geofenceRadiusM = form.geofenceRadiusM;
@@ -264,6 +265,28 @@ export default function AttendanceSettingsForm() {
             disabled={!canEdit}
           />
         </div>
+      </div>
+
+      {/* ── Location Attendance ── */}
+      <div className="rounded-xl border border-gray-200 bg-card p-6">
+        <div className="flex items-center justify-between mb-4">
+          <h3 className="text-base font-semibold text-content-dark">{t("sections.locationAttendance")}</h3>
+          <Toggle
+            checked={form.locationAttendanceEnabled}
+            onChange={(v) => update("locationAttendanceEnabled", v)}
+            disabled={!canEdit}
+          />
+        </div>
+        {form.locationAttendanceEnabled && (
+          <div className="flex items-center justify-between pt-3 border-t border-gray-100">
+            <label className="text-sm text-content">{t("fields.requireLocation")}</label>
+            <Toggle
+              checked={form.requireLocation}
+              onChange={(v) => update("requireLocation", v)}
+              disabled={!canEdit}
+            />
+          </div>
+        )}
       </div>
 
       {/* ── Geofence ── */}

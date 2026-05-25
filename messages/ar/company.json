@@ -54,9 +54,11 @@
       "gracePeriods": "فترات السماح",
       "rounding": "التقريب",
       "biometric": "طلب بصمة",
-      "geofence": "السياج الجغرافي"
+      "geofence": "السياج الجغرافي",
+      "locationAttendance": "الحضور بالموقع"
     },
     "fields": {
+      "requireLocation": "طلب الموقع عند تسجيل الحضور",
       "workDayStart": "بداية يوم العمل",
       "workDayEnd": "نهاية يوم العمل",
       "lateGraceMinutes": "سماح التأخير (دقائق)",
