@@ -112,7 +112,7 @@ export default function PricingPage() {
                             {t("hero.subtitle")}
                         </p>
                         <Link
-                            href="/demo"
+                            href="/book-demo"
                             className="inline-flex items-center gap-2 bg-primary text-white font-bold px-8 py-4 rounded-xl shadow-xl hover:bg-primary/90 transition-all text-sm"
                         >
                             {t("hero.cta")} <ArrowRight size={16} />
