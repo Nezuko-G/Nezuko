@@ -1,0 +1,115 @@
+{
+  "list": {
+    "title": "Recruitment Jobs",
+    "subtitle": "Manage external job postings and review applicants",
+    "createBtn": "Create New Job",
+    "pagination": "Page {current} of {total}",
+    "all": "All",
+    "reset": "Reset Filters",
+    "errors": {
+      "fetch": "Failed to load jobs or unauthorized access."
+    },
+    "table": {
+      "title": "Job Title",
+      "company": "Company",
+      "jobType": "Type",
+      "status": "Status",
+      "actions": "Actions",
+      "edit": "Edit",
+      "delete": "Delete",
+      "toggle": "Toggle Status",
+      "empty": "No jobs found."
+    }
+  },
+  "create": {
+    "title": "Create Job",
+    "subtitle": "Publish a new job opening to the external portal",
+    "breadcrumbs": {
+      "list": "Jobs"
+    }
+  },
+  "edit": {
+    "title": "Edit Job",
+    "notFound": "Job not found.",
+    "breadcrumbs": {
+      "list": "Jobs"
+    }
+  },
+  "details": {
+    "notFound": "Job not found.",
+    "breadcrumbs": {
+      "list": "Jobs"
+    },
+    "stats": {
+      "location": "Location",
+      "type": "Job Type",
+      "workMode": "Work Mode",
+      "expires": "Expires On"
+    },
+    "info": {
+      "description": "Job Description",
+      "requirements": "Requirements"
+    }
+  },
+  "form": {
+    "sections": {
+      "basic": "Basic Information",
+      "details": "Job Details",
+      "classification": "Classification & Location",
+      "responsibilities": "Responsibilities",
+      "requirements": "Requirements"
+    },
+    "fields": {
+      "titleAr": "Job Title (Arabic)",
+      "titleEn": "Job Title (English)",
+      "jobId": "Job ID Reference",
+      "company": "Company Name",
+      "organization": "Organization / Department",
+      "expirationDate": "Expiration Date",
+      "descAr": "Description (Arabic)",
+      "descEn": "Description (English)",
+      "locationAr": "Location Details (Arabic)",
+      "locationEn": "Location Details (English)",
+      "durationAr": "Duration (Arabic)",
+      "durationEn": "Duration (English)",
+      "jobType": "Job Type",
+      "employmentType": "Employment Type",
+      "workMode": "Work Mode",
+      "countryId": "Country ID",
+      "fieldOfWorkId": "Field of Work ID",
+      "experienceLevelId": "Experience Level ID"
+    },
+    "options": {
+      "fullTime": "Full-Time",
+      "partTime": "Part-Time",
+      "internship": "Internship",
+      "permanent": "Permanent",
+      "contract": "Contract",
+      "fixedTerm": "Fixed-Term",
+      "office": "Office",
+      "remote": "Remote",
+      "hybrid": "Hybrid"
+    },
+    "placeholders": {
+      "ar": "Write in Arabic...",
+      "en": "Write in English...",
+      "search": "Search..."
+    },
+    "buttons": {
+      "add": "Add Item",
+      "cancel": "Cancel",
+      "save": "Save Job"
+    }
+  },
+  "status": {
+    "active": "Active",
+    "inactive": "Inactive"
+  },
+  "messages": {
+    "createSuccess": "Job posted successfully",
+    "updateSuccess": "Job updated successfully",
+    "deleteSuccess": "Job deleted successfully",
+    "toggleSuccess": "Job status toggled successfully",
+    "error": "An error occurred while processing your request"
+  }
+}
