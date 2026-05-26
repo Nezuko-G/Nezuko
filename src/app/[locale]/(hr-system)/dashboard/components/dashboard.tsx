@@ -197,7 +197,9 @@ function AttendanceRing({ percentage }: { percentage: number }) {
 function DashboardSkeleton() {
   return (
     <div className="min-h-screen bg-background">
-      <div className="h-16 w-full animate-pulse bg-gray-200" />
+      <div className="mx-auto max-w-6xl px-4 pt-4">
+        <div className="h-16 w-full animate-pulse rounded-3xl bg-gray-200" />
+      </div>
       <div className="mx-auto max-w-6xl animate-pulse px-4 pb-12 pt-6">
         <div className="mb-8 grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-6">
           {Array.from({ length: 6 }).map((_, i) => (
@@ -301,32 +303,66 @@ export default function DashboardPage() {
   return (
     <main className="min-h-screen bg-background">
 
-      <motion.header
-        initial={{ opacity: 0, y: -12 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.4 }}
-        className="w-full bg-secondary px-4 py-4"
-      >
-        <div className="mx-auto flex max-w-6xl items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div className="flex h-9 w-9 items-center justify-center rounded-xl border-2 border-primary/30 bg-primary/10">
-              <LayoutDashboard size={18} className="text-primary" />
-            </div>
-            <div>
-              <h1 className="text-[17px] font-semibold leading-none text-white">
-                {t("header.title1")}{" "}
-                <span className="text-primary">{t("header.title2")}</span>
-              </h1>
-              <p className="mt-0.5 text-[11px] text-white/40">{t("header.subtitle")}</p>
-            </div>
-          </div>
-          <span className="rounded-full border-2 border-primary/30 bg-primary/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-widest text-primary">
-            {t("header.badge")}
-          </span>
-        </div>
-      </motion.header>
+      {/* HEADER */}
+      <div className="mx-auto max-w-6xl px-4 pt-4">
+        <motion.header
+          initial={{ opacity: 0, y: -16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.45 }}
+          className="relative overflow-hidden rounded-3xl bg-secondary px-6 py-5"
+          style={{
+            boxShadow:
+              "0 8px 32px 0 rgba(0,0,40,0.38), 0 2px 8px 0 rgba(0,255,185,0.10)",
+          }}
+        >
+          {/* Animated orbs */}
+          <motion.div
+            className="pointer-events-none absolute -left-8 -top-8 h-40 w-40 rounded-full"
+            style={{ background: "radial-gradient(circle, rgba(0,255,185,0.18) 0%, transparent 70%)" }}
+            animate={{ scale: [1, 1.18, 1], opacity: [0.7, 1, 0.7] }}
+            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+          />
+          <motion.div
+            className="pointer-events-none absolute -bottom-10 left-1/3 h-32 w-32 rounded-full"
+            style={{ background: "radial-gradient(circle, rgba(0,255,185,0.12) 0%, transparent 70%)" }}
+            animate={{ scale: [1, 1.25, 1], opacity: [0.5, 0.9, 0.5] }}
+            transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+          />
+          <motion.div
+            className="pointer-events-none absolute -right-6 -top-6 h-36 w-36 rounded-full"
+            style={{ background: "radial-gradient(circle, rgba(0,204,148,0.14) 0%, transparent 70%)" }}
+            animate={{ scale: [1, 1.2, 1], opacity: [0.6, 1, 0.6] }}
+            transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
+          />
+          <motion.div
+            className="pointer-events-none absolute bottom-0 right-1/4 h-24 w-24 rounded-full"
+            style={{ background: "radial-gradient(circle, rgba(0,255,185,0.09) 0%, transparent 70%)" }}
+            animate={{ scale: [1, 1.3, 1], opacity: [0.4, 0.8, 0.4] }}
+            transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+          />
 
-      <div className="mx-auto max-w-6xl px-4 pb-12 pt-4">
+          {/* Content */}
+          <div className="relative z-10 flex items-center justify-between">
+            <div className="flex items-center gap-3">
+              <div className="flex h-10 w-10 items-center justify-center rounded-2xl border-2 border-primary/30 bg-primary/10 backdrop-blur-sm">
+                <LayoutDashboard size={18} className="text-primary" />
+              </div>
+              <div>
+                <h1 className="text-[18px] font-semibold leading-none text-white">
+                  {t("header.title1")}{" "}
+                  <span className="text-primary">{t("header.title2")}</span>
+                </h1>
+                <p className="mt-1 text-[11px] text-white/40">{t("header.subtitle")}</p>
+              </div>
+            </div>
+            <span className="rounded-full border-2 border-primary/30 bg-primary/10 px-4 py-1.5 text-[11px] font-semibold uppercase tracking-widest text-primary backdrop-blur-sm">
+              {t("header.badge")}
+            </span>
+          </div>
+        </motion.header>
+      </div>
+
+      <div className="mx-auto max-w-6xl px-4 pb-12 pt-2">
 
         <SectionDivider label={t("sections.metrics")} />
 
