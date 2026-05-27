@@ -105,6 +105,14 @@
     "active": "Active",
     "inactive": "Inactive"
   },
+  "auth": {
+    "title": "Authentication Required",
+    "subtitle": "Please enter your credentials to continue",
+    "email": "Email",
+    "password": "Password",
+    "error": "Invalid email or password",
+    "loginBtn": "Login"
+  },
   "messages": {
     "createSuccess": "Job posted successfully",
     "updateSuccess": "Job updated successfully",
