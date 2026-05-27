@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import ReactMarkdown from "react-markdown";
 import { useTranslations } from "next-intl";
 import type { Message } from "./types/chatbot.types";
@@ -36,7 +36,7 @@ function MessageBubble({ message }: { message: Message }) {
 
     return (
         <div
-            className={`flex items-end gap-2 animate-slideIn ${isUser ? "flex-row-reverse ml-auto max-w-[75%]" : "max-w-[80%]"
+            className={`flex items-end gap-2 animate-slideIn ${isUser ? "flex-row-reverse ml-auto max-w-[85%] sm:max-w-[75%]" : "max-w-[90%] sm:max-w-[80%]"
                 }`}
         >
             {!isUser && (
@@ -125,7 +125,7 @@ function QuickActions({
     ];
 
     return (
-        <div className="flex-shrink-0 flex gap-2 flex-wrap px-4 py-3 border-t border-gray-100 bg-[var(--color-background)]">
+        <div className="flex-shrink-0 flex gap-2 flex-wrap px-3 py-3 sm:px-4 border-t border-gray-100 bg-[var(--color-background)]">
             {actions.map((a) => (
                 <button
                     key={a.label}
@@ -173,11 +173,32 @@ export default function ChatbotPage() {
     const bottomRef = useRef<HTMLDivElement>(null);
     const inputRef = useRef<HTMLTextAreaElement>(null);
 
+    const [isScrolledUp, setIsScrolledUp] = useState(false);
+    const messagesRef = useRef<HTMLDivElement>(null);
+
+    const handleScroll = useCallback(() => {
+        const el = messagesRef.current;
+        if (!el) return;
+        setIsScrolledUp(el.scrollTop < el.scrollHeight - el.clientHeight - 200);
+    }, []);
+
+    const scrollToBottom = useCallback(() => {
+        messagesRef.current?.scrollTo({ top: messagesRef.current.scrollHeight, behavior: "smooth" });
+        setIsScrolledUp(false);
+    }, []);
+
     useEffect(() => {
-        bottomRef.current?.scrollIntoView({ behavior: "smooth" });
+        const timeout = setTimeout(() => {
+            messagesRef.current?.scrollTo({ top: messagesRef.current.scrollHeight, behavior: "smooth" });
+        }, 350);
+        return () => clearTimeout(timeout);
     }, [messages, isLoading]);
 
-
+    useEffect(() => {
+        if (!isLoading) {
+            inputRef.current?.focus();
+        }
+    }, [isLoading]);
 
     const handleSend = () => {
         if (!input.trim() || isLoading) return;
@@ -231,20 +252,43 @@ export default function ChatbotPage() {
             </header>
 
             {/* Messages — scrollable area */}
-            <div className="flex-1 min-h-0 overflow-y-auto px-5 py-5 flex flex-col gap-4">
-                {messages.map((msg) => (
-                    <MessageBubble key={msg.id} message={msg} />
-                ))}
+            <div className="flex-1 min-h-0 relative">
+                <div
+                    ref={messagesRef}
+                    onScroll={handleScroll}
+                    className="absolute inset-0 overflow-y-auto overflow-x-hidden px-4 py-4 sm:px-5 sm:py-5 flex flex-col gap-4"
+                >
+                    {messages.map((msg) => (
+                        <MessageBubble key={msg.id} message={msg} />
+                    ))}
 
-                {isLoading && <TypingIndicator />}
+                    {isLoading && <TypingIndicator />}
 
-                {error && (
-                    <div className="self-center px-4 py-2.5 rounded-xl bg-red-50 border border-[var(--color-status-error)]/30 text-[var(--color-status-error)] text-xs text-center max-w-xs animate-slideIn">
-                        {error}
-                    </div>
+                    {error && (
+                        <div className="self-center px-4 py-2.5 rounded-xl bg-red-50 border border-[var(--color-status-error)]/30 text-[var(--color-status-error)] text-xs text-center max-w-xs animate-slideIn">
+                            {error}
+                        </div>
+                    )}
+
+                    <div ref={bottomRef} />
+                </div>
+
+                {isScrolledUp && (
+                    <button
+                        onClick={scrollToBottom}
+                        className="absolute bottom-4 left-1/2 -translate-x-1/2 w-9 h-9 rounded-full
+                            bg-[var(--color-secondary)] text-white shadow-lg
+                            hover:bg-[var(--color-secondary-hover)] hover:shadow-xl
+                            flex items-center justify-center
+                            transition-all duration-200 animate-bounce cursor-pointer z-10"
+                        aria-label="Scroll to bottom"
+                    >
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                            <line x1="12" y1="5" x2="12" y2="19" />
+                            <polyline points="19 12 12 19 5 12" />
+                        </svg>
+                    </button>
                 )}
-
-                <div ref={bottomRef} />
             </div>
 
             {/* Quick Actions — show only when there's just the welcome message */}
@@ -259,7 +303,7 @@ export default function ChatbotPage() {
             )}
 
             {/* Input */}
-            <div className="flex-shrink-0 px-4 py-3 border-t border-gray-100 bg-[var(--color-background)]">
+            <div className="flex-shrink-0 px-3 py-2.5 sm:px-4 sm:py-3 border-t border-gray-100 bg-[var(--color-background)]">
                 <div className="flex items-end gap-3 bg-white border border-gray-200 rounded-2xl px-4 py-3 shadow-sm
                     focus-within:border-[var(--color-primary)] focus-within:shadow-[0_0_0_3px_var(--color-primary-light)]
                     transition-all duration-200">
