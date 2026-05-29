@@ -83,7 +83,7 @@ export default function ReportHistoryPage() {
                     <th className="px-5 py-4 text-center">
                       {t("table.format")}
                     </th>
-                    <th className="px-5 py-4 text-left pl-8">
+                    <th className="px-5 py-4 text-left ps-8">
                       {t("table.actions")}
                     </th>
                   </tr>
@@ -110,7 +110,7 @@ export default function ReportHistoryPage() {
                         </span>
                       </td>
                       <td className="px-5 py-4">
-                        <div className="flex items-center gap-2 pl-3">
+                        <div className="flex items-center gap-2 ps-3">
                           <button
                             onClick={() => handleDownload(item)}
                             disabled={isDownloadingCsv || isDownloadingPdf}

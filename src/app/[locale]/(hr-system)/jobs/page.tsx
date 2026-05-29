@@ -107,11 +107,11 @@ export default function JobsPage() {
                 setSearchTerm(e.target.value);
                 setPage(1);
               }}
-              className="w-full px-4 py-2 pr-10 rounded-xl border border-gray-200 bg-gray-50 focus:bg-white focus:ring-2 focus:ring-primary/20 outline-none transition text-sm font-medium"
+              className="w-full px-4 py-2 pe-10 rounded-xl border border-gray-200 bg-gray-50 focus:bg-white focus:ring-2 focus:ring-primary/20 outline-none transition text-sm font-medium"
             />
             <Search
               size={16}
-              className="absolute right-3 top-1/2 -translate-y-1/2 text-content-muted"
+              className="absolute end-3 top-1/2 -translate-y-1/2 text-content-muted"
             />
           </div>
 

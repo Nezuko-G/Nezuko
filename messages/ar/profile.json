@@ -5,6 +5,8 @@
     "active": "نشط",
     "inactive": "غير نشط",
     "fields": {
+        "code": "الكود",
+        "active": "نشط",
         "fullName": "الاسم الكامل",
         "email": "البريد الإلكتروني",
         "phone": "الهاتف",

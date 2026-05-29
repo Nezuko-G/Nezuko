@@ -30,7 +30,7 @@ export default function DepartmentTable({ departments }: DepartmentTableProps) {
             <th className="px-5 py-4 text-right">{t("parent")}</th>
             <th className="px-5 py-4 text-center">{t("status")}</th>
             {canEdit && (
-              <th className="px-5 py-4 text-left pl-8">{t("actions")}</th>
+              <th className="px-5 py-4 text-left ps-8">{t("actions")}</th>
             )}
           </tr>
         </thead>
@@ -87,7 +87,7 @@ export default function DepartmentTable({ departments }: DepartmentTableProps) {
               </td>
               {canEdit && (
                 <td className="px-5 py-4">
-                  <div className="flex items-center justify-end gap-2 pl-3">
+                  <div className="flex items-center justify-end gap-2 ps-3">
                     <button
                       onClick={(e) => {
                         e.stopPropagation();

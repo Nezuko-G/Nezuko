@@ -26,7 +26,7 @@ export default function JobTable({ jobs }: JobTableProps) {
           <th className="px-6 py-4 text-right">{t("company")}</th>
           <th className="px-6 py-4 text-center">{t("jobType")}</th>
           <th className="px-6 py-4 text-center">{t("status")}</th>
-          <th className="px-6 py-4 text-left pl-8">{t("actions")}</th>
+          <th className="px-6 py-4 text-left ps-8">{t("actions")}</th>
         </tr>
       </thead>
       <tbody className="divide-y divide-gray-50">
@@ -69,7 +69,7 @@ export default function JobTable({ jobs }: JobTableProps) {
               </span>
             </td>
             <td className="px-6 py-4">
-              <div className="flex items-center justify-end gap-2 pl-3">
+              <div className="flex items-center justify-end gap-2 ps-3">
                 <button
                   onClick={(e) => {
                     e.stopPropagation();

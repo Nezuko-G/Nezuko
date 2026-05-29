@@ -5,6 +5,8 @@
     "active": "Active",
     "inactive": "Inactive",
     "fields": {
+        "code": "Code",
+        "active": "Active",
         "fullName": "Full Name",
         "email": "Email",
         "phone": "Phone",

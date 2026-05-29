@@ -58,7 +58,7 @@ export default function Navbar() {
               size={20}
               className="group-hover:text-primary transition-colors"
             />
-            <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-status-error rounded-full ring-2 ring-secondary" />
+            <span className="absolute top-1.5 end-1.5 w-2 h-2 bg-status-error rounded-full ring-2 ring-secondary" />
           </button>
 
           {/* Avatar */}

@@ -65,7 +65,7 @@ export default function InsurancePlanTable({ plans }: InsurancePlanTableProps) {
                 </span>
               </td>
               <td className="px-5 py-4">
-                <div className="flex items-center justify-end gap-2 pl-3">
+                <div className="flex items-center justify-end gap-2 ps-3">
                   <button
                     onClick={() => router.push(`/insurance/${plan.id}/enroll`)}
                     className="px-2.5 py-1 text-xs font-bold text-primary bg-primary/10 hover:bg-primary hover:text-white rounded-md transition-all"

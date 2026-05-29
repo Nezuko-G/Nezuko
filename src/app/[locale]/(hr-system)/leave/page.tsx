@@ -18,7 +18,7 @@ function SkeletonRow() {
       <td className="px-4 py-3"><div className="h-4 w-24 bg-gray-200 rounded animate-pulse" /></td>
       <td className="px-4 py-3"><div className="h-4 w-32 bg-gray-200 rounded animate-pulse" /></td>
       <td className="px-4 py-3"><div className="h-6 w-16 bg-gray-200 rounded-full animate-pulse" /></td>
-      <td className="px-4 py-3"><div className="h-4 w-16 bg-gray-200 rounded animate-pulse ml-auto" /></td>
+      <td className="px-4 py-3"><div className="h-4 w-16 bg-gray-200 rounded animate-pulse ms-auto" /></td>
     </tr>
   );
 }

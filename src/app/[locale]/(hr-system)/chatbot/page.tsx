@@ -12,7 +12,7 @@ function TypingIndicator() {
             <div className="w-8 h-8 rounded-full bg-[var(--color-secondary)] flex items-center justify-center flex-shrink-0">
                 <BotIcon size={14} />
             </div>
-            <div className="bg-white border border-gray-100 rounded-2xl rounded-bl-sm px-4 py-3 shadow-sm">
+            <div className="bg-white border border-gray-100 rounded-2xl rounded-es-sm px-4 py-3 shadow-sm">
                 <div className="flex gap-1 items-center h-4">
                     {[0, 1, 2].map((i) => (
                         <span
@@ -36,7 +36,9 @@ function MessageBubble({ message }: { message: Message }) {
 
     return (
         <div
-            className={`flex items-end gap-2 animate-slideIn ${isUser ? "flex-row-reverse ml-auto max-w-[85%] sm:max-w-[75%]" : "max-w-[90%] sm:max-w-[80%]"
+            className={`flex items-end gap-2 animate-slideIn ${isUser
+                    ? "flex-row-reverse ml-auto max-w-[85%] sm:max-w-[75%]"
+                    : "ltr:flex-row rtl:flex-row-reverse max-w-[90%] sm:max-w-[80%]"
                 }`}
         >
             {!isUser && (
@@ -47,8 +49,8 @@ function MessageBubble({ message }: { message: Message }) {
             <div className={`flex flex-col gap-1 ${isUser ? "items-end" : "items-start"}`}>
                 <div
                     className={`px-4 py-3 rounded-2xl text-sm leading-relaxed shadow-sm ${isUser
-                            ? "bg-[var(--color-secondary)] text-white rounded-br-sm"
-                            : "bg-white border border-gray-100 text-[var(--color-content)] rounded-bl-sm"
+                            ? "bg-[var(--color-secondary)] text-white ltr:rounded-ee-sm rtl:rounded-es-sm"
+                            : "bg-white border border-gray-100 text-[var(--color-content)] rounded-es-sm"
                         }`}
                 >
                     {isUser ? (
@@ -60,10 +62,10 @@ function MessageBubble({ message }: { message: Message }) {
                                     <p className="mb-2 last:mb-0">{children}</p>
                                 ),
                                 ul: ({ children }) => (
-                                    <ul className="list-disc pl-4 space-y-1 my-2">{children}</ul>
+                                    <ul className="list-disc ps-4 space-y-1 my-2">{children}</ul>
                                 ),
                                 ol: ({ children }) => (
-                                    <ol className="list-decimal pl-4 space-y-1 my-2">{children}</ol>
+                                    <ol className="list-decimal ps-4 space-y-1 my-2">{children}</ol>
                                 ),
                                 li: ({ children }) => (
                                     <li className="text-sm leading-relaxed">{children}</li>
@@ -276,7 +278,7 @@ export default function ChatbotPage() {
                 {isScrolledUp && (
                     <button
                         onClick={scrollToBottom}
-                        className="absolute bottom-4 left-1/2 -translate-x-1/2 w-9 h-9 rounded-full
+                        className="absolute bottom-4 start-1/2 ltr:-translate-x-1/2 rtl:translate-x-1/2 w-9 h-9 rounded-full
                             bg-[var(--color-secondary)] text-white shadow-lg
                             hover:bg-[var(--color-secondary-hover)] hover:shadow-xl
                             flex items-center justify-center

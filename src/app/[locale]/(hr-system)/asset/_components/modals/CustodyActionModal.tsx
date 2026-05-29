@@ -151,7 +151,7 @@ export default function CustodyActionModal() {
                     </option>
                   ))}
                 </select>
-                <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-content-muted">
+                <div className="absolute end-4 top-1/2 -translate-y-1/2 pointer-events-none text-content-muted">
                   {employeesLoading ? (
                     <Loader2 size={14} className="animate-spin" />
                   ) : (
