@@ -1,0 +1,38 @@
+{
+    "back": "العودة إلى لوحة التحكم",
+    "retry": "إعادة المحاولة",
+    "errorMessage": "فشل تحميل الملف الشخصي. يرجى المحاولة مرة أخرى.",
+    "active": "نشط",
+    "inactive": "غير نشط",
+    "fields": {
+        "fullName": "الاسم الكامل",
+        "email": "البريد الإلكتروني",
+        "phone": "الهاتف",
+        "dateOfBirth": "تاريخ الميلاد",
+        "gender": "الجنس",
+        "jobTitle": "المسمى الوظيفي",
+        "employeeCode": "كود الموظف",
+        "hireDate": "تاريخ التوظيف",
+        "status": "الحالة",
+        "departmentId": "معرف القسم",
+        "salary": "الراتب",
+        "country": "الدولة",
+        "city": "المدينة",
+        "address": "العنوان",
+        "contactName": "اسم جهة الاتصال",
+        "contactPhone": "هاتف جهة الاتصال",
+        "relation": "صلة القرابة",
+        "role": "الدور",
+        "memberSince": "عضو منذ",
+        "lastUpdated": "آخر تحديث",
+        "yes": "نعم",
+        "no": "لا"
+    },
+    "sections": {
+        "personal": "المعلومات الشخصية",
+        "job": "معلومات الوظيفة",
+        "address": "العنوان",
+        "emergency": "جهة الاتصال للطوارئ",
+        "account": "الحساب"
+    }
+}

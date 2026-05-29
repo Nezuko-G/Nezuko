@@ -68,7 +68,7 @@ export default function Navbar() {
           >
             <Image
               src="https://i.pravatar.cc/150?img=11"
-              alt="Profile"
+              alt={t("profile")}
               width={40}
               height={40}
               className="w-full h-full object-cover"
@@ -91,7 +91,7 @@ export default function Navbar() {
 
           {/* Language Switcher (Mobile) */}
           <div className="flex items-center justify-between hover:bg-white/10 px-3 py-2.5 rounded-lg transition-colors w-full">
-            <span className="text-sm font-medium text-white">Language</span>
+            <span className="text-sm font-medium text-white">{t("language")}</span>
             <LanguageSwitcher currentLocale={locale} />
           </div>
         </div>

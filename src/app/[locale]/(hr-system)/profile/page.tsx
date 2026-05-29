@@ -1,6 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 import { ArrowLeft, AlertCircle } from "lucide-react";
 import { useProfile } from "./hooks/useProfile";
 import ProfileHeader from "./components/ProfileHeader";
@@ -38,18 +39,19 @@ function ProfileSkeleton() {
 }
 
 function ProfileError({ onRetry }: { onRetry: () => void }) {
+    const t = useTranslations("profile");
     return (
         <div className="p-4 md:p-8 max-w-6xl mx-auto flex items-center justify-center min-h-[60vh]">
             <div className="bg-card rounded-2xl border border-gray-100 shadow-sm p-8 flex flex-col items-center gap-4 text-center max-w-md">
                 <div className="w-12 h-12 rounded-full bg-status-error/10 flex items-center justify-center">
                     <AlertCircle size={24} className="text-status-error" />
                 </div>
-                <p className="text-content-muted text-sm">Failed to load profile. Please try again.</p>
+                <p className="text-content-muted text-sm">{t("errorMessage")}</p>
                 <button
                     onClick={onRetry}
                     className="px-5 py-2 rounded-xl bg-primary text-white text-sm font-bold shadow hover:opacity-90 transition"
                 >
-                    Try Again
+                    {t("retry")}
                 </button>
             </div>
         </div>
@@ -57,6 +59,7 @@ function ProfileError({ onRetry }: { onRetry: () => void }) {
 }
 
 export default function ProfilePage() {
+    const t = useTranslations("profile");
     const router = useRouter();
     const { data, isLoading, isError, refetch } = useProfile();
 
@@ -69,7 +72,7 @@ export default function ProfilePage() {
                 onClick={() => router.push("/dashboard")}
                 className="flex items-center gap-2 text-content-muted hover:text-secondary text-sm font-semibold transition w-fit"
             >
-                <ArrowLeft size={16} /> Back to Dashboard
+                <ArrowLeft size={16} /> {t("back")}
             </button>
 
             <div className="flex flex-col lg:flex-row gap-6">

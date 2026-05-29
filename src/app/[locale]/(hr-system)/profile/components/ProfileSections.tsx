@@ -1,5 +1,6 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import { User, Briefcase, Shield, Calendar, Phone, Tag, DollarSign, CheckCircle, Clock, Mail, Hash, MapPin, PhoneCall, MapPinned, Building, Contact, AlertCircle } from "lucide-react";
 
 interface Props {
@@ -71,67 +72,68 @@ function SectionGrid({ children }: { children: React.ReactNode }) {
 }
 
 export default function ProfileSections({ data }: Props) {
+    const t = useTranslations("profile");
     const hasAddressData = data.country || data.city || data.address;
     const hasEmergencyData = data.emergencyName || data.emergencyPhone || data.emergencyRelation;
 
     return (
         <div className="bg-card rounded-2xl border border-gray-200 shadow-sm p-4 md:p-5 flex flex-col gap-6">
             <div className="flex flex-col gap-3">
-                <SectionHeading icon={User} label="Personal Info" />
+                <SectionHeading icon={User} label={t("sections.personal")} />
                 <SectionGrid>
-                    <Field label="Full Name" value={`${data.firstName} ${data.lastName}`} />
-                    <Field label="Email" value={data.email} />
-                    {data.phone && <Field label="Phone" value={data.phone} />}
-                    {data.dateOfBirth && <Field label="Date of Birth" value={formatDate(data.dateOfBirth)!} />}
+                    <Field label={t("fields.fullName")} value={`${data.firstName} ${data.lastName}`} />
+                    <Field label={t("fields.email")} value={data.email} />
+                    {data.phone && <Field label={t("fields.phone")} value={data.phone} />}
+                    {data.dateOfBirth && <Field label={t("fields.dateOfBirth")} value={formatDate(data.dateOfBirth)!} />}
                     {data.gender && (
-                        <Field label="Gender" value={data.gender.charAt(0) + data.gender.slice(1).toLowerCase()} />
+                        <Field label={t("fields.gender")} value={data.gender.charAt(0) + data.gender.slice(1).toLowerCase()} />
                     )}
                 </SectionGrid>
             </div>
 
             <div className="flex flex-col gap-3">
-                <SectionHeading icon={Briefcase} label="Job Info" />
+                <SectionHeading icon={Briefcase} label={t("sections.job")} />
                 <SectionGrid>
-                    {data.jobTitle && <Field label="Job Title" value={data.jobTitle} />}
-                    {data.employeeCode && <Field label="Employee Code" value={data.employeeCode} />}
-                    {data.hireDate && <Field label="Hire Date" value={formatDate(data.hireDate)!} />}
+                    {data.jobTitle && <Field label={t("fields.jobTitle")} value={data.jobTitle} />}
+                    {data.employeeCode && <Field label={t("fields.employeeCode")} value={data.employeeCode} />}
+                    {data.hireDate && <Field label={t("fields.hireDate")} value={formatDate(data.hireDate)!} />}
                     {data.status && (
-                        <Field label="Status" value={data.status.charAt(0) + data.status.slice(1).toLowerCase()} />
+                        <Field label={t("fields.status")} value={data.status.charAt(0) + data.status.slice(1).toLowerCase()} />
                     )}
-                    {data.departmentId && <Field label="Department ID" value={data.departmentId} />}
-                    {data.salary != null && <Field label="Salary" value={`$${data.salary.toLocaleString()}`} />}
+                    {data.departmentId && <Field label={t("fields.departmentId")} value={data.departmentId} />}
+                    {data.salary != null && <Field label={t("fields.salary")} value={`$${data.salary.toLocaleString()}`} />}
                 </SectionGrid>
             </div>
 
             {hasAddressData && (
                 <div className="flex flex-col gap-3">
-                    <SectionHeading icon={MapPin} label="Address" />
+                    <SectionHeading icon={MapPin} label={t("sections.address")} />
                     <SectionGrid>
-                        {data.country && <Field label="Country" value={data.country} />}
-                        {data.city && <Field label="City" value={data.city} />}
-                        {data.address && <Field label="Address" value={data.address} />}
+                        {data.country && <Field label={t("fields.country")} value={data.country} />}
+                        {data.city && <Field label={t("fields.city")} value={data.city} />}
+                        {data.address && <Field label={t("fields.address")} value={data.address} />}
                     </SectionGrid>
                 </div>
             )}
 
             {hasEmergencyData && (
                 <div className="flex flex-col gap-3">
-                    <SectionHeading icon={PhoneCall} label="Emergency Contact" />
+                    <SectionHeading icon={PhoneCall} label={t("sections.emergency")} />
                     <SectionGrid>
-                        {data.emergencyName && <Field label="Contact Name" value={data.emergencyName} />}
-                        {data.emergencyPhone && <Field label="Contact Phone" value={data.emergencyPhone} />}
-                        {data.emergencyRelation && <Field label="Relation" value={data.emergencyRelation} />}
+                        {data.emergencyName && <Field label={t("fields.contactName")} value={data.emergencyName} />}
+                        {data.emergencyPhone && <Field label={t("fields.contactPhone")} value={data.emergencyPhone} />}
+                        {data.emergencyRelation && <Field label={t("fields.relation")} value={data.emergencyRelation} />}
                     </SectionGrid>
                 </div>
             )}
 
             <div className="flex flex-col gap-3">
-                <SectionHeading icon={Shield} label="Account" />
+                <SectionHeading icon={Shield} label={t("sections.account")} />
                 <SectionGrid>
-                    <Field label="Role" value={formatRole(data.role)} />
-                    <Field label="Active" value={data.isActive ? "Yes" : "No"} />
-                    <Field label="Member Since" value={formatDate(data.createdAt)!} />
-                    <Field label="Last Updated" value={formatDate(data.updatedAt)!} />
+                    <Field label={t("fields.role")} value={formatRole(data.role)} />
+                    <Field label={t("fields.active")} value={data.isActive ? t("fields.yes") : t("fields.no")} />
+                    <Field label={t("fields.memberSince")} value={formatDate(data.createdAt)!} />
+                    <Field label={t("fields.lastUpdated")} value={formatDate(data.updatedAt)!} />
                 </SectionGrid>
             </div>
         </div>

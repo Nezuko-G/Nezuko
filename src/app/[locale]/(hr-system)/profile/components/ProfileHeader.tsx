@@ -1,5 +1,6 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import { cn } from "@/lib/utils";
 import { Mail, Phone, Calendar, Hash } from "lucide-react";
 
@@ -40,12 +41,13 @@ const FIELD_ICONS = {
 } as const;
 
 export default function ProfileHeader({ data }: Props) {
+    const t = useTranslations("profile");
     const initials = `${data.firstName[0]}${data.lastName[0]}`;
 
     const sidebarFields = [
-        { key: "code", label: "Code", value: data.employeeCode, icon: FIELD_ICONS.code },
-        { key: "phone", label: "Phone", value: data.phone, icon: FIELD_ICONS.phone },
-        { key: "hireDate", label: "Hire Date", value: formatDate(data.hireDate), icon: FIELD_ICONS.hireDate },
+        { key: "code", label: t("fields.code"), value: data.employeeCode, icon: FIELD_ICONS.code },
+        { key: "phone", label: t("fields.phone"), value: data.phone, icon: FIELD_ICONS.phone },
+        { key: "hireDate", label: t("fields.hireDate"), value: formatDate(data.hireDate), icon: FIELD_ICONS.hireDate },
     ].filter((f) => f.value);
 
     return (
@@ -77,7 +79,7 @@ export default function ProfileHeader({ data }: Props) {
                             ? "bg-status-success/10 text-status-success"
                             : "bg-status-error/10 text-status-error"
                     )}>
-                        {data.isActive ? "Active" : "Inactive"}
+                        {data.isActive ? t("active") : t("inactive")}
                     </span>
                 </div>
             </div>
