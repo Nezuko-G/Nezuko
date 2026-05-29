@@ -64,7 +64,7 @@ export default function ReportsHubPage() {
                   <FileText size={22} />
                 </div>
                 <div className="space-y-1">
-                  <h3 className="text-lg font-semibold text-secondary">
+                  <h3 className="text-lg text-start font-semibold text-secondary">
                     {t(`types.${report.key}.name`)}
                   </h3>
                   <p className="text-sm text-content-muted leading-relaxed text-start w-full">
