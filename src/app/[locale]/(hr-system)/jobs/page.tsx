@@ -85,7 +85,7 @@ export default function JobsPage() {
           </h1>
         </div>
 
-        <RoleGuard allowedRoles={["HR", "TENANT_OWNER"]}>
+        <RoleGuard allowedRoles={["HR_ADMIN", "TENANT_OWNER"]}>
           <button
             onClick={() => router.push("/jobs/create")}
             className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-primary text-secondary font-bold text-sm shadow hover:opacity-90 transition w-full sm:w-auto justify-center"

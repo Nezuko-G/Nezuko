@@ -23,7 +23,7 @@ export default function AssetTable({
   const t = useTranslations("assets.list");
   const { openModal } = useAssetUIStore();
   const { role } = useAuthStore();
-  const actuallyReadOnly = isReadOnly || role !== "HR";
+  const actuallyReadOnly = isReadOnly || role !== "HR_ADMIN";
   const router = useRouter();
 
   const getStatusColor = (status: Asset["status"]) => {

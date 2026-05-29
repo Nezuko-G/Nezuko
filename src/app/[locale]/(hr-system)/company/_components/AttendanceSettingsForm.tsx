@@ -12,7 +12,7 @@ import { Button } from "@/components/ui/button";
 import Toggle from "@/components/ui/toggle";
 import { MapPin, Loader2 as Spinner } from "lucide-react";
 
-const EDIT_ROLES = ["HR"];
+const EDIT_ROLES = ["HR_ADMIN"];
 
 const DEFAULTS = {
   workDayStart: "09:00",

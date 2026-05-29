@@ -3,23 +3,23 @@ import { z } from "zod";
 export const LeaveStatusEnum = z.enum(["PENDING", "APPROVED", "REJECTED", "CANCELLED"]);
 
 export const UserDTO = z.object({
-  id: z.string().uuid(),
+  id: z.string(),
   firstName: z.string(),
   lastName: z.string(),
   email: z.string().email(),
-  employeeCode: z.string(),
+  employeeCode: z.string().nullable(),
   role: z.string(),
-  departmentId: z.string().uuid().nullable(),
+  departmentId: z.string().nullable().default(null),
 });
 
 export const LeaveRequestDTO = z.object({
-  id: z.string().uuid(),
+  id: z.string(),
   startDate: z.string().datetime(),
   endDate: z.string().datetime(),
   reason: z.string().min(1),
   status: LeaveStatusEnum,
-  userId: z.string().uuid(),
-  reviewerId: z.string().uuid().nullable(),
+  userId: z.string(),
+  reviewerId: z.string().nullable(),
   reviewNote: z.string().nullable(),
   reviewedAt: z.string().datetime().nullable(),
   createdAt: z.string().datetime(),
@@ -44,7 +44,7 @@ export type User = {
   firstName: string;
   lastName: string;
   email: string;
-  employeeCode: string;
+  employeeCode: string | null;
   role: string;
   departmentId: string | null;
 };

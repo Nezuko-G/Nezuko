@@ -56,7 +56,7 @@ export default function AssetsPage() {
             <span>{t("myAssetsBtn")}</span>
           </button>
 
-          <RoleGuard allowedRoles={["HR"]}>
+          <RoleGuard allowedRoles={["HR_ADMIN"]}>
             <button
               onClick={() => router.push("/asset/report")}
               className="flex items-center gap-2 px-4 py-2 rounded-xl border border-gray-200 bg-card text-content hover:text-primary transition font-bold text-sm shadow-sm"

@@ -7,7 +7,7 @@ import { useAuthStore } from "@/hooks/useAuthStore";
 import { Button } from "@/components/ui/button";
 import CompanyLogoSection from "./CompanyLogoSection";
 
-const EDIT_ROLES = ["HR"];
+const EDIT_ROLES = ["HR_ADMIN"];
 
 type FieldConfig = {
   key: string;

@@ -7,7 +7,7 @@ import type { UpdateGeneralSettingsRequest } from "../types/company.dto";
 import { useAuthStore } from "@/hooks/useAuthStore";
 import { Button } from "@/components/ui/button";
 
-const EDIT_ROLES = ["HR"];
+const EDIT_ROLES = ["HR_ADMIN"];
 
 type SegmentedProps<T extends string> = {
   label: string;

@@ -12,6 +12,7 @@ import { z } from "zod";
 
 export default function PlanDrawer() {
   const t = useTranslations("insurance.drawers.plan");
+  const tTypes = useTranslations("insurance.types");
   const { isDrawerOpen, drawerType, selectedPlan, closeDrawer } =
     useInsuranceUIStore();
   const { createPlan, updatePlan, isLoading } = useInsuranceMutations();
@@ -115,9 +116,9 @@ export default function PlanDrawer() {
               {...register("type")}
               className="w-full bg-background border border-gray-200 rounded-xl px-4 py-3 text-sm focus:border-primary focus:outline-none"
             >
-              <option value="BASIC">{t("types.BASIC")}</option>
-              <option value="STANDARD">{t("types.STANDARD")}</option>
-              <option value="PREMIUM">{t("types.PREMIUM")}</option>
+              <option value="BASIC">{tTypes("BASIC")}</option>
+              <option value="STANDARD">{tTypes("STANDARD")}</option>
+              <option value="PREMIUM">{tTypes("PREMIUM")}</option>
             </select>
           </div>
 

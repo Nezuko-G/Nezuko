@@ -33,7 +33,7 @@ export default function ReportHistoryPage() {
 
   return (
     <RoleGuard
-      allowedRoles={["HR", "TENANT_OWNER"]}
+      allowedRoles={["HR_ADMIN", "TENANT_OWNER"]}
       fallback={
         <div className="p-8 text-center font-bold text-status-error">
           {t("noAccess")}

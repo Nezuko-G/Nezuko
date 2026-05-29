@@ -9,16 +9,29 @@ import { LeaveRequestForm } from "./_components/LeaveRequestForm";
 import { LeaveRequestsTable } from "./_components/LeaveRequestsTable";
 import { LeaveFilters } from "./_components/LeaveFilters";
 import type { LeaveRequest } from "@/app/[locale]/(hr-system)/leave/types/leave.dto";
+import RoleGuard from "@/components/RoleGuard/RoleGuard";
 
 function SkeletonRow() {
   return (
     <tr className="border-b border-gray-100">
-      <td className="px-4 py-3"><div className="h-4 w-20 bg-gray-200 rounded animate-pulse" /></td>
-      <td className="px-4 py-3"><div className="h-4 w-24 bg-gray-200 rounded animate-pulse" /></td>
-      <td className="px-4 py-3"><div className="h-4 w-24 bg-gray-200 rounded animate-pulse" /></td>
-      <td className="px-4 py-3"><div className="h-4 w-32 bg-gray-200 rounded animate-pulse" /></td>
-      <td className="px-4 py-3"><div className="h-6 w-16 bg-gray-200 rounded-full animate-pulse" /></td>
-      <td className="px-4 py-3"><div className="h-4 w-16 bg-gray-200 rounded animate-pulse ms-auto" /></td>
+      <td className="px-4 py-3">
+        <div className="h-4 w-20 bg-gray-200 rounded animate-pulse" />
+      </td>
+      <td className="px-4 py-3">
+        <div className="h-4 w-24 bg-gray-200 rounded animate-pulse" />
+      </td>
+      <td className="px-4 py-3">
+        <div className="h-4 w-24 bg-gray-200 rounded animate-pulse" />
+      </td>
+      <td className="px-4 py-3">
+        <div className="h-4 w-32 bg-gray-200 rounded animate-pulse" />
+      </td>
+      <td className="px-4 py-3">
+        <div className="h-6 w-16 bg-gray-200 rounded-full animate-pulse" />
+      </td>
+      <td className="px-4 py-3">
+        <div className="h-4 w-16 bg-gray-200 rounded animate-pulse ms-auto" />
+      </td>
     </tr>
   );
 }
@@ -26,15 +39,25 @@ function SkeletonRow() {
 export default function LeavePage() {
   const t = useTranslations("leave");
   const { role } = useAuthStore();
-  const isHR = role === "HR" || role === "MANAGER";
-  const [statusFilter, setStatusFilter] = useState<LeaveRequest["status"] | "ALL">("ALL");
+  const isHR = role === "HR_ADMIN" || role === "MANAGER";
+  const [statusFilter, setStatusFilter] = useState<
+    LeaveRequest["status"] | "ALL"
+  >("ALL");
   const [showForm, setShowForm] = useState(false);
 
-  const { data: requests = [], isLoading, isError, error, refetch, isFetching } = useLeaveRequests();
+  const {
+    data: requests = [],
+    isLoading,
+    isError,
+    error,
+    refetch,
+    isFetching,
+  } = useLeaveRequests();
 
-  const filteredRequests = statusFilter === "ALL"
-    ? requests
-    : requests.filter((r) => r.status === statusFilter);
+  const filteredRequests =
+    statusFilter === "ALL"
+      ? requests
+      : requests.filter((r) => r.status === statusFilter);
 
   return (
     <div className="p-6 max-w-6xl mx-auto">
@@ -47,16 +70,21 @@ export default function LeavePage() {
             <div className="w-4 h-4 border-2 border-primary/30 border-t-primary rounded-full animate-spin" />
           )}
         </div>
-        <button
-          onClick={() => setShowForm(true)}
-          className="bg-primary hover:bg-primary/80 text-secondary text-sm font-semibold px-5 py-2.5 rounded-lg transition-colors shadow-lg shadow-primary/20"
-        >
-          {t("createRequest")}
-        </button>
+        <RoleGuard allowedRoles={["EMPLOYEE"]}>
+          <button
+            onClick={() => setShowForm(true)}
+            className="bg-primary hover:bg-primary/80 text-secondary text-sm font-semibold px-5 py-2.5 rounded-lg transition-colors shadow-lg shadow-primary/20"
+          >
+            {t("createRequest")}
+          </button>
+        </RoleGuard>
       </div>
 
       <div className="mb-6">
-        <LeaveFilters statusFilter={statusFilter} onStatusChange={setStatusFilter} />
+        <LeaveFilters
+          statusFilter={statusFilter}
+          onStatusChange={setStatusFilter}
+        />
       </div>
 
       {isLoading && (
@@ -64,13 +92,27 @@ export default function LeavePage() {
           <table className="w-full text-sm">
             <thead>
               <tr className="bg-gray-50 border-b border-gray-200">
-                <th className="text-left px-4 py-3 text-xs font-medium text-gray-500">{t("employee")}</th>
-                <th className="text-left px-4 py-3 text-xs font-medium text-gray-500">{t("employeeCode")}</th>
-                <th className="text-left px-4 py-3 text-xs font-medium text-gray-500">{t("startDate")}</th>
-                <th className="text-left px-4 py-3 text-xs font-medium text-gray-500">{t("endDate")}</th>
-                <th className="text-left px-4 py-3 text-xs font-medium text-gray-500">{t("reason")}</th>
-                <th className="text-left px-4 py-3 text-xs font-medium text-gray-500">{t("status")}</th>
-                <th className="text-right px-4 py-3 text-xs font-medium text-gray-500">{t("actions")}</th>
+                <th className="text-left px-4 py-3 text-xs font-medium text-gray-500">
+                  {t("employee")}
+                </th>
+                <th className="text-left px-4 py-3 text-xs font-medium text-gray-500">
+                  {t("employeeCode")}
+                </th>
+                <th className="text-left px-4 py-3 text-xs font-medium text-gray-500">
+                  {t("startDate")}
+                </th>
+                <th className="text-left px-4 py-3 text-xs font-medium text-gray-500">
+                  {t("endDate")}
+                </th>
+                <th className="text-left px-4 py-3 text-xs font-medium text-gray-500">
+                  {t("reason")}
+                </th>
+                <th className="text-left px-4 py-3 text-xs font-medium text-gray-500">
+                  {t("status")}
+                </th>
+                <th className="text-right px-4 py-3 text-xs font-medium text-gray-500">
+                  {t("actions")}
+                </th>
               </tr>
             </thead>
             <tbody>

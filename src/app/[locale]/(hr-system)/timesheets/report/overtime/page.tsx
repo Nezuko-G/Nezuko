@@ -52,7 +52,7 @@ export default function OvertimeReportPage() {
   ];
 
   return (
-    <RoleGuard allowedRoles={["HR", "MANAGER"]}>
+    <RoleGuard allowedRoles={["HR_ADMIN", "MANAGER"]}>
       <div className="p-6">
         <div className="flex items-center justify-between mb-6">
           <div className="flex items-center gap-3">
