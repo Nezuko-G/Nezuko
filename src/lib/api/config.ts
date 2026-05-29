@@ -4,6 +4,7 @@ export const apis = {
     emailSignup: "/auth/email-signup",
     forgetPassword: "/auth/forget-password",
     refresh: "/auth/refresh",
+    me: "/auth/me",
   },
 
   home: {

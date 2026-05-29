@@ -62,7 +62,10 @@ export default function Navbar() {
           </button>
 
           {/* Avatar */}
-          <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-zinc-800 border-2 border-primary/20 overflow-hidden shrink-0 cursor-pointer hover:border-primary transition-colors">
+          <Link
+            href="/profile"
+            className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-zinc-800 border-2 border-primary/20 overflow-hidden shrink-0 cursor-pointer hover:border-primary transition-colors"
+          >
             <Image
               src="https://i.pravatar.cc/150?img=11"
               alt="Profile"
@@ -70,7 +73,7 @@ export default function Navbar() {
               height={40}
               className="w-full h-full object-cover"
             />
-          </div>
+          </Link>
         </div>
       </div>
 
