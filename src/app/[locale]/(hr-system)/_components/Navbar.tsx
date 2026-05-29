@@ -58,19 +58,22 @@ export default function Navbar() {
               size={20}
               className="group-hover:text-primary transition-colors"
             />
-            <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-status-error rounded-full ring-2 ring-secondary" />
+            <span className="absolute top-1.5 end-1.5 w-2 h-2 bg-status-error rounded-full ring-2 ring-secondary" />
           </button>
 
           {/* Avatar */}
-          <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-zinc-800 border-2 border-primary/20 overflow-hidden shrink-0 cursor-pointer hover:border-primary transition-colors">
+          <Link
+            href="/profile"
+            className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-zinc-800 border-2 border-primary/20 overflow-hidden shrink-0 cursor-pointer hover:border-primary transition-colors"
+          >
             <Image
               src="https://i.pravatar.cc/150?img=11"
-              alt="Profile"
+              alt={t("profile")}
               width={40}
               height={40}
               className="w-full h-full object-cover"
             />
-          </div>
+          </Link>
         </div>
       </div>
 
@@ -88,7 +91,7 @@ export default function Navbar() {
 
           {/* Language Switcher (Mobile) */}
           <div className="flex items-center justify-between hover:bg-white/10 px-3 py-2.5 rounded-lg transition-colors w-full">
-            <span className="text-sm font-medium text-white">Language</span>
+            <span className="text-sm font-medium text-white">{t("language")}</span>
             <LanguageSwitcher currentLocale={locale} />
           </div>
         </div>

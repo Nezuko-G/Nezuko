@@ -129,7 +129,7 @@ export default function CoverageReportPage() {
               <th className="px-6 py-4 text-right">{t("table.planName")}</th>
               <th className="px-6 py-4 text-center">{t("table.type")}</th>
               <th className="px-6 py-4 text-center">{t("table.enrolled")}</th>
-              <th className="px-6 py-4 text-right pl-8">
+              <th className="px-6 py-4 text-right ps-8">
                 {t("table.monthlyCost")}
               </th>
             </tr>
@@ -153,7 +153,7 @@ export default function CoverageReportPage() {
                     {row.activeEnrollments}
                   </span>
                 </td>
-                <td className="px-6 py-4 font-bold text-secondary text-base pl-8">
+                <td className="px-6 py-4 font-bold text-secondary text-base ps-8">
                   {row.totalMonthlyCost.toLocaleString()} {t("currency")}
                 </td>
               </tr>

@@ -46,7 +46,7 @@ export function LocationStatus({ state, onRetry }: Props) {
         <span>{t("widget.locationTimeout")}</span>
         <button
           onClick={onRetry}
-          className="ml-1 inline-flex items-center gap-1 text-xs font-medium text-amber-700 hover:text-amber-800 underline"
+          className="ms-1 inline-flex items-center gap-1 text-xs font-medium text-amber-700 hover:text-amber-800 underline"
         >
           <RefreshCw size={12} />
           {t("widget.retryLocation")}

@@ -20,7 +20,9 @@
     "title": "HR Management",
     "searchPlaceholder": "Search...",
     "aiChat": "AI Chat",
-    "quickAdd": "Quick Add"
+    "quickAdd": "Quick Add",
+    "language": "Language",
+    "profile": "Profile"
   },
   "hero": {
     "greeting": "Dashboard Welcome",

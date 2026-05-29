@@ -93,7 +93,7 @@ function MetricCard({
       {...fadeUp(delay)}
       className={`group relative flex flex-col gap-3 overflow-hidden rounded-2xl border-2 border-gray-200 bg-card p-4 shadow-sm transition-all duration-200 hover:-translate-y-1 hover:border-secondary/20 hover:shadow-md border-l-4 ${METRIC_ACCENT[index]}`}
     >
-      <div className="absolute -right-4 -top-4 h-16 w-16 rounded-full bg-secondary/[0.03] transition-all duration-300 group-hover:scale-150" />
+      <div className="absolute -end-4 -top-4 h-16 w-16 rounded-full bg-secondary/[0.03] transition-all duration-300 group-hover:scale-150" />
       <div className="flex items-center justify-between">
         <div className="flex h-9 w-9 items-center justify-center rounded-xl border-2 border-primary/20 bg-primary-light">
           <Icon size={16} className="text-secondary" />
@@ -317,25 +317,25 @@ export default function DashboardPage() {
         >
           {/* Animated orbs */}
           <motion.div
-            className="pointer-events-none absolute -left-8 -top-8 h-40 w-40 rounded-full"
+            className="pointer-events-none absolute -start-8 -top-8 h-40 w-40 rounded-full"
             style={{ background: "radial-gradient(circle, rgba(0,255,185,0.18) 0%, transparent 70%)" }}
             animate={{ scale: [1, 1.18, 1], opacity: [0.7, 1, 0.7] }}
             transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
           />
           <motion.div
-            className="pointer-events-none absolute -bottom-10 left-1/3 h-32 w-32 rounded-full"
+            className="pointer-events-none absolute -bottom-10 start-1/3 h-32 w-32 rounded-full"
             style={{ background: "radial-gradient(circle, rgba(0,255,185,0.12) 0%, transparent 70%)" }}
             animate={{ scale: [1, 1.25, 1], opacity: [0.5, 0.9, 0.5] }}
             transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
           />
           <motion.div
-            className="pointer-events-none absolute -right-6 -top-6 h-36 w-36 rounded-full"
+            className="pointer-events-none absolute -end-6 -top-6 h-36 w-36 rounded-full"
             style={{ background: "radial-gradient(circle, rgba(0,204,148,0.14) 0%, transparent 70%)" }}
             animate={{ scale: [1, 1.2, 1], opacity: [0.6, 1, 0.6] }}
             transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
           />
           <motion.div
-            className="pointer-events-none absolute bottom-0 right-1/4 h-24 w-24 rounded-full"
+            className="pointer-events-none absolute bottom-0 end-1/4 h-24 w-24 rounded-full"
             style={{ background: "radial-gradient(circle, rgba(0,255,185,0.09) 0%, transparent 70%)" }}
             animate={{ scale: [1, 1.3, 1], opacity: [0.4, 0.8, 0.4] }}
             transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 2 }}

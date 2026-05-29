@@ -68,7 +68,7 @@ export default function AssetTable({
             <th className="px-5 py-4 text-center">{t("table.status")}</th>
             <th className="px-5 py-4 text-center">{t("table.condition")}</th>
             {!actuallyReadOnly && (
-              <th className="px-5 py-4 text-left pl-8">{t("table.actions")}</th>
+              <th className="px-5 py-4 text-left ps-8">{t("table.actions")}</th>
             )}
           </tr>
         </thead>
@@ -126,7 +126,7 @@ export default function AssetTable({
 
                 {!actuallyReadOnly && (
                   <td className="px-5 py-4">
-                    <div className="flex items-center justify-end gap-2 pl-3">
+                    <div className="flex items-center justify-end gap-2 ps-3">
                       {asset.status === "AVAILABLE" && (
                         <button
                           title={t("actions.assign")}

@@ -130,7 +130,7 @@ export default function EnrollEmployeePage() {
         </form>
 
         <div className="bg-primary-light/30 p-6 rounded-3xl border border-primary/20 shadow-sm flex flex-col items-center text-center space-y-4 relative overflow-hidden">
-          <div className="absolute top-0 right-0 w-24 h-24 bg-primary/10 rounded-bl-full -z-10" />
+          <div className="absolute top-0 end-0 w-24 h-24 bg-primary/10 rounded-es-full -z-10" />
           <div className="w-14 h-14 bg-primary/20 text-primary rounded-2xl flex items-center justify-center">
             <Calculator size={28} />
           </div>

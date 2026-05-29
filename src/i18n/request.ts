@@ -30,6 +30,7 @@ export default getRequestConfig(async ({ requestLocale }) => {
   const reports = (await import(`../../messages/${locale}/reports.json`)).default
   const jobs = (await import(`../../messages/${locale}/jobs.json`)).default
   const chatbot = (await import(`../../messages/${locale}/chatbot.json`)).default
+  const profile = (await import(`../../messages/${locale}/profile.json`)).default
 
   return {
     locale: locale as typeof routing.locales[number],
@@ -52,7 +53,8 @@ export default getRequestConfig(async ({ requestLocale }) => {
       company,
       projects,
       jobs,
-      chatbot
+      chatbot,
+      profile
     },
   }
 })

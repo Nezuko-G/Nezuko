@@ -143,7 +143,7 @@ export default function MyInsurancePage() {
               {t("dependents.addBtn")}
             </button>
             {maxReached && (
-              <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 hidden group-hover:block w-48 p-2 bg-secondary text-white text-[10px] rounded-lg text-center font-bold shadow-xl z-10">
+              <div className="absolute bottom-full start-1/2 ltr:-translate-x-1/2 rtl:translate-x-1/2 mb-2 hidden group-hover:block w-48 p-2 bg-secondary text-white text-[10px] rounded-lg text-center font-bold shadow-xl z-10">
                 {t("dependents.limitReached")}
               </div>
             )}

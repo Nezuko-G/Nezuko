@@ -183,7 +183,7 @@ export default function AssetDetailPage() {
         </div>
       </div>
 
-                  <div className="flex flex-col md:items-end gap-1.5 text-right pl-2">
+                  <div className="flex flex-col md:items-end gap-1.5 text-right ps-2">
                     <div className="flex items-center gap-3">
                       <span className="flex items-center gap-1 px-2 py-0.5 bg-gray-50 text-content-muted rounded-md text-[10px] font-bold border border-gray-100">
                         <CalendarClock size={12} />

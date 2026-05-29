@@ -133,7 +133,7 @@ export default function PlanDrawer() {
                 className="w-full bg-background border border-gray-200 rounded-xl px-4 py-3 text-sm focus:border-primary focus:outline-none text-right"
                 dir="ltr"
               />
-              <span className="absolute left-4 top-1/2 -translate-y-1/2 text-content-muted font-bold">
+              <span className="absolute start-4 top-1/2 -translate-y-1/2 text-content-muted font-bold">
                 %
               </span>
             </div>

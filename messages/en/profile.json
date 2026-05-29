@@ -1,0 +1,40 @@
+{
+    "back": "Back to Dashboard",
+    "retry": "Try Again",
+    "errorMessage": "Failed to load profile. Please try again.",
+    "active": "Active",
+    "inactive": "Inactive",
+    "fields": {
+        "code": "Code",
+        "active": "Active",
+        "fullName": "Full Name",
+        "email": "Email",
+        "phone": "Phone",
+        "dateOfBirth": "Date of Birth",
+        "gender": "Gender",
+        "jobTitle": "Job Title",
+        "employeeCode": "Employee Code",
+        "hireDate": "Hire Date",
+        "status": "Status",
+        "departmentId": "Department ID",
+        "salary": "Salary",
+        "country": "Country",
+        "city": "City",
+        "address": "Address",
+        "contactName": "Contact Name",
+        "contactPhone": "Contact Phone",
+        "relation": "Relation",
+        "role": "Role",
+        "memberSince": "Member Since",
+        "lastUpdated": "Last Updated",
+        "yes": "Yes",
+        "no": "No"
+    },
+    "sections": {
+        "personal": "Personal Info",
+        "job": "Job Info",
+        "address": "Address",
+        "emergency": "Emergency Contact",
+        "account": "Account"
+    }
+}

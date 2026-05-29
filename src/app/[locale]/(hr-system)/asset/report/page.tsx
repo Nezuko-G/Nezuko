@@ -107,7 +107,7 @@ export default function DepreciationReportPage() {
               <th className="px-6 py-4 text-right">
                 {tReport("table.currentValue")}
               </th>
-              <th className="px-6 py-4 text-right pl-8">
+              <th className="px-6 py-4 text-right ps-8">
                 {tReport("table.depreciation")}
               </th>
             </tr>
