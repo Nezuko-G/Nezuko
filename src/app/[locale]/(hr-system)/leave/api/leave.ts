@@ -62,7 +62,10 @@ export async function getAllLeaveRequests(params?: { limit?: number; page?: numb
   
   const data = response.data.data?.leaveRequests ?? response.data.leaveRequests ?? [];
   const parsed = LeaveRequestDTO.array().safeParse(data);
-  if (!parsed.success) return [];
+  if (!parsed.success) {
+    console.error("[getAllLeaveRequests] Parse failure:", parsed.error);
+    throw new Error("Failed to parse leave requests data");
+  }
   
   return mapLeaveRequestsFromDTO(parsed.data);
 }

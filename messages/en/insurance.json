@@ -113,7 +113,13 @@
       "addBtn": "Add Dependent",
       "limitReached": "You have reached the maximum number of dependents for this plan",
       "empty": "No dependents added yet",
-      "removeConfirm": "Are you sure you want to remove this dependent from coverage?"
+      "removeConfirm": "Are you sure you want to remove this dependent from coverage?",
+      "fields": {
+        "name": "Full Name",
+        "relation": "Relation",
+        "dateOfBirth": "Date of Birth",
+        "nationalId": "National ID"
+      }
     }
   },
   "relations": {
@@ -122,6 +128,13 @@
     "PARENT": "Parent"
   },
   "modals": {
+    "addDependent": {
+      "title": "Add Dependent"
+    },
+    "removeDependent": {
+      "title": "Remove Dependent",
+      "message": "Are you sure you want to remove {name} from coverage?"
+    },
     "deactivate": {
       "title": "Deactivate Plan",
       "message": "Are you sure you want to deactivate the plan {name}?",
@@ -129,7 +142,9 @@
     },
     "buttons": {
       "cancel": "Cancel",
-      "confirmDeactivate": "Confirm Deactivation"
+      "confirmDeactivate": "Confirm Deactivation",
+      "confirmAdd": "Add",
+      "confirmRemove": "Remove"
     }
   },
   "errors": {

@@ -113,7 +113,13 @@
       "addBtn": "إضافة مُعال",
       "limitReached": "لقد وصلت إلى الحد الأقصى لعدد المُعالين في هذه الخطة",
       "empty": "لم تتم إضافة أي مُعالين بعد",
-      "removeConfirm": "هل أنت متأكد من رغبتك في إزالة هذا المُعال من التغطية؟"
+      "removeConfirm": "هل أنت متأكد من رغبتك في إزالة هذا المُعال من التغطية؟",
+      "fields": {
+        "name": "الاسم الكامل",
+        "relation": "صلة القرابة",
+        "dateOfBirth": "تاريخ الميلاد",
+        "nationalId": "الرقم القومي"
+      }
     }
   },
   "relations": {
@@ -122,6 +128,13 @@
     "PARENT": "والد/والدة"
   },
   "modals": {
+    "addDependent": {
+      "title": "إضافة مُعال"
+    },
+    "removeDependent": {
+      "title": "إزالة مُعال",
+      "message": "هل أنت متأكد من رغبتك في إزالة {name} من التغطية؟"
+    },
     "deactivate": {
       "title": "إلغاء تنشيط الخطة",
       "message": "هل أنت متأكد من رغبتك في إلغاء تنشيط الخطة {name}؟",
@@ -129,7 +142,9 @@
     },
     "buttons": {
       "cancel": "إلغاء",
-      "confirmDeactivate": "تأكيد إلغاء التنشيط"
+      "confirmDeactivate": "تأكيد إلغاء التنشيط",
+      "confirmAdd": "إضافة",
+      "confirmRemove": "إزالة"
     }
   },
   "errors": {

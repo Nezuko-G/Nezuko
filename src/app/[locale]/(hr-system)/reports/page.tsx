@@ -35,7 +35,7 @@ export default function ReportsHubPage() {
           <RoleGuard allowedRoles={["HR_ADMIN", "TENANT_OWNER"]}>
             <button
               onClick={() => router.push("/reports/history")}
-              className="flex items-center gap-2 px-4 py-2 rounded-xl border border-gray-200 bg-card text-secondary font-bold text-sm shadow-sm hover:bg-gray-50 transition"
+              className="flex items-center gap-2 px-4 py-2 rounded-xl border border-gray-200 bg-card text-secondary font-bold text-sm shadow-sm hover:bg-gray-100 transition cursor-pointer "
             >
               <Clock size={16} />
               {t("historyBtn")}
@@ -86,7 +86,7 @@ export default function ReportsHubPage() {
               <div className="pt-5 mt-5 border-t border-gray-50">
                 <button
                   onClick={() => router.push(`/reports/${report.key}`)}
-                  className="w-full py-2.5 bg-gray-50 text-secondary font-bold text-sm rounded-xl group-hover:bg-primary group-hover:text-white transition-all flex items-center justify-center gap-2"
+                  className="w-full py-2.5 bg-gray-50 text-secondary font-bold text-sm rounded-xl group-hover:bg-primary group-hover:text-white transition-all flex items-center justify-center gap-2 cursor-pointer"
                 >
                   {t("generateBtn")}
                   <ChevronLeft

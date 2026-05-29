@@ -17,7 +17,7 @@ export const projectsApi = {
     /** GET /projects — Manager / HR */
     list: async (filters?: ProjectFilters): Promise<Project[]> => {
         const res = await api.get("/project", { params: filters });
-        const payload = res.data?.data;
+        const payload = res.data?.projects;
         if (Array.isArray(payload)) return payload;
         return [];
     },

@@ -48,7 +48,7 @@ export default function ProjectDetailPage({
     const varianceSign = hoursVariance >= 0 ? "+" : "";
 
     return (
-        <div className="flex flex-col gap-6">
+        <div className="flex flex-col gap-6 p-4 sm:p-6">
             {/* Back */}
             <Link
                 href="/projects"
