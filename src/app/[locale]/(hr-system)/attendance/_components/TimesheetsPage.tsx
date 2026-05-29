@@ -39,7 +39,7 @@ export default function TimesheetsPage() {
   const { data: timesheets = [], isLoading, isError, error, refetch, isFetching } = useTimesheets(filters);
 
   return (
-    <RoleGuard allowedRoles={["HR", "MANAGER"]}>
+    <RoleGuard allowedRoles={["HR_ADMIN", "MANAGER"]}>
       <div className="p-6 max-w-6xl mx-auto">
         <div className="flex items-center justify-between mb-6">
           <div className="flex items-center gap-3">

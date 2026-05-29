@@ -8,7 +8,7 @@ export default function SubmitTimesheetPage() {
   const router = useRouter();
 
   return (
-    <RoleGuard allowedRoles={["HR"]}>
+    <RoleGuard allowedRoles={["HR_ADMIN"]}>
       <SubmitTimesheetForm onClose={() => router.push("/timesheets")} />
     </RoleGuard>
   );

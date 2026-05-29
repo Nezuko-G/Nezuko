@@ -17,7 +17,7 @@ interface ApiErrorType extends Error {
 
 export function useLeaveRequests(filters?: { limit?: number; page?: number }) {
   const { role } = useAuthStore();
-  const isHR = role === "HR" || role === "MANAGER";
+  const isHR = role === "HR_ADMIN" || role === "MANAGER";
   const toast = useToast();
 
   return useQuery({

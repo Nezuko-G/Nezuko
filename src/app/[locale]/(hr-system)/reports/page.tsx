@@ -32,7 +32,7 @@ export default function ReportsHubPage() {
         </div>
 
         <div className="flex flex-wrap items-center gap-2 w-full sm:w-auto justify-end">
-          <RoleGuard allowedRoles={["HR", "TENANT_OWNER"]}>
+          <RoleGuard allowedRoles={["HR_ADMIN", "TENANT_OWNER"]}>
             <button
               onClick={() => router.push("/reports/history")}
               className="flex items-center gap-2 px-4 py-2 rounded-xl border border-gray-200 bg-card text-secondary font-bold text-sm shadow-sm hover:bg-gray-50 transition"

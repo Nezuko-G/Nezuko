@@ -23,11 +23,11 @@ interface ApiErrorType extends Error {
 }
 
 export function canManageTimesheets(role: string): boolean {
-  return role === "HR" || role === "MANAGER";
+  return role === "HR_ADMIN" || role === "MANAGER";
 }
 
 export function canSubmitTimesheets(role: string): boolean {
-  return role === "HR";
+  return role === "HR_ADMIN";
 }
 
 export function useTimesheets(filters?: TimesheetListFilters) {

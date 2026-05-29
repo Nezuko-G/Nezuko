@@ -26,7 +26,7 @@ function SkeletonRow() {
 export default function LeavePage() {
   const t = useTranslations("leave");
   const { role } = useAuthStore();
-  const isHR = role === "HR" || role === "MANAGER";
+  const isHR = role === "HR_ADMIN" || role === "MANAGER";
   const [statusFilter, setStatusFilter] = useState<LeaveRequest["status"] | "ALL">("ALL");
   const [showForm, setShowForm] = useState(false);
 

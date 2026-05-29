@@ -17,7 +17,7 @@ export default function DepartmentTable({ departments }: DepartmentTableProps) {
   const { openModal } = useDepartmentUIStore();
   const { role } = useAuthStore();
   const router = useRouter();
-  const canEdit = role === "HR" || role === "TENANT_OWNER";
+  const canEdit = role === "HR_ADMIN" || role === "TENANT_OWNER";
 
   return (
     <div className="overflow-x-auto rounded-2xl border border-gray-100 bg-card shadow-sm">

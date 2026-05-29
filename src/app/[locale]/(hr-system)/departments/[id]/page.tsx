@@ -66,7 +66,7 @@ export default function DepartmentDetailPage() {
           {department.name}
         </h1>
 
-        <RoleGuard allowedRoles={["HR", "TENANT_OWNER"]}>
+        <RoleGuard allowedRoles={["HR_ADMIN", "TENANT_OWNER"]}>
           <div className="flex items-center gap-2 w-full sm:w-auto justify-end">
             <button
               onClick={handleDelete}

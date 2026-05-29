@@ -27,7 +27,7 @@ export interface User {
   id: string;
   name: string;
   email: string;
-  role: "MANAGER" | "HR" | "EMPLOYEE";
+  role: "MANAGER" | "HR_ADMIN" | "EMPLOYEE";
 }
 
 export interface Project {

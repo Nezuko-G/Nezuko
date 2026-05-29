@@ -47,7 +47,7 @@ export default function InsurancePlansPage() {
         <h1 className="text-2xl font-extrabold text-secondary">{t("title")}</h1>
 
         <div className="flex flex-wrap items-center gap-2 w-full sm:w-auto justify-end">
-          <RoleGuard allowedRoles={["HR", "TENANT_OWNER"]}>
+          <RoleGuard allowedRoles={["HR_ADMIN", "TENANT_OWNER"]}>
             <button
               onClick={() => router.push("/insurance/coverage-report")}
               className="flex items-center gap-2 px-4 py-2 rounded-xl border border-gray-200 bg-card text-content hover:text-primary transition font-bold text-sm shadow-sm"
