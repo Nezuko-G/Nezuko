@@ -11,24 +11,32 @@ import {
   Network,
   Building2,
   FileText,
-  Briefcase
+  Briefcase,
+  LucideIcon
 } from "lucide-react";
 import { Link, usePathname } from "@/i18n/navigation";
+import { useAuthStore, UserRole } from "@/hooks/useAuthStore";
 
 export default function Sidebar() {
   const t = useTranslations("dashboard.sidebar");
   const pathname = usePathname();
+  const { role } = useAuthStore();
 
-  const menuItems = [
-    { icon: Users, label: t("employees"), href: "/employees" },
+  const menuItems: {
+    icon: LucideIcon;
+    label: string;
+    href: string;
+    allowedRoles?: UserRole[];
+  }[] = [
+    { icon: Users, label: t("employees"), href: "/employees", allowedRoles: ["HR_ADMIN", "MANAGER", "TENANT_OWNER"] },
     { icon: Briefcase, label: "Jobs", href: "/jobs" }, 
     { icon: Package, label: t("assets"), href: "/asset" },
-    { icon: ShieldAlert, label: t("insurance"), href: "/insurance" },
-    { icon: Folder, label: t("projects"), href: "/projects" },
+    { icon: ShieldAlert, label: t("insurance"), href: "/insurance", allowedRoles: ["HR_ADMIN", "MANAGER", "TENANT_OWNER"] },
+    { icon: Folder, label: t("projects"), href: "/projects", allowedRoles: ["HR_ADMIN", "MANAGER", "TENANT_OWNER"] },
     { icon: Clock, label: t("attendance"), href: "/attendance" },
     { icon: FileText, label: t("timesheets"), href: "/timesheets" },
     { icon: CalendarDays, label: t("leave"), href: "/leave" },
-    { icon: FilePieChart, label: t("reports"), href: "/reports" },
+    { icon: FilePieChart, label: t("reports"), href: "/reports", allowedRoles: ["HR_ADMIN", "MANAGER", "TENANT_OWNER"] },
     { icon: Network, label: t("departments"), href: "/departments" },
     { icon: Building2, label: t("company"), href: "/company" },
   ];
@@ -44,7 +52,9 @@ export default function Sidebar() {
       </Link>
 
       <nav className="flex flex-col gap-4 w-full px-4">
-        {menuItems.map((item, index) => {
+        {menuItems
+          .filter((item) => !item.allowedRoles || item.allowedRoles.includes(role))
+          .map((item, index) => {
           const Icon = item.icon;
           const isActive =
             pathname === item.href || pathname.startsWith(`${item.href}/`);
