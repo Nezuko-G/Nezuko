@@ -20,7 +20,7 @@ export function ApproveRejectModal({ timesheet, onClose }: Props) {
 
   async function handleSubmit() {
     try {
-      await reviewMutation.mutateAsync({ id: timesheet.id, data: { status, reviewNote: reviewNote || undefined } });
+      await reviewMutation.mutateAsync({ id: timesheet.id, data: { status }});
       onClose();
     } catch {
       // Error handled by mutation's onError
@@ -90,7 +90,7 @@ export function ApproveRejectModal({ timesheet, onClose }: Props) {
             </div>
           </div>
 
-          <div className="flex flex-col gap-1.5">
+          {/* <div className="flex flex-col gap-1.5">
             <label className="text-xs font-medium text-gray-600">{t("note")}</label>
             <textarea
               rows={2}
@@ -100,7 +100,7 @@ export function ApproveRejectModal({ timesheet, onClose }: Props) {
               disabled={reviewMutation.isPending}
               className="w-full border border-gray-200 rounded-lg px-3 py-2.5 text-sm outline-none resize-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all disabled:opacity-50"
             />
-          </div>
+          </div> */}
         </div>
 
         <div className="flex items-center justify-end gap-3 px-6 py-4 border-t border-gray-100 bg-gray-50">
