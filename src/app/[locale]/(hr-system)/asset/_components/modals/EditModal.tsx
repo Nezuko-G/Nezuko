@@ -7,7 +7,7 @@ import { useTranslations } from "next-intl";
 import { useAssetUIStore } from "@/app/[locale]/(hr-system)/asset/hooks/useAssetUIStore";
 import { UpdateAssetDTO } from "@/types/dto/asset.dto";
 import { useAssetMutations } from "@/app/[locale]/(hr-system)/asset/hooks/useAssets";
-import { X, Loader2 } from "lucide-react";
+import { X, Loader2, ChevronDown } from "lucide-react";
 import { z } from "zod";
 
 export default function EditModal() {
@@ -106,15 +106,20 @@ export default function EditModal() {
             <label className="text-sm font-bold text-content-dark">
               {tList("table.condition")}
             </label>
-            <select
-              {...register("condition")}
-              className="w-full bg-background border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:border-primary focus:outline-none"
-            >
-              <option value="NEW">{tList("condition.NEW")}</option>
-              <option value="GOOD">{tList("condition.GOOD")}</option>
-              <option value="FAIR">{tList("condition.FAIR")}</option>
-              <option value="DAMAGED">{tList("condition.DAMAGED")}</option>
-            </select>
+            <div className="relative">
+              <select
+                {...register("condition")}
+                className="w-full bg-background border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:border-primary focus:outline-none appearance-none"
+              >
+                <option value="NEW">{tList("condition.NEW")}</option>
+                <option value="GOOD">{tList("condition.GOOD")}</option>
+                <option value="FAIR">{tList("condition.FAIR")}</option>
+                <option value="DAMAGED">{tList("condition.DAMAGED")}</option>
+              </select>
+              <div className="absolute end-4 top-1/2 -translate-y-1/2 pointer-events-none text-content-muted">
+                <ChevronDown size={14} />
+              </div>
+            </div>
           </div>
         </form>
 

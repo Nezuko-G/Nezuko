@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useDebounce } from "use-debounce";
 import { useTranslations } from "next-intl";
 import {
   FileText,
@@ -25,6 +26,7 @@ export default function AssetsPage() {
 
   const [status, setStatus] = useState("");
   const [search, setSearch] = useState("");
+  const [debouncedSearch] = useDebounce(search, 500);
   const [page, setPage] = useState(1);
   const limit = 10;
 
@@ -32,7 +34,7 @@ export default function AssetsPage() {
     page,
     limit,
     status,
-    search: search || undefined,
+    search: debouncedSearch || undefined,
   });
 
   const { data: departmentsData } = useDepartments({});
@@ -128,7 +130,7 @@ export default function AssetsPage() {
                 <p className="text-sm text-content-muted font-bold">
                   {t("pagination", { current: page, total: lastPage })}
                 </p>
-                <div className="flex items-center gap-1.5">
+                <div className="flex ltr:flex-row-reverse rtl:flex-row items-center gap-1.5">
                   <button
                     disabled={page >= lastPage}
                     onClick={() => setPage((p) => p + 1)}
