@@ -7,8 +7,41 @@ import { Providers } from '@/components/providers/Providers'
 import { LocaleProvider } from '@/components/i18n/LocaleProvider'
 
 export const metadata: Metadata = {
-  title: "Nezuko | HR Portal",
-  description: "Secure HR Management System",
+  title: {
+    default: "Nezuko | HR Portal",
+    template: "%s | Nezuko",
+  },
+  description:
+    "Secure HR Management System — Streamline workforce management with AI-powered tools",
+  openGraph: {
+    title: "Nezuko | HR Portal",
+    description:
+      "Secure HR Management System — Streamline workforce management with AI-powered tools",
+    url: "https://nezuko.com",
+    siteName: "Nezuko",
+    locale: "en_US",
+    type: "website",
+    images: [
+      {
+        url: "/logo.png",
+        width: 400,
+        height: 400,
+        alt: "Nezuko",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Nezuko | HR Portal",
+    description:
+      "Secure HR Management System — Streamline workforce management with AI-powered tools",
+    images: ["/logo.png"],
+  },
+  icons: {
+    icon: "/logo.png",
+    shortcut: "/logo.png",
+    apple: "/logo.png",
+  },
 };
 
 export default async function RootLayout({
