@@ -1,9 +1,10 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useSyncExternalStore } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { ChevronDown, Menu, X, LogOut } from "lucide-react";
+import { motion } from "framer-motion";
 import { useTranslations, useLocale } from "next-intl";
 import { LanguageSwitcher } from "@/components/i18n/LanguageSwitcher";
 import { cn } from "@/lib/utils";
@@ -15,18 +16,27 @@ export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  const [mounted, setMounted] = useState(false);
-  const [token, setToken] = useState(false);
+  const isHydrated = useSyncExternalStore(
+    () => () => {},
+    () => true,
+    () => false,
+  );
 
-  useEffect(() => {
-    setMounted(true);
+  function getAuthSnapshot() {
     try {
       const raw = localStorage.getItem("auth");
       if (raw) {
-        setToken((JSON.parse(raw) as { isAuthenticated?: boolean }).isAuthenticated === true);
+        return (JSON.parse(raw) as { isAuthenticated?: boolean }).isAuthenticated === true;
       }
     } catch {}
-  }, []);
+    return false;
+  }
+
+  const token = useSyncExternalStore(
+    () => () => {},
+    getAuthSnapshot,
+    () => false,
+  );
 
   function handleLogout() {
     localStorage.removeItem("auth");
@@ -88,25 +98,35 @@ export default function Navbar() {
             <LanguageSwitcher currentLocale={locale} />
           </div>
 
-          {mounted ? (
-            token ? (
-              <button
-                onClick={handleLogout}
-                className="hidden lg:flex items-center gap-1.5 font-bold text-xs hover:text-primary transition-colors uppercase"
-              >
-                <LogOut size={14} className="ltr:rotate-180"/>
-                {t("logout")}
-              </button>
-            ) : (
-              <Link
-                href="/login"
-                className="hidden lg:block font-bold text-xs hover:text-primary transition-colors uppercase"
-              >
-                {t("login")}
-              </Link>
-            )
+          {isHydrated ? (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.3 }}
+              className={token ? "hidden lg:flex items-center gap-1.5" : "hidden lg:block"}
+            >
+              {token ? (
+                <button
+                  onClick={handleLogout}
+                  className="font-bold text-xs hover:text-primary transition-colors uppercase flex items-center gap-1.5"
+                >
+                  <LogOut size={14} className="ltr:rotate-180"/>
+                  {t("logout")}
+                </button>
+              ) : (
+                <Link
+                  href="/login"
+                  className="font-bold text-xs hover:text-primary transition-colors uppercase"
+                >
+                  {t("login")}
+                </Link>
+              )}
+            </motion.div>
           ) : (
-            <div className="hidden lg:block h-4" />
+            <div className="hidden lg:flex items-center gap-1.5">
+              <div className="h-3.5 w-3.5 rounded bg-current/20 animate-pulse" />
+              <div className="h-3.5 w-14 rounded bg-current/20 animate-pulse" />
+            </div>
           )}
 
           <Link
@@ -160,27 +180,38 @@ export default function Navbar() {
         >
           {t("services")}
         </Link>
-        {mounted ? (
-          token ? (
-            <button
-              onClick={() => {
-                handleLogout();
-                setIsMobileMenuOpen(false);
-              }}
-              className="font-bold text-white flex items-center gap-1.5"
-            >
-              <LogOut size={14} /> Logout
-            </button>
-          ) : (
-            <Link
-              href="/login"
-              className="font-bold text-white"
-              onClick={() => setIsMobileMenuOpen(false)}
-            >
-              {t("login")}
-            </Link>
-          )
-        ) : null}
+        {isHydrated ? (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.3 }}
+          >
+            {token ? (
+              <button
+                onClick={() => {
+                  handleLogout();
+                  setIsMobileMenuOpen(false);
+                }}
+                className="font-bold text-white flex items-center gap-1.5"
+              >
+                <LogOut size={14} /> Logout
+              </button>
+            ) : (
+              <Link
+                href="/login"
+                className="font-bold text-white"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                {t("login")}
+              </Link>
+            )}
+          </motion.div>
+        ) : (
+          <div className="flex items-center gap-1.5">
+            <div className="h-3.5 w-3.5 rounded bg-current/20 animate-pulse" />
+            <div className="h-3.5 w-14 rounded bg-current/20 animate-pulse" />
+          </div>
+        )}
 
         <div className="pt-2 w-full flex justify-center border-t border-white/10">
           <LanguageSwitcher currentLocale={locale} />
