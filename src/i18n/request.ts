@@ -1,12 +1,13 @@
 import { getRequestConfig } from 'next-intl/server'
 import { routing } from './routing'
+import { cookies } from 'next/headers'
 
 export default getRequestConfig(async ({ requestLocale }) => {
   let locale = await requestLocale
 
-  // Validate locale - must be in the supported list
   if (!locale || !routing.locales.includes(locale as typeof routing.locales[number])) {
-    locale = routing.defaultLocale
+    const cookieStore = await cookies()
+    locale = cookieStore.get('NEXT_LOCALE')?.value || routing.defaultLocale
   }
 
   const common = (await import(`../../messages/${locale}/common.json`)).default
