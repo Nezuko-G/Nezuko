@@ -15,16 +15,18 @@ export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  const [token] = useState(() => {
-    if (typeof window === "undefined") return false;
+  const [mounted, setMounted] = useState(false);
+  const [token, setToken] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
     try {
       const raw = localStorage.getItem("auth");
-      if (!raw) return false;
-      return (JSON.parse(raw) as { isAuthenticated?: boolean }).isAuthenticated === true;
-    } catch {
-      return false;
-    }
-  });
+      if (raw) {
+        setToken((JSON.parse(raw) as { isAuthenticated?: boolean }).isAuthenticated === true);
+      }
+    } catch {}
+  }, []);
 
   function handleLogout() {
     localStorage.removeItem("auth");
@@ -86,21 +88,25 @@ export default function Navbar() {
             <LanguageSwitcher currentLocale={locale} />
           </div>
 
-          {token ? (
-            <button
-              onClick={handleLogout}
-              className="hidden lg:flex items-center gap-1.5 font-bold text-xs hover:text-primary transition-colors uppercase"
-            >
-              <LogOut size={14} className="ltr:rotate-180"/>
-              {t("logout")}
-            </button>
+          {mounted ? (
+            token ? (
+              <button
+                onClick={handleLogout}
+                className="hidden lg:flex items-center gap-1.5 font-bold text-xs hover:text-primary transition-colors uppercase"
+              >
+                <LogOut size={14} className="ltr:rotate-180"/>
+                {t("logout")}
+              </button>
+            ) : (
+              <Link
+                href="/login"
+                className="hidden lg:block font-bold text-xs hover:text-primary transition-colors uppercase"
+              >
+                {t("login")}
+              </Link>
+            )
           ) : (
-            <Link
-              href="/login"
-              className="hidden lg:block font-bold text-xs hover:text-primary transition-colors uppercase"
-            >
-              {t("login")}
-            </Link>
+            <div className="hidden lg:block h-4" />
           )}
 
           <Link
@@ -154,25 +160,27 @@ export default function Navbar() {
         >
           {t("services")}
         </Link>
-        {token ? (
-          <button
-            onClick={() => {
-              handleLogout();
-              setIsMobileMenuOpen(false);
-            }}
-            className="font-bold text-white flex items-center gap-1.5"
-          >
-            <LogOut size={14} /> Logout
-          </button>
-        ) : (
-          <Link
-            href="/login"
-            className="font-bold text-white"
-            onClick={() => setIsMobileMenuOpen(false)}
-          >
-            {t("login")}
-          </Link>
-        )}
+        {mounted ? (
+          token ? (
+            <button
+              onClick={() => {
+                handleLogout();
+                setIsMobileMenuOpen(false);
+              }}
+              className="font-bold text-white flex items-center gap-1.5"
+            >
+              <LogOut size={14} /> Logout
+            </button>
+          ) : (
+            <Link
+              href="/login"
+              className="font-bold text-white"
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
+              {t("login")}
+            </Link>
+          )
+        ) : null}
 
         <div className="pt-2 w-full flex justify-center border-t border-white/10">
           <LanguageSwitcher currentLocale={locale} />

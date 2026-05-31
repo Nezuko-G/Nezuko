@@ -10,7 +10,11 @@ export function useLogin() {
   const router = useRouter();
 
   return useMutation({
-    mutationFn: (data: { companyEmail: string; userEmail: string; password: string }) => login(data),
+    mutationFn: (data: {
+      companyEmail: string;
+      userEmail: string;
+      password: string;
+    }) => login(data),
     onSuccess: (response) => {
       const role = response?.data?.user?.role || response?.user?.role;
 
@@ -20,7 +24,11 @@ export function useLogin() {
       );
 
       setRole(role || "EMPLOYEE");
-      router.push("/dashboard");
+      if (role === "EMPLOYEE") {
+        router.push("/profile");
+      } else {
+        router.push("/dashboard");
+      }
     },
   });
 }

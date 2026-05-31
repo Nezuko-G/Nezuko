@@ -4,14 +4,33 @@ import Image from "next/image";
 import LangSwitcher from "./LangSwitcher";
 import { useTranslations } from "next-intl";
 // import { useLocale } from "next-intl";
-import { Link } from "@/i18n/navigation";
-import { useState } from "react";
+import { Link, useRouter } from "@/i18n/navigation";
+import { useState, useEffect, useMemo } from "react";
 import { ArrowLeft } from "lucide-react";
 import { useLogin } from "../hooks/useLogin";
 
 export default function LoginForm() {
   const t = useTranslations("auth");
+  const router = useRouter();
   // const locale = useLocale();
+
+  const [hydrated, setHydrated] = useState(false);
+
+  // eslint-disable-next-line react-hooks/set-state-in-effect
+  useEffect(() => { setHydrated(true); }, []);
+
+  const isAuth = useMemo(() => {
+    if (!hydrated) return null;
+    try {
+      const raw = localStorage.getItem("auth");
+      if (!raw) return false;
+      return (JSON.parse(raw) as { isAuthenticated?: boolean }).isAuthenticated === true;
+    } catch { return false; }
+  }, [hydrated]);
+
+  useEffect(() => {
+    if (isAuth === true) router.replace("/profile");
+  }, [isAuth, router]);
 
   const [form, setForm] = useState({
     companyEmail: "admin@techcorp.com",
@@ -20,6 +39,8 @@ export default function LoginForm() {
   });
 
   const loginMutation = useLogin();
+
+  if (!hydrated || isAuth) return null;
 
   return (
     <div className="flex min-h-screen flex-col md:flex-row">
