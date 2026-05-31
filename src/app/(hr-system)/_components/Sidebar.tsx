@@ -12,11 +12,12 @@ import {
   Building2,
   FileText,
   Briefcase,
+  Wallet,
+  Gift,
   LucideIcon
 } from "lucide-react";
 import { Link, usePathname } from "@/i18n/navigation";
 import { useAuthStore, UserRole } from "@/hooks/useAuthStore";
-import Image from "next/image";
 
 export default function Sidebar() {
   const t = useTranslations("dashboard.sidebar");
@@ -29,20 +30,21 @@ export default function Sidebar() {
     href: string;
     allowedRoles?: UserRole[];
   }[] = [
-    { icon: Users, label: t("employees"), href: "/employees", allowedRoles: ["HR_ADMIN", "MANAGER", "TENANT_OWNER"] },
-    { icon: Briefcase, label: "Jobs", href: "/jobs" , allowedRoles: ["HR_ADMIN", "MANAGER", "TENANT_OWNER"]}, 
-    { icon: Package, label: t("assets"), href: "/asset" },
-    { icon: ShieldAlert, label: t("insurance"), href: "/insurance", allowedRoles: ["HR_ADMIN", "MANAGER", "TENANT_OWNER"] },
-    { icon: Folder, label: t("projects"), href: "/projects", allowedRoles: ["HR_ADMIN", "MANAGER", "TENANT_OWNER"] },
-    { icon: Clock, label: t("attendance"), href: "/attendance" },
-    { icon: FileText, label: t("timesheets"), href: "/timesheets" },
-    { icon: CalendarDays, label: t("leave"), href: "/leave" },
-    { icon: FilePieChart, label: t("reports"), href: "/reports", allowedRoles: ["HR_ADMIN", "MANAGER", "TENANT_OWNER"] },
-    { icon: Network, label: t("departments"), href: "/departments" },
-    { icon: Building2, label: t("company"), href: "/company" },
+    { icon: Users,        label: t("employees"),   href: "/employees",         allowedRoles: ["HR_ADMIN", "MANAGER", "TENANT_OWNER"] },
+    { icon: Briefcase,    label: "Jobs",            href: "/jobs",              allowedRoles: ["HR_ADMIN", "MANAGER", "TENANT_OWNER"] },
+    { icon: Package,      label: t("assets"),       href: "/asset" },
+    { icon: ShieldAlert,  label: t("insurance"),    href: "/insurance",         allowedRoles: ["HR_ADMIN", "MANAGER", "TENANT_OWNER"] },
+    { icon: Folder,       label: t("projects"),     href: "/projects",          allowedRoles: ["HR_ADMIN", "MANAGER", "TENANT_OWNER"] },
+    { icon: Clock,        label: t("attendance"),   href: "/attendance" },
+    { icon: FileText,     label: t("timesheets"),   href: "/timesheets" },
+    { icon: CalendarDays, label: t("leave"),        href: "/leave" },
+    { icon: Wallet,       label: t("payroll"),      href: "/payroll/runs",      allowedRoles: ["HR_ADMIN", "TENANT_OWNER"] },
+    { icon: Gift,         label: t("incentives"),   href: "/payroll/incentives",allowedRoles: ["HR_ADMIN", "TENANT_OWNER"] },
+    { icon: FilePieChart, label: t("reports"),      href: "/reports",           allowedRoles: ["HR_ADMIN", "MANAGER", "TENANT_OWNER"] },
+    { icon: Network,      label: t("departments"),  href: "/departments" },
+    { icon: Building2,    label: t("company"),      href: "/company" },
   ];
 
-  
   return (
     <aside className="w-20 bg-secondary min-h-screen flex flex-col items-center py-6 gap-6 sticky top-0 shrink-0 z-20">
       <Link
@@ -56,25 +58,24 @@ export default function Sidebar() {
         {menuItems
           .filter((item) => !item.allowedRoles || item.allowedRoles.includes(role))
           .map((item, index) => {
-          const Icon = item.icon;
-          const isActive =
-            pathname === item.href || pathname.startsWith(`${item.href}/`);
-          return (
-            <Link
-              key={index}
-              href={item.href}
-              title={item.label}
-              className={`p-2 rounded-xl flex items-center justify-center transition-all duration-200 ${
-                isActive
-                  ? "bg-primary text-secondary shadow-lg shadow-primary/20"
-                  : "text-white/60 hover:bg-white/10 hover:text-white"
-              }`}
-            >
-              <Icon size={22} strokeWidth={1.5} />
-            </Link>
-          );
-        })}
-        <Image src="/abdo.png" alt="Logo" width={50} height={50} className="border border-primary"/>
+            const Icon = item.icon;
+            const isActive =
+              pathname === item.href || pathname.startsWith(`${item.href}/`);
+            return (
+              <Link
+                key={index}
+                href={item.href}
+                title={item.label}
+                className={`p-2 rounded-xl flex items-center justify-center transition-all duration-200 ${
+                  isActive
+                    ? "bg-primary text-secondary shadow-lg shadow-primary/20"
+                    : "text-white/60 hover:bg-white/10 hover:text-white"
+                }`}
+              >
+                <Icon size={22} strokeWidth={1.5} />
+              </Link>
+            );
+          })}
       </nav>
     </aside>
   );
