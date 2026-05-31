@@ -18,7 +18,7 @@ async function handleRequest(req: NextRequest, { params }: { params: any }) {
     
     const cookieStore = await cookies();
     const jobsToken = cookieStore.get("jobs_token")?.value;
-    const locale = req.headers.get("accept-language") || "en";
+    const locale = req.headers.get("accept-language") || cookieStore.get("NEXT_LOCALE")?.value || "en";
 
     if (cleanPath === "check-auth") {
       return NextResponse.json({ isAuthenticated: !!jobsToken }, { status: 200 });
