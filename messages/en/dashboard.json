@@ -107,5 +107,18 @@
     "IN_PROGRESS": "In Progress",
     "DONE": "Done",
     "CANCELLED": "Cancelled"
+  },
+  "error": {
+    "title": "Oops! Something went wrong",
+    "description": "An unexpected error occurred. Please try again or contact support if the issue persists.",
+    "tryAgain": "Try again"
+  },
+  "loading": {
+    "text": "Loading"
+  },
+  "unauthorized": {
+    "title": "Access Denied",
+    "description": "You don't have permission to access this page.",
+    "back": "Go back"
   }
 }

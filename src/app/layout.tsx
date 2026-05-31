@@ -22,11 +22,7 @@ export default async function RootLayout({
 
   return (
     <html lang={locale} dir={dir} suppressHydrationWarning>
-      <head>
-        <script dangerouslySetInnerHTML={{
-          __html: `(function(){try{var l=localStorage.getItem('locale');if(l==='en'||l==='ar'){document.cookie='NEXT_LOCALE='+l+';path=/;max-age=31536000;SameSite=Lax';}}catch(e){}})()`
-        }} />
-      </head>
+      <head />
       <body className="antialiased">
         <NextIntlClientProvider locale={locale} messages={messages}>
           <Providers>

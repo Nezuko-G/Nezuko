@@ -2,7 +2,8 @@
 
 import { useTranslations } from "next-intl";
 import { cn } from "@/lib/utils";
-import { Mail, Phone, Calendar, Hash } from "lucide-react";
+import { Mail, Phone, Calendar, Hash, LogOut } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 interface Props {
     data: {
@@ -41,6 +42,12 @@ const FIELD_ICONS = {
 } as const;
 
 export default function ProfileHeader({ data }: Props) {
+    
+    const router = useRouter();
+    function handleLogout(router: ReturnType<typeof useRouter>) {
+        localStorage.removeItem("auth");
+        router.push("/login");
+    }
     const t = useTranslations("profile");
     const initials = `${data.firstName[0]}${data.lastName[0]}`;
 
@@ -106,6 +113,16 @@ export default function ProfileHeader({ data }: Props) {
                     })}
                 </div>
             )}
+
+            <div className="px-6 pb-5 border-t border-gray-100 pt-4">
+                <button
+                    onClick={() => handleLogout(router)}
+                    className="w-full flex items-center justify-center gap-2 py-2.5 rounded-xl bg-red-50 text-red-600 hover:bg-red-100 transition text-sm font-semibold"
+                >
+                    <LogOut size={16} />
+                    Logout
+                </button>
+            </div>
         </div>
     );
 }

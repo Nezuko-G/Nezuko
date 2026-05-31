@@ -3,62 +3,23 @@
 import Image from "next/image";
 import LangSwitcher from "./LangSwitcher";
 import { useTranslations } from "next-intl";
-import { useLocale } from "next-intl";
-import { Link, useRouter } from "@/i18n/navigation";
+// import { useLocale } from "next-intl";
+import { Link } from "@/i18n/navigation";
 import { useState } from "react";
-import { useAuthStore } from "@/hooks/useAuthStore";
+import { ArrowLeft } from "lucide-react";
+import { useLogin } from "../hooks/useLogin";
 
 export default function LoginForm() {
   const t = useTranslations("auth");
-  const locale = useLocale();
-  const router = useRouter();
+  // const locale = useLocale();
 
   const [form, setForm] = useState({
     companyEmail: "admin@techcorp.com",
     userEmail: "hr@techcorp.com",
     password: "Password123",
   });
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
 
-  async function handleSubmit() {
-    setLoading(true);
-    setError(null);
-
-    try {
-      const res = await fetch("http://localhost:5000/api/v1/auth/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        credentials: "include",
-        body: JSON.stringify(form),
-      });
-
-      const body = await res.json().catch(() => ({}));
-
-      if (!res.ok) {
-        setError(body.message ?? "Login failed");
-        return;
-      }
-
-      const userRole = body.data?.user?.role || body.user?.role;
-
-      if (typeof window !== "undefined") {
-        localStorage.setItem("role", userRole || "");
-        localStorage.setItem("isAuthenticated", "true");
-
-        if (body.data?.accessToken) {
-          localStorage.setItem("accessToken", body.data.accessToken);
-        }
-      }
-
-      useAuthStore.getState().setRole(userRole || "EMPLOYEE");
-      router.push("/dashboard");
-    } catch {
-      setError("Network error, please try again");
-    } finally {
-      setLoading(false);
-    }
-  }
+  const loginMutation = useLogin();
 
   return (
     <div className="flex min-h-screen flex-col md:flex-row">
@@ -97,8 +58,8 @@ export default function LoginForm() {
 
       <div className="w-full md:w-1/2 bg-gray-100 flex flex-col min-h-screen">
         <div className="flex justify-between p-4">
-          <Link href="/" className="text-sm text-gray-600 hover:text-black">
-            ← Home
+          <Link href="/" className="text-sm text-gray-600 hover:text-black flex flex-row gap-1">
+            <ArrowLeft size={20} className="rtl:rotate-180"/> {t("home")}
           </Link>
           <LangSwitcher />
         </div>
@@ -109,9 +70,9 @@ export default function LoginForm() {
           </h1>
 
           <div className="w-full max-w-md bg-white shadow-lg rounded-2xl p-6 min-h-[450px] flex flex-col">
-            {error && (
+            {loginMutation.error && (
               <div className="mb-4 bg-red-50 border border-red-200 text-red-600 text-sm px-4 py-3 rounded-lg">
-                {error}
+                {loginMutation.error?.message || "Login failed"}
               </div>
             )}
 
@@ -163,11 +124,11 @@ export default function LoginForm() {
             </div>
 
             <button
-              onClick={handleSubmit}
-              disabled={loading}
+              onClick={() => loginMutation.mutate(form)}
+              disabled={loginMutation.isPending}
               className="w-full bg-secondary text-white py-3 rounded-lg font-medium hover:opacity-90 transition-opacity mt-10 disabled:opacity-50"
             >
-              {loading ? "..." : t("form.submit")}
+              {loginMutation.isPending ? "..." : t("form.submit")}
             </button>
           </div>
         </div>

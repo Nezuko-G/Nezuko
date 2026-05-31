@@ -2,6 +2,7 @@
 
 import { useRouter } from '@/i18n/navigation'
 import { useCallback } from 'react'
+import { setLocaleCookie } from '@/lib/cookie'
 
 interface LanguageSwitcherProps {
   currentLocale: string
@@ -9,15 +10,12 @@ interface LanguageSwitcherProps {
 
 export function LanguageSwitcher({ currentLocale }: LanguageSwitcherProps) {
   const router = useRouter()
-  // const pathname = usePathname()
 
   const switchLocale = useCallback((newLocale: string) => {
     if (newLocale === currentLocale) return
-    localStorage.setItem('locale', newLocale)
-    document.cookie = `NEXT_LOCALE=${newLocale};path=/;max-age=31536000;SameSite=Lax`
-    // router.replace(pathname, { locale: newLocale })
+    setLocaleCookie(newLocale)
     router.refresh()
-  }, [ router, currentLocale])
+  }, [router, currentLocale])
 
   return (
     <div className="flex items-center gap-1 bg-secondary-light p-1 rounded-full border border-gray-700">

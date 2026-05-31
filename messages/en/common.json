@@ -7,6 +7,7 @@
     "company": "Company",
     "pricing": "Pricing",
     "login": "Login",
+    "logout": "Logout",
     "demo": "Request a Demo",
     "blogs":"blogs"
   },

@@ -2,7 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
-import { ArrowLeft, AlertCircle } from "lucide-react";
+import { ArrowLeft, AlertCircle, LogOut } from "lucide-react";
 import { useProfile } from "./hooks/useProfile";
 import ProfileHeader from "./components/ProfileHeader";
 import ProfileSections from "./components/ProfileSections";
@@ -57,6 +57,8 @@ function ProfileError({ onRetry }: { onRetry: () => void }) {
         </div>
     );
 }
+
+
 
 export default function ProfilePage() {
     const t = useTranslations("profile");

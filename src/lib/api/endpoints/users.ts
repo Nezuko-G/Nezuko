@@ -14,11 +14,6 @@ export async function login(email: string, password: string) {
     user: UserDTO,
   }).parse(response.data)
   
-  if (typeof window !== 'undefined') {
-    localStorage.setItem('accessToken', validated.accessToken)
-    localStorage.setItem('refreshToken', validated.refreshToken)
-  }
-  
   return {
     ...validated,
     user: mapUserFromDTO(validated.user),
@@ -26,8 +21,4 @@ export async function login(email: string, password: string) {
 }
 
 export async function logout() {
-  if (typeof window !== 'undefined') {
-    localStorage.removeItem('accessToken')
-    localStorage.removeItem('refreshToken')
-  }
 }
