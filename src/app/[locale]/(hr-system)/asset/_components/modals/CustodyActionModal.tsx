@@ -6,7 +6,7 @@ import { useAssetUIStore } from "@/app/[locale]/(hr-system)/asset/hooks/useAsset
 import { AssetConditionEnum } from "@/types/dto/asset.dto";
 import { useAssetMutations } from "@/app/[locale]/(hr-system)/asset/hooks/useAssets";
 import { useEmployees } from "@/hooks/use-employee";
-import { X, AlertCircle, Loader2 } from "lucide-react";
+import { X, AlertCircle, Loader2, ChevronDown } from "lucide-react";
 import { z } from "zod";
 
 type AssetConditionType = z.infer<typeof AssetConditionEnum>;
@@ -98,7 +98,7 @@ export default function CustodyActionModal() {
           {isTransfer && (
             <div className="bg-status-warning/10 border border-status-warning/20 p-4 rounded-xl flex gap-3 text-status-warning">
               <AlertCircle size={20} className="shrink-0 mt-0.5" />
-              <p className="text-sm font-medium leading-relaxed">
+              <p className="text-sm font-medium text-start leading-relaxed">
                 {t("warnings.atomicTransfer")}
               </p>
             </div>
@@ -108,21 +108,26 @@ export default function CustodyActionModal() {
             <label className="text-sm font-bold text-content-dark">
               {tList("table.condition")}
             </label>
-            <select
-              value={formData.condition}
-              onChange={(e) =>
-                setFormData({
-                  ...formData,
-                  condition: e.target.value as AssetConditionType,
-                })
-              }
-              className="w-full bg-background border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:border-primary focus:outline-none"
-            >
-              <option value="NEW">{tList("condition.NEW")}</option>
-              <option value="GOOD">{tList("condition.GOOD")}</option>
-              <option value="FAIR">{tList("condition.FAIR")}</option>
-              <option value="DAMAGED">{tList("condition.DAMAGED")}</option>
-            </select>
+            <div className="relative">
+              <select
+                value={formData.condition}
+                onChange={(e) =>
+                  setFormData({
+                    ...formData,
+                    condition: e.target.value as AssetConditionType,
+                  })
+                }
+                className="w-full bg-background border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:border-primary focus:outline-none appearance-none"
+              >
+                <option value="NEW">{tList("condition.NEW")}</option>
+                <option value="GOOD">{tList("condition.GOOD")}</option>
+                <option value="FAIR">{tList("condition.FAIR")}</option>
+                <option value="DAMAGED">{tList("condition.DAMAGED")}</option>
+              </select>
+              <div className="absolute end-4 top-1/2 -translate-y-1/2 pointer-events-none text-content-muted">
+                <ChevronDown size={14} />
+              </div>
+            </div>
           </div>
 
           {(isAssign || isTransfer) && (
@@ -155,7 +160,7 @@ export default function CustodyActionModal() {
                   {employeesLoading ? (
                     <Loader2 size={14} className="animate-spin" />
                   ) : (
-                    "▼"
+                    <ChevronDown size={14} />
                   )}
                 </div>
               </div>

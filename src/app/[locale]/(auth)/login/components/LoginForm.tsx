@@ -51,7 +51,7 @@ export default function LoginForm() {
         }
       }
 
-      useAuthStore.getState().setRole(userRole || "HR_ADMIN");
+      useAuthStore.getState().setRole(userRole || "EMPLOYEE");
       router.push("/dashboard");
     } catch {
       setError("Network error, please try again");

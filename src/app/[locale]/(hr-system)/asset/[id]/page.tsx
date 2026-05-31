@@ -85,7 +85,7 @@ export default function AssetDetailPage() {
     <div className="flex flex-col gap-4 w-full max-w-5xl mx-auto p-4 md:p-8 text-right">
       <div
         className="flex items-center gap-2 text-content-muted text-sm font-bold mb-1 cursor-pointer"
-        onClick={() => router.push("/assets")}
+        onClick={() => router.push("/asset")}
       >
         <span>{tList("title")}</span>
         <ChevronRight size={14} className="rtl:rotate-0 ltr:rotate-180" />
