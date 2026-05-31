@@ -1,0 +1,199 @@
+{
+  "status": {
+    "DRAFT": "مسودة",
+    "APPROVED": "موافق عليه",
+    "PAID": "مدفوع"
+  },
+  "incentiveType": {
+    "BONUS": "مكافأة",
+    "COMMISSION": "عمولة",
+    "OVERTIME": "وقت إضافي",
+    "DEDUCTION": "خصم",
+    "OTHER": "آخر",
+    "ALL": "الكل"
+  },
+  "months": {
+    "1": "يناير",
+    "2": "فبراير",
+    "3": "مارس",
+    "4": "أبريل",
+    "5": "مايو",
+    "6": "يونيو",
+    "7": "يوليو",
+    "8": "أغسطس",
+    "9": "سبتمبر",
+    "10": "أكتوبر",
+    "11": "نوفمبر",
+    "12": "ديسمبر"
+  },
+  "runs": {
+    "title": "عمليات كشف الرواتب",
+    "subtitle": "إدارة عمليات كشف الرواتب الشهرية، واعتماد المدخلات، وتحديد المدفوعات.",
+    "createBtn": "إنشاء عملية كشف رواتب",
+    "filters": {
+      "ALL": "الكل",
+      "DRAFT": "مسودة",
+      "APPROVED": "موافق عليه",
+      "PAID": "مدفوع"
+    },
+    "table": {
+      "monthYear": "الشهر / السنة",
+      "status": "الحالة",
+      "employees": "الموظفين",
+      "createdBy": "أنشئ بواسطة",
+      "approvedBy": "تمت الموافقة بواسطة",
+      "paidAt": "تاريخ الدفع",
+      "actions": "الإجراءات"
+    },
+    "empty": "لم يتم العثور على عمليات كشف رواتب.",
+    "actions": {
+      "view": "عرض",
+      "approve": "موافقة",
+      "markPaid": "تحديد كمدفوع"
+    },
+    "confirm": {
+      "approveTitle": "الموافقة على دورة {monthYear}؟",
+      "approveDesc": "بمجرد الموافقة، سيتم قفل هذه الدورة للتعديل. سيتمكن الموظفون من عرض قسائم رواتبهم.",
+      "markPaidTitle": "تحديد {monthYear} كمدفوع؟",
+      "markPaidDesc": "سيؤدي هذا إلى تحديد عملية كشف الرواتب كمدفوعة بالكامل. لا يمكن التراجع عن هذا الإجراء.",
+      "approveBtn": "موافقة على الدورة",
+      "markPaidBtn": "تحديد كمدفوع",
+      "cancel": "إلغاء"
+    }
+  },
+  "runDetail": {
+    "backBtn": "العودة للعمليات",
+    "createdBy": "أنشئت بواسطة {name}",
+    "approvedBy": "تمت الموافقة بواسطة {name} في {date}",
+    "paidOn": "تم الدفع في {date}",
+    "approveBtn": "موافقة على الدورة",
+    "markPaidBtn": "تحديد كمدفوع",
+    "searchPlaceholder": "البحث عن موظفين...",
+    "table": {
+      "employee": "الموظف",
+      "baseSalary": "الراتب الأساسي",
+      "otHours": "ساعات العمل الإضافي",
+      "otPay": "أجر العمل الإضافي",
+      "incentives": "الحوافز",
+      "deductions": "الخصومات",
+      "insurance": "التأمين",
+      "netSalary": "صافي الراتب"
+    },
+    "empty": "لم يتم العثور على مدخلات للموظفين.",
+    "drawerTitle": "قسيمة الراتب",
+    "payslipSubtitle": "تفاصيل قسيمة الراتب للقراءة فقط.",
+    "payslipTitle": "قسيمة الراتب — {monthYear}"
+  },
+  "payslip": {
+    "title": "قسائم الرواتب الخاصة بي",
+    "subtitle": "عرض تفاصيل راتبك الشهري. للقراءة فقط.",
+    "allYears": "كل السنوات",
+    "table": {
+      "monthYear": "الشهر / السنة",
+      "baseSalary": "الراتب الأساسي",
+      "netSalary": "صافي الراتب",
+      "status": "الحالة"
+    },
+    "empty": "لا توجد قسائم رواتب متاحة بعد.",
+    "helpText": "انقر فوق أي صف لعرض تفاصيل قسيمة راتبك بالكامل.",
+    "drawerTitle": "قسيمة راتب — {monthYear}",
+    "noEntry": "لم يتم العثور على مدخل لقسيمة راتب في هذه الفترة."
+  },
+  "payslipDetail": {
+    "noDepartment": "بدون قسم",
+    "baseSalary": "الراتب الأساسي",
+    "noOvertime": "لا يوجد عمل إضافي معتمد لهذه الفترة.",
+    "overtime": "عمل إضافي ({hours} ساعة)",
+    "incentives": "الحوافز",
+    "deductions": "الخصومات",
+    "insurance": "خصم التأمين",
+    "netSalary": "صافي الراتب"
+  },
+  "report": {
+    "title": "تقرير ملخص الرواتب",
+    "subtitle": "تفاصيل التكلفة الشهرية مجمعة حسب القسم.",
+    "exportCsv": "تصدير كـ CSV",
+    "filters": {
+      "month": "الشهر",
+      "year": "السنة",
+      "generate": "إنشاء التقرير",
+      "loading": "جاري التحميل..."
+    },
+    "errorNoRun": "لم يتم العثور على عملية كشف رواتب لهذه الفترة.",
+    "stats": {
+      "totalBase": "إجمالي الأساسي",
+      "totalOvertime": "إجمالي الإضافي",
+      "totalIncentives": "إجمالي الحوافز",
+      "totalDeductions": "إجمالي الخصومات",
+      "totalNet": "إجمالي الصافي"
+    },
+    "table": {
+      "title": "{monthYear} — حسب القسم",
+      "employeesCount": "{count} موظف",
+      "department": "القسم",
+      "employees": "الموظفين",
+      "baseSalary": "الراتب الأساسي",
+      "overtime": "العمل الإضافي",
+      "incentives": "الحوافز",
+      "deductions": "الخصومات",
+      "netSalary": "صافي الراتب",
+      "total": "الإجمالي"
+    }
+  },
+  "incentives": {
+    "title": "الحوافز",
+    "subtitle": "إدارة المكافآت والعمولات والخصومات للموظفين.",
+    "addBtn": "إضافة حافز",
+    "table": {
+      "employee": "الموظف",
+      "type": "النوع",
+      "amount": "المبلغ",
+      "description": "الوصف",
+      "effectiveDate": "تاريخ السريان",
+      "linkedPayroll": "كشف الرواتب المرتبط",
+      "actions": "الإجراءات"
+    },
+    "empty": "لم يتم العثور على حوافز.",
+    "linkedBadge": "مرتبط",
+    "deleteBtn": "حذف",
+    "cannotDeleteTooltip": "لا يمكن حذف حافز مرتبط بكشف رواتب مدفوع.",
+    "confirmDeleteTitle": "حذف الحافز؟",
+    "confirmDeleteDesc": "هل أنت متأكد أنك تريد حذف هذا الـ {type} بقيمة {amount}؟ لا يمكن التراجع عن هذا الإجراء.",
+    "confirmDeleteBtn": "حذف"
+  },
+  "addIncentiveModal": {
+    "title": "إضافة حافز",
+    "employee": "الموظف",
+    "searchPlaceholder": "البحث عن موظف...",
+    "selectPlaceholder": "اختر موظفاً",
+    "type": "النوع",
+    "amount": "المبلغ",
+    "description": "الوصف",
+    "descriptionPlaceholder": "ملاحظة اختيارية...",
+    "effectiveDate": "تاريخ السريان",
+    "requiredError": "يرجى ملء جميع الحقول المطلوبة.",
+    "genericError": "حدث خطأ ما.",
+    "cancelBtn": "إلغاء",
+    "addingBtn": "جاري الإضافة...",
+    "addBtn": "إضافة حافز"
+  },
+  "createRunModal": {
+    "title": "إنشاء دورة رواتب",
+    "infoText": "سيؤدي إنشاء دورة رواتب إلى حساب جميع مدخلات الموظفين تلقائياً من الرواتب، وجداول الحضور المعتمدة، واشتراكات التأمين النشطة، والحوافز المعلقة لهذا الشهر.",
+    "month": "الشهر",
+    "year": "السنة",
+    "conflictError": "يوجد بالفعل كشف رواتب لهذا الشهر والسنة.",
+    "genericError": "حدث خطأ ما. يرجى المحاولة مرة أخرى.",
+    "cancelBtn": "إلغاء",
+    "creatingBtn": "جاري الإنشاء..." ,
+    "createBtn": "إنشاء دورة"
+  },
+  "shared": {
+    "lockBanner": "دورة الرواتب هذه مغلقة ولا يمكن تعديلها.",
+    "confirmModal": {
+      "cancel": "إلغاء",
+      "confirm": "تأكيد",
+      "processing": "جاري المعالجة..."
+    }
+  }
+}

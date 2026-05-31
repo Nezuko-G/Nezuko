@@ -1,5 +1,5 @@
 {
-  "sidebar": {
+ "sidebar": {
     "home": "الرئيسية",
     "employees": "الموظفون",
     "assets": "الأصول",
@@ -7,9 +7,10 @@
     "insurance": "التأمين",
     "projects": "المشاريع",
     "attendance": "الحضور",
-    "timesheets": "سجلات الدوام",
+    "timesheets": "سجلات الوقت",
     "leave": "الإجازات",
-    "departments": "الأقسام",
+    "payroll": "الرواتب",
+    "incentives": "الحوافز",
     "reports": "التقارير",
     "departments": "الأقسام",
     "favorites": "المفضلة",

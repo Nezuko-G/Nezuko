@@ -1,0 +1,199 @@
+{
+  "status": {
+    "DRAFT": "Draft",
+    "APPROVED": "Approved",
+    "PAID": "Paid"
+  },
+  "incentiveType": {
+    "BONUS": "Bonus",
+    "COMMISSION": "Commission",
+    "OVERTIME": "Overtime",
+    "DEDUCTION": "Deduction",
+    "OTHER": "Other",
+    "ALL": "All"
+  },
+  "months": {
+    "1": "January",
+    "2": "February",
+    "3": "March",
+    "4": "April",
+    "5": "May",
+    "6": "June",
+    "7": "July",
+    "8": "August",
+    "9": "September",
+    "10": "October",
+    "11": "November",
+    "12": "December"
+  },
+  "runs": {
+    "title": "Payroll Runs",
+    "subtitle": "Manage monthly payroll runs, approve entries, and mark payments.",
+    "createBtn": "Create Payroll Run",
+    "filters": {
+      "ALL": "All",
+      "DRAFT": "Draft",
+      "APPROVED": "Approved",
+      "PAID": "Paid"
+    },
+    "table": {
+      "monthYear": "Month / Year",
+      "status": "Status",
+      "employees": "Employees",
+      "createdBy": "Created By",
+      "approvedBy": "Approved By",
+      "paidAt": "Paid At",
+      "actions": "Actions"
+    },
+    "empty": "No payroll runs found.",
+    "actions": {
+      "view": "View",
+      "approve": "Approve",
+      "markPaid": "Mark Paid"
+    },
+    "confirm": {
+      "approveTitle": "Approve {monthYear} Run?",
+      "approveDesc": "Once approved, this run will be locked for editing. Employees will be able to view their payslips.",
+      "markPaidTitle": "Mark {monthYear} as Paid?",
+      "markPaidDesc": "This will mark the payroll run as fully paid. This action cannot be undone.",
+      "approveBtn": "Approve Run",
+      "markPaidBtn": "Mark as Paid",
+      "cancel": "Cancel"
+    }
+  },
+  "runDetail": {
+    "backBtn": "Back to Runs",
+    "createdBy": "Created by {name}",
+    "approvedBy": "Approved by {name} on {date}",
+    "paidOn": "Paid on {date}",
+    "approveBtn": "Approve Run",
+    "markPaidBtn": "Mark as Paid",
+    "searchPlaceholder": "Search employees...",
+    "table": {
+      "employee": "Employee",
+      "baseSalary": "Base Salary",
+      "otHours": "OT Hours",
+      "otPay": "OT Pay",
+      "incentives": "Incentives",
+      "deductions": "Deductions",
+      "insurance": "Insurance",
+      "netSalary": "Net Salary"
+    },
+    "empty": "No employee entries found.",
+    "drawerTitle": "Payslip",
+    "payslipSubtitle": "Read-only payslip breakdown.",
+    "payslipTitle": "Payslip — {monthYear}"
+  },
+  "payslip": {
+    "title": "My Payslips",
+    "subtitle": "View your monthly salary breakdown. Read-only.",
+    "allYears": "All Years",
+    "table": {
+      "monthYear": "Month / Year",
+      "baseSalary": "Base Salary",
+      "netSalary": "Net Salary",
+      "status": "Status"
+    },
+    "empty": "No payslips available yet.",
+    "helpText": "Click any row to view your full payslip breakdown.",
+    "drawerTitle": "Payslip — {monthYear}",
+    "noEntry": "No payslip entry found for this period."
+  },
+  "payslipDetail": {
+    "noDepartment": "No Department",
+    "baseSalary": "Base Salary",
+    "noOvertime": "No approved overtime for this period.",
+    "overtime": "Overtime ({hours}h)",
+    "incentives": "Incentives",
+    "deductions": "Deductions",
+    "insurance": "Insurance Deduction",
+    "netSalary": "Net Salary"
+  },
+  "report": {
+    "title": "Payroll Summary Report",
+    "subtitle": "Monthly cost breakdown grouped by department.",
+    "exportCsv": "Export CSV",
+    "filters": {
+      "month": "Month",
+      "year": "Year",
+      "generate": "Generate Report",
+      "loading": "Loading..."
+    },
+    "errorNoRun": "No payroll run found for this period.",
+    "stats": {
+      "totalBase": "Total Base",
+      "totalOvertime": "Total Overtime",
+      "totalIncentives": "Total Incentives",
+      "totalDeductions": "Total Deductions",
+      "totalNet": "Total Net"
+    },
+    "table": {
+      "title": "{monthYear} — By Department",
+      "employeesCount": "{count} employees",
+      "department": "Department",
+      "employees": "Employees",
+      "baseSalary": "Base Salary",
+      "overtime": "Overtime",
+      "incentives": "Incentives",
+      "deductions": "Deductions",
+      "netSalary": "Net Salary",
+      "total": "Total"
+    }
+  },
+  "incentives": {
+    "title": "Incentives",
+    "subtitle": "Manage bonuses, commissions, and deductions for employees.",
+    "addBtn": "Add Incentive",
+    "table": {
+      "employee": "Employee",
+      "type": "Type",
+      "amount": "Amount",
+      "description": "Description",
+      "effectiveDate": "Effective Date",
+      "linkedPayroll": "Linked Payroll",
+      "actions": "Actions"
+    },
+    "empty": "No incentives found.",
+    "linkedBadge": "Linked",
+    "deleteBtn": "Delete",
+    "cannotDeleteTooltip": "Cannot remove an incentive linked to a paid payroll.",
+    "confirmDeleteTitle": "Delete Incentive?",
+    "confirmDeleteDesc": "Are you sure you want to delete this {type} of {amount}? This cannot be undone.",
+    "confirmDeleteBtn": "Delete"
+  },
+  "addIncentiveModal": {
+    "title": "Add Incentive",
+    "employee": "Employee",
+    "searchPlaceholder": "Search employee...",
+    "selectPlaceholder": "Select employee",
+    "type": "Type",
+    "amount": "Amount",
+    "description": "Description",
+    "descriptionPlaceholder": "Optional note...",
+    "effectiveDate": "Effective Date",
+    "requiredError": "Please fill in all required fields.",
+    "genericError": "Something went wrong.",
+    "cancelBtn": "Cancel",
+    "addingBtn": "Adding...",
+    "addBtn": "Add Incentive"
+  },
+  "createRunModal": {
+    "title": "Create Payroll Run",
+    "infoText": "Creating a run will auto-calculate all employee entries from salaries, approved timesheets, active insurance enrollments, and pending incentives for this month.",
+    "month": "Month",
+    "year": "Year",
+    "conflictError": "A payroll run already exists for this month and year.",
+    "genericError": "Something went wrong. Please try again.",
+    "cancelBtn": "Cancel",
+    "creatingBtn": "Creating...",
+    "createBtn": "Create Run"
+  },
+  "shared": {
+    "lockBanner": "This payroll run is locked and cannot be edited.",
+    "confirmModal": {
+      "cancel": "Cancel",
+      "confirm": "Confirm",
+      "processing": "Processing..."
+    }
+  }
+}
