@@ -69,12 +69,7 @@ export default function Navbar() {
         </Link>
 
         <div className="hidden lg:flex items-center gap-8 font-bold text-sm uppercase tracking-wide">
-          <Link
-            href="#"
-            className="flex items-center gap-1 hover:text-primary transition-colors"
-          >
-            {t("product")} <ChevronDown size={14} />
-          </Link>
+          
 
           <Link href="/blogs" className="hover:text-primary transition-colors">
             {t("blogs")}
