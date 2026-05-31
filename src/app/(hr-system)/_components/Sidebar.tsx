@@ -30,7 +30,7 @@ export default function Sidebar() {
     allowedRoles?: UserRole[];
   }[] = [
     { icon: Users, label: t("employees"), href: "/employees", allowedRoles: ["HR_ADMIN", "MANAGER", "TENANT_OWNER"] },
-    { icon: Briefcase, label: "Jobs", href: "/jobs" }, 
+    { icon: Briefcase, label: "Jobs", href: "/jobs" , allowedRoles: ["HR_ADMIN", "MANAGER", "TENANT_OWNER"]}, 
     { icon: Package, label: t("assets"), href: "/asset" },
     { icon: ShieldAlert, label: t("insurance"), href: "/insurance", allowedRoles: ["HR_ADMIN", "MANAGER", "TENANT_OWNER"] },
     { icon: Folder, label: t("projects"), href: "/projects", allowedRoles: ["HR_ADMIN", "MANAGER", "TENANT_OWNER"] },
