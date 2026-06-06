@@ -30,6 +30,7 @@ async function apiRequest<T>(
     }
 
     return { data, error: null, status: response.status };
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (err: any) {
     if (err.name === 'AbortError' || err.code === 'ERR_CANCELED') {
       return { data: null, error: 'Request canceled', status: 0 };
@@ -54,13 +55,14 @@ export async function createLeaveRequest(data: CreateLeaveInput) {
 }
 
 export async function getAllLeaveRequests(params?: { limit?: number; page?: number }) {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const queryString = params ? `?${new URLSearchParams(params as any).toString()}` : '';
-  const response = await apiRequest<any>(`${apis.leaveRequests.base}${queryString}`);
+  const response = await apiRequest<LeaveRequestsResponse>(`${apis.leaveRequests.base}${queryString}`);
   
   if (response.error) throw new Error(response.error);
   if (!response.data) return [];
   
-  const data = response.data.data?.leaveRequests ?? response.data.leaveRequests ?? [];
+  const data = response.data.data?.leaveRequests ?? [];
   const parsed = LeaveRequestDTO.array().safeParse(data);
   if (!parsed.success) {
     console.error("[getAllLeaveRequests] Parse failure:", parsed.error);
@@ -71,13 +73,14 @@ export async function getAllLeaveRequests(params?: { limit?: number; page?: numb
 }
 
 export async function getMyLeaveRequests(params?: { limit?: number; page?: number }) {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const queryString = params ? `?${new URLSearchParams(params as any).toString()}` : '';
-  const response = await apiRequest<z.infer<typeof LeaveRequestDTO>[]>(`${apis.leaveRequests.me}${queryString}`);
-  
+  const response = await apiRequest<LeaveRequestsResponse>(`${apis.leaveRequests.me}${queryString}`);
+  console.log("response",response)
   if (response.error) throw new Error(response.error);
   if (!response.data) return [];
 
-  const items = response.data.data?.leaveRequests ?? response.data.leaveRequests ?? [];
+  const items = response.data.data?.leaveRequests ?? [];
   const parsed = LeaveRequestDTO.array().safeParse(items);
   if (!parsed.success) {
     console.error("[getMyLeaveRequests] Parse failure:", parsed.error);
@@ -108,6 +111,18 @@ export async function cancelLeaveRequest(id: string) {
   if (response.error) throw new Error(response.error);
   return response.data;
 }
+
+type LeaveRequestsResponse = {
+  data: {
+    leaveRequests: z.infer<typeof LeaveRequestDTO>[];
+    meta: {
+      total: number;
+      page: number;
+      limit: number;
+      totalPages: number;
+    };
+  };
+};
 
 type CreateLeaveInput = z.infer<typeof CreateLeaveRequestDTO>;
 type ReviewLeaveInput = z.infer<typeof ReviewLeaveRequestDTO>;
