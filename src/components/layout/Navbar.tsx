@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useSyncExternalStore } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import { ChevronDown, Menu, X, LogOut } from "lucide-react";
 import { motion } from "framer-motion";
 import { useTranslations, useLocale } from "next-intl";
@@ -15,6 +15,7 @@ export default function Navbar() {
   const router = useRouter();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const pathname = usePathname();
 
   const isHydrated = useSyncExternalStore(
     () => () => {},
@@ -69,20 +70,36 @@ export default function Navbar() {
         </Link>
 
         <div className="hidden lg:flex items-center gap-8 font-bold text-sm uppercase tracking-wide">
-          
-
-          <Link href="/blogs" className="hover:text-primary transition-colors">
+          <Link
+            href="/blogs"
+            className={cn(
+              "transition-colors",
+              pathname === "/blogs"
+                ? "text-primary"
+                : "hover:text-primary",
+            )}
+          >
             {t("blogs")}
           </Link>
           <Link
             href="/services"
-            className="hover:text-primary transition-colors"
+            className={cn(
+              "transition-colors",
+              pathname === "/services"
+                ? "text-primary"
+                : "hover:text-primary",
+            )}
           >
             {t("services")}
           </Link>
           <Link
             href="/pricing"
-            className="hover:text-primary transition-colors"
+            className={cn(
+              "transition-colors",
+              pathname === "/pricing"
+                ? "text-primary"
+                : "hover:text-primary",
+            )}
           >
             {t("pricing")}
           </Link>
@@ -148,32 +165,40 @@ export default function Navbar() {
         )}
       >
         <Link
-          href="#"
-          className="font-bold text-white"
-          onClick={() => setIsMobileMenuOpen(false)}
-        >
-          {t("product")}
-        </Link>
-        <Link
-          href="#"
-          className="font-bold text-white"
+          href="/blogs"
+          className={cn(
+            "font-bold transition-colors",
+            pathname === "/blogs"
+              ? "text-primary"
+              : "text-white hover:text-primary",
+          )}
           onClick={() => setIsMobileMenuOpen(false)}
         >
           {t("blogs")}
         </Link>
         <Link
-          href="#"
-          className="font-bold text-white"
-          onClick={() => setIsMobileMenuOpen(false)}
-        >
-          {t("pricing")}
-        </Link>
-        <Link
-          href="#"
-          className="font-bold text-white"
+          href="/services"
+          className={cn(
+            "font-bold transition-colors",
+            pathname === "/services"
+              ? "text-primary"
+              : "text-white hover:text-primary",
+          )}
           onClick={() => setIsMobileMenuOpen(false)}
         >
           {t("services")}
+        </Link>
+        <Link
+          href="/pricing"
+          className={cn(
+            "font-bold transition-colors",
+            pathname === "/pricing"
+              ? "text-primary"
+              : "text-white hover:text-primary",
+          )}
+          onClick={() => setIsMobileMenuOpen(false)}
+        >
+          {t("pricing")}
         </Link>
         {isHydrated ? (
           <motion.div

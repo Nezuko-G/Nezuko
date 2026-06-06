@@ -32,9 +32,9 @@ export default function Footer() {
 
         <div className="flex flex-col gap-4">
           <h4 className="text-white font-bold mb-2">{t("sections.product")}</h4>
-          <Link href="#" className="text-gray-400 hover:text-primary text-sm transition-colors">{t("links.features")}</Link>
-          <Link href="#" className="text-gray-400 hover:text-primary text-sm transition-colors">{t("links.pricing")}</Link>
-          <Link href="#" className="text-gray-400 hover:text-primary text-sm transition-colors">{t("links.updates")}</Link>
+          <Link href="/blogs" className="text-gray-400 hover:text-primary text-sm transition-colors">{t("links.blogs")}</Link>
+          <Link href="/services" className="text-gray-400 hover:text-primary text-sm transition-colors">{t("links.services")}</Link>
+          <Link href="/pricing" className="text-gray-400 hover:text-primary text-sm transition-colors">{t("links.pricing")}</Link>
         </div>
 
         <div className="flex flex-col gap-4">
