@@ -47,7 +47,7 @@ export function mapOvertimeReportItemFromDTO(dto: any): OvertimeReportItem {
     employeeName: dto.user ? `${dto.user.firstName} ${dto.user.lastName}` : "Unknown",
     departmentId: dto.user?.departmentId ?? null,
     departmentName: null,
-    date: dto.date,
+    date: new Date(dto.date),
     totalHours: dto.totalHours,
     overtimeHours: dto.overtimeHours,
   };

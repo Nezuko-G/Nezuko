@@ -7,6 +7,10 @@ import RoleGuard from "@/components/RoleGuard/RoleGuard";
 import { useOvertimeReport } from "@/app/(hr-system)/timesheets/hooks/useTimesheets";
 import { TableSkeleton, ErrorState, EmptyState, SpinnerIndicator } from "@/components/ui/data-states";
 
+function formatDate(date: Date) {
+  return date.toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" });
+}
+
 export default function OvertimeReportPage() {
   const t = useTranslations("timesheet.overtime");
   const [startDate, setStartDate] = useState("");
@@ -28,7 +32,7 @@ export default function OvertimeReportPage() {
     const rows = report.items.map((item) => [
       item.employeeName,
       item.departmentName || "",
-      item.date,
+      formatDate(item.date),
       item.totalHours.toFixed(2),
       item.overtimeHours.toFixed(2),
     ]);
@@ -142,7 +146,7 @@ export default function OvertimeReportPage() {
                       <tr key={`${item.userId}-${item.date}-${i}`} className="border-b border-gray-100 hover:bg-gray-50 transition-colors">
                         <td className="px-4 py-3 font-medium text-gray-800">{item.employeeName}</td>
                         <td className="px-4 py-3 text-gray-600">{item.departmentName || "—"}</td>
-                        <td className="px-4 py-3 text-gray-600">{item.date}</td>
+                        <td className="px-4 py-3 text-gray-600">{formatDate(item.date)}</td>
                         <td className="px-4 py-3 text-gray-600">{item.totalHours.toFixed(2)}</td>
                         <td className="px-4 py-3">
                           <span className="text-amber-600 font-medium">{item.overtimeHours.toFixed(2)}</span>
