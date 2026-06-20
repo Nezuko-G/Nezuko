@@ -33,6 +33,8 @@
   "cancelling": "Cancelling...",
   "cancelAction": "Cancel",
   "reviewAction": "Review",
+  "searchPlaceholder": "Search by employee name or reason...",
+  "pagination": "Page {current} of {total}",
   "filters": {
     "all": "All",
     "pending": "Pending",

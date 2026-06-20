@@ -1,14 +1,14 @@
 "use client";
 
 import { useState } from "react";
+import { useDebounce } from "use-debounce";
 import { useTranslations } from "next-intl";
-import { AlertCircle, RefreshCw } from "lucide-react";
+import { AlertCircle, RefreshCw, Loader2, ChevronLeft, ChevronRight } from "lucide-react";
 import { useLeaveRequests } from "@/app/(hr-system)/leave/hooks/useLeaveRequests";
 import { useAuthStore } from "@/hooks/useAuthStore";
 import { LeaveRequestForm } from "./_components/LeaveRequestForm";
 import { LeaveRequestsTable } from "./_components/LeaveRequestsTable";
 import { LeaveFilters } from "./_components/LeaveFilters";
-import type { LeaveRequest } from "@/app/(hr-system)/leave/types/leave.dto";
 import RoleGuard from "@/components/RoleGuard/RoleGuard";
 
 function SkeletonRow() {
@@ -40,24 +40,24 @@ export default function LeavePage() {
   const t = useTranslations("leave");
   const { role } = useAuthStore();
   const isHR = role === "HR_ADMIN" || role === "MANAGER";
-  const [statusFilter, setStatusFilter] = useState<
-    LeaveRequest["status"] | "ALL"
-  >("ALL");
+
+  const [search, setSearch] = useState("");
+  const [debouncedSearch] = useDebounce(search, 500);
+  const [statusFilter, setStatusFilter] = useState("ALL");
+  const [page, setPage] = useState(1);
   const [showForm, setShowForm] = useState(false);
+  const limit = 10;
 
-  const {
-    data: requests = [],
-    isLoading,
-    isError,
-    error,
-    refetch,
-    isFetching,
-  } = useLeaveRequests();
+  const { data, isLoading, isError, error, refetch, isFetching } = useLeaveRequests({
+    page,
+    limit,
+    search: debouncedSearch || undefined,
+    status: statusFilter === "ALL" ? undefined : statusFilter,
+  });
 
-  const filteredRequests =
-    statusFilter === "ALL"
-      ? requests
-      : requests.filter((r) => r.status === statusFilter);
+  const requests = data?.data ?? [];
+  const meta = data?.meta;
+  const lastPage = meta?.totalPages || 1;
 
   return (
     <div className="p-6 max-w-6xl mx-auto">
@@ -80,10 +80,23 @@ export default function LeavePage() {
         </RoleGuard>
       </div>
 
-      <div className="mb-6">
+      <div className="flex flex-col sm:flex-row gap-2 mb-6">
+        <input
+          type="text"
+          placeholder={t("searchPlaceholder")}
+          value={search}
+          onChange={(e) => {
+            setSearch(e.target.value);
+            setPage(1);
+          }}
+          className="flex-1 px-4 py-2 rounded-xl border border-gray-200 bg-card text-content text-sm focus:outline-none focus:ring-2 focus:ring-primary/30 font-semibold placeholder:text-content-muted placeholder:font-normal"
+        />
         <LeaveFilters
           statusFilter={statusFilter}
-          onStatusChange={setStatusFilter}
+          onStatusChange={(s) => {
+            setStatusFilter(s);
+            setPage(1);
+          }}
         />
       </div>
 
@@ -142,14 +155,38 @@ export default function LeavePage() {
         </div>
       )}
 
-      {!isLoading && !isError && filteredRequests.length === 0 && (
+      {!isLoading && !isError && requests.length === 0 && (
         <div className="text-center py-12">
           <p className="text-gray-400 text-base">{t("noRequests")}</p>
         </div>
       )}
 
-      {!isLoading && !isError && filteredRequests.length > 0 && (
-        <LeaveRequestsTable requests={filteredRequests} isHR={isHR} />
+      {!isLoading && !isError && requests.length > 0 && (
+        <div className="bg-white rounded-xl border border-gray-200 overflow-hidden">
+          <LeaveRequestsTable requests={requests} isHR={isHR} />
+
+          <div className="px-6 py-4 border-t border-gray-100 flex items-center justify-center gap-4 bg-gray-50/50">
+            <p className="text-sm text-content-muted font-bold">
+              {t("pagination", { current: page, total: lastPage })}
+            </p>
+            <div className="flex ltr:flex-row-reverse rtl:flex-row items-center gap-1.5">
+              <button
+                disabled={page >= lastPage}
+                onClick={() => setPage((p) => p + 1)}
+                className="h-8 w-8 flex items-center justify-center rounded-lg border border-gray-200 hover:bg-gray-50 text-content-dark transition disabled:opacity-50"
+              >
+                <ChevronRight size={16} />
+              </button>
+              <button
+                disabled={page <= 1}
+                onClick={() => setPage((p) => p - 1)}
+                className="h-8 w-8 flex items-center justify-center rounded-lg border border-gray-200 hover:bg-gray-50 text-content-dark transition disabled:opacity-50"
+              >
+                <ChevronLeft size={16} />
+              </button>
+            </div>
+          </div>
+        </div>
       )}
 
       {showForm && <LeaveRequestForm onClose={() => setShowForm(false)} />}

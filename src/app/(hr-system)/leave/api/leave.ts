@@ -5,12 +5,19 @@ import { apis } from "@/lib/api/config";
 
 const API_BASE = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api/v1';
 
+interface RequestParams {
+  page?: number;
+  limit?: number;
+  search?: string;
+  status?: string;
+}
+
 async function apiRequest<T>(
   endpoint: string,
   options: RequestInit = {}
 ): Promise<{ data: T | null; error: string | null; status: number }> {
   const url = `${API_BASE}${endpoint}`;
-  
+
   try {
     const response = await fetch(url, {
       ...options,
@@ -42,43 +49,53 @@ async function apiRequest<T>(
   }
 }
 
+function buildQueryString(params?: RequestParams): string {
+  if (!params) return '';
+  const clean = Object.fromEntries(
+    Object.entries(params).filter(([, v]) => v !== undefined && v !== '')
+  );
+  if (Object.keys(clean).length === 0) return '';
+  return `?${new URLSearchParams(clean as Record<string, string>).toString()}`;
+}
+
 export async function createLeaveRequest(data: CreateLeaveInput) {
   const validated = CreateLeaveRequestDTO.parse(data);
   const response = await apiRequest<z.infer<typeof LeaveRequestDTO>>(apis.leaveRequests.base, {
     method: 'POST',
     body: JSON.stringify(validated),
   });
-  
+
   if (response.error) throw new Error(response.error);
   if (!response.data) throw new Error("No data received");
   return mapLeaveRequestFromDTO(response.data);
 }
 
-export async function getAllLeaveRequests(params?: { limit?: number; page?: number }) {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const queryString = params ? `?${new URLSearchParams(params as any).toString()}` : '';
+export async function getAllLeaveRequests(params?: RequestParams) {
+  const queryString = buildQueryString(params);
   const response = await apiRequest<LeaveRequestsResponse>(`${apis.leaveRequests.base}${queryString}`);
-  
+
   if (response.error) throw new Error(response.error);
-  if (!response.data) return [];
-  
-  const data = response.data.data?.leaveRequests ?? [];
-  const parsed = LeaveRequestDTO.array().safeParse(data);
+  if (!response.data) return { data: [], meta: null };
+
+  const items = response.data.data?.leaveRequests ?? [];
+  const parsed = LeaveRequestDTO.array().safeParse(items);
   if (!parsed.success) {
     console.error("[getAllLeaveRequests] Parse failure:", parsed.error);
     throw new Error("Failed to parse leave requests data");
   }
-  
-  return mapLeaveRequestsFromDTO(parsed.data);
+
+  return {
+    data: mapLeaveRequestsFromDTO(parsed.data),
+    meta: response.data.data?.meta ?? null,
+  };
 }
 
-export async function getMyLeaveRequests(params?: { limit?: number; page?: number }) {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const queryString = params ? `?${new URLSearchParams(params as any).toString()}` : '';
+export async function getMyLeaveRequests(params?: RequestParams) {
+  const queryString = buildQueryString(params);
   const response = await apiRequest<LeaveRequestsResponse>(`${apis.leaveRequests.me}${queryString}`);
-  console.log("response",response)
+
   if (response.error) throw new Error(response.error);
-  if (!response.data) return [];
+  if (!response.data) return { data: [], meta: null };
 
   const items = response.data.data?.leaveRequests ?? [];
   const parsed = LeaveRequestDTO.array().safeParse(items);
@@ -87,7 +104,10 @@ export async function getMyLeaveRequests(params?: { limit?: number; page?: numbe
     throw new Error("Failed to parse leave requests data");
   }
 
-  return mapLeaveRequestsFromDTO(parsed.data);
+  return {
+    data: mapLeaveRequestsFromDTO(parsed.data),
+    meta: response.data.data?.meta ?? null,
+  };
 }
 
 export async function reviewLeaveRequest(id: string, data: ReviewLeaveInput) {
@@ -96,7 +116,7 @@ export async function reviewLeaveRequest(id: string, data: ReviewLeaveInput) {
     method: 'PATCH',
     body: JSON.stringify(validated),
   });
-  
+
   if (response.error) throw new Error(response.error);
   if (!response.data) throw new Error("No data received");
   return mapLeaveRequestFromDTO(response.data);
@@ -107,7 +127,7 @@ export async function cancelLeaveRequest(id: string) {
     method: 'PATCH',
     body: JSON.stringify({}),
   });
-  
+
   if (response.error) throw new Error(response.error);
   return response.data;
 }
