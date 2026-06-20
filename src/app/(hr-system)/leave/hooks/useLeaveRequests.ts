@@ -15,24 +15,18 @@ interface ApiErrorType extends Error {
   status?: number;
 }
 
-export function useLeaveRequests(filters?: { limit?: number; page?: number }) {
+export function useLeaveRequests(params?: { page?: number; limit?: number; search?: string; status?: string }) {
   const { role } = useAuthStore();
   const isHR = role === "HR_ADMIN" || role === "MANAGER";
-  const toast = useToast();
 
   return useQuery({
-    queryKey: ["leave-requests", filters, isHR],
+    queryKey: ["leave-requests", params, isHR],
     queryFn: async () => {
-      console.log('[useLeaveRequests] Query function called, isHR:', isHR);
       try {
-        const result = isHR ? await getAllLeaveRequests(filters) : await getMyLeaveRequests(filters);
-        console.log('[useLeaveRequests] Query success:', result);
-        return result;
+        return isHR ? await getAllLeaveRequests(params) : await getMyLeaveRequests(params);
       } catch (error) {
-        console.log('[useLeaveRequests] Query error caught:', error);
         const err = error as ApiErrorType;
-        toast.error(err?.message || "Failed to load leave requests");
-        throw error;
+        throw new Error(err?.message || "Failed to load leave requests");
       }
     },
     retry: false,

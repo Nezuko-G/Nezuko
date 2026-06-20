@@ -56,56 +56,61 @@ export default function Navbar() {
     <div className="fixed top-4 left-1/2 -translate-x-1/2 z-50 w-[92%] max-w-7xl">
       <nav
         className={cn(
-          "transition-all duration-300 px-4 md:px-8 py-3 md:py-4 flex items-center justify-between rounded-full",
+          "transition-all duration-300 px-4 md:px-8 py-3 md:py-4 flex items-center rounded-full",
           isScrolled
             ? "bg-card/90 backdrop-blur-md text-content shadow-lg border border-white/10"
             : "bg-transparent text-white",
         )}
       >
-        <Link
-          href={`/`}
-          className="text-2xl md:text-2xl font-black tracking-tighter"
-        >
-          NEZUKO
-        </Link>
-
-        <div className="hidden lg:flex items-center gap-8 font-bold text-sm uppercase tracking-wide">
+        <div className="flex-1 flex justify-start">
           <Link
-            href="/blogs"
-            className={cn(
-              "transition-colors",
-              pathname === "/blogs"
-                ? "text-primary"
-                : "hover:text-primary",
-            )}
+            href={`/`}
+            className="text-2xl md:text-2xl font-black tracking-tighter"
           >
-            {t("blogs")}
-          </Link>
-          <Link
-            href="/services"
-            className={cn(
-              "transition-colors",
-              pathname === "/services"
-                ? "text-primary"
-                : "hover:text-primary",
-            )}
-          >
-            {t("services")}
-          </Link>
-          <Link
-            href="/pricing"
-            className={cn(
-              "transition-colors",
-              pathname === "/pricing"
-                ? "text-primary"
-                : "hover:text-primary",
-            )}
-          >
-            {t("pricing")}
+            NEZUKO
           </Link>
         </div>
 
-        <div className="flex items-center gap-3 md:gap-6">
+        <div className="flex-1 flex justify-center">
+          <div className="hidden lg:flex items-center gap-8 font-bold text-sm uppercase tracking-wide">
+            <Link
+              href="/blogs"
+              className={cn(
+                "transition-colors",
+                pathname === "/blogs"
+                  ? "text-primary"
+                  : "hover:text-primary",
+              )}
+            >
+              {t("blogs")}
+            </Link>
+            <Link
+              href="/services"
+              className={cn(
+                "transition-colors",
+                pathname === "/services"
+                  ? "text-primary"
+                  : "hover:text-primary",
+              )}
+            >
+              {t("services")}
+            </Link>
+            <Link
+              href="/pricing"
+              className={cn(
+                "transition-colors",
+                pathname === "/pricing"
+                  ? "text-primary"
+                  : "hover:text-primary",
+              )}
+            >
+              {t("pricing")}
+            </Link>
+          </div>
+        </div>
+
+        <div className="flex-1 flex justify-end">
+          <div className="flex items-center gap-3 md:gap-6">
           <div className="hidden md:block">
             <LanguageSwitcher currentLocale={locale} />
           </div>
@@ -143,7 +148,7 @@ export default function Navbar() {
 
           <Link
             href="/book-demo"
-            className="bg-primary hover:bg-primary/90 text-secondary font-black py-2 px-4 md:py-3 md:px-6 rounded-full transition-all active:scale-95 text-[13px] md:text-xs"
+            className="bg-primary hover:bg-primary/90 text-secondary font-black py-2 px-3 md:py-3 md:px-6 rounded-full transition-all active:scale-95 text-[11px] md:text-xs text-nowrap wrap-break-word"
           >
             {t("demo")}
           </Link>
@@ -153,6 +158,7 @@ export default function Navbar() {
           >
             {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
+        </div>
         </div>
       </nav>
 

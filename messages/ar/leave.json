@@ -33,6 +33,8 @@
   "cancelling": "جاري الإلغاء...",
   "cancelAction": "إلغاء",
   "reviewAction": "مراجعة",
+  "searchPlaceholder": "ابحث باسم الموظف أو السبب...",
+  "pagination": "الصفحة {current} من {total}",
   "filters": {
     "all": "الكل",
     "pending": "معلق",
