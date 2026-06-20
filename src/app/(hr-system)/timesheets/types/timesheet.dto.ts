@@ -85,9 +85,18 @@ export type OvertimeReportItem = {
   totalHours: number;
   overtimeHours: number;
 };
+
+export type OvertimeReportMeta = {
+  total: number;
+  page: number;
+  limit: number;
+  totalPages: number;
+};
+
 export type OvertimeReport = {
   items: OvertimeReportItem[];
   totalOvertime: number;
+  meta: OvertimeReportMeta | null;
 };
 
 export type Timesheet = {

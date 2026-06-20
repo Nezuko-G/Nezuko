@@ -82,6 +82,8 @@ export interface OvertimeReportFilters {
   startDate: string;
   endDate: string;
   departmentId?: string;
+  page?: number;
+  limit?: number;
 }
 
 export async function getOvertimeReport(filters: OvertimeReportFilters): Promise<OvertimeReport> {
@@ -92,6 +94,8 @@ export async function getOvertimeReport(filters: OvertimeReportFilters): Promise
 
   throwIfError(response);
 
-  const raw = extractList(response, "timesheets");
-  return mapOvertimeReportFromDTO(raw);
+  const data = response.data?.data ?? response.data ?? {};
+  const raw = Array.isArray(data) ? data : (data.timesheets ?? data.items ?? []);
+  const meta = data.meta ?? null;
+  return mapOvertimeReportFromDTO(raw, meta);
 }
