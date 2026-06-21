@@ -1,6 +1,6 @@
 import { z } from "zod";
 import apiClient from "@/lib/axios/core/instance";
-import { apis } from "../config";
+import { apis } from "../../../../lib/api/config";
 import { 
   InsurancePlanDTO, CreateInsurancePlanDTO, UpdateInsurancePlanDTO, 
   InsuranceEnrollmentDTO, EnrollEmployeeDTO, 
@@ -13,7 +13,7 @@ interface ApiResponse<T> {
   meta?: any;
 }
 
-export async function getInsurancePlans(params?: { page?: number; limit?: number; type?: string; isActive?: boolean }) {
+export async function getInsurancePlans(params?: { page?: number; limit?: number; type?: string; isActive?: boolean; search?: string }) {
   const response = await apiClient.get<ApiResponse<any>>(apis.insurance.plans, { params });
   return {
     data: response.data.data?.plans || response.data.data || [],
