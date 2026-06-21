@@ -1,22 +1,18 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import axios from "axios";
-import { useLocale } from "next-intl";
 import { CreateJobInput, JobsPaginatedResponse, SingleJobResponse,JobFilters } from "../types/job.dto";
 import toast from "react-hot-toast";
 import { useTranslations } from "next-intl";
-
-const jobsClient = axios.create({
-  baseURL: "/api/jobs-proxy",
-});
+import { jobsClient } from "../api/jobsClient";
 
 export const useJobsAuthCheck = () => {
   return useQuery({
     queryKey: ["jobs_auth_check"],
     queryFn: async () => {
-      const res = await jobsClient.get<{ isAuthenticated: boolean }>("/check-auth");
-      return res.data;
+      const res = await jobsClient.get("/auth/me"); 
+      
+      return { isAuthenticated: true, user: res.data };
     },
-    retry: false,
+    retry: false, 
   });
 };
 
@@ -25,6 +21,16 @@ export const useJobsAuth = () => {
     mutationFn: async (data: any) => {
       const res = await jobsClient.post("/auth/login", data);
       return res.data;
+    },
+    onSuccess: () => {
+      toast.success("Logged in successfully"); 
+    },
+    onError: (error: any) => {
+      const errorMessage = 
+        error.response?.data?.message || 
+        error.response?.data?.error 
+
+      toast.error(errorMessage);
     },
   });
 };
