@@ -8,7 +8,8 @@ import { TableSkeleton, ErrorState, EmptyState, SpinnerIndicator } from "@/compo
 
 export default function MyTimesheetsPage() {
   const t = useTranslations("timesheet");
-  const { data: timesheets = [], isLoading, isError, error, refetch, isFetching } = useMyTimesheets();
+  const { data, isLoading, isError, error, refetch, isFetching } = useMyTimesheets();
+  const timesheets = data?.timesheets ?? [];
 
   const skeletonColumns = [
     { key: "date", label: t("table.date") },

@@ -2,7 +2,8 @@
 
 import { useState, useMemo } from "react";
 import { useTranslations } from "next-intl";
-import { Download, ChevronLeft, ChevronRight } from "lucide-react";
+import { Download, Search, ChevronLeft, ChevronRight } from "lucide-react";
+import { useDebounce } from "use-debounce";
 import RoleGuard from "@/components/RoleGuard/RoleGuard";
 import { useOvertimeReport } from "@/app/(hr-system)/timesheets/hooks/useTimesheets";
 import { TableSkeleton, ErrorState, EmptyState, SpinnerIndicator } from "@/components/ui/data-states";
@@ -15,13 +16,15 @@ export default function OvertimeReportPage() {
   const t = useTranslations("timesheet.overtime");
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
-  const [departmentId, setDepartmentId] = useState("");
+  const [searchQuery, setSearchQuery] = useState("");
   const [page, setPage] = useState(1);
   const limit = 10;
 
+  const [debouncedSearch] = useDebounce(searchQuery, 500);
+
   const filters = useMemo(
-    () => ({ startDate, endDate, page, limit, ...(departmentId ? { departmentId } : {}) }),
-    [startDate, endDate, page, departmentId]
+    () => ({ startDate, endDate, page, limit, ...(debouncedSearch ? { search: debouncedSearch } : {}) }),
+    [startDate, endDate, page, debouncedSearch]
   );
 
   const { data: report, isLoading, isError, error, refetch, isFetching } = useOvertimeReport(filters);
@@ -103,17 +106,17 @@ export default function OvertimeReportPage() {
               className="border border-gray-200 rounded-lg px-3 py-1.5 text-sm outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all"
             />
           </div>
-          <div className="flex items-center gap-2">
-            <label className="text-xs font-medium text-gray-500">{t("department")}</label>
+          <div className="relative flex-1 min-w-[200px] max-w-xs">
+            <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
             <input
               type="text"
-              placeholder={t("departmentId")}
-              value={departmentId}
+              placeholder={t("searchPlaceholder")}
+              value={searchQuery}
               onChange={(e) => {
-                setDepartmentId(e.target.value);
+                setSearchQuery(e.target.value);
                 setPage(1);
               }}
-              className="border border-gray-200 rounded-lg px-3 py-1.5 text-sm outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all w-40"
+              className="w-full pl-9 pr-3 py-1.5 rounded-lg border border-gray-200 text-sm outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all"
             />
           </div>
         </div>

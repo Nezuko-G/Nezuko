@@ -24,7 +24,8 @@ export function AttendanceWidget() {
   const [widgetView, setWidgetView] = useState<WidgetView>("loading");
 
   const { state: geoState, refreshLocation, retryLocation } = useGeolocation();
-  const { data: myTimesheets = [], isLoading: timesheetsLoading } = useMyTimesheets();
+  const { data: myTimesheetsData, isLoading: timesheetsLoading } = useMyTimesheets();
+  const myTimesheets = useMemo(() => myTimesheetsData?.timesheets ?? [], [myTimesheetsData]);
   const markMutation = useAttendanceMark();
 
   const todayRecord = useMemo(() => {
@@ -46,14 +47,15 @@ export function AttendanceWidget() {
   const resolvedView = widgetView !== "loading" ? widgetView : computedView;
 
   const gpsDenied = geoState === "denied";
-  const canSubmit = resolvedView === "not_checked_in" || resolvedView === "checked_in";
+  const canSubmit = (resolvedView === "not_checked_in" || resolvedView === "checked_in") && !gpsDenied;
 
   const handleAction = useCallback(async () => {
     if (!canSubmit || markMutation.isPending) return;
 
     const freshCoords = await refreshLocation();
-    const lat = freshCoords?.lat ?? 0;
-    const lng = freshCoords?.lng ?? 0;
+    if (!freshCoords) return;
+
+    const { lat, lng } = freshCoords;
 
     try {
       const result = await markMutation.mutateAsync({ lat, lng });
@@ -162,6 +164,9 @@ export function AttendanceWidget() {
       {gpsDenied && (
         <div className="mt-3 px-4 py-2 bg-amber-50 border border-amber-200 rounded-lg">
           <p className="text-xs text-amber-700">{t("widget.locationDeniedWarning")}</p>
+          <p className="text-xs text-amber-600 mt-1">
+            Click the location icon in your browser&apos;s address bar, set permission to Allow, then tap Try Again.
+          </p>
         </div>
       )}
 

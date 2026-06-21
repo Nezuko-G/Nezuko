@@ -24,8 +24,8 @@ function formatTime(date: Date | null) {
   return date.toLocaleTimeString(undefined, { hour: "2-digit", minute: "2-digit" });
 }
 
-function formatHours(hours: number) {
-  return hours.toFixed(2);
+function formatHours(hours: number | null) {
+  return hours?.toFixed(2) ?? "\u2014";
 }
 
 function TimesheetRow({ sheet, isHR }: { sheet: Timesheet; isHR: boolean }) {

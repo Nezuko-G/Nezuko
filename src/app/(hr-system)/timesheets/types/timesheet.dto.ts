@@ -86,6 +86,13 @@ export type OvertimeReportItem = {
   overtimeHours: number;
 };
 
+export type PaginationMeta = {
+  total: number;
+  page: number;
+  limit: number;
+  totalPages: number;
+};
+
 export type OvertimeReportMeta = {
   total: number;
   page: number;

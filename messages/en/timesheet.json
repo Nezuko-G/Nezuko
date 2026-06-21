@@ -1,5 +1,6 @@
 {
   "title": "Timesheets",
+  "exportCsv": "Export CSV",
   "loadError": "Failed to load timesheets",
   "tryAgain": "Try Again",
   "empty": "No timesheets found",
@@ -95,7 +96,7 @@
     "overtimeHours": "Overtime Hours",
     "from": "From",
     "to": "To",
-    "departmentId": "Department ID",
+    "searchPlaceholder": "Search employee or department...",
     "loadError": "Failed to load overtime report",
     "tryAgain": "Try Again",
     "hours": "hrs",
