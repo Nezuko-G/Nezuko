@@ -24,27 +24,30 @@ import type {
     DeleteEmployeeResponse,
 } from "@/app/(hr-system)/employees/types/employees.dto";
 
-export async function getAllEmployees(): Promise<GetAllEmployeesResponse> {
-    const response = await api.get(apis.employees.base);
-
-    console.log("RAW RESPONSE:", JSON.stringify(response.data, null, 2));
+export async function getAllEmployees(params?: {
+    page?: number;
+    limit?: number;
+    search?: string;
+    departmentId?: string;
+    status?: string;
+}): Promise<GetAllEmployeesResponse> {
+    const response = await api.get(apis.employees.base, { params });
 
     const parsed = GetAllEmployeesResponseDTO.safeParse(response.data);
 
     if (!parsed.success) {
-        console.error("Zod Parsing Error:", parsed.error.format());
         throw new Error("Invalid employees data structure received from API");
     }
 
     return mapGetAllEmployeesFromDTO(parsed.data);
 }
+
 export async function getEmployee(id: string): Promise<GetEmployeeResponse> {
     const response = await api.get(apis.employees.byId(id));
 
     const parsed = GetEmployeeResponseDTO.safeParse(response.data);
 
     if (!parsed.success) {
-        console.error("Zod Parsing Error:", parsed.error.format());
         throw new Error("Invalid employee data structure received from API");
     }
 
@@ -57,7 +60,6 @@ export async function createEmployee(data: CreateEmployeeRequest): Promise<Creat
     const parsed = CreateEmployeeResponseDTO.safeParse(response.data);
 
     if (!parsed.success) {
-        console.error("Zod Parsing Error:", parsed.error.format());
         throw new Error("Invalid employee data structure received from API");
     }
 
@@ -68,14 +70,12 @@ export async function updateEmployee(id: string, data: UpdateEmployeeRequest): P
     await api.patch(apis.employees.byId(id), data);
 }
 
-
 export async function deleteEmployee(id: string): Promise<DeleteEmployeeResponse> {
     const response = await api.delete(apis.employees.byId(id));
 
     const parsed = DeleteEmployeeResponseDTO.safeParse(response.data);
 
     if (!parsed.success) {
-        console.error("Zod Parsing Error:", parsed.error.format());
         throw new Error("Invalid employee data structure received from API");
     }
 

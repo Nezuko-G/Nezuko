@@ -73,7 +73,12 @@ export default function JobsPage() {
   }
 
   if (!authData?.isAuthenticated) {
-    return <JobAuthPopup onSuccess={() => refetchAuth()} />;
+    return (
+      <JobAuthPopup
+        onSuccess={() => refetchAuth()}
+        onClose={() => router.back()}
+      />
+    );
   }
 
   return (
@@ -120,7 +125,9 @@ export default function JobsPage() {
             onChange={(e) => handleFilterChange("jobType", e.target.value)}
             className="px-3 py-2 rounded-xl border border-gray-200 bg-gray-50 text-sm font-bold text-secondary outline-none focus:bg-white transition"
           >
-            <option value="all">{tForm("fields.jobType")} {t("all")}</option>
+            <option value="all">
+              {tForm("fields.jobType")} {t("all")}
+            </option>
             <option value="full-time">{tForm("options.fullTime")}</option>
             <option value="part-time">{tForm("options.partTime")}</option>
             <option value="internship">{tForm("options.internship")}</option>
@@ -131,7 +138,9 @@ export default function JobsPage() {
             onChange={(e) => handleFilterChange("workMode", e.target.value)}
             className="px-3 py-2 rounded-xl border border-gray-200 bg-gray-50 text-sm font-bold text-secondary outline-none focus:bg-white transition"
           >
-            <option value="all">{tForm("fields.workMode")} {t("all")}</option>
+            <option value="all">
+              {tForm("fields.workMode")} {t("all")}
+            </option>
             <option value="office">{tForm("options.office")}</option>
             <option value="remote">{tForm("options.remote")}</option>
             <option value="hybrid">{tForm("options.hybrid")}</option>

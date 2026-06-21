@@ -10,12 +10,12 @@ import {
   getCostPreview,
   addDependent,
   removeDependent,
-} from "@/lib/api/endpoints/insurance";
+} from "@/app/(hr-system)/insurance/api/insurance";
 import { useInsuranceUIStore } from "./useInsuranceUIStore";
 import toast from "react-hot-toast";
 import { useTranslations } from "next-intl";
 
-export const useInsurancePlans = (params?: { page?: number; limit?: number; type?: string; isActive?: boolean }) => {
+export const useInsurancePlans = (params?: { page?: number; limit?: number; type?: string; isActive?: boolean; search?: string }) => {
   return useQuery({
     queryKey: ["insurance-plans", params],
     queryFn: () => getInsurancePlans(params),

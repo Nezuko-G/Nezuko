@@ -3,32 +3,47 @@
 import { useTranslations } from "next-intl";
 import { InsurancePlan } from "@/types/dto/insurance.dto";
 import { useInsuranceUIStore } from "@/app/(hr-system)/insurance/hooks/useInsuranceUIStore";
-import { Pencil, ShieldOff, Users } from "lucide-react";
+import {
+  Pencil,
+  ShieldOff,
+  Users,
+  ChevronLeft,
+  ChevronRight,
+} from "lucide-react";
 import InsurancePlanTypeBadge from "./InsurancePlanTypeBadge";
 import { useRouter } from "@/i18n/navigation";
 import { cn } from "@/lib/utils";
+import { Dispatch, SetStateAction } from "react";
 
 interface InsurancePlanTableProps {
   plans: InsurancePlan[];
+  page: number;
+  lastPage: number;
+  setPage: Dispatch<SetStateAction<number>>;
 }
 
-export default function InsurancePlanTable({ plans }: InsurancePlanTableProps) {
+export default function InsurancePlanTable({
+  plans,
+  page,
+  lastPage,
+  setPage,
+}: InsurancePlanTableProps) {
   const t = useTranslations("insurance.plans.table");
   const tStatus = useTranslations("insurance.plans.status");
   const { openDrawer, openModal } = useInsuranceUIStore();
   const router = useRouter();
 
   return (
-    <div className="overflow-x-auto rounded-2xl border border-gray-100 bg-card shadow-sm">
-      <table className="w-full text-sm text-right">
+    <div className="overflow-x-auto rounded-2xl border border-gray-100 bg-card shadow-sm flex flex-col h-full">
+      <table className="w-full text-sm text-start">
         <thead>
           <tr className="border-b border-gray-100 text-content-muted text-xs font-bold uppercase tracking-wider">
-            <th className="px-5 py-4 text-right">{t("name")}</th>
+            <th className="px-5 py-4 text-start">{t("name")}</th>
             <th className="px-5 py-4 text-center">{t("type")}</th>
             <th className="px-5 py-4 text-center">{t("salaryPercentage")}</th>
             <th className="px-5 py-4 text-center">{t("maxDependents")}</th>
             <th className="px-5 py-4 text-center">{t("status")}</th>
-            <th className="px-5 py-4 text-left pl-8">{t("actions")}</th>
+            <th className="px-5 py-4 text-end pl-8">{t("actions")}</th>
           </tr>
         </thead>
         <tbody className="divide-y divide-gray-50">
@@ -94,6 +109,30 @@ export default function InsurancePlanTable({ plans }: InsurancePlanTableProps) {
           ))}
         </tbody>
       </table>
+
+      {lastPage > 1 && (
+        <div className="px-6 py-4 border-t border-gray-50 flex items-center justify-center gap-4 bg-gray-50/50 mt-auto">
+          <p className="text-sm text-content-muted font-bold">
+            {t("pagination", { current: page, total: lastPage })}
+          </p>
+          <div className="flex items-center gap-1.5">
+            <button
+              disabled={page <= 1}
+              onClick={() => setPage((p) => p - 1)}
+              className="h-8 w-8 flex items-center justify-center rounded-lg border border-gray-200 bg-white hover:bg-gray-50 text-content-dark transition disabled:opacity-50"
+            >
+              <ChevronLeft size={16} />
+            </button>
+            <button
+              disabled={page >= lastPage}
+              onClick={() => setPage((p) => p + 1)}
+              className="h-8 w-8 flex items-center justify-center rounded-lg border border-gray-200 bg-white hover:bg-gray-50 text-content-dark transition disabled:opacity-50"
+            >
+              <ChevronRight size={16} />
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

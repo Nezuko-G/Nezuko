@@ -4,6 +4,7 @@
     "subtitle": "إدارة باقات التأمين وتخصيص نسب الخصم",
     "createBtn": "خطة جديدة",
     "coverageReportBtn": "تقرير التغطية",
+    "searchPlaceholder": "بحث باسم الخطة...",
     "pagination": "الصفحة {current} من {total}",
     "filters": {
       "allTypes": "جميع الأنواع",

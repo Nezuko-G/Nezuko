@@ -3,6 +3,7 @@
     "addEmployee": "إضافة موظف",
     "searchPlaceholder": "ابحث بالاسم أو البريد أو الكود...",
     "allDepartments": "كل الأقسام",
+    "pagination": "صفحة {current} من {total}",
     "allStatuses": "كل الحالات",
     "loading": "جار التحميل...",
     "noResults": "لا توجد نتائج.",

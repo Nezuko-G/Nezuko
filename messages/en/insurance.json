@@ -5,6 +5,7 @@
     "createBtn": "New Plan",
     "coverageReportBtn": "Coverage Report",
     "pagination": "Page {current} of {total}",
+    "searchPlaceholder": "Search by plan name...",
     "filters": {
       "allTypes": "All Types",
       "allStatuses": "All Statuses"

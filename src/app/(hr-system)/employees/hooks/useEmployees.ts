@@ -21,14 +21,14 @@ interface ApiErrorType extends Error {
 const EMPLOYEES_KEY = ["employees"] as const;
 const employeeKey = (id: string) => [...EMPLOYEES_KEY, id] as const;
 
-export function useEmployees() {
+export function useEmployees(params?: { page?: number; limit?: number; search?: string; departmentId?: string; status?: string }) {
     const toast = useToast();
 
     return useQuery({
-        queryKey: EMPLOYEES_KEY,
+        queryKey: [EMPLOYEES_KEY, params],
         queryFn: async () => {
             try {
-                return await getAllEmployees();
+                return await getAllEmployees(params);
             } catch (error) {
                 const err = error as ApiErrorType;
                 toast.error(err?.message || "Failed to load employees");

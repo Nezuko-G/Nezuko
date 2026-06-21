@@ -5,6 +5,7 @@
     "allDepartments": "All Departments",
     "allStatuses": "All Statuses",
     "loading": "Loading employees...",
+    "pagination": "Page {current} of {total}",
     "noResults": "No employees found.",
     "status": {
         "active": "Active",
