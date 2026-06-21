@@ -132,7 +132,7 @@ export default function JobForm({
               required
               value={formData.title.ar}
               onChange={(e) => handleChange("title", e.target.value, "ar")}
-              className="w-full px-4 py-2.5 rounded-xl border border-gray-200 bg-gray-50 focus:bg-secondary focus:ring-2 focus:ring-primary/20 outline-none transition-all font-medium text-sm"
+              className="w-full px-4 py-2.5 rounded-xl border border-gray-200 bg-gray-50 focus:ring-2 focus:ring-primary/20 outline-none transition-all font-medium text-sm"
             />
           </div>
           <div className="space-y-1.5">
@@ -144,7 +144,7 @@ export default function JobForm({
               value={formData.title.en}
               onChange={(e) => handleChange("title", e.target.value, "en")}
               dir="ltr"
-              className="w-full px-4 py-2.5 rounded-xl border border-gray-200 bg-gray-50 focus:bg-secondary focus:ring-2 focus:ring-primary/20 outline-none transition-all font-medium text-sm text-left"
+              className="w-full px-4 py-2.5 rounded-xl border border-gray-200 bg-gray-50 focus:ring-2 focus:ring-primary/20 outline-none transition-all font-medium text-sm text-left"
             />
           </div>
           <div className="space-y-1.5">
@@ -155,7 +155,7 @@ export default function JobForm({
               required
               value={formData.jobId}
               onChange={(e) => handleChange("jobId", e.target.value)}
-              className="w-full px-4 py-2.5 rounded-xl border border-gray-200 bg-gray-50 focus:bg-secondary focus:ring-2 focus:ring-primary/20 outline-none transition-all font-medium text-sm"
+              className="w-full px-4 py-2.5 rounded-xl border border-gray-200 bg-gray-50 focus:ring-2 focus:ring-primary/20 outline-none transition-all font-medium text-sm"
             />
           </div>
           <div className="space-y-1.5">
@@ -166,7 +166,7 @@ export default function JobForm({
               required
               value={formData.company}
               onChange={(e) => handleChange("company", e.target.value)}
-              className="w-full px-4 py-2.5 rounded-xl border border-gray-200 bg-gray-50 focus:bg-secondary focus:ring-2 focus:ring-primary/20 outline-none transition-all font-medium text-sm"
+              className="w-full px-4 py-2.5 rounded-xl border border-gray-200 bg-gray-50 focus:ring-2 focus:ring-primary/20 outline-none transition-all font-medium text-sm"
             />
           </div>
           <div className="space-y-1.5">
@@ -176,7 +176,7 @@ export default function JobForm({
             <input
               value={formData.organization}
               onChange={(e) => handleChange("organization", e.target.value)}
-              className="w-full px-4 py-2.5 rounded-xl border border-gray-200 bg-gray-50 focus:bg-secondary focus:ring-2 focus:ring-primary/20 outline-none transition-all font-medium text-sm"
+              className="w-full px-4 py-2.5 rounded-xl border border-gray-200 bg-gray-50 focus:ring-2 focus:ring-primary/20 outline-none transition-all font-medium text-sm"
             />
           </div>
           <div className="space-y-1.5">
@@ -188,7 +188,7 @@ export default function JobForm({
               type="datetime-local"
               value={formData.expirationDate}
               onChange={(e) => handleChange("expirationDate", e.target.value)}
-              className="w-full px-4 py-2.5 rounded-xl border border-gray-200 bg-gray-50 focus:bg-secondary focus:ring-2 focus:ring-primary/20 outline-none transition-all font-medium text-sm"
+              className="w-full px-4 py-2.5 rounded-xl border border-gray-200 bg-gray-50 focus:ring-2 focus:ring-primary/20 outline-none transition-all font-medium text-sm"
             />
           </div>
         </div>
@@ -210,7 +210,7 @@ export default function JobForm({
               onChange={(e) =>
                 handleChange("description", e.target.value, "ar")
               }
-              className="w-full px-4 py-2.5 rounded-xl border border-gray-200 bg-gray-50 focus:bg-secondary focus:ring-2 focus:ring-primary/20 outline-none transition-all font-medium text-sm resize-none"
+              className="w-full px-4 py-2.5 rounded-xl border border-gray-200 bg-gray-50 focus:ring-2 focus:ring-primary/20 outline-none transition-all font-medium text-sm resize-none"
             />
           </div>
           <div className="space-y-1.5">
@@ -225,7 +225,7 @@ export default function JobForm({
                 handleChange("description", e.target.value, "en")
               }
               dir="ltr"
-              className="w-full px-4 py-2.5 rounded-xl border border-gray-200 bg-gray-50 focus:bg-secondary focus:ring-2 focus:ring-primary/20 outline-none transition-all font-medium text-sm resize-none text-left"
+              className="w-full px-4 py-2.5 rounded-xl border border-gray-200 bg-gray-50 focus:ring-2 focus:ring-primary/20 outline-none transition-all font-medium text-sm resize-none text-left"
             />
           </div>
           <div className="space-y-1.5">
@@ -237,7 +237,7 @@ export default function JobForm({
               onChange={(e) =>
                 handleChange("locationDetails", e.target.value, "ar")
               }
-              className="w-full px-4 py-2.5 rounded-xl border border-gray-200 bg-gray-50 focus:bg-secondary focus:ring-2 focus:ring-primary/20 outline-none transition-all font-medium text-sm"
+              className="w-full px-4 py-2.5 rounded-xl border border-gray-200 bg-gray-50 focus:ring-2 focus:ring-primary/20 outline-none transition-all font-medium text-sm"
             />
           </div>
           <div className="space-y-1.5">
@@ -250,7 +250,7 @@ export default function JobForm({
                 handleChange("locationDetails", e.target.value, "en")
               }
               dir="ltr"
-              className="w-full px-4 py-2.5 rounded-xl border border-gray-200 bg-gray-50 focus:bg-secondary focus:ring-2 focus:ring-primary/20 outline-none transition-all font-medium text-sm text-left"
+              className="w-full px-4 py-2.5 rounded-xl border border-gray-200 bg-gray-50 focus:ring-2 focus:ring-primary/20 outline-none transition-all font-medium text-sm text-left"
             />
           </div>
           <div className="space-y-1.5">
@@ -260,7 +260,7 @@ export default function JobForm({
             <input
               value={formData.duration.ar}
               onChange={(e) => handleChange("duration", e.target.value, "ar")}
-              className="w-full px-4 py-2.5 rounded-xl border border-gray-200 bg-gray-50 focus:bg-secondary focus:ring-2 focus:ring-primary/20 outline-none transition-all font-medium text-sm"
+              className="w-full px-4 py-2.5 rounded-xl border border-gray-200 bg-gray-50 focus:ring-2 focus:ring-primary/20 outline-none transition-all font-medium text-sm"
             />
           </div>
           <div className="space-y-1.5">
@@ -271,7 +271,7 @@ export default function JobForm({
               value={formData.duration.en}
               onChange={(e) => handleChange("duration", e.target.value, "en")}
               dir="ltr"
-              className="w-full px-4 py-2.5 rounded-xl border border-gray-200 bg-gray-50 focus:bg-secondary focus:ring-2 focus:ring-primary/20 outline-none transition-all font-medium text-sm text-left"
+              className="w-full px-4 py-2.5 rounded-xl border border-gray-200 bg-gray-50 focus:ring-2 focus:ring-primary/20 outline-none transition-all font-medium text-sm text-left"
             />
           </div>
         </div>
@@ -289,7 +289,7 @@ export default function JobForm({
             <select
               value={formData.jobType}
               onChange={(e) => handleChange("jobType", e.target.value)}
-              className="w-full px-4 py-2.5 rounded-xl border border-gray-200 bg-gray-50 focus:bg-secondary focus:ring-2 focus:ring-primary/20 outline-none transition-all font-medium text-sm"
+              className="w-full px-4 py-2.5 rounded-xl border border-gray-200 bg-gray-50 focus:ring-2 focus:ring-primary/20 outline-none transition-all font-medium text-sm"
             >
               <option value="full-time">{t("options.fullTime")}</option>
               <option value="part-time">{t("options.partTime")}</option>
@@ -303,7 +303,7 @@ export default function JobForm({
             <select
               value={formData.employmentType}
               onChange={(e) => handleChange("employmentType", e.target.value)}
-              className="w-full px-4 py-2.5 rounded-xl border border-gray-200 bg-gray-50 focus:bg-secondary focus:ring-2 focus:ring-primary/20 outline-none transition-all font-medium text-sm"
+              className="w-full px-4 py-2.5 rounded-xl border border-gray-200 bg-gray-50 focus:ring-2 focus:ring-primary/20 outline-none transition-all font-medium text-sm"
             >
               <option value="permanent">{t("options.permanent")}</option>
               <option value="contract">{t("options.contract")}</option>
@@ -317,7 +317,7 @@ export default function JobForm({
             <select
               value={formData.workMode}
               onChange={(e) => handleChange("workMode", e.target.value)}
-              className="w-full px-4 py-2.5 rounded-xl border border-gray-200 bg-gray-50 focus:bg-secondary focus:ring-2 focus:ring-primary/20 outline-none transition-all font-medium text-sm"
+              className="w-full px-4 py-2.5 rounded-xl border border-gray-200 bg-gray-50 focus:ring-2 focus:ring-primary/20 outline-none transition-all font-medium text-sm"
             >
               <option value="office">{t("options.office")}</option>
               <option value="remote">{t("options.remote")}</option>
@@ -333,7 +333,7 @@ export default function JobForm({
               placeholder="Country ObjectId"
               value={formData.country}
               onChange={(e) => handleChange("country", e.target.value)}
-              className="w-full px-4 py-2.5 rounded-xl border border-gray-200 bg-gray-50 focus:bg-secondary focus:ring-2 focus:ring-primary/20 outline-none transition-all font-medium text-sm"
+              className="w-full px-4 py-2.5 rounded-xl border border-gray-200 bg-gray-50 focus:ring-2 focus:ring-primary/20 outline-none transition-all font-medium text-sm"
             />
           </div>
           <div className="space-y-1.5">
@@ -345,7 +345,7 @@ export default function JobForm({
               placeholder="Category ObjectId"
               value={formData.fieldOfWork}
               onChange={(e) => handleChange("fieldOfWork", e.target.value)}
-              className="w-full px-4 py-2.5 rounded-xl border border-gray-200 bg-gray-50 focus:bg-secondary focus:ring-2 focus:ring-primary/20 outline-none transition-all font-medium text-sm"
+              className="w-full px-4 py-2.5 rounded-xl border border-gray-200 bg-gray-50 focus:ring-2 focus:ring-primary/20 outline-none transition-all font-medium text-sm"
             />
           </div>
           <div className="space-y-1.5">
@@ -357,7 +357,7 @@ export default function JobForm({
               placeholder="Level ObjectId"
               value={formData.experienceLevel}
               onChange={(e) => handleChange("experienceLevel", e.target.value)}
-              className="w-full px-4 py-2.5 rounded-xl border border-gray-200 bg-gray-50 focus:bg-secondary focus:ring-2 focus:ring-primary/20 outline-none transition-all font-medium text-sm"
+              className="w-full px-4 py-2.5 rounded-xl border border-gray-200 bg-gray-50 focus:ring-2 focus:ring-primary/20 outline-none transition-all font-medium text-sm"
             />
           </div>
         </div>

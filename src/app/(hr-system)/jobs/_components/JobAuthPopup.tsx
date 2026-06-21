@@ -3,14 +3,15 @@
 import { useTranslations } from "next-intl";
 import { useState } from "react";
 import { useJobsAuth } from "../hooks/useJobs";
-import { Loader2, Lock } from "lucide-react";
+import { Loader2, Lock, X } from "lucide-react";
 import { useQueryClient } from "@tanstack/react-query";
 
 interface Props {
   onSuccess: () => void;
+  onClose: () => void;
 }
 
-export default function JobAuthPopup({ onSuccess }: Props) {
+export default function JobAuthPopup({ onSuccess, onClose }: Props) {
   const t = useTranslations("jobs.auth");
   const queryClient = useQueryClient();
   const [email, setEmail] = useState("");
@@ -32,7 +33,15 @@ export default function JobAuthPopup({ onSuccess }: Props) {
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-secondary/80 backdrop-blur-sm p-4">
-      <div className="bg-card w-full max-w-md rounded-3xl p-8 shadow-2xl border border-gray-100 flex flex-col items-center text-center">
+      <div className="relative bg-card w-full max-w-md rounded-3xl p-8 shadow-2xl border border-gray-100 flex flex-col items-center text-center">
+        <button
+          onClick={onClose}
+          className="absolute top-4 end-4 p-2 text-content-muted hover:text-status-error hover:bg-status-error/10 rounded-full transition-colors"
+          title={"Close"}
+        >
+          <X size={20} />
+        </button>
+
         <div className="w-16 h-16 bg-primary/10 text-primary rounded-full flex items-center justify-center mb-4">
           <Lock size={32} />
         </div>
@@ -41,7 +50,7 @@ export default function JobAuthPopup({ onSuccess }: Props) {
           {t("subtitle")}
         </p>
 
-        <form onSubmit={handleSubmit} className="w-full space-y-4 text-right">
+        <form onSubmit={handleSubmit} className="w-full space-y-4 text-start">
           <div className="space-y-1">
             <label className="text-sm font-bold text-content-dark">
               {t("email")}

@@ -14,7 +14,7 @@ export default function CreateJobPage() {
 
   return (
     <RoleGuard allowedRoles={["HR_ADMIN", "TENANT_OWNER"]}>
-      <div className="flex flex-col gap-4 w-full max-w-5xl mx-auto pb-10 text-right">
+      <div className="flex flex-col gap-4 w-full max-w-5xl mx-auto p-4">
         <div
           className="flex items-center gap-2 text-content-muted text-sm font-bold mb-1 cursor-pointer w-fit"
           onClick={() => router.push("/jobs")}
