@@ -17,6 +17,7 @@ export const useJobsAuth = () => {
       if (responseData?.data) {
         queryClient.setQueryData(["jobs_user"], responseData.data);
       }
+      localStorage.setItem("jobs_is_authenticated", "true"); 
       toast.success("Logged in successfully");
     },
     onError: (error: any) => {
