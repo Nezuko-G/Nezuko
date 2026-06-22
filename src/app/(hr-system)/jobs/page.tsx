@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useTranslations, useLocale } from "next-intl";
 import {
   Plus,
@@ -24,6 +24,8 @@ export default function JobsPage() {
   const locale = useLocale();
   const router = useRouter();
 
+  const [isAuthGuarded, setIsAuthGuarded] = useState(false);
+  const [isCheckingAuth, setIsCheckingAuth] = useState(true);
   const [page, setPage] = useState(1);
   const [searchTerm, setSearchTerm] = useState("");
   const [debouncedSearch] = useDebounce(searchTerm, 500);
@@ -33,6 +35,14 @@ export default function JobsPage() {
     jobType: "all",
     workMode: "all",
   });
+
+  useEffect(() => {
+    const authFlag = localStorage.getItem("jobs_is_authenticated");
+    if (authFlag === "true") {
+      setIsAuthGuarded(true);
+    }
+    setIsCheckingAuth(false);
+  }, []);
 
   const { data, isLoading, isError, error, refetch } = useJobsList(
     page,
@@ -59,9 +69,23 @@ export default function JobsPage() {
     setPage(1);
   };
 
-  if (isError && (error as any)?.response?.status === 401) {
+  if (isCheckingAuth) {
     return (
-      <JobAuthPopup onSuccess={() => refetch()} onClose={() => router.back()} />
+      <div className="flex h-[70vh] items-center justify-center">
+        <Loader2 className="animate-spin text-primary" size={40} />
+      </div>
+    );
+  }
+
+  if (!isAuthGuarded || (isError && (error as any)?.response?.status === 401)) {
+    return (
+      <JobAuthPopup
+        onSuccess={() => {
+          setIsAuthGuarded(true);
+          refetch();
+        }}
+        onClose={() => router.back()}
+      />
     );
   }
 
