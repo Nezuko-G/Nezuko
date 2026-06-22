@@ -2,24 +2,35 @@
 
 import { useState, useMemo } from "react";
 import { useTranslations } from "next-intl";
-import { Download } from "lucide-react";
+import { Download, Search, ChevronLeft, ChevronRight } from "lucide-react";
+import { useDebounce } from "use-debounce";
 import RoleGuard from "@/components/RoleGuard/RoleGuard";
 import { useOvertimeReport } from "@/app/(hr-system)/timesheets/hooks/useTimesheets";
 import { TableSkeleton, ErrorState, EmptyState, SpinnerIndicator } from "@/components/ui/data-states";
+
+function formatDate(date: Date) {
+  return date.toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" });
+}
 
 export default function OvertimeReportPage() {
   const t = useTranslations("timesheet.overtime");
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
-  const [departmentId, setDepartmentId] = useState("");
+  const [searchQuery, setSearchQuery] = useState("");
+  const [page, setPage] = useState(1);
+  const limit = 10;
+
+  const [debouncedSearch] = useDebounce(searchQuery, 500);
 
   const filters = useMemo(
-    () => ({ startDate, endDate, ...(departmentId ? { departmentId } : {}) }),
-    [startDate, endDate, departmentId]
+    () => ({ startDate, endDate, page, limit, ...(debouncedSearch ? { search: debouncedSearch } : {}) }),
+    [startDate, endDate, page, debouncedSearch]
   );
 
   const { data: report, isLoading, isError, error, refetch, isFetching } = useOvertimeReport(filters);
   const hasFilters = !!startDate && !!endDate;
+  const meta = report?.meta;
+  const lastPage = meta?.totalPages || 1;
 
   function exportCsv() {
     if (!report?.items.length) return;
@@ -28,7 +39,7 @@ export default function OvertimeReportPage() {
     const rows = report.items.map((item) => [
       item.employeeName,
       item.departmentName || "",
-      item.date,
+      formatDate(item.date),
       item.totalHours.toFixed(2),
       item.overtimeHours.toFixed(2),
     ]);
@@ -76,7 +87,10 @@ export default function OvertimeReportPage() {
             <input
               type="date"
               value={startDate}
-              onChange={(e) => setStartDate(e.target.value)}
+              onChange={(e) => {
+                setStartDate(e.target.value);
+                setPage(1);
+              }}
               className="border border-gray-200 rounded-lg px-3 py-1.5 text-sm outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all"
             />
           </div>
@@ -85,18 +99,24 @@ export default function OvertimeReportPage() {
             <input
               type="date"
               value={endDate}
-              onChange={(e) => setEndDate(e.target.value)}
+              onChange={(e) => {
+                setEndDate(e.target.value);
+                setPage(1);
+              }}
               className="border border-gray-200 rounded-lg px-3 py-1.5 text-sm outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all"
             />
           </div>
-          <div className="flex items-center gap-2">
-            <label className="text-xs font-medium text-gray-500">{t("department")}</label>
+          <div className="relative flex-1 min-w-[200px] max-w-xs">
+            <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
             <input
               type="text"
-              placeholder={t("departmentId")}
-              value={departmentId}
-              onChange={(e) => setDepartmentId(e.target.value)}
-              className="border border-gray-200 rounded-lg px-3 py-1.5 text-sm outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all w-40"
+              placeholder={t("searchPlaceholder")}
+              value={searchQuery}
+              onChange={(e) => {
+                setSearchQuery(e.target.value);
+                setPage(1);
+              }}
+              className="w-full pl-9 pr-3 py-1.5 rounded-lg border border-gray-200 text-sm outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all"
             />
           </div>
         </div>
@@ -142,7 +162,7 @@ export default function OvertimeReportPage() {
                       <tr key={`${item.userId}-${item.date}-${i}`} className="border-b border-gray-100 hover:bg-gray-50 transition-colors">
                         <td className="px-4 py-3 font-medium text-gray-800">{item.employeeName}</td>
                         <td className="px-4 py-3 text-gray-600">{item.departmentName || "—"}</td>
-                        <td className="px-4 py-3 text-gray-600">{item.date}</td>
+                        <td className="px-4 py-3 text-gray-600">{formatDate(item.date)}</td>
                         <td className="px-4 py-3 text-gray-600">{item.totalHours.toFixed(2)}</td>
                         <td className="px-4 py-3">
                           <span className="text-amber-600 font-medium">{item.overtimeHours.toFixed(2)}</span>
@@ -151,6 +171,28 @@ export default function OvertimeReportPage() {
                     ))}
                   </tbody>
                 </table>
+              </div>
+
+              <div className="px-6 py-4 border-t border-gray-100 flex items-center justify-center gap-4 bg-gray-50/50">
+                <p className="text-sm text-content-muted font-bold">
+                  {t("pagination", { current: page, total: lastPage })}
+                </p>
+                <div className="flex ltr:flex-row-reverse rtl:flex-row items-center gap-1.5">
+                  <button
+                    disabled={page >= lastPage}
+                    onClick={() => setPage((p) => p + 1)}
+                    className="h-8 w-8 flex items-center justify-center rounded-lg border border-gray-200 hover:bg-gray-50 text-content-dark transition disabled:opacity-50"
+                  >
+                    <ChevronRight size={16} />
+                  </button>
+                  <button
+                    disabled={page <= 1}
+                    onClick={() => setPage((p) => p - 1)}
+                    className="h-8 w-8 flex items-center justify-center rounded-lg border border-gray-200 hover:bg-gray-50 text-content-dark transition disabled:opacity-50"
+                  >
+                    <ChevronLeft size={16} />
+                  </button>
+                </div>
               </div>
             </div>
           </div>

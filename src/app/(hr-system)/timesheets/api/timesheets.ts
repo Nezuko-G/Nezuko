@@ -3,6 +3,7 @@ import { getRequest, postRequest, patchRequest } from "@/lib/axios/dist/requests
 import { throwIfError, extractList } from "@/lib/api/utils";
 import type {
   Timesheet,
+  PaginationMeta,
   SubmitTimesheetInput,
   EditTimesheetInput,
   ReviewTimesheetInput,
@@ -20,9 +21,17 @@ export interface TimesheetListFilters {
   status?: string;
   startDate?: string;
   endDate?: string;
+  search?: string;
+  page?: number;
+  limit?: number;
 }
 
-export async function getTimesheets(filters?: TimesheetListFilters): Promise<Timesheet[]> {
+export interface PaginatedTimesheets {
+  timesheets: Timesheet[];
+  meta: PaginationMeta | null;
+}
+
+export async function getTimesheets(filters?: TimesheetListFilters): Promise<PaginatedTimesheets> {
   const response = await getRequest<any>({
     api: apis.timesheets.base,
     config: { params: filters },
@@ -30,11 +39,13 @@ export async function getTimesheets(filters?: TimesheetListFilters): Promise<Tim
 
   throwIfError(response);
 
-  const raw = extractList(response);
-  return mapTimesheetsFromDTO(raw);
+  const data = response.data?.data ?? response.data ?? {};
+  const raw = Array.isArray(data) ? data : (data.timesheets ?? data.items ?? []);
+  const meta = (!Array.isArray(data) && data.meta ? (data.meta as PaginationMeta) : null);
+  return { timesheets: mapTimesheetsFromDTO(raw), meta };
 }
 
-export async function getMyTimesheets(): Promise<Timesheet[]> {
+export async function getMyTimesheets(): Promise<PaginatedTimesheets> {
   const response = await getRequest<any>({
     api: apis.timesheets.me,
   });
@@ -42,7 +53,7 @@ export async function getMyTimesheets(): Promise<Timesheet[]> {
   throwIfError(response);
 
   const raw = extractList(response);
-  return mapTimesheetsFromDTO(raw);
+  return { timesheets: mapTimesheetsFromDTO(raw), meta: null };
 }
 
 export async function submitTimesheet(data: SubmitTimesheetInput) {
@@ -81,7 +92,9 @@ export async function reviewTimesheet(id: string, data: ReviewTimesheetInput) {
 export interface OvertimeReportFilters {
   startDate: string;
   endDate: string;
-  departmentId?: string;
+  search?: string;
+  page?: number;
+  limit?: number;
 }
 
 export async function getOvertimeReport(filters: OvertimeReportFilters): Promise<OvertimeReport> {
@@ -92,6 +105,8 @@ export async function getOvertimeReport(filters: OvertimeReportFilters): Promise
 
   throwIfError(response);
 
-  const raw = extractList(response, "timesheets");
-  return mapOvertimeReportFromDTO(raw);
+  const data = response.data?.data ?? response.data ?? {};
+  const raw = Array.isArray(data) ? data : (data.timesheets ?? data.items ?? []);
+  const meta = data.meta ?? null;
+  return mapOvertimeReportFromDTO(raw, meta);
 }

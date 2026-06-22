@@ -1,7 +1,7 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { SelectWithSearch } from "@/components/ui/select-with-search";
+import { Search } from "lucide-react";
 import type { TimesheetStatus } from "@/app/(hr-system)/timesheets/types/timesheet.dto";
 
 interface Props {
@@ -11,9 +11,8 @@ interface Props {
   toDate: string;
   onFromDateChange: (date: string) => void;
   onToDateChange: (date: string) => void;
-  userId: string;
-  onUserIdChange: (id: string) => void;
-  employees: { id: string; firstName: string; lastName: string }[];
+  searchQuery: string;
+  onSearchChange: (query: string) => void;
 }
 
 export function TimesheetFilters({
@@ -23,9 +22,8 @@ export function TimesheetFilters({
   toDate,
   onFromDateChange,
   onToDateChange,
-  userId,
-  onUserIdChange,
-  employees,
+  searchQuery,
+  onSearchChange,
 }: Props) {
   const t = useTranslations("timesheet.filters");
 
@@ -40,15 +38,14 @@ export function TimesheetFilters({
   return (
     <div className="flex flex-col gap-3">
       <div className="flex items-center gap-3 flex-wrap">
-        <div className="w-56">
-          <SelectWithSearch
+        <div className="relative flex-1 min-w-[200px] max-w-lg">
+          <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
+          <input
+            type="text"
+            value={searchQuery}
+            onChange={(e) => onSearchChange(e.target.value)}
             placeholder={t("employee")}
-            options={employees}
-            value={userId}
-            onChange={onUserIdChange}
-            getOptionValue={(e) => e.id}
-            getOptionLabel={(e) => `${e.firstName} ${e.lastName} (${e.id})`}
-            searchFields={[(e) => e.firstName, (e) => e.lastName, (e) => `${e.firstName} ${e.lastName}`, (e) => e.id]}
+            className="w-full pl-9 pr-3 py-1.5 rounded-lg border border-gray-200 text-sm outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all"
           />
         </div>
         <div className="flex items-center gap-2">
@@ -70,19 +67,17 @@ export function TimesheetFilters({
           />
         </div>
         <div className="w-px h-6 bg-gray-200" />
-        {statusOptions.map((opt) => (
-          <button
-            key={opt.value}
-            onClick={() => onStatusChange(opt.value as TimesheetStatus | "ALL")}
-            className={`px-3 py-1.5 rounded-full text-xs font-medium border transition-all duration-150
-              ${statusFilter === opt.value
-                ? "bg-primary/10 text-primary border-primary/30 ring-2 ring-primary/20"
-                : "bg-gray-50 text-gray-500 border-gray-200 hover:bg-gray-100"
-              }`}
+        <div className="flex items-center gap-2">
+          <select
+            value={statusFilter}
+            onChange={(e) => onStatusChange(e.target.value as TimesheetStatus | "ALL")}
+            className="border border-gray-200 rounded-lg px-3 py-1.5 text-sm outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all bg-white"
           >
-            {opt.label}
-          </button>
-        ))}
+            {statusOptions.map((opt) => (
+              <option key={opt.value} value={opt.value}>{opt.label}</option>
+            ))}
+          </select>
+        </div>
       </div>
     </div>
   );

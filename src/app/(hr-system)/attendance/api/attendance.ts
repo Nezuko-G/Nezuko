@@ -1,6 +1,6 @@
 import api from "@/lib/axios/core/instance";
 import { apis } from "@/lib/api/config";
-import { TimesheetDTO, type Timesheet } from "@/app/(hr-system)/attendance/types/timesheet.dto";
+import { TimesheetDTO, type Timesheet, type PaginationMeta } from "@/app/(hr-system)/attendance/types/timesheet.dto";
 import { mapTimesheetsFromDTO } from "@/app/(hr-system)/attendance/mappers/timesheet.mapper";
 import {
   MarkAttendanceErrorDTO,
@@ -23,6 +23,13 @@ export interface TimesheetFilters {
   status?: string;
   fromDate?: string;
   toDate?: string;
+  page?: number;
+  limit?: number;
+}
+
+export interface PaginatedTimesheets {
+  timesheets: Timesheet[];
+  meta: PaginationMeta | null;
 }
 
 export interface AttendanceError {
@@ -62,17 +69,21 @@ export async function markAttendance(
   return mapMarkAttendanceFromDTO(parsed.data);
 }
 
-export async function getMyTimesheets(filters?: TimesheetFilters): Promise<Timesheet[]> {
+export async function getMyTimesheets(filters?: TimesheetFilters): Promise<PaginatedTimesheets> {
   const response = (await api.get(apis.attendance.me, { params: filters })) as ApiResponse;
 
   if (response.error) {
     throw new Error(String(response.error));
   }
 
-  const parsed = TimesheetDTO.array().safeParse(response.data);
+  const raw = response.data as Record<string, unknown>;
+  const items = Array.isArray(raw) ? raw : ((raw.data ?? raw.timesheets ?? []) as unknown[]);
+  const meta = (!Array.isArray(raw) && raw.meta ? (raw.meta as PaginationMeta) : null);
+
+  const parsed = TimesheetDTO.array().safeParse(items);
   if (!parsed.success) {
     throw new Error("Invalid timesheet data structure received from API");
   }
 
-  return mapTimesheetsFromDTO(parsed.data);
+  return { timesheets: mapTimesheetsFromDTO(parsed.data), meta };
 }

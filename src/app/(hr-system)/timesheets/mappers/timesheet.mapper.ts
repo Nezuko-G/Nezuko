@@ -47,15 +47,15 @@ export function mapOvertimeReportItemFromDTO(dto: any): OvertimeReportItem {
     employeeName: dto.user ? `${dto.user.firstName} ${dto.user.lastName}` : "Unknown",
     departmentId: dto.user?.departmentId ?? null,
     departmentName: null,
-    date: dto.date,
+    date: new Date(dto.date),
     totalHours: dto.totalHours,
     overtimeHours: dto.overtimeHours,
   };
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export function mapOvertimeReportFromDTO(dtos: any[]): OvertimeReport {
+export function mapOvertimeReportFromDTO(dtos: any[], meta: any): OvertimeReport {
   const items = dtos.map(mapOvertimeReportItemFromDTO);
   const totalOvertime = items.reduce((sum, item) => sum + item.overtimeHours, 0);
-  return { items, totalOvertime };
+  return { items, totalOvertime, meta };
 }

@@ -1,5 +1,6 @@
 {
   "title": "سجلات الدوام",
+  "exportCsv": "تصدير CSV",
   "loadError": "فشل تحميل سجلات الدوام",
   "tryAgain": "حاول مرة أخرى",
   "empty": "لا توجد سجلات دوام",
@@ -95,10 +96,11 @@
     "overtimeHours": "ساعات إضافية",
     "from": "من",
     "to": "إلى",
-    "departmentId": "معرف القسم",
+    "searchPlaceholder": "ابحث عن موظف أو قسم...",
     "loadError": "فشل تحميل تقرير الساعات الإضافية",
     "tryAgain": "حاول مرة أخرى",
     "hours": "ساعة",
+    "pagination": "الصفحة {current} من {total}",
     "exportCsv": "تصدير CSV",
     "noData": "لا توجد بيانات ساعات إضافية",
     "selectDateRange": "اختر نطاق تاريخ لعرض الساعات الإضافية"

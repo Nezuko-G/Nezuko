@@ -3,6 +3,7 @@
 import { useState, useCallback, useRef, useEffect } from "react";
 
 export type GeolocationState = "fetching" | "detected" | "denied" | "unavailable" | "timed_out";
+export type PermissionState = "prompt" | "granted" | "denied" | "unavailable";
 
 export interface GeoCoords {
   lat: number;
@@ -25,6 +26,7 @@ export function useGeolocation() {
   const [coords, setCoords] = useState<GeoCoords | null>(null);
   const [state, setState] = useState<GeolocationState>("fetching");
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [permissionState, setPermissionState] = useState<PermissionState>("prompt");
   const mountedRef = useRef(true);
 
   useEffect(() => {
@@ -79,19 +81,6 @@ export function useGeolocation() {
     }, 0);
   }, [handlePosition, handlePositionError]);
 
-  useEffect(() => {
-    if (!mountedRef.current) return;
-    if (!navigator.geolocation) {
-      setState("unavailable");
-      setErrorMessage("Geolocation not supported");
-      return;
-    }
-    getCurrentPosition()
-      .then(handlePosition)
-      .catch(handlePositionError);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
   const refreshLocation = useCallback((): Promise<GeoCoords | null> => {
     if (!navigator.geolocation) {
       if (!mountedRef.current) return Promise.resolve(null);
@@ -122,10 +111,44 @@ export function useGeolocation() {
       });
   }, []);
 
+  useEffect(() => {
+    if (!mountedRef.current) return;
+    if (!navigator.geolocation) {
+      setState("unavailable");
+      setErrorMessage("Geolocation not supported");
+      return;
+    }
+
+    if (navigator.permissions?.query) {
+      navigator.permissions.query({ name: "geolocation" }).then((status) => {
+        if (!mountedRef.current) return;
+        setPermissionState(status.state as PermissionState);
+
+        status.onchange = () => {
+          if (!mountedRef.current) return;
+          const newState = status.state as PermissionState;
+          setPermissionState(newState);
+          if (newState === "granted" || newState === "prompt") {
+            requestLocation();
+          }
+        };
+      }).catch(() => {
+        if (!mountedRef.current) return;
+        setPermissionState("unavailable");
+      });
+    }
+
+    getCurrentPosition()
+      .then(handlePosition)
+      .catch(handlePositionError);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return {
     coords,
     state,
     errorMessage,
+    permissionState,
     refreshLocation,
     retryLocation: requestLocation,
   };

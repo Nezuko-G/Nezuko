@@ -1,24 +1,61 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { useTranslations } from "next-intl";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import { AttendanceWidget } from "@/app/(hr-system)/attendance/_components/AttendanceWidget";
 import { MyTimesheetsFilters } from "@/app/(hr-system)/attendance/_components/MyTimesheetsFilters";
 import { MyTimesheetsTable } from "@/app/(hr-system)/attendance/_components/MyTimesheetsTable";
 import { useMyTimesheets } from "@/app/(hr-system)/attendance/hooks/useMyTimesheets";
-import { SpinnerIndicator } from "@/components/ui/data-states";
+import { TableSkeleton, ErrorState, EmptyState, SpinnerIndicator } from "@/components/ui/data-states";
+import type { TimesheetStatus } from "@/app/(hr-system)/attendance/types/timesheet.dto";
+
+const PAGE_LIMIT = 10;
 
 export default function MyAttendancePage() {
   const t = useTranslations("timesheet");
+  const [statusFilter, setStatusFilter] = useState<TimesheetStatus | "ALL">("ALL");
   const [fromDate, setFromDate] = useState("");
   const [toDate, setToDate] = useState("");
+  const [page, setPage] = useState(1);
 
-  const filters = {
+  const filters = useMemo(() => ({
+    ...(statusFilter !== "ALL" && { status: statusFilter }),
     ...(fromDate && { fromDate }),
     ...(toDate && { toDate }),
-  };
+    page,
+    limit: PAGE_LIMIT,
+  }), [statusFilter, fromDate, toDate, page]);
 
-  const { data: timesheets = [], isLoading, isError, error, refetch, isFetching } = useMyTimesheets(filters);
+  const { data, isLoading, isError, error, refetch, isFetching } = useMyTimesheets(filters);
+
+  const timesheets = data?.timesheets ?? [];
+  const meta = data?.meta ?? null;
+  const lastPage = meta?.totalPages || 1;
+
+  function handleStatusChange(status: TimesheetStatus | "ALL") {
+    setStatusFilter(status);
+    setPage(1);
+  }
+
+  function handleFromDateChange(date: string) {
+    setFromDate(date);
+    setPage(1);
+  }
+
+  function handleToDateChange(date: string) {
+    setToDate(date);
+    setPage(1);
+  }
+
+  const skeletonColumns = [
+    { key: "date", label: t("table.date") },
+    { key: "checkIn", label: t("table.checkIn") },
+    { key: "checkOut", label: t("table.checkOut") },
+    { key: "totalHours", label: t("table.totalHours") },
+    { key: "overtime", label: t("table.overtime") },
+    { key: "status", label: t("table.status") },
+  ];
 
   return (
     <div className="p-6 max-w-5xl mx-auto">
@@ -28,70 +65,58 @@ export default function MyAttendancePage() {
 
       <div className="flex items-center justify-between mb-6">
         <h2 className="text-xl font-bold text-secondary">{t("myTimesheets.title")}</h2>
-        {isFetching && !isLoading && (
-          <SpinnerIndicator show />
-        )}
+        <SpinnerIndicator show={isFetching && !isLoading} />
       </div>
 
       <div className="mb-6">
         <MyTimesheetsFilters
+          statusFilter={statusFilter}
+          onStatusChange={handleStatusChange}
           fromDate={fromDate}
           toDate={toDate}
-          onFromDateChange={setFromDate}
-          onToDateChange={setToDate}
+          onFromDateChange={handleFromDateChange}
+          onToDateChange={handleToDateChange}
         />
       </div>
 
-      {isLoading && (
-        <div className="bg-white rounded-xl border border-gray-200 overflow-hidden">
-          <table className="w-full text-sm">
-            <thead>
-              <tr className="bg-gray-50 border-b border-gray-200">
-                <th className="text-left px-4 py-3 text-xs font-medium text-gray-500">{t("table.date")}</th>
-                <th className="text-left px-4 py-3 text-xs font-medium text-gray-500">{t("table.checkIn")}</th>
-                <th className="text-left px-4 py-3 text-xs font-medium text-gray-500">{t("table.checkOut")}</th>
-                <th className="text-left px-4 py-3 text-xs font-medium text-gray-500">{t("table.totalHours")}</th>
-                <th className="text-left px-4 py-3 text-xs font-medium text-gray-500">{t("table.overtime")}</th>
-                <th className="text-left px-4 py-3 text-xs font-medium text-gray-500">{t("table.status")}</th>
-              </tr>
-            </thead>
-            <tbody>
-              {Array.from({ length: 5 }).map((_, i) => (
-                <tr key={i} className="border-b border-gray-100">
-                  {Array.from({ length: 6 }).map((_, j) => (
-                    <td key={j} className="px-4 py-3">
-                      <div className="h-4 bg-gray-200 rounded animate-pulse" style={{ width: "6rem" }} />
-                    </td>
-                  ))}
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      )}
+      {isLoading && <TableSkeleton columns={skeletonColumns} rows={5} />}
 
       {isError && !isLoading && (
-        <div className="bg-red-50 border border-red-200 rounded-xl p-6 text-center">
-          <p className="text-red-600 font-medium mb-4">
-            {error instanceof Error ? error.message : t("loadError")}
-          </p>
-          <button
-            onClick={() => refetch()}
-            className="inline-flex items-center gap-2 bg-red-500 hover:bg-red-600 text-white text-sm font-medium px-4 py-2 rounded-lg transition-colors"
-          >
-            {t("tryAgain")}
-          </button>
-        </div>
+        <ErrorState
+          message={error instanceof Error ? error.message : t("loadError")}
+          onRetry={() => refetch()}
+        />
       )}
 
       {!isLoading && !isError && timesheets.length === 0 && (
-        <div className="text-center py-12">
-          <p className="text-gray-400 text-base">{t("myTimesheets.empty")}</p>
-        </div>
+        <EmptyState message={t("myTimesheets.empty")} />
       )}
 
       {!isLoading && !isError && timesheets.length > 0 && (
-        <MyTimesheetsTable timesheets={timesheets} />
+        <div>
+          <MyTimesheetsTable timesheets={timesheets} />
+          <div className="flex items-center justify-center gap-4 mt-6">
+            <p className="text-sm text-content-muted font-bold">
+              {t("overtime.pagination", { current: page, total: lastPage })}
+            </p>
+            <div className="flex ltr:flex-row-reverse rtl:flex-row items-center gap-1.5">
+              <button
+                disabled={page >= lastPage}
+                onClick={() => setPage((p) => p + 1)}
+                className="h-8 w-8 flex items-center justify-center rounded-lg border border-gray-200 hover:bg-gray-50 text-content-dark transition disabled:opacity-50"
+              >
+                <ChevronRight size={16} />
+              </button>
+              <button
+                disabled={page <= 1}
+                onClick={() => setPage((p) => p - 1)}
+                className="h-8 w-8 flex items-center justify-center rounded-lg border border-gray-200 hover:bg-gray-50 text-content-dark transition disabled:opacity-50"
+              >
+                <ChevronLeft size={16} />
+              </button>
+            </div>
+          </div>
+        </div>
       )}
     </div>
   );

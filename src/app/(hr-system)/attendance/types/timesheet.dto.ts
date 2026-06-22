@@ -33,6 +33,13 @@ export const TimesheetDTO = z.object({
 export type TimesheetStatus = z.infer<typeof TimesheetStatusEnum>;
 export type UserSummary = z.infer<typeof UserSummaryDTO>;
 
+export type PaginationMeta = {
+  page: number;
+  limit: number;
+  total: number;
+  totalPages: number;
+};
+
 export type Timesheet = {
   id: string;
   userId: string;

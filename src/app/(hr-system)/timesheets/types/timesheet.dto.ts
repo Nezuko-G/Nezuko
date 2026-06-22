@@ -76,8 +76,35 @@ export type TimesheetEntry = z.infer<typeof TimesheetEntryDTO>;
 export type SubmitTimesheetInput = z.infer<typeof SubmitTimesheetDTO>;
 export type EditTimesheetInput = z.infer<typeof EditTimesheetDTO>;
 export type ReviewTimesheetInput = z.infer<typeof ReviewTimesheetDTO>;
-export type OvertimeReportItem = z.infer<typeof OvertimeReportItemDTO>;
-export type OvertimeReport = z.infer<typeof OvertimeReportDTO>;
+export type OvertimeReportItem = {
+  userId: string;
+  employeeName: string;
+  departmentId: string | null;
+  departmentName: string | null;
+  date: Date;
+  totalHours: number;
+  overtimeHours: number;
+};
+
+export type PaginationMeta = {
+  total: number;
+  page: number;
+  limit: number;
+  totalPages: number;
+};
+
+export type OvertimeReportMeta = {
+  total: number;
+  page: number;
+  limit: number;
+  totalPages: number;
+};
+
+export type OvertimeReport = {
+  items: OvertimeReportItem[];
+  totalOvertime: number;
+  meta: OvertimeReportMeta | null;
+};
 
 export type Timesheet = {
   id: string;
