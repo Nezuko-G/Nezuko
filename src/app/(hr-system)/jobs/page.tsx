@@ -10,7 +10,7 @@ import {
   Search,
   FilterX,
 } from "lucide-react";
-import { useJobsList, useJobsAuthCheck } from "./hooks/useJobs";
+import { useJobsList } from "./hooks/useJobs";
 import JobTable from "./_components/JobTable";
 import JobAuthPopup from "./_components/JobAuthPopup";
 import RoleGuard from "@/components/RoleGuard/RoleGuard";
@@ -34,12 +34,7 @@ export default function JobsPage() {
     workMode: "all",
   });
 
-  const {
-    data: authData,
-    isLoading: authLoading,
-    refetch: refetchAuth,
-  } = useJobsAuthCheck();
-  const { data, isLoading, isError } = useJobsList(
+  const { data, isLoading, isError, error, refetch } = useJobsList(
     page,
     limit,
     locale,
@@ -64,25 +59,14 @@ export default function JobsPage() {
     setPage(1);
   };
 
-  if (authLoading) {
+  if (isError && (error as any)?.response?.status === 401) {
     return (
-      <div className="flex h-[70vh] items-center justify-center">
-        <Loader2 className="animate-spin text-primary" size={40} />
-      </div>
-    );
-  }
-
-  if (!authData?.isAuthenticated) {
-    return (
-      <JobAuthPopup
-        onSuccess={() => refetchAuth()}
-        onClose={() => router.back()}
-      />
+      <JobAuthPopup onSuccess={() => refetch()} onClose={() => router.back()} />
     );
   }
 
   return (
-    <div className="flex flex-col gap-5 w-full max-w-6xl mx-auto p-4 md:pt-8 text-right">
+    <div className="flex flex-col gap-5 w-full max-w-6xl mx-auto p-4 md:pt-8 text-start">
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
         <div className="space-y-0.5">
           <h1 className="text-2xl font-extrabold text-secondary">
@@ -161,7 +145,7 @@ export default function JobsPage() {
           <div className="flex-1 flex flex-col items-center justify-center gap-3">
             <Loader2 className="animate-spin text-primary" size={36} />
           </div>
-        ) : isError ? (
+        ) : isError && (error as any)?.response?.status !== 401 ? (
           <div className="flex-1 flex items-center justify-center text-status-error font-bold">
             {t("errors.fetch")}
           </div>
@@ -178,18 +162,18 @@ export default function JobsPage() {
                 </p>
                 <div className="flex items-center gap-1.5">
                   <button
-                    disabled={page >= lastPage}
-                    onClick={() => setPage((p) => p + 1)}
-                    className="h-8 w-8 flex items-center justify-center rounded-lg border border-gray-200 bg-white hover:bg-gray-50 text-content-dark transition disabled:opacity-50"
-                  >
-                    <ChevronRight size={16} />
-                  </button>
-                  <button
                     disabled={page <= 1}
                     onClick={() => setPage((p) => p - 1)}
                     className="h-8 w-8 flex items-center justify-center rounded-lg border border-gray-200 bg-white hover:bg-gray-50 text-content-dark transition disabled:opacity-50"
                   >
                     <ChevronLeft size={16} />
+                  </button>
+                  <button
+                    disabled={page >= lastPage}
+                    onClick={() => setPage((p) => p + 1)}
+                    className="h-8 w-8 flex items-center justify-center rounded-lg border border-gray-200 bg-white hover:bg-gray-50 text-content-dark transition disabled:opacity-50"
+                  >
+                    <ChevronRight size={16} />
                   </button>
                 </div>
               </div>
