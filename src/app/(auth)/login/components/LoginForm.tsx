@@ -33,10 +33,10 @@ export default function LoginForm() {
   }, [isAuth, router]);
 
   const [form, setForm] = useState({
-    companyEmail: "admin@techcorp.com",
-    userEmail: "hr@techcorp.com",
-    password: "Password123",
-  });
+    companyEmail: "contact@nezuko.com",
+    userEmail: "hr@nezuko.com",
+    password: "Admin@1234"
+});
 
   const loginMutation = useLogin();
 

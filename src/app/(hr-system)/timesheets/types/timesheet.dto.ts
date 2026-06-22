@@ -8,12 +8,12 @@ export const UserSummaryDTO = z.object({
   lastName: z.string(),
   email: z.string().email(),
   employeeCode: z.string().nullable().optional(),
-  departmentId: z.string().uuid().nullable().optional(),
+  departmentId: z.string().nullable().optional(),
   role: z.string(),
 });
 
 export const TimesheetEntryDTO = z.object({
-  userId: z.string().uuid(),
+  userId: z.string(),
   date: z.string(),
   checkIn: z.string(),
   checkOut: z.string(),
@@ -21,9 +21,9 @@ export const TimesheetEntryDTO = z.object({
 });
 
 export const TimesheetDTO = z.object({
-  id: z.string().uuid(),
+  id: z.string(),
   tenantId: z.string().optional(),
-  userId: z.string().uuid(),
+  userId: z.string(),
   date: z.string(),
   checkIn: z.string().nullable(),
   checkOut: z.string().nullable(),
