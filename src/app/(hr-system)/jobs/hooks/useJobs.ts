@@ -4,32 +4,26 @@ import toast from "react-hot-toast";
 import { useTranslations } from "next-intl";
 import { jobsClient } from "../api/jobsClient";
 
-export const useJobsAuthCheck = () => {
-  return useQuery({
-    queryKey: ["jobs_auth_check"],
-    queryFn: async () => {
-      const res = await jobsClient.get("/auth/me"); 
-      
-      return { isAuthenticated: true, user: res.data };
-    },
-    retry: false, 
-  });
-};
 
 export const useJobsAuth = () => {
+  const queryClient = useQueryClient();
+
   return useMutation({
-    mutationFn: async (data: any) => {
-      const res = await jobsClient.post("/auth/login", data);
+    mutationFn: async (credentials: any) => {
+      const res = await jobsClient.post("/auth/login", credentials);
       return res.data;
     },
-    onSuccess: () => {
-      toast.success("Logged in successfully"); 
+    onSuccess: (responseData) => {
+      if (responseData?.data) {
+        queryClient.setQueryData(["jobs_user"], responseData.data);
+      }
+      toast.success("Logged in successfully");
     },
     onError: (error: any) => {
       const errorMessage = 
         error.response?.data?.message || 
-        error.response?.data?.error 
-
+        error.response?.data?.error || 
+        "Login failed";
       toast.error(errorMessage);
     },
   });
@@ -70,6 +64,7 @@ export const useJobsList = (
     retry: false,
   });
 };
+
 export const useJobBilingual = (id: string) => {
   return useQuery({
     queryKey: ["job_bilingual_final", id], 
