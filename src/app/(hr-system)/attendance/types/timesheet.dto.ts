@@ -8,14 +8,14 @@ export const UserSummaryDTO = z.object({
   lastName: z.string(),
   email: z.string().email(),
   employeeCode: z.string().nullable().optional(),
-  departmentId: z.string().uuid().nullable().optional(),
+  departmentId: z.string().nullable().optional(),
   role: z.string(),
 });
 
 export const TimesheetDTO = z.object({
-  id: z.string().uuid(),
+  id: z.string(),
   tenantId: z.string(),
-  userId: z.string().uuid(),
+  userId: z.string(),
   date: z.string().datetime(),
   checkIn: z.string().datetime().nullable(),
   checkOut: z.string().datetime().nullable(),

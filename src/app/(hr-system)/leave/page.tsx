@@ -81,7 +81,7 @@ export default function LeavePage() {
       </div>
 
       <div className="flex flex-col sm:flex-row gap-2 mb-6">
-        <input
+        {/* <input
           type="text"
           placeholder={t("searchPlaceholder")}
           value={search}
@@ -90,7 +90,7 @@ export default function LeavePage() {
             setPage(1);
           }}
           className="flex-1 px-4 py-2 rounded-xl border border-gray-200 bg-card text-content text-sm focus:outline-none focus:ring-2 focus:ring-primary/30 font-semibold placeholder:text-content-muted placeholder:font-normal"
-        />
+        /> */}
         <LeaveFilters
           statusFilter={statusFilter}
           onStatusChange={(s) => {

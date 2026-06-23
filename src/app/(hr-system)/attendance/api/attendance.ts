@@ -82,7 +82,7 @@ export async function getMyTimesheets(filters?: TimesheetFilters): Promise<Pagin
 
   const parsed = TimesheetDTO.array().safeParse(items);
   if (!parsed.success) {
-    throw new Error("Invalid timesheet data structure received from API");
+    throw new Error(`Invalid timesheet data structure received from API: ${parsed.error.message}`);
   }
 
   return { timesheets: mapTimesheetsFromDTO(parsed.data), meta };
