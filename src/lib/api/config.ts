@@ -5,6 +5,7 @@ export const apis = {
     forgetPassword: "/auth/forget-password",
     refresh: "/auth/refresh",
     me: "/auth/me",
+    avatar: "/auth/avatar",
   },
 
   home: {

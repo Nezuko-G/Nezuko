@@ -1,9 +1,12 @@
 "use client";
 
+import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { ArrowLeft, AlertCircle, LogOut } from "lucide-react";
-import { useProfile } from "./hooks/useProfile";
+import { useProfile, useUpdateAvatar } from "./hooks/useProfile";
+import { useAuthStore } from "@/hooks/useAuthStore";
+import { fetchImageAsBase64, isAvatarStale } from "@/lib/avatar";
 import ProfileHeader from "./components/ProfileHeader";
 import ProfileSections from "./components/ProfileSections";
 
@@ -64,6 +67,24 @@ export default function ProfilePage() {
     const t = useTranslations("profile");
     const router = useRouter();
     const { data, isLoading, isError, refetch } = useProfile();
+    const { mutate: uploadAvatar, isPending: isUploading } = useUpdateAvatar();
+    const avatarBase64 = useAuthStore((s) => s.avatarBase64);
+    const setAvatarBase64 = useAuthStore((s) => s.setAvatarBase64);
+    const setUserData = useAuthStore((s) => s.setUserData);
+
+    useEffect(() => {
+        if (data?.avatarUrl && (isAvatarStale(useAuthStore.getState().avatarUpdatedAt) || !avatarBase64)) {
+            fetchImageAsBase64(data.avatarUrl)
+                .then((base64) => setAvatarBase64(base64))
+                .catch(() => {});
+        }
+        if (data?.firstName && data?.lastName) {
+            const state = useAuthStore.getState();
+            if (state.firstName !== data.firstName || state.lastName !== data.lastName) {
+                setUserData({ firstName: data.firstName, lastName: data.lastName });
+            }
+        }
+    }, [data?.avatarUrl, data?.firstName, data?.lastName]);
 
     if (isLoading) return <ProfileSkeleton />;
     if (isError || !data) return <ProfileError onRetry={() => refetch()} />;
@@ -78,7 +99,12 @@ export default function ProfilePage() {
             </button>
 
             <div className="flex flex-col lg:flex-row gap-6">
-                <ProfileHeader data={data} />
+                <ProfileHeader
+                    data={data}
+                    avatarBase64={avatarBase64}
+                    onUpload={uploadAvatar}
+                    isUploading={isUploading}
+                />
                 <div className="flex-1 min-w-0">
                     <ProfileSections data={data} />
                 </div>

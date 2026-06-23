@@ -1,9 +1,12 @@
 "use client";
 
+import { useRef, useState } from "react";
 import { useTranslations } from "next-intl";
+import Image from "next/image";
 import { cn } from "@/lib/utils";
-import { Mail, Phone, Calendar, Hash, LogOut } from "lucide-react";
+import { Mail, Phone, Calendar, Hash, LogOut, Camera, Loader2 } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { useAuthStore } from "@/hooks/useAuthStore";
 
 interface Props {
     data: {
@@ -17,7 +20,13 @@ interface Props {
         phone?: string | null;
         hireDate?: string | null;
     };
+    avatarBase64?: string | null;
+    onUpload?: (file: File) => void;
+    isUploading?: boolean;
 }
+
+const MAX_FILE_SIZE = 5 * 1024 * 1024;
+const ACCEPTED_TYPES = ["image/jpeg", "image/png", "image/webp"];
 
 function formatRole(role: string) {
     return role
@@ -41,11 +50,15 @@ const FIELD_ICONS = {
     hireDate: Calendar,
 } as const;
 
-export default function ProfileHeader({ data }: Props) {
-    
+export default function ProfileHeader({ data, avatarBase64, onUpload, isUploading }: Props) {
+
     const router = useRouter();
+    const fileInputRef = useRef<HTMLInputElement>(null);
+    const [error, setError] = useState<string | null>(null);
+    const clearAuth = useAuthStore((s) => s.clearAuth);
+
     function handleLogout(router: ReturnType<typeof useRouter>) {
-        localStorage.removeItem("auth");
+        clearAuth();
         router.push("/login");
     }
     const t = useTranslations("profile");
@@ -57,14 +70,72 @@ export default function ProfileHeader({ data }: Props) {
         { key: "hireDate", label: t("fields.hireDate"), value: formatDate(data.hireDate), icon: FIELD_ICONS.hireDate },
     ].filter((f) => f.value);
 
+    const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const file = e.target.files?.[0];
+        setError(null);
+        if (!file || !onUpload) return;
+
+        if (!ACCEPTED_TYPES.includes(file.type)) {
+            setError("File must be JPEG, PNG, or WebP");
+            return;
+        }
+        if (file.size > MAX_FILE_SIZE) {
+            setError("File must be under 5MB");
+            return;
+        }
+
+        onUpload(file);
+        e.target.value = "";
+    };
+
     return (
         <div className="w-full lg:w-64 shrink-0 bg-card rounded-2xl border border-gray-200 shadow-sm overflow-hidden self-start">
             <div className="h-1.5 bg-gradient-to-r from-primary/40 via-primary to-primary/40" />
 
             <div className="px-6 pt-6 pb-5 flex flex-col items-center gap-3">
-                <div className="w-20 h-20 rounded-full bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center text-primary font-extrabold text-2xl ring-4 ring-white shadow-sm">
-                    {initials}
+                <div className="relative w-20 h-20 group">
+                    {avatarBase64 ? (
+                        <Image
+                            src={avatarBase64}
+                            alt={`${data.firstName} ${data.lastName}`}
+                            width={80}
+                            height={80}
+                            className="w-20 h-20 rounded-full object-cover ring-4 ring-white shadow-sm"
+                        />
+                    ) : (
+                        <div className="w-20 h-20 rounded-full bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center text-primary font-extrabold text-2xl ring-4 ring-white shadow-sm">
+                            {initials}
+                        </div>
+                    )}
+
+                    {onUpload && (
+                        <button
+                            onClick={() => !isUploading && fileInputRef.current?.click()}
+                            disabled={isUploading}
+                            className={`absolute inset-0 rounded-full bg-black/40 flex items-center justify-center cursor-pointer disabled:cursor-not-allowed transition-opacity ${
+                                isUploading ? "opacity-100" : "opacity-0 group-hover:opacity-100"
+                            }`}
+                        >
+                            {isUploading ? (
+                                <Loader2 size={18} className="text-white animate-spin" />
+                            ) : (
+                                <Camera size={18} className="text-white" />
+                            )}
+                        </button>
+                    )}
+
+                    <input
+                        ref={fileInputRef}
+                        type="file"
+                        accept="image/jpeg,image/png,image/webp"
+                        className="hidden"
+                        onChange={handleFileChange}
+                    />
                 </div>
+
+                {error && (
+                    <p className="text-xs text-status-error">{error}</p>
+                )}
 
                 <div className="text-center">
                     <h2 className="font-bold text-secondary text-lg">{data.firstName} {data.lastName}</h2>
