@@ -1,8 +1,10 @@
 "use client";
 
-import { useQuery } from "@tanstack/react-query";
-import { getMe } from "../api/profile.api";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { getMe, updateAvatar } from "../api/profile.api";
 import { useToast } from "@/components/ui/toast";
+import { useAuthStore } from "@/hooks/useAuthStore";
+import { fileToBase64 } from "@/lib/avatar";
 
 interface ApiErrorType extends Error {
     status?: number;
@@ -24,5 +26,27 @@ export function useProfile() {
         },
         retry: false,
         staleTime: 5 * 60 * 1000,
+    });
+}
+
+export function useUpdateAvatar() {
+    const queryClient = useQueryClient();
+    const setAvatarBase64 = useAuthStore((s) => s.setAvatarBase64);
+    const toast = useToast();
+
+    return useMutation({
+        mutationFn: async (file: File) => {
+            const result = await updateAvatar(file);
+            const base64 = await fileToBase64(file);
+            setAvatarBase64(base64);
+            return result;
+        },
+        onSuccess: () => {
+            queryClient.invalidateQueries({ queryKey: ["profile"] });
+            toast.success("Avatar updated successfully");
+        },
+        onError: (error: Error) => {
+            toast.error(error?.message || "Failed to update avatar");
+        },
     });
 }

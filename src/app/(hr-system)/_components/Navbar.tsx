@@ -1,16 +1,25 @@
 "use client"
 import { useTranslations, useLocale } from "next-intl";
 import Image from "next/image";
-import { Bell, MessageSquare, X, Menu } from "lucide-react";
+import { Bell, MessageSquare, X, Menu, User } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import { useState } from "react";
 
 import { LanguageSwitcher } from "../../../components/i18n/LanguageSwitcher";
+import { useAuthStore } from "@/hooks/useAuthStore";
 
 export default function Navbar() {
   const locale = useLocale();
   const t = useTranslations("dashboard.navbar");
   const [menuOpen, setMenuOpen] = useState(false);
+  const avatarBase64 = useAuthStore((s) => s.avatarBase64);
+  const firstName = useAuthStore((s) => s.firstName);
+  const lastName = useAuthStore((s) => s.lastName);
+
+  const initials =
+    firstName && lastName
+      ? `${firstName[0]}${lastName[0]}`.toUpperCase()
+      : null;
 
   return (
     <header className="h-16 md:h-20 bg-secondary text-white sticky top-0 z-10 w-full shrink-0 shadow-sm">
@@ -64,15 +73,22 @@ export default function Navbar() {
           {/* Avatar */}
           <Link
             href="/profile"
-            className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-zinc-800 border-2 border-primary/20 overflow-hidden shrink-0 cursor-pointer hover:border-primary transition-colors"
+            className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-zinc-800 border-2 border-primary/20 overflow-hidden shrink-0 cursor-pointer hover:border-primary transition-colors flex items-center justify-center"
           >
-            <Image
-              src="https://i.pravatar.cc/150?img=11"
-              alt={t("profile")}
-              width={40}
-              height={40}
-              className="w-full h-full object-cover"
-            />
+            {avatarBase64 ? (
+              <Image
+                src={avatarBase64}
+                alt={t("profile")}
+                width={40}
+                height={40}
+                className="w-full h-full object-cover"
+                unoptimized
+              />
+            ) : (
+              <div className="w-full h-full flex items-center justify-center bg-zinc-700 text-white text-sm font-bold">
+                {initials ?? <User size={18} />}
+              </div>
+            )}
           </Link>
         </div>
       </div>

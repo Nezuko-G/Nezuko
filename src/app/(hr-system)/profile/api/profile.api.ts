@@ -11,6 +11,7 @@ export interface ProfileData {
     updatedAt: string;
     firstName: string;
     lastName: string;
+    avatarUrl?: string | null;
     phone?: string | null;
     dateOfBirth?: string | null;
     gender?: string | null;
@@ -31,4 +32,13 @@ export interface ProfileData {
 export async function getMe(): Promise<ProfileData> {
     const response = await api.get(apis.auth.me);
     return response.data.data as ProfileData;
+}
+
+export async function updateAvatar(file: File): Promise<{ avatarUrl: string }> {
+    const formData = new FormData();
+    formData.append("avatar", file);
+    const response = await api.patch(apis.auth.avatar, formData, {
+        headers: { "Content-Type": "multipart/form-data" },
+    });
+    return response.data.data as { avatarUrl: string };
 }

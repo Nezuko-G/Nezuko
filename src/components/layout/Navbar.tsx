@@ -8,6 +8,7 @@ import { motion } from "framer-motion";
 import { useTranslations, useLocale } from "next-intl";
 import { LanguageSwitcher } from "@/components/i18n/LanguageSwitcher";
 import { cn } from "@/lib/utils";
+import { useAuthStore } from "@/hooks/useAuthStore";
 
 export default function Navbar() {
   const t = useTranslations("common.navbar");
@@ -39,8 +40,10 @@ export default function Navbar() {
     () => false,
   );
 
+  const clearAuth = useAuthStore((s) => s.clearAuth);
+
   function handleLogout() {
-    localStorage.removeItem("auth");
+    clearAuth();
     router.push("/login");
   }
 
