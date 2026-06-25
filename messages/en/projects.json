@@ -57,7 +57,8 @@
       "startDateLabel": "Start Date",
       "dueDateLabel": "Due Date",
       "dueDateAfterStart": "Due date must be after start date",
-      "nameRequired": "Project name is required"
+      "nameRequired": "Project name is required",
+      "ownerRequired": "Project owner is required"
     },
 
     "errors": {
@@ -91,6 +92,10 @@
       "URGENT": "Urgent"
     },
 
+    "detail": {
+      "title": "Task Details"
+    },
+
     "fields": {
       "title": "Title",
       "description": "Description",
@@ -100,7 +105,10 @@
       "project": "Project",
       "dueDate": "Due Date",
       "estimatedHours": "Estimated Hours",
-      "actualHours": "Actual Hours"
+      "actualHours": "Actual Hours",
+      "completedAt": "Completed At",
+      "createdBy": "Created By",
+      "parentTask": "Parent Task"
     },
 
     "actions": {
@@ -124,6 +132,8 @@
       "titleRequired": "Task title is required",
       "standaloneOrProject": "Link to project (optional)"
     },
+
+    "loading": "Loading…",
 
     "errors": {
       "loadFailed": "Failed to load tasks",

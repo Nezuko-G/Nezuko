@@ -25,18 +25,21 @@ export function useLogin() {
         try {
           const base64 = await fetchImageAsBase64(user.avatarUrl);
           setUserData({
+            id: user.id,
             firstName: user.firstName ?? "",
             lastName: user.lastName ?? "",
             avatarBase64: base64,
           });
         } catch {
           setUserData({
+            id: user.id,
             firstName: user.firstName ?? "",
             lastName: user.lastName ?? "",
           });
         }
       } else if (user?.firstName) {
         setUserData({
+          id: user.id,
           firstName: user.firstName,
           lastName: user.lastName ?? "",
         });

@@ -112,4 +112,17 @@ export const apis = {
   toggleActivation: (id: string) => `/job/toggle-activation/${id}`,
   login: "/auth/login",
 },
+  projects: {
+    base: "/project",
+    byId: (id: string) => `/project/${id}`,
+    progress: (id: string) => `/project/${id}/progress`,
+    tasks: (id: string) => `/project/${id}/tasks`,
+  },
+  tasks: {
+    base: "/project/tasks",
+    byId: (id: string) => `/project/tasks/${id}`,
+    myTasks: "/project/tasks/me",
+    overdueReport: "/project/tasks/report/overdue",
+    subtasks: (parentId: string) => `/project/tasks/subtasks/${parentId}`,
+  },
 };

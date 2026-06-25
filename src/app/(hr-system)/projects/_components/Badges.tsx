@@ -14,12 +14,12 @@ const PROJECT_STATUS_STYLES: Record<ProjectStatus, string> = {
 
 export function ProjectStatusBadge({ status }: { status: ProjectStatus }) {
     const t = useTranslations("projects.status");
-
-    const style = PROJECT_STATUS_STYLES[status] ?? "bg-gray-100 text-gray-500";
+    const safe = status ?? ProjectStatus.PLANNING;
+    const style = PROJECT_STATUS_STYLES[safe] ?? "bg-gray-100 text-gray-500";
 
     return (
         <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold ${style}`}>
-            {t(status)}
+            {t(safe)}
         </span>
     );
 }
@@ -33,13 +33,14 @@ const TASK_STATUS_STYLES: Record<TaskStatus, string> = {
 };
 
 export function TaskStatusBadge({ status }: { status: TaskStatus }) {
-    const t = useTranslations("tasks.status");
+    const t = useTranslations("projects.tasks.status");
+    const safe = status ?? TaskStatus.TODO;
 
     return (
         <span
-            className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold ${TASK_STATUS_STYLES[status]}`}
+            className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold ${TASK_STATUS_STYLES[safe]}`}
         >
-            {t(status)}
+            {t(safe)}
         </span>
     );
 }
@@ -60,14 +61,15 @@ const PRIORITY_DOTS: Record<TaskPriority, string> = {
 };
 
 export function PriorityBadge({ priority }: { priority: TaskPriority }) {
-    const t = useTranslations("tasks.priority");
+    const t = useTranslations("projects.tasks.priority");
+    const safe = priority ?? TaskPriority.MEDIUM;
 
     return (
         <span
-            className={`inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-medium ${PRIORITY_STYLES[priority]}`}
+            className={`inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-medium ${PRIORITY_STYLES[safe]}`}
         >
-            <span className={`w-1.5 h-1.5 rounded-full ${PRIORITY_DOTS[priority]}`} />
-            {t(priority)}
+            <span className={`w-1.5 h-1.5 rounded-full ${PRIORITY_DOTS[safe]}`} />
+            {t(safe)}
         </span>
     );
 }

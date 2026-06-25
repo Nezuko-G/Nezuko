@@ -19,9 +19,20 @@ import type {
 
 export const taskKeys = {
     all: ["tasks"] as const,
+    byId: (id: string) => [...taskKeys.all, id] as const,
     myTasks: () => [...taskKeys.all, "me"] as const,
     overdueReport: () => [...taskKeys.all, "report", "overdue"] as const,
 };
+
+
+export function useTaskById(id: string, options?: UseQueryOptions<Task>) {
+    return useQuery({
+        queryKey: taskKeys.byId(id),
+        queryFn: () => tasksApi.getById(id),
+        enabled: !!id,
+        ...options,
+    });
+}
 
 
 export function useMyTasks(options?: UseQueryOptions<Task[]>) {
@@ -103,12 +114,16 @@ export function useUpdateTaskStatus(taskId: string) {
 }
 
 
-export function useCreateSubTask(parentId: string) {
+export function useCreateSubTask(parentId: string, options?: { parentDepth?: number }) {
     const queryClient = useQueryClient();
 
     return useMutation({
-        mutationFn: (payload: CreateTaskPayload) =>
-            tasksApi.createSubTask(parentId, payload),
+        mutationFn: (payload: CreateTaskPayload) => {
+            if (options?.parentDepth !== undefined && options.parentDepth > 0) {
+                throw new Error("Sub-tasks cannot have nested sub-tasks");
+            }
+            return tasksApi.createSubTask(parentId, payload);
+        },
         onSuccess: (task) => {
             if (task.projectId) {
                 queryClient.invalidateQueries({

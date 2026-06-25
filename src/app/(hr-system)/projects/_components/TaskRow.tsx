@@ -14,7 +14,9 @@ interface TaskRowProps {
   /** true = Manager/HR */
   canManage: boolean;
   onEdit?: (task: Task) => void;
+  onViewDetail?: (task: Task) => void;
   depth?: number;
+  disableStatusChange?: boolean;
 }
 
 const STATUS_FLOW: TaskStatus[] = [
@@ -30,15 +32,17 @@ export function TaskRow({
   currentUserId,
   canManage,
   onEdit,
+  onViewDetail,
   depth = 0,
+  disableStatusChange = false,
 }: TaskRowProps) {
-  const t = useTranslations("tasks");
+    const t = useTranslations("projects.tasks");
   const [expanded, setExpanded] = useState(false);
   const [addingSubTask, setAddingSubTask] = useState(false);
   const [subTaskTitle, setSubTaskTitle] = useState("");
 
   const isAssignee = task.assigneeId === currentUserId;
-  const canChangeStatus = canManage || isAssignee;
+  const canChangeStatus = (canManage || isAssignee) && !disableStatusChange;
   const isOverdue =
     task.dueDate &&
     task.status !== TaskStatus.DONE &&
@@ -47,7 +51,7 @@ export function TaskRow({
   const hasOpenSubTasks = task.subTasks?.some((s) => s.status !== TaskStatus.DONE);
 
   const { mutate: updateStatus, isPending: statusLoading } = useUpdateTaskStatus(task.id);
-  const { mutate: createSubTask, isPending: subTaskLoading } = useCreateSubTask(task.id);
+  const { mutate: createSubTask, isPending: subTaskLoading } = useCreateSubTask(task.id, { parentDepth: depth });
 
   const handleStatusChange = (status: TaskStatus) => {
     if (status === TaskStatus.DONE && hasOpenSubTasks) return;
@@ -86,9 +90,12 @@ export function TaskRow({
 
         {/* Title */}
         <div className="flex-1 min-w-0">
-          <p className="text-sm font-medium text-content-dark truncate">
+          <button
+            onClick={() => onViewDetail?.(task)}
+            className="text-sm font-medium text-content-dark truncate hover:text-primary transition-colors text-left w-full"
+          >
             {task.title}
-          </p>
+          </button>
           {task.assignee && (
             <p className="text-xs text-content-muted truncate">{task.assignee.name}</p>
           )}
@@ -164,6 +171,8 @@ export function TaskRow({
               currentUserId={currentUserId}
               canManage={canManage}
               onEdit={onEdit}
+              onViewDetail={onViewDetail}
+              disableStatusChange={disableStatusChange}
               depth={depth + 1}
             />
           ))}

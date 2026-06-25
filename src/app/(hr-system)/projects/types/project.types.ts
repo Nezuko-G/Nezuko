@@ -73,6 +73,7 @@ export interface CreateProjectPayload {
   name: string;
   description?: string;
   status?: ProjectStatus;
+  ownerId?: string;
   startDate?: string;
   dueDate?: string;
 }
