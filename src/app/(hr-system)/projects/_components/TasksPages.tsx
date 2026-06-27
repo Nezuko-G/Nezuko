@@ -1,16 +1,17 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { useMyTasks, useOverdueReport } from "../_hooks/useTasks";
-import { TaskRow } from "./TaskRow";
+import { useMyTasks, useOverdueReport, useUpdateTask } from "../_hooks/useTasks";
+import MyTasksTable from "./MyTasksTable";
 import { TaskDetailPopover } from "./TaskDetailPopover";
 import { TaskForm } from "./TaskForm";
+import OverdueTasksTable from "./OverdueTasksTable";
 import { TaskListLoader, OverdueReportLoader } from "../loaders/index";
 import { useState, useMemo } from "react";
-import { ChevronDown, ChevronRight } from "lucide-react";
-import type { OverdueReportGroup, Task, UpdateTaskPayload } from "../types/project.types";
+import type { Task } from "../types/project.types";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { tasksApi } from "../api/api";
+import type { UpdateTaskPayload } from "../types/project.types";
 import { useAuthStore } from "@/hooks/useAuthStore";
 
 interface MyTasksPageProps {
@@ -56,23 +57,11 @@ export function MyTasksPage({ currentUserId }: MyTasksPageProps) {
         <TaskListLoader />
       ) : isError ? (
         <p className="text-sm text-status-error">{tp("tasks.errors.loadFailed")}</p>
-      ) : !sorted.length ? (
-        <p className="text-sm text-content-muted text-center py-10 bg-white rounded-2xl border border-gray-100">
-          {tp("tasks.noTasks")}
-        </p>
       ) : (
-        <div className="rounded-2xl bg-white border border-gray-100 shadow-sm overflow-hidden divide-y divide-gray-50">
-          {sorted.map((task) => (
-            <TaskRow
-              key={task.id}
-              task={task}
-              currentUserId={currentUserId}
-              canManage={false}
-              disableStatusChange={true}
-              onViewDetail={(task) => setSelectedTaskId(task.id)}
-            />
-          ))}
-        </div>
+        <MyTasksTable
+          tasks={sorted}
+          onViewDetail={(task) => setSelectedTaskId(task.id)}
+        />
       )}
 
       {selectedTaskId && (
@@ -105,58 +94,6 @@ export function MyTasksPage({ currentUserId }: MyTasksPageProps) {
 }
 
 
-interface OverdueGroupProps {
-  group: OverdueReportGroup;
-  currentUserId: string;
-  onViewDetail?: (task: Task) => void;
-}
-
-function OverdueGroup({ group, currentUserId, onViewDetail }: OverdueGroupProps) {
-  const tp = useTranslations("projects");
-  const [expanded, setExpanded] = useState(true);
-
-  const assigneeName = (group as { assigneeName?: string }).assigneeName ?? group.assignee?.name ?? "Unknown";
-  const assigneeInitial = assigneeName.charAt(0).toUpperCase();
-
-  return (
-    <div className="rounded-2xl bg-white border border-gray-100 shadow-sm overflow-hidden">
-      {/* Group header */}
-      <button
-        onClick={() => setExpanded((v) => !v)}
-        className="w-full flex items-center gap-3 px-4 py-3 border-b border-gray-100 hover:bg-gray-50/60 transition-colors"
-      >
-        <div className="w-8 h-8 rounded-full bg-primary-light flex items-center justify-center text-xs font-bold text-secondary flex-shrink-0">
-          {assigneeInitial}
-        </div>
-        <span className="font-semibold text-content-dark text-sm">{assigneeName}</span>
-        <span className="ms-auto text-xs text-content-muted">
-          {tp("tasks.overdueReport.taskCount", { count: group.tasks?.length ?? 0 })}
-        </span>
-        {expanded ? (
-          <ChevronDown size={14} className="text-content-muted" />
-        ) : (
-          <ChevronRight size={14} className="text-content-muted" />
-        )}
-      </button>
-
-      {/* Tasks */}
-      {expanded && !!group.tasks?.length && (
-        <div className="divide-y divide-gray-50">
-          {group.tasks.map((task) => (
-            <TaskRow
-              key={task.id}
-              task={task}
-              currentUserId={currentUserId}
-              canManage={false}
-              onViewDetail={onViewDetail}
-            />
-          ))}
-        </div>
-      )}
-    </div>
-  );
-}
-
 interface OverdueReportPageProps {
   currentUserId: string;
 }
@@ -167,41 +104,24 @@ export function OverdueReportPage({ currentUserId }: OverdueReportPageProps) {
   const [selectedTaskId, setSelectedTaskId] = useState<string>();
   const [editingTask, setEditingTask] = useState<Task>();
   const queryClient = useQueryClient();
-  const { mutate: updateTask, isPending: taskUpdating } = useMutation({
-    mutationFn: ({ taskId, data }: { taskId: string; data: UpdateTaskPayload }) =>
-      tasksApi.update(taskId, data),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["tasks", "me"] });
-      setEditingTask(undefined);
-    },
-  });
+  const updateTask = useUpdateTask(editingTask?.id ?? "");
 
   return (
     <div className="flex flex-col gap-4">
       <div className="flex items-center justify-between">
         <h1 className="text-2xl font-black text-secondary">{tp("tasks.overdueReport.title")}</h1>
-        <span className="text-sm text-content-muted">{tp("tasks.overdueReport.groupedByAssignee")}</span>
       </div>
 
       {isLoading ? (
         <OverdueReportLoader />
       ) : isError ? (
         <p className="text-sm text-status-error">{tp("tasks.errors.loadFailed")}</p>
-      ) : !groups?.length ? (
-        <p className="text-sm text-content-muted text-center py-10 bg-white rounded-2xl border border-gray-100">
-          {tp("tasks.overdueReport.noOverdue")}
-        </p>
       ) : (
-        <div className="flex flex-col gap-4">
-          {groups.map((group, idx) => (
-            <OverdueGroup
-              key={(group as { assigneeId?: string }).assigneeId ?? group.assignee?.id ?? String(idx)}
-              group={group}
-              currentUserId={currentUserId}
-              onViewDetail={(task) => setSelectedTaskId(task.id)}
-            />
-          ))}
-        </div>
+        <OverdueTasksTable
+          groups={groups}
+          currentUserId={currentUserId}
+          onViewDetail={(task) => setSelectedTaskId(task.id)}
+        />
       )}
 
       {selectedTaskId && (
@@ -219,10 +139,10 @@ export function OverdueReportPage({ currentUserId }: OverdueReportPageProps) {
         key={editingTask?.id ?? "create"}
         open={!!editingTask}
         task={editingTask}
-        loading={taskUpdating}
+        loading={updateTask.isPending}
         onSubmit={(payload) => {
           if (editingTask) {
-            updateTask({ taskId: editingTask.id, data: payload });
+            updateTask.mutate(payload);
           }
         }}
         onClose={() => setEditingTask(undefined)}

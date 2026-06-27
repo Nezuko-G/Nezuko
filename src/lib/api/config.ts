@@ -122,6 +122,7 @@ export const apis = {
     base: "/project/tasks",
     byId: (id: string) => `/project/tasks/${id}`,
     myTasks: "/project/tasks/me",
+    byUser: (userId: string) => `/project/tasks?assigneeId=${userId}`,
     overdueReport: "/project/tasks/report/overdue",
     subtasks: (parentId: string) => `/project/tasks/subtasks/${parentId}`,
   },

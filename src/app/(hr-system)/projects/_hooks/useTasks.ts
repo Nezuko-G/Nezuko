@@ -21,6 +21,7 @@ export const taskKeys = {
     all: ["tasks"] as const,
     byId: (id: string) => [...taskKeys.all, id] as const,
     myTasks: () => [...taskKeys.all, "me"] as const,
+    byUser: (userId: string) => [...taskKeys.all, "user", userId] as const,
     overdueReport: () => [...taskKeys.all, "report", "overdue"] as const,
 };
 
@@ -39,6 +40,16 @@ export function useMyTasks(options?: UseQueryOptions<Task[]>) {
     return useQuery({
         queryKey: taskKeys.myTasks(),
         queryFn: tasksApi.getMyTasks,
+        ...options,
+    });
+}
+
+
+export function useEmployeeTasks(userId: string, options?: UseQueryOptions<Task[]>) {
+    return useQuery({
+        queryKey: taskKeys.byUser(userId),
+        queryFn: () => tasksApi.getByUser(userId),
+        enabled: !!userId,
         ...options,
     });
 }
@@ -109,6 +120,7 @@ export function useUpdateTaskStatus(taskId: string) {
                 });
             }
             queryClient.invalidateQueries({ queryKey: taskKeys.myTasks() });
+            queryClient.invalidateQueries({ queryKey: taskKeys.overdueReport() });
         },
     });
 }

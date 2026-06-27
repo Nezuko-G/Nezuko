@@ -93,6 +93,7 @@
             "emergency": "Emergency Contact",
             "documents": "Documents"
         },
+        "tasks": "Tasks",
         "status": {
             "active": "Active",
             "terminated": "Terminated"

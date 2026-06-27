@@ -1,5 +1,6 @@
 "use client";
 
+import { Fragment } from "react";
 
 function Skeleton({ className = "" }: { className?: string }) {
   return (
@@ -20,12 +21,11 @@ export function ProjectCardSkeleton() {
       </div>
       <Skeleton className="h-4 w-full" />
       <Skeleton className="h-4 w-3/4" />
-      <div className="flex items-center gap-3 mt-2">
+      <div className="flex items-center justify-between gap-3 mt-2">
         <Skeleton className="h-3 w-24" />
         <Skeleton className="h-3 w-24" />
+        <Skeleton className="h-3 w-16 ms-auto" />
       </div>
-      {/* Progress bar */}
-      <Skeleton className="h-2 w-full rounded-full mt-1" />
     </div>
   );
 }
@@ -82,26 +82,73 @@ export function ProjectDetailLoader() {
 
 export function TaskRowSkeleton() {
   return (
-    <div className="flex items-center gap-4 px-4 py-3 border-b border-gray-50 last:border-0">
-      <Skeleton className="h-5 w-5 rounded-full flex-shrink-0" />
-      <div className="flex flex-col gap-1.5 flex-1">
-        <Skeleton className="h-4 w-3/5" />
-        <Skeleton className="h-3 w-2/5" />
-      </div>
-      <Skeleton className="h-6 w-20 rounded-full" />
-      <Skeleton className="h-6 w-20 rounded-full" />
-      <Skeleton className="h-5 w-5 rounded-full" />
-    </div>
+    <tr className="border-b border-gray-50 last:border-0">
+      <td className="px-4 py-3">
+        <Skeleton className="h-4 w-48" />
+      </td>
+      <td className="px-4 py-3">
+        <Skeleton className="h-4 w-24" />
+      </td>
+      <td className="px-4 py-3 text-center">
+        <Skeleton className="h-5 w-16 rounded-full mx-auto" />
+      </td>
+      <td className="px-4 py-3 text-center">
+        <Skeleton className="h-4 w-20 mx-auto" />
+      </td>
+      <td className="px-4 py-3 text-center">
+        <Skeleton className="h-5 w-20 rounded-full mx-auto" />
+      </td>
+    </tr>
   );
 }
 
 
 export function TaskListLoader({ count = 5 }: { count?: number }) {
   return (
-    <div className="rounded-2xl bg-white border border-gray-100 shadow-sm overflow-hidden">
-      {Array.from({ length: count }).map((_, i) => (
-        <TaskRowSkeleton key={i} />
-      ))}
+    <div className="overflow-x-auto rounded-2xl bg-white border border-gray-100 shadow-sm">
+      <table className="w-full text-sm">
+        <thead>
+          <tr className="border-b border-gray-100 text-content-muted text-xs font-bold uppercase tracking-wider">
+            <th className="px-4 py-4 text-start w-8" />
+            <th className="px-4 py-4 text-start">Title</th>
+            <th className="px-4 py-4 text-start whitespace-nowrap">Project</th>
+            <th className="px-4 py-4 text-start whitespace-nowrap">Created By</th>
+            <th className="px-4 py-4 text-center whitespace-nowrap">Priority</th>
+            <th className="px-4 py-4 text-center whitespace-nowrap">Schedule</th>
+            <th className="px-4 py-4 text-center whitespace-nowrap">Status</th>
+          </tr>
+        </thead>
+        <tbody className="divide-y divide-gray-50">
+          {Array.from({ length: count }).map((_, i) => (
+            <tr key={i} className="border-b border-gray-50 last:border-0">
+              <td className="px-4 py-3">
+                <Skeleton className="h-3.5 w-3.5" />
+              </td>
+              <td className="px-4 py-3">
+                <Skeleton className="h-4 w-48" />
+              </td>
+              <td className="px-4 py-3">
+                <Skeleton className="h-4 w-24" />
+              </td>
+              <td className="px-4 py-3">
+                <Skeleton className="h-4 w-24" />
+              </td>
+              <td className="px-4 py-3">
+                <Skeleton className="h-5 w-16 rounded-full" />
+              </td>
+              <td className="px-4 py-3">
+                <div className="flex flex-col gap-1">
+                  <Skeleton className="h-4 w-20" />
+                  <Skeleton className="h-3 w-14" />
+                </div>
+              </td>
+              <td className="px-4 py-3">
+                <Skeleton className="h-5 w-20 rounded-full" />
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 }
@@ -109,24 +156,32 @@ export function TaskListLoader({ count = 5 }: { count?: number }) {
 
 export function OverdueReportLoader({ groups = 3 }: { groups?: number }) {
   return (
-    <div className="flex flex-col gap-4">
-      {Array.from({ length: groups }).map((_, i) => (
-        <div
-          key={i}
-          className="rounded-2xl bg-white border border-gray-100 shadow-sm overflow-hidden"
-        >
-          {/* Group header */}
-          <div className="flex items-center gap-3 px-4 py-3 border-b border-gray-100">
-            <Skeleton className="h-8 w-8 rounded-full" />
-            <Skeleton className="h-5 w-36" />
-            <Skeleton className="h-5 w-20 rounded-full ms-auto" />
-          </div>
-          {/* Tasks */}
-          {Array.from({ length: 2 }).map((_, j) => (
-            <TaskRowSkeleton key={j} />
+    <div className="overflow-x-auto rounded-2xl border border-gray-100 bg-card shadow-sm">
+      <table className="w-full text-sm">
+        <thead>
+          <tr className="border-b border-gray-100 text-content-muted text-xs font-bold uppercase tracking-wider">
+            <th className="px-4 py-4 text-start">Title</th>
+            <th className="px-4 py-4 text-start whitespace-nowrap">Project</th>
+            <th className="px-4 py-4 text-center whitespace-nowrap">Priority</th>
+            <th className="px-4 py-4 text-center whitespace-nowrap">Due Date</th>
+            <th className="px-4 py-4 text-center whitespace-nowrap">Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          {Array.from({ length: groups }).map((_, i) => (
+            <Fragment key={i}>
+              <tr className="bg-primary/[0.04] border-b border-gray-100">
+                <td colSpan={5} className="px-4 py-2.5 border-s-[3px] border-primary/15">
+                  <Skeleton className="h-4 w-36" />
+                </td>
+              </tr>
+              {Array.from({ length: 2 }).map((_, j) => (
+                <TaskRowSkeleton key={`${i}-${j}`} />
+              ))}
+            </Fragment>
           ))}
-        </div>
-      ))}
+        </tbody>
+      </table>
     </div>
   );
 }

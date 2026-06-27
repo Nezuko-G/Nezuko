@@ -43,7 +43,7 @@
     "detail": {
       "progress": "Progress",
       "overdueCount": "Overdue Tasks",
-      "hoursVariance": "Hours Variance",
+      "hours": "Hours",
       "completedOf": "{completed} of {total} tasks completed",
       "tasks": "Tasks",
       "noTasks": "No tasks in this project yet"
@@ -108,7 +108,8 @@
       "actualHours": "Actual Hours",
       "completedAt": "Completed At",
       "createdBy": "Created By",
-      "parentTask": "Parent Task"
+      "parentTask": "Parent Task",
+      "schedule": "Schedule"
     },
 
     "actions": {
@@ -127,6 +128,7 @@
     "form": {
       "createTitle": "Create New Task",
       "editTitle": "Edit Task",
+      "createSubTaskTitle": "New Sub-task",
       "titlePlaceholder": "e.g. Design login screen",
       "descriptionPlaceholder": "Task details…",
       "titleRequired": "Task title is required",
@@ -147,6 +149,7 @@
       "groupedByAssignee": "Grouped by Assignee",
       "noOverdue": "No overdue tasks",
       "taskCount": "{count} overdue task(s)"
-    }
+    },
+    "pagination": "Page {current} of {total}"
   }
 }

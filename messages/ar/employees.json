@@ -93,6 +93,7 @@
             "emergency": "جهة الاتصال للطوارئ",
             "documents": "الوثائق"
         },
+        "tasks": "المهام",
         "status": {
             "active": "نشط",
             "terminated": "منتهي"

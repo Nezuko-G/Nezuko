@@ -43,6 +43,7 @@ export interface Project {
   createdAt: string;
   updatedAt: string;
   tasks?: Task[];
+  _count?: { tasks: number };
 }
 
 export interface Task {
@@ -99,6 +100,7 @@ export type UpdateTaskPayload = Partial<CreateTaskPayload>
 
 export interface UpdateTaskStatusPayload {
   status: TaskStatus;
+  actualHours?: number;
 }
 
 export interface ProjectProgress {
@@ -106,6 +108,8 @@ export interface ProjectProgress {
   totalCount: number;
   completionPercentage: number;
   overdueCount: number;
+  estimatedHours: number;
+  actualHours: number;
   hoursVariance: number;
 }
 
@@ -114,11 +118,23 @@ export interface OverdueReportGroup {
   tasks: Task[];
 }
 
+export interface PaginationMeta {
+  total: number;
+  page: number;
+  limit: number;
+  totalPages: number;
+}
+
 export interface PaginatedResponse<T> {
   data: T[];
   total: number;
   page: number;
   pageSize: number;
+}
+
+export interface PaginatedTasksResponse {
+  tasks: Task[];
+  meta: PaginationMeta;
 }
 
 export interface ProjectFilters {

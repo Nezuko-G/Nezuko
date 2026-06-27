@@ -15,6 +15,7 @@ interface TaskRowProps {
   canManage: boolean;
   onEdit?: (task: Task) => void;
   onViewDetail?: (task: Task) => void;
+  onAddSubTask?: (task: Task) => void;
   depth?: number;
   disableStatusChange?: boolean;
 }
@@ -33,10 +34,11 @@ export function TaskRow({
   canManage,
   onEdit,
   onViewDetail,
+  onAddSubTask,
   depth = 0,
   disableStatusChange = false,
 }: TaskRowProps) {
-    const t = useTranslations("projects.tasks");
+  const t = useTranslations("projects.tasks");
   const [expanded, setExpanded] = useState(false);
   const [addingSubTask, setAddingSubTask] = useState(false);
   const [subTaskTitle, setSubTaskTitle] = useState("");
@@ -48,10 +50,16 @@ export function TaskRow({
     task.status !== TaskStatus.DONE &&
     new Date(task.dueDate) < new Date();
 
-  const hasOpenSubTasks = task.subTasks?.some((s) => s.status !== TaskStatus.DONE);
+  const hasOpenSubTasks = task.subTasks?.some(
+    (s) => s.status !== TaskStatus.DONE,
+  );
 
-  const { mutate: updateStatus, isPending: statusLoading } = useUpdateTaskStatus(task.id);
-  const { mutate: createSubTask, isPending: subTaskLoading } = useCreateSubTask(task.id, { parentDepth: depth });
+  const { mutate: updateStatus, isPending: statusLoading } =
+    useUpdateTaskStatus(task.id);
+  const { mutate: createSubTask, isPending: subTaskLoading } = useCreateSubTask(
+    task.id,
+    { parentDepth: depth },
+  );
 
   const handleStatusChange = (status: TaskStatus) => {
     if (status === TaskStatus.DONE && hasOpenSubTasks) return;
@@ -67,7 +75,7 @@ export function TaskRow({
           setSubTaskTitle("");
           setAddingSubTask(false);
         },
-      }
+      },
     );
   };
 
@@ -92,12 +100,14 @@ export function TaskRow({
         <div className="flex-1 min-w-0">
           <button
             onClick={() => onViewDetail?.(task)}
-            className="text-sm font-medium text-content-dark truncate hover:text-primary transition-colors text-left w-full"
+            className="text-sm font-medium text-content-dark truncate hover:text-primary transition-colors text-start w-full"
           >
             {task.title}
           </button>
           {task.assignee && (
-            <p className="text-xs text-content-muted truncate">{task.assignee.name}</p>
+            <p className="text-xs text-content-muted truncate">
+              {task.assignee.name}
+            </p>
           )}
         </div>
 
@@ -141,25 +151,24 @@ export function TaskRow({
           <TaskStatusBadge status={task.status} />
         )}
 
+        {/* Open sub-tasks warning */}
+        {/*{hasOpenSubTasks && task.status !== TaskStatus.DONE && (
+          <div className="ms-9 mb-1 flex items-center gap-1.5 text-xs text-amber-600 bg-amber-50 rounded-lg px-3 py-1.5">
+            <AlertCircle size={12} />
+            {t("warnings.openSubTasks")}
+          </div>
+        )}*/}
+
         {/* Manager edit */}
         {canManage && (
           <button
             onClick={() => onEdit?.(task)}
-            className="text-xs text-content-muted hover:text-primary transition-colors opacity-0 group-hover:opacity-100"
+            className="text-xs text-content-muted hover:text-primary transition-colors"
           >
             {t("actions.edit")}
           </button>
         )}
       </div>
-
-      {/* Open sub-tasks warning */}
-      {hasOpenSubTasks &&
-        task.status !== TaskStatus.DONE && (
-          <div className="ms-9 mb-1 flex items-center gap-1.5 text-xs text-amber-600 bg-amber-50 rounded-lg px-3 py-1.5">
-            <AlertCircle size={12} />
-            {t("warnings.openSubTasks")}
-          </div>
-        )}
 
       {/* Sub-tasks */}
       {expanded && hasSubTasks && (
@@ -182,7 +191,15 @@ export function TaskRow({
       {/* Add sub-task (Manager only, no nesting below depth 0) */}
       {canManage && depth === 0 && (
         <div className="ms-9 mb-2">
-          {addingSubTask ? (
+          {onAddSubTask ? (
+            <button
+              onClick={() => onAddSubTask(task)}
+              className="flex items-center gap-1 text-xs text-content-muted hover:text-primary transition-colors"
+            >
+              <Plus size={12} />
+              {t("addSubTask")}
+            </button>
+          ) : addingSubTask ? (
             <div className="flex items-center gap-2">
               <input
                 autoFocus
