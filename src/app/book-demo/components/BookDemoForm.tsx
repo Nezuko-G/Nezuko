@@ -1,13 +1,11 @@
 "use client";
 
-import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { BookDemoPayload, EMPLOYEE_RANGE_MAP, INTEREST_MAP, InterestKey } from "../types/book-demo.types";
+import { InterestKey } from "../types/book-demo.types";
 import { CheckCircle } from "lucide-react";
-
-const BOOK_DEMO_URL = "http://localhost:5000/api/v1/booking-demo-request";
+import { useBookDemoForm } from "../hooks/useBookDemoForm";
 
 export default function BookDemoForm() {
     const t = useTranslations("bookDemo");
@@ -26,78 +24,27 @@ export default function BookDemoForm() {
         { key: "spend", label: t("form.interests.spend") },
     ];
 
-    const [fullName, setFullName] = useState("");
-    const [email, setEmail] = useState("");
-    const [companyName, setCompanyName] = useState("");
-    const [jobTitle, setJobTitle] = useState("");
-    const [phone, setPhone] = useState("");
-    const [selectedRange, setSelectedRange] = useState<string | null>(null);
-    const [selectedInterests, setSelectedInterests] = useState<Set<InterestKey | "all">>(new Set());
-    const [isLoading, setIsLoading] = useState(false);
-    const [error, setError] = useState<string | null>(null);
-    const [success, setSuccess] = useState(false);
-
-    const toggleInterest = (key: InterestKey | "all") => {
-        setSelectedInterests((prev) => {
-            const next = new Set(prev);
-            if (key === "all") {
-                next.has("all") ? next.clear() : (next.clear(), next.add("all"));
-            } else {
-                next.delete("all");
-                next.has(key) ? next.delete(key) : next.add(key);
-            }
-            return next;
-        });
-    };
-
-    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-        setError(null);
-
-        if (!fullName.trim() || !email.trim() || !companyName.trim()) {
-            setError(t("form.validation.requiredFields"));
-            return;
-        }
-
-        const interests: string[] = selectedInterests.has("all")
-            ? Object.values(INTEREST_MAP)
-            : [...selectedInterests]
-                .filter((k): k is InterestKey => k !== "all")
-                .map((k) => INTEREST_MAP[k]);
-
-        const payload: BookDemoPayload = {
-            fullName: fullName.trim(),
-            email: email.trim(),
-            companyName: companyName.trim(),
-            jobTitle: jobTitle.trim(),
-            phone: phone.trim(),
-            interests,
-        };
-
-        if (selectedRange) {
-            payload.employeeCount = EMPLOYEE_RANGE_MAP[selectedRange];
-        }
-
-        setIsLoading(true);
-        try {
-            const res = await fetch(BOOK_DEMO_URL, {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(payload),
-            });
-
-            if (!res.ok) {
-                const data = await res.json().catch(() => ({})) as { message?: string };
-                throw new Error(data.message ?? t("form.validation.bookingError"));
-            }
-
-            setSuccess(true);
-        } catch (err) {
-            setError(err instanceof Error ? err.message : t("form.validation.bookingError"));
-        } finally {
-            setIsLoading(false);
-        }
-    };
+    const {
+        fullName,
+        setFullName,
+        email,
+        setEmail,
+        companyName,
+        setCompanyName,
+        jobTitle,
+        setJobTitle,
+        phone,
+        setPhone,
+        selectedRange,
+        setSelectedRange,
+        selectedInterests,
+        toggleInterest,
+        isLoading,
+        error,
+        success,
+        setSuccess,
+        handleSubmit,
+    } = useBookDemoForm();
 
     return (
         <>
@@ -175,7 +122,10 @@ export default function BookDemoForm() {
                             <h2 className="text-gray-900 text-lg sm:text-xl font-bold">{t("form.title")}</h2>
                             <p className="text-gray-500 text-xs sm:text-sm mt-1">
                                 {t("form.careersPrompt")}{" "}
-                                <a href="#" className="underline hover:text-primary transition-colors">
+                                <a href="https://nezuko-portal.vercel.app"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="underline hover:text-primary transition-colors">
                                     {t("form.careersLink")}
                                 </a>{" "}
                                 {t("form.careersInstead")}
@@ -195,17 +145,13 @@ export default function BookDemoForm() {
                             <Input placeholder={t("form.fields.jobTitle")} value={jobTitle} onChange={(e) => setJobTitle(e.target.value)} className="bg-gray-50 border-gray-200 text-gray-900 placeholder:text-gray-400 focus-visible:ring-primary/60" />
                         </div>
 
-                        <div className="flex items-center gap-2 bg-gray-50 border border-gray-200 rounded-full px-4 h-14">
-                            <span className="text-gray-500 text-sm shrink-0">🇸🇦 +966</span>
-                            <span className="w-px h-5 bg-gray-200 shrink-0" />
-                            <input
-                                type="tel"
-                                placeholder={t("form.fields.phone")}
-                                value={phone}
-                                onChange={(e) => setPhone(e.target.value)}
-                                className="flex-1 min-w-0 bg-transparent text-gray-900 placeholder-gray-400 text-sm focus:outline-none"
-                            />
-                        </div>
+                        <Input
+                            type="tel"
+                            placeholder={t("form.fields.phone")}
+                            value={phone}
+                            onChange={(e) => setPhone(e.target.value)}
+                            className="bg-gray-50 border-gray-200 text-gray-900 placeholder:text-gray-400 focus-visible:ring-primary/60"
+                        />
 
                         <div className="space-y-2">
                             <label className="text-gray-600 text-sm font-medium">{t("form.employees.label")}</label>
@@ -216,8 +162,8 @@ export default function BookDemoForm() {
                                         key={value}
                                         onClick={() => setSelectedRange(value)}
                                         className={`px-3 sm:px-4 py-2 rounded-full text-xs sm:text-sm font-semibold border transition-all ${selectedRange === value
-                                                ? "bg-primary text-secondary border-primary"
-                                                : "border-gray-200 text-gray-600 hover:border-primary/50 bg-gray-50"
+                                            ? "bg-primary text-secondary border-primary"
+                                            : "border-gray-200 text-gray-600 hover:border-primary/50 bg-gray-50"
                                             }`}
                                     >
                                         {label}
@@ -234,8 +180,8 @@ export default function BookDemoForm() {
                                         <div
                                             onClick={() => toggleInterest(key)}
                                             className={`w-4 h-4 rounded border flex items-center justify-center shrink-0 transition-all ${selectedInterests.has(key)
-                                                    ? "bg-primary border-primary"
-                                                    : "border-gray-300 group-hover:border-primary/50"
+                                                ? "bg-primary border-primary"
+                                                : "border-gray-300 group-hover:border-primary/50"
                                                 }`}
                                         >
                                             {selectedInterests.has(key) && (
