@@ -32,7 +32,7 @@ export const apis = {
 
   daily: "/api/daily",
 
-  book_demo: "/book-demo",
+  book_demo: "/booking-demo-request",
 
   assets: {
     base: "/asset",
