@@ -7,16 +7,18 @@ import { useProjects, useCreateProject, useUpdateProject, useCancelProject } fro
 import { ProjectCard } from "./_components/ProjectCard";
 import { ProjectForm } from "./_components/ProjectForm";
 import { CancelProjectDialog } from "./_components/CancelProjectDialog";
+import { TaskForm } from "./_components/TaskForm";
+import { useCreateTask } from "./_hooks/useTasks";
 import { ProjectListLoader } from "./loaders/index";
 import type { Project, ProjectFilters } from "./types/project.types";
 import { ProjectStatus } from "./types/project.types";
+import { useAuthStore } from "@/hooks/useAuthStore";
 
-interface ProjectsPageProps {
-    currentUserId: string;
-    canManage: boolean;
-}
+const MANAGE_ROLES = ["HR_ADMIN", "MANAGER", "TENANT_OWNER"] as const;
 
-export default function ProjectsPage({ currentUserId, canManage }: ProjectsPageProps) {
+export default function ProjectsPage() {
+    const { role } = useAuthStore();
+    const canManage = MANAGE_ROLES.includes(role as typeof MANAGE_ROLES[number]);
     const t = useTranslations("projects");
 
     const [filters, setFilters] = useState<ProjectFilters>({});
@@ -24,6 +26,10 @@ export default function ProjectsPage({ currentUserId, canManage }: ProjectsPageP
 
     // Create / Edit dialog state
     const [formOpen, setFormOpen] = useState(false);
+
+    // Standalone task creation state
+    const [taskFormOpen, setTaskFormOpen] = useState(false);
+    const { mutate: standaloneCreateTask, isPending: standaloneTaskLoading, error: standaloneTaskError } = useCreateTask();
     const [editingProject, setEditingProject] = useState<Project | undefined>();
 
     // Cancel dialog state
@@ -77,13 +83,22 @@ export default function ProjectsPage({ currentUserId, canManage }: ProjectsPageP
             <div className="flex items-center justify-between">
                 <h1 className="text-2xl font-black text-secondary">{t("title")}</h1>
                 {canManage && (
-                    <button
-                        onClick={() => setFormOpen(true)}
-                        className="flex items-center gap-2 px-4 py-2 rounded-xl bg-primary hover:bg-primary-hover text-secondary text-sm font-semibold transition-colors"
-                    >
-                        <Plus size={16} />
-                        {t("newProject")}
-                    </button>
+                    <div className="flex items-center gap-2">
+                        <button
+                            onClick={() => setTaskFormOpen(true)}
+                            className="flex items-center gap-2 px-4 py-2 rounded-xl border border-gray-200 hover:bg-gray-50 text-sm font-medium transition-colors"
+                        >
+                            <Plus size={16} />
+                            {t("tasks.newTask")}
+                        </button>
+                        <button
+                            onClick={() => setFormOpen(true)}
+                            className="flex items-center gap-2 px-4 py-2 rounded-xl bg-primary hover:bg-primary-hover text-secondary text-sm font-semibold transition-colors"
+                        >
+                            <Plus size={16} />
+                            {t("newProject")}
+                        </button>
+                    </div>
                 )}
             </div>
 
@@ -167,6 +182,18 @@ export default function ProjectsPage({ currentUserId, canManage }: ProjectsPageP
                 loading={cancelling}
                 onConfirm={handleConfirmCancel}
                 onClose={() => setCancelTarget(null)}
+            />
+
+            {/* Standalone Task Form */}
+            <TaskForm
+                open={taskFormOpen}
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                error={(standaloneTaskError as any)?.message ?? null}
+                loading={standaloneTaskLoading}
+                onSubmit={(payload) =>
+                    standaloneCreateTask(payload, { onSuccess: () => setTaskFormOpen(false) })
+                }
+                onClose={() => setTaskFormOpen(false)}
             />
         </div>
     );

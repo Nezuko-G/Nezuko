@@ -18,6 +18,8 @@ export { CancelProjectDialog } from "./_components/CancelProjectDialog";
 export { TaskRow } from "./_components/TaskRow";
 export { ProjectStatusBadge, TaskStatusBadge, PriorityBadge } from "./_components/Badges";
 export { MyTasksPage, OverdueReportPage } from "./_components/TasksPages";
+export { TaskForm } from "./_components/TaskForm";
+export { TaskDetailPopover } from "./_components/TaskDetailPopover";
 
 // Pages
 export { default as ProjectsPage } from "./page";

@@ -15,6 +15,7 @@ import type {
     UpdateProjectPayload,
     ProjectFilters,
     PaginatedResponse,
+    PaginatedTasksResponse,
 } from "../types/project.types";
 import { ProjectStatus } from "../types/project.types";
 
@@ -68,11 +69,14 @@ export function useProjectProgress(
 
 export function useProjectTasks(
     projectId: string,
-    options?: UseQueryOptions<Task[]>
+    page = 1,
+    limit = 10,
+    search?: string,
+    options?: UseQueryOptions<PaginatedTasksResponse>
 ) {
     return useQuery({
-        queryKey: projectKeys.tasks(projectId),
-        queryFn: () => projectsApi.listTasks(projectId),
+        queryKey: [...projectKeys.tasks(projectId), page, search],
+        queryFn: () => projectsApi.listTasks(projectId, page, limit, search),
         enabled: !!projectId,
         ...options,
     });

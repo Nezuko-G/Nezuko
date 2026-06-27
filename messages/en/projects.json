@@ -43,7 +43,7 @@
     "detail": {
       "progress": "Progress",
       "overdueCount": "Overdue Tasks",
-      "hoursVariance": "Hours Variance",
+      "hours": "Hours",
       "completedOf": "{completed} of {total} tasks completed",
       "tasks": "Tasks",
       "noTasks": "No tasks in this project yet"
@@ -57,7 +57,8 @@
       "startDateLabel": "Start Date",
       "dueDateLabel": "Due Date",
       "dueDateAfterStart": "Due date must be after start date",
-      "nameRequired": "Project name is required"
+      "nameRequired": "Project name is required",
+      "ownerRequired": "Project owner is required"
     },
 
     "errors": {
@@ -91,6 +92,10 @@
       "URGENT": "Urgent"
     },
 
+    "detail": {
+      "title": "Task Details"
+    },
+
     "fields": {
       "title": "Title",
       "description": "Description",
@@ -100,7 +105,11 @@
       "project": "Project",
       "dueDate": "Due Date",
       "estimatedHours": "Estimated Hours",
-      "actualHours": "Actual Hours"
+      "actualHours": "Actual Hours",
+      "completedAt": "Completed At",
+      "createdBy": "Created By",
+      "parentTask": "Parent Task",
+      "schedule": "Schedule"
     },
 
     "actions": {
@@ -119,11 +128,14 @@
     "form": {
       "createTitle": "Create New Task",
       "editTitle": "Edit Task",
+      "createSubTaskTitle": "New Sub-task",
       "titlePlaceholder": "e.g. Design login screen",
       "descriptionPlaceholder": "Task details…",
       "titleRequired": "Task title is required",
       "standaloneOrProject": "Link to project (optional)"
     },
+
+    "loading": "Loading…",
 
     "errors": {
       "loadFailed": "Failed to load tasks",
@@ -137,6 +149,7 @@
       "groupedByAssignee": "Grouped by Assignee",
       "noOverdue": "No overdue tasks",
       "taskCount": "{count} overdue task(s)"
-    }
+    },
+    "pagination": "Page {current} of {total}"
   }
 }

@@ -9,13 +9,15 @@ const roleRouteMap: Record<string, string[]> = {
   '/insurance': ['HR_ADMIN', 'MANAGER', 'TENANT_OWNER'],
   '/projects': ['HR_ADMIN', 'MANAGER', 'TENANT_OWNER'],
   '/reports': ['HR_ADMIN', 'MANAGER', 'TENANT_OWNER'],
+  '/tasks/me': ['EMPLOYEE', 'HR_ADMIN'],
+  '/tasks/report/overdue': ['HR_ADMIN', 'MANAGER', 'TENANT_OWNER'],
 };
 
 const protectedPaths = [
   '/dashboard', '/profile', '/employees', '/departments',
   '/asset', '/attendance', '/insurance', '/jobs',
   '/leave', '/timesheets', '/projects', '/reports',
-  '/company', '/chatbot',
+  '/company', '/chatbot', '/tasks',
 ];
 
 export function AuthGuard({ children }: { children: React.ReactNode }) {
@@ -44,12 +46,14 @@ export function AuthGuard({ children }: { children: React.ReactNode }) {
       return;
     }
 
-    const matchedPrefix = protectedPaths.find(
-      (p) => pathname === p || pathname.startsWith(p + "/"),
-    );
+    const matchedRoute = roleRouteMap[pathname]
+      ? pathname
+      : protectedPaths.find(
+          (p) => pathname === p || pathname.startsWith(p + "/"),
+        );
 
-    if (matchedPrefix && roleRouteMap[matchedPrefix]) {
-      if (!roleRouteMap[matchedPrefix].includes(role)) {
+    if (matchedRoute && roleRouteMap[matchedRoute]) {
+      if (!roleRouteMap[matchedRoute].includes(role)) {
         router.replace("/unauthorized");
         return;
       }
@@ -67,10 +71,12 @@ export function AuthGuard({ children }: { children: React.ReactNode }) {
   if (!isAuth) return null;
   if (role === "EMPLOYEE" && pathname === "/dashboard") return null;
 
-  const matchedPrefix = protectedPaths.find(
-    (p) => pathname === p || pathname.startsWith(p + "/"),
-  );
-  if (matchedPrefix && roleRouteMap[matchedPrefix] && !roleRouteMap[matchedPrefix].includes(role)) return null;
+  const matchedRoute = roleRouteMap[pathname]
+    ? pathname
+    : protectedPaths.find(
+        (p) => pathname === p || pathname.startsWith(p + "/"),
+      );
+  if (matchedRoute && roleRouteMap[matchedRoute] && !roleRouteMap[matchedRoute].includes(role)) return null;
 
   return <>{children}</>;
 }

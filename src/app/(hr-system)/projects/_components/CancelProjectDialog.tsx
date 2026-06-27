@@ -2,6 +2,7 @@
 
 import { useTranslations } from "next-intl";
 import { AlertTriangle, Loader2 } from "lucide-react";
+import { useRouter } from "@/i18n/navigation";
 
 interface CancelProjectDialogProps {
     projectName: string;
@@ -19,6 +20,8 @@ export function CancelProjectDialog({
     onClose,
 }: CancelProjectDialogProps) {
     const t = useTranslations("projects.cancelDialog");
+
+    const router =useRouter()
 
     if (!open) return null;
 
@@ -56,7 +59,7 @@ export function CancelProjectDialog({
                         {t("abort")}
                     </button>
                     <button
-                        onClick={onConfirm}
+                        onClick={()=>{  onConfirm();router.back()} }
                         disabled={loading}
                         className="px-4 py-2 rounded-xl text-sm font-semibold text-white bg-status-error hover:bg-red-600 transition-colors disabled:opacity-50 flex items-center gap-2"
                     >

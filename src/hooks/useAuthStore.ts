@@ -4,6 +4,7 @@ import { readAvatarFromStorage, writeAvatarToStorage, removeAvatarFromStorage } 
 export type UserRole = "HR_ADMIN" | "MANAGER" | "EMPLOYEE" | "TENANT_OWNER";
 
 interface AuthState {
+  id: string | null;
   role: UserRole;
   isHydrated: boolean;
   avatarBase64: string | null;
@@ -12,7 +13,7 @@ interface AuthState {
   lastName: string | null;
   setRole: (role: UserRole) => void;
   setAvatarBase64: (base64: string) => void;
-  setUserData: (data: { firstName: string; lastName: string; avatarBase64?: string }) => void;
+  setUserData: (data: { id?: string; firstName: string; lastName: string; avatarBase64?: string }) => void;
   clearAvatar: () => void;
   clearAuth: () => void;
 }
@@ -21,6 +22,7 @@ const ALL_ROLES: UserRole[] = ["HR_ADMIN", "MANAGER", "EMPLOYEE", "TENANT_OWNER"
 
 interface StoredAuth {
   isAuthenticated?: boolean;
+  id?: string | null;
   role?: UserRole;
   firstName?: string | null;
   lastName?: string | null;
@@ -41,6 +43,7 @@ const stored = getInitialAuth();
 const avatar = readAvatarFromStorage();
 
 export const useAuthStore = create<AuthState>((set) => ({
+  id: stored.id ?? null,
   role: (stored.role && ALL_ROLES.includes(stored.role) ? stored.role : "EMPLOYEE") as UserRole,
   isHydrated: typeof window !== "undefined",
   avatarBase64: avatar.base64,
@@ -65,11 +68,13 @@ export const useAuthStore = create<AuthState>((set) => ({
 
   setUserData: (data) => {
     const next: Partial<AuthState> = {
+      id: data.id ?? null,
       firstName: data.firstName,
       lastName: data.lastName,
     };
     const raw = localStorage.getItem("auth");
     const auth = raw ? JSON.parse(raw) : {};
+    auth.id = data.id ?? null;
     auth.firstName = data.firstName;
     auth.lastName = data.lastName;
     set(next as AuthState);
@@ -87,7 +92,7 @@ export const useAuthStore = create<AuthState>((set) => ({
   },
 
   clearAuth: () => {
-    set({ role: "EMPLOYEE" as UserRole, avatarBase64: null, avatarUpdatedAt: null, firstName: null, lastName: null });
+    set({ id: null, role: "EMPLOYEE" as UserRole, avatarBase64: null, avatarUpdatedAt: null, firstName: null, lastName: null });
     localStorage.removeItem("auth");
     removeAvatarFromStorage();
   },
