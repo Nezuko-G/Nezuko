@@ -9,7 +9,7 @@ const roleRouteMap: Record<string, string[]> = {
   '/insurance': ['HR_ADMIN', 'MANAGER', 'TENANT_OWNER'],
   '/projects': ['HR_ADMIN', 'MANAGER', 'TENANT_OWNER'],
   '/reports': ['HR_ADMIN', 'MANAGER', 'TENANT_OWNER'],
-  '/tasks/me': ['EMPLOYEE'],
+  '/tasks/me': ['EMPLOYEE', 'HR_ADMIN'],
   '/tasks/report/overdue': ['HR_ADMIN', 'MANAGER', 'TENANT_OWNER'],
 };
 

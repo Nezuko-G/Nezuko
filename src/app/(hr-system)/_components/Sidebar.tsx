@@ -38,7 +38,7 @@ export default function Sidebar() {
     { icon: Package,      label: t("assets"),       href: "/asset",             allowedRoles: ["HR_ADMIN", "MANAGER", "TENANT_OWNER"] },
     { icon: ShieldAlert,  label: t("insurance"),    href: "/insurance",         allowedRoles: ["HR_ADMIN", "MANAGER", "TENANT_OWNER"] },
     { icon: Folder,       label: t("projects"),     href: "/projects",          allowedRoles: ["HR_ADMIN", "MANAGER", "TENANT_OWNER"] },
-    { icon: CheckSquare,  label: t("myTasks"),      href: "/tasks/me",          allowedRoles: ["EMPLOYEE"] },
+    { icon: CheckSquare,  label: t("myTasks"),      href: "/tasks/me",          allowedRoles: ["HR_ADMIN","EMPLOYEE"] },
     { icon: AlertTriangle,label: t("overdueReport"),href: "/tasks/report/overdue",allowedRoles: ["HR_ADMIN", "MANAGER", "TENANT_OWNER"] },
     { icon: Clock,        label: t("attendance"),   href: "/attendance",        allowedRoles: ["EMPLOYEE"] },
     { icon: FileText,     label: t("timesheets"),   href: "/timesheets" ,       allowedRoles: ["HR_ADMIN", "MANAGER", "TENANT_OWNER"] },
