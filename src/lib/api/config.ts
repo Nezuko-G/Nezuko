@@ -123,7 +123,13 @@ export const apis = {
     byId: (id: string) => `/project/tasks/${id}`,
     myTasks: "/project/tasks/me",
     byUser: (userId: string) => `/project/tasks?assigneeId=${userId}`,
-    overdueReport: "/project/tasks/report/overdue",
+    overdueReport: "/project/tasks/overdue-report",
     subtasks: (parentId: string) => `/project/tasks/subtasks/${parentId}`,
+  },
+  notifications: {
+    base: "/notifications",
+    unreadCount: "/notifications/unread-count",
+    markAllSeen: "/notifications/mark-all-seen",
+    markSeen: (id: string) => `/notifications/${id}/seen`,
   },
 };

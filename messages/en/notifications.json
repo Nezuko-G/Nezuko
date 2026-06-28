@@ -1,0 +1,32 @@
+{
+  "page": {
+    "title": "Notifications",
+    "markAllSeen": "Mark All as Seen"
+  },
+  "filters": {
+    "all": "All",
+    "read": "Read",
+    "unread": "Unread"
+  },
+  "table": {
+    "message": "Message",
+    "type": "Type",
+    "priority": "Priority",
+    "status": "Status",
+    "date": "Date",
+    "actions": "Actions"
+  },
+  "status": {
+    "read": "Read",
+    "unread": "Unread"
+  },
+  "markSeen": "Mark as Seen",
+  "pagination": "Page {current} of {total}",
+  "loading": "Loading",
+  "empty": "No notifications found",
+  "errors": {
+    "fetch": "Failed to load notifications",
+    "markSeen": "Failed to mark notification as seen",
+    "markAllSeen": "Failed to mark all as seen"
+  }
+}
