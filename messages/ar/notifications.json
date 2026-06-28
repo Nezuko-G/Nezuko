@@ -1,0 +1,32 @@
+{
+  "page": {
+    "title": "الإشعارات",
+    "markAllSeen": "تحديد الكل كمقروء"
+  },
+  "filters": {
+    "all": "الكل",
+    "read": "مقروء",
+    "unread": "غير مقروء"
+  },
+  "table": {
+    "message": "الرسالة",
+    "type": "النوع",
+    "priority": "الأولوية",
+    "status": "الحالة",
+    "date": "التاريخ",
+    "actions": "الإجراءات"
+  },
+  "status": {
+    "read": "مقروء",
+    "unread": "غير مقروء"
+  },
+  "markSeen": "تحديد كمقروء",
+  "pagination": "صفحة {current} من {total}",
+  "loading": "جارٍ التحميل",
+  "empty": "لا توجد إشعارات",
+  "errors": {
+    "fetch": "فشل تحميل الإشعارات",
+    "markSeen": "فشل تحديد الإشعار كمقروء",
+    "markAllSeen": "فشل تحديد الكل كمقروء"
+  }
+}

@@ -1,0 +1,672 @@
+{
+  "apidogProject": "1.0.0",
+  "$schema": {
+    "app": "apidog",
+    "type": "project",
+    "version": "1.2.0"
+  },
+  "info": {
+    "name": "Nezuko-Api",
+    "description": "",
+    "mockRule": {
+      "rules": [],
+      "enableSystemRule": true
+    }
+  },
+  "projectSetting": {
+    "id": "1256077",
+    "auth": {},
+    "securityScheme": {},
+    "gateway": [],
+    "language": "en-US",
+    "apiStatuses": [
+      "developing",
+      "testing",
+      "released",
+      "deprecated"
+    ],
+    "mockSettings": {},
+    "preProcessors": [],
+    "postProcessors": [],
+    "advancedSettings": {
+      "enableJsonc": false,
+      "enableBigint": false,
+      "responseValidate": true,
+      "enableTestScenarioSetting": false,
+      "enableYAPICompatScript": false,
+      "isDefaultUrlEncoding": 3,
+      "publishedDocUrlRules": {
+        "defaultRule": "SLUGIFY_WITH_RESOURCE_KEY",
+        "resourceKeyStandard": "NEW"
+      }
+    },
+    "initialDisabledMockIds": [],
+    "servers": [
+      {
+        "id": "default",
+        "name": "Default Server",
+        "moduleId": 1202799
+      }
+    ],
+    "cloudMock": {
+      "enable": false,
+      "security": "free",
+      "tokenKey": "apidogToken",
+      "isCreatedAutomaticallyByDefaultConfigFromAdmin": true
+    }
+  },
+  "apiCollection": [
+    {
+      "name": "Root",
+      "id": 7884801,
+      "auth": {
+        "type": "securityscheme"
+      },
+      "securityScheme": {
+        "schemeGroups": [
+          {
+            "id": "r2qW9gqDikeb3s6kR3_I4",
+            "schemeIds": [
+              519922
+            ]
+          }
+        ],
+        "required": true,
+        "use": {
+          "id": "r2qW9gqDikeb3s6kR3_I4",
+          "configs": {
+            "519922": {
+              "authConfigs": {
+                "x-apidog": {
+                  "token": "jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJhYWFhYWFhYS1hYWFhLWFhYWEtYWFhYS1hYWFhYWFhYWFhYWEiLCJyb2xlIjoiSFJfQURNSU4iLCJ0eXBlIjoidXNlciIsInRlbmFudElkIjoiMTExMTExMTEtMTExMS0xMTExLTExMTEtMTExMTExMTExMTExIiwiaWF0IjoxNzc4NTE4NjI5LCJleHAiOjE3NzkxMjM0Mjl9.PKG0TLxzKbnpuK9uPIV790-CZeQyCnqOShTZQpf512c"
+                }
+              }
+            }
+          }
+        },
+        "scopes": {
+          "r2qW9gqDikeb3s6kR3_I4": {
+            "519922": []
+          }
+        }
+      },
+      "parentId": 0,
+      "serverId": "",
+      "description": "",
+      "identityPattern": {
+        "httpApi": {
+          "type": "methodAndPath",
+          "bodyType": ""
+        }
+      },
+      "shareSettings": {},
+      "visibility": "SHARED",
+      "moduleId": 1202799,
+      "preProcessors": [
+        {
+          "id": "inheritProcessors",
+          "type": "inheritProcessors",
+          "data": {}
+        }
+      ],
+      "postProcessors": [
+        {
+          "id": "inheritProcessors",
+          "type": "inheritProcessors",
+          "data": {}
+        }
+      ],
+      "inheritPostProcessors": {},
+      "inheritPreProcessors": {},
+      "items": [
+        {
+          "name": "Notfications",
+          "id": 9265980,
+          "auth": {},
+          "securityScheme": {},
+          "parentId": 0,
+          "serverId": "",
+          "description": "",
+          "identityPattern": {
+            "httpApi": {
+              "type": "inherit",
+              "bodyType": "",
+              "fields": []
+            }
+          },
+          "shareSettings": {},
+          "visibility": "INHERITED",
+          "moduleId": 1202799,
+          "preProcessors": [
+            {
+              "id": "inheritProcessors",
+              "type": "inheritProcessors",
+              "data": {}
+            }
+          ],
+          "postProcessors": [
+            {
+              "id": "inheritProcessors",
+              "type": "inheritProcessors",
+              "data": {}
+            }
+          ],
+          "inheritPostProcessors": {},
+          "inheritPreProcessors": {},
+          "items": [
+            {
+              "name": "Get All Notfications",
+              "api": {
+                "id": "38714876",
+                "method": "get",
+                "path": "http://localhost:5000/api/v1/notifications",
+                "parameters": {},
+                "auth": {},
+                "securityScheme": {},
+                "commonParameters": {
+                  "query": [],
+                  "body": [],
+                  "cookie": [],
+                  "header": []
+                },
+                "responses": [
+                  {
+                    "id": "175785148",
+                    "code": 200,
+                    "name": "Success",
+                    "headers": [],
+                    "jsonSchema": {
+                      "type": "object",
+                      "properties": {}
+                    },
+                    "itemSchema": {},
+                    "description": "",
+                    "contentType": "json",
+                    "mediaType": ""
+                  }
+                ],
+                "responseExamples": [],
+                "requestBody": {
+                  "type": "none",
+                  "parameters": [],
+                  "required": true,
+                  "mediaType": "",
+                  "examples": [],
+                  "oasExtensions": ""
+                },
+                "description": "",
+                "tags": [],
+                "status": "developing",
+                "serverId": "",
+                "operationId": "",
+                "sourceUrl": "",
+                "ordering": 10,
+                "cases": [
+                  {
+                    "id": 52184320,
+                    "type": "DEBUG_CASE",
+                    "path": null,
+                    "name": "have data",
+                    "responseId": "175785148",
+                    "parameters": {},
+                    "commonParameters": {
+                      "query": [],
+                      "body": [],
+                      "header": [],
+                      "cookie": []
+                    },
+                    "requestBody": {
+                      "parameters": [],
+                      "data": "",
+                      "type": "none"
+                    },
+                    "auth": {},
+                    "securityScheme": {},
+                    "advancedSettings": {
+                      "disabledSystemHeaders": {},
+                      "isDefaultUrlEncoding": 3,
+                      "disableUrlEncoding": false
+                    },
+                    "requestResult": "{\"id\":\"temp.cc3859d5-f149-4be6-9f60-10ba28424577\",\"cursor\":{\"position\":0,\"iteration\":0,\"length\":1,\"cycles\":1,\"empty\":false,\"eof\":false,\"bof\":true,\"cr\":false,\"ref\":\"cc3859d5-f149-4be6-9f60-10ba28424577\",\"requestIndex\":0,\"httpRequestId\":\"c5f3246e-ef0a-47b7-a4e1-a291916cd223\"},\"type\":\"http\",\"response\":{\"id\":\"051ed530-ee65-4821-b3b0-6005a05fdf40\",\"status\":\"OK\",\"code\":200,\"header\":[{\"key\":\"Content-Security-Policy\",\"value\":\"default-src 'self';style-src 'self' 'unsafe-inline';script-src 'self';img-src 'self' data: https:;base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';object-src 'none';script-src-attr 'none';upgrade-insecure-requests\"},{\"key\":\"Cross-Origin-Opener-Policy\",\"value\":\"same-origin\"},{\"key\":\"Cross-Origin-Resource-Policy\",\"value\":\"same-origin\"},{\"key\":\"Origin-Agent-Cluster\",\"value\":\"?1\"},{\"key\":\"Referrer-Policy\",\"value\":\"no-referrer\"},{\"key\":\"Strict-Transport-Security\",\"value\":\"max-age=31536000; includeSubDomains; preload\"},{\"key\":\"X-Content-Type-Options\",\"value\":\"nosniff\"},{\"key\":\"X-DNS-Prefetch-Control\",\"value\":\"off\"},{\"key\":\"X-Download-Options\",\"value\":\"noopen\"},{\"key\":\"X-Frame-Options\",\"value\":\"DENY\"},{\"key\":\"X-Permitted-Cross-Domain-Policies\",\"value\":\"none\"},{\"key\":\"X-XSS-Protection\",\"value\":\"1; mode=block\"},{\"key\":\"Vary\",\"value\":\"Origin, Accept-Encoding\"},{\"key\":\"Access-Control-Allow-Credentials\",\"value\":\"true\"},{\"key\":\"Content-Type\",\"value\":\"application/json; charset=utf-8\"},{\"key\":\"ETag\",\"value\":\"W/\\\"729-uy2BrGqSpXzTg8vky1yDqGSUr50\\\"\"},{\"key\":\"Content-Encoding\",\"value\":\"br\"},{\"key\":\"Date\",\"value\":\"Sun, 28 Jun 2026 19:57:15 GMT\"},{\"key\":\"Connection\",\"value\":\"keep-alive\"},{\"key\":\"Keep-Alive\",\"value\":\"timeout=5\"},{\"key\":\"Transfer-Encoding\",\"value\":\"chunked\"}],\"trailer\":[],\"stream\":{\"type\":\"Buffer\",\"data\":[123,34,115,116,97,116,117,115,34,58,34,115,117,99,99,101,115,115,34,44,34,100,97,116,97,34,58,123,34,110,111,116,105,102,105,99,97,116,105,111,110,115,34,58,91,123,34,105,100,34,58,34,100,98,97,53,102,102,52,55,45,50,54,48,50,45,52,54,50,56,45,57,57,57,102,45,97,101,49,56,101,56,53,99,50,55,99,52,34,44,34,116,101,110,97,110,116,73,100,34,58,34,98,98,98,98,98,98,98,98,45,48,48,48,48,45,48,48,48,48,45,48,48,48,48,45,48,48,48,48,48,48,48,48,48,48,48,49,34,44,34,117,115,101,114,73,100,34,58,34,117,115,101,114,48,48,48,49,45,48,48,48,48,45,48,48,48,48,45,48,48,48,48,45,48,48,48,48,48,48,48,48,48,48,48,49,34,44,34,115,117,112,101,114,65,100,109,105,110,73,100,34,58,110,117,108,108,44,34,116,105,116,108,101,34,58,34,84,97,115,107,32,68,117,101,32,84,111,109,111,114,114,111,119,34,44,34,109,101,115,115,97,103,101,34,58,34,84,104,101,32,116,97,115,107,32,92,34,115,115,115,115,115,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,92,34,32,105,115,32,100,117,101,32,116,111,109,111,114,114,111,119,34,44,34,116,121,112,101,34,58,34,84,65,83,75,34,44,34,112,114,105,111,114,105,116,121,34,58,34,72,73,71,72,34,44,34,105,115,83,101,101,110,34,58,102,97,108,115,101,44,34,115,101,101,110,65,116,34,58,110,117,108,108,44,34,97,99,116,105,111,110,85,114,108,34,58,110,117,108,108,44,34,109,101,116,97,100,97,116,97,34,58,123,34,116,97,115,107,73,100,34,58,34,53,48,98,100,49,98,102,56,45,54,99,48,100,45,52,49,56,102,45,57,49,52,57,45,56,57,52,97,98,97,48,57,49,97,49,99,34,44,34,100,101,97,100,108,105,110,101,84,121,112,101,34,58,34,68,85,69,95,84,79,77,79,82,82,79,87,34,125,44,34,100,101,108,101,116,101,100,65,116,34,58,110,117,108,108,44,34,99,114,101,97,116,101,100,65,116,34,58,34,50,48,50,54,45,48,54,45,50,56,84,49,57,58,53,55,58,49,48,46,54,54,52,90,34,44,34,117,112,100,97,116,101,100,65,116,34,58,34,50,48,50,54,45,48,54,45,50,56,84,49,57,58,53,55,58,49,48,46,54,54,52,90,34,44,34,117,115,101,114,34,58,123,34,105,100,34,58,34,117,115,101,114,48,48,48,49,45,48,48,48,48,45,48,48,48,48,45,48,48,48,48,45,48,48,48,48,48,48,48,48,48,48,48,49,34,44,34,102,105,114,115,116,78,97,109,101,34,58,34,83,97,114,97,34,44,34,108,97,115,116,78,97,109,101,34,58,34,72,97,115,115,97,110,34,44,34,101,109,97,105,108,34,58,34,104,114,64,110,101,122,117,107,111,46,99,111,109,34,44,34,97,118,97,116,97,114,85,114,108,34,58,34,104,116,116,112,115,58,47,47,114,101,115,46,99,108,111,117,100,105,110,97,114,121,46,99,111,109,47,100,120,106,103,48,52,120,49,108,47,105,109,97,103,101,47,117,112,108,111,97,100,47,118,49,55,56,50,52,48,48,55,52,57,47,97,118,97,116,97,114,115,47,117,115,101,114,95,117,115,101,114,48,48,48,49,45,48,48,48,48,45,48,48,48,48,45,48,48,48,48,45,48,48,48,48,48,48,48,48,48,48,48,49,46,112,110,103,34,125,44,34,116,101,110,97,110,116,34,58,123,34,105,100,34,58,34,98,98,98,98,98,98,98,98,45,48,48,48,48,45,48,48,48,48,45,48,48,48,48,45,48,48,48,48,48,48,48,48,48,48,48,49,34,44,34,110,97,109,101,34,58,34,78,101,122,117,107,111,32,67,111,114,112,34,44,34,115,108,117,103,34,58,34,110,101,122,117,107,111,45,99,111,114,112,34,125,44,34,115,117,112,101,114,65,100,109,105,110,34,58,110,117,108,108,125,44,123,34,105,100,34,58,34,54,100,97,56,98,53,52,54,45,49,98,100,97,45,52,98,49,52,45,57,99,97,51,45,100,50,101,51,98,98,51,52,57,99,55,100,34,44,34,116,101,110,97,110,116,73,100,34,58,34,98,98,98,98,98,98,98,98,45,48,48,48,48,45,48,48,48,48,45,48,48,48,48,45,48,48,48,48,48,48,48,48,48,48,48,49,34,44,34,117,115,101,114,73,100,34,58,34,117,115,101,114,48,48,48,49,45,48,48,48,48,45,48,48,48,48,45,48,48,48,48,45,48,48,48,48,48,48,48,48,48,48,48,49,34,44,34,115,117,112,101,114,65,100,109,105,110,73,100,34,58,110,117,108,108,44,34,116,105,116,108,101,34,58,34,78,101,119,32,76,101,97,118,101,32,82,101,113,117,101,115,116,34,44,34,109,101,115,115,97,103,101,34,58,34,78,101,119,32,108,101,97,118,101,32,114,101,113,117,101,115,116,32,115,117,98,109,105,116,116,101,100,32,98,121,32,79,109,97,114,32,83,97,108,101,104,34,44,34,116,121,112,101,34,58,34,76,69,65,86,69,34,44,34,112,114,105,111,114,105,116,121,34,58,34,72,73,71,72,34,44,34,105,115,83,101,101,110,34,58,102,97,108,115,101,44,34,115,101,101,110,65,116,34,58,110,117,108,108,44,34,97,99,116,105,111,110,85,114,108,34,58,110,117,108,108,44,34,109,101,116,97,100,97,116,97,34,58,123,34,108,101,97,118,101,82,101,113,117,101,115,116,73,100,34,58,34,57,53,50,98,101,98,53,53,45,99,49,98,53,45,52,97,51,55,45,98,99,49,52,45,53,52,52,102,49,52,54,100,52,100,49,51,34,125,44,34,100,101,108,101,116,101,100,65,116,34,58,110,117,108,108,44,34,99,114,101,97,116,101,100,65,116,34,58,34,50,48,50,54,45,48,54,45,50,55,84,49,49,58,50,55,58,51,50,46,57,54,53,90,34,44,34,117,112,100,97,116,101,100,65,116,34,58,34,50,48,50,54,45,48,54,45,50,55,84,49,49,58,50,55,58,51,50,46,57,54,53,90,34,44,34,117,115,101,114,34,58,123,34,105,100,34,58,34,117,115,101,114,48,48,48,49,45,48,48,48,48,45,48,48,48,48,45,48,48,48,48,45,48,48,48,48,48,48,48,48,48,48,48,49,34,44,34,102,105,114,115,116,78,97,109,101,34,58,34,83,97,114,97,34,44,34,108,97,115,116,78,97,109,101,34,58,34,72,97,115,115,97,110,34,44,34,101,109,97,105,108,34,58,34,104,114,64,110,101,122,117,107,111,46,99,111,109,34,44,34,97,118,97,116,97,114,85,114,108,34,58,34,104,116,116,112,115,58,47,47,114,101,115,46,99,108,111,117,100,105,110,97,114,121,46,99,111,109,47,100,120,106,103,48,52,120,49,108,47,105,109,97,103,101,47,117,112,108,111,97,100,47,118,49,55,56,50,52,48,48,55,52,57,47,97,118,97,116,97,114,115,47,117,115,101,114,95,117,115,101,114,48,48,48,49,45,48,48,48,48,45,48,48,48,48,45,48,48,48,48,45,48,48,48,48,48,48,48,48,48,48,48,49,46,112,110,103,34,125,44,34,116,101,110,97,110,116,34,58,123,34,105,100,34,58,34,98,98,98,98,98,98,98,98,45,48,48,48,48,45,48,48,48,48,45,48,48,48,48,45,48,48,48,48,48,48,48,48,48,48,48,49,34,44,34,110,97,109,101,34,58,34,78,101,122,117,107,111,32,67,111,114,112,34,44,34,115,108,117,103,34,58,34,110,101,122,117,107,111,45,99,111,114,112,34,125,44,34,115,117,112,101,114,65,100,109,105,110,34,58,110,117,108,108,125,93,125,44,34,109,101,116,97,34,58,123,34,116,111,116,97,108,34,58,50,44,34,112,97,103,101,34,58,49,44,34,108,105,109,105,116,34,58,49,48,44,34,116,111,116,97,108,80,97,103,101,115,34,58,49,125,125]},\"cookie\":[{\"name\":\"jwt\",\"expires\":\"2026-07-01T19:50:08.000Z\",\"maxAge\":null,\"domain\":\"localhost\",\"path\":\"/\",\"secure\":false,\"httpOnly\":true,\"hostOnly\":true,\"value\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJ1c2VyMDAwMS0wMDAwLTAwMDAtMDAwMC0wMDAwMDAwMDAwMDEiLCJyb2xlIjoiSFJfQURNSU4iLCJ0eXBlIjoidXNlciIsInRlbmFudElkIjoiYmJiYmJiYmItMDAwMC0wMDAwLTAwMDAtMDAwMDAwMDAwMDAxIiwiaWF0IjoxNzgyNjc2MjA4LCJleHAiOjE3ODMyODEwMDh9.Idx-pSCbBr5ntXPqEIpEvLx-slr7jZikOYSxO_2_wKM\"}],\"responseTime\":658,\"responseSize\":1833,\"downloadedBytes\":660,\"type\":\"http\",\"tempFilePath\":\"\",\"socketSession\":{\"addresses\":{\"local\":\"::1\",\"remote\":\"::1\"},\"httpVersion\":\"1.1\",\"tls\":{\"protocol\":\"\",\"cipherName\":\"\"},\"cert\":{\"subjectCN\":\"\",\"issuerCN\":\"\",\"validUntil\":\"\"}},\"timingPhases\":{\"prepare\":1.0351040000095963,\"wait\":1.0634569999529049,\"dns\":0.2708229999989271,\"tcp\":0.3097210000269115,\"firstByte\":653.2336679999717,\"download\":2.2969649999868125,\"process\":1.0588480000151321,\"total\":659.2685859999619}},\"request\":{\"url\":{\"protocol\":\"http\",\"port\":\"5000\",\"path\":[\"api\",\"v1\",\"notifications\"],\"host\":[\"localhost\"],\"query\":[],\"variable\":[]},\"header\":[{\"key\":\"User-Agent\",\"value\":\"Apidog/1.0.0 (https://apidog.com)\"},{\"key\":\"Authorization\",\"value\":\"Bearer jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJhYWFhYWFhYS1hYWFhLWFhYWEtYWFhYS1hYWFhYWFhYWFhYWEiLCJyb2xlIjoiSFJfQURNSU4iLCJ0eXBlIjoidXNlciIsInRlbmFudElkIjoiMTExMTExMTEtMTExMS0xMTExLTExMTEtMTExMTExMTExMTExIiwiaWF0IjoxNzc4NTE4NjI5LCJleHAiOjE3NzkxMjM0Mjl9.PKG0TLxzKbnpuK9uPIV790-CZeQyCnqOShTZQpf512c\",\"system\":true},{\"key\":\"Accept\",\"value\":\"*/*\",\"system\":true},{\"key\":\"Host\",\"value\":\"localhost:5000\",\"system\":true},{\"key\":\"Accept-Encoding\",\"value\":\"gzip, deflate, br\",\"system\":true},{\"key\":\"Connection\",\"value\":\"keep-alive\",\"system\":true},{\"key\":\"Cookie\",\"value\":\"jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJ1c2VyMDAwMS0wMDAwLTAwMDAtMDAwMC0wMDAwMDAwMDAwMDEiLCJyb2xlIjoiSFJfQURNSU4iLCJ0eXBlIjoidXNlciIsInRlbmFudElkIjoiYmJiYmJiYmItMDAwMC0wMDAwLTAwMDAtMDAwMDAwMDAwMDAxIiwiaWF0IjoxNzgyNjc2MjA4LCJleHAiOjE3ODMyODEwMDh9.Idx-pSCbBr5ntXPqEIpEvLx-slr7jZikOYSxO_2_wKM\",\"system\":true}],\"method\":\"GET\",\"body\":{},\"auth\":{\"type\":\"jwt\",\"jwt\":[{\"type\":\"any\",\"value\":\"header\",\"key\":\"addTokenTo\"},{\"type\":\"any\",\"key\":\"algorithm\"},{\"type\":\"any\",\"value\":\"\",\"key\":\"header\"},{\"type\":\"any\",\"value\":\"Bearer\",\"key\":\"headerPrefix\"},{\"type\":\"any\",\"key\":\"queryParamKey\"},{\"type\":\"any\",\"key\":\"isSecretBase64Encoded\"},{\"type\":\"any\",\"value\":\"\",\"key\":\"payload\"},{\"type\":\"any\",\"key\":\"secret\"},{\"type\":\"any\",\"key\":\"privateKey\"},{\"type\":\"any\",\"value\":\"jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJhYWFhYWFhYS1hYWFhLWFhYWEtYWFhYS1hYWFhYWFhYWFhYWEiLCJyb2xlIjoiSFJfQURNSU4iLCJ0eXBlIjoidXNlciIsInRlbmFudElkIjoiMTExMTExMTEtMTExMS0xMTExLTExMTEtMTExMTExMTExMTExIiwiaWF0IjoxNzc4NTE4NjI5LCJleHAiOjE3NzkxMjM0Mjl9.PKG0TLxzKbnpuK9uPIV790-CZeQyCnqOShTZQpf512c\",\"key\":\"token\"}]},\"type\":\"http\"},\"history\":{\"execution\":{\"verbose\":true,\"sessions\":{\"4336bee9-09d9-4c94-b6d1-a507393f4183\":{\"addresses\":{\"local\":{\"address\":\"::1\",\"family\":\"IPv6\",\"port\":55596},\"remote\":{\"address\":\"::1\",\"family\":\"IPv6\",\"port\":5000}}}},\"data\":[{\"request\":{\"method\":\"GET\",\"href\":\"http://localhost:5000/api/v1/notifications\",\"headers\":[{\"key\":\"User-Agent\",\"value\":\"Apidog/1.0.0 (https://apidog.com)\"},{\"key\":\"Authorization\",\"value\":\"Bearer jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJhYWFhYWFhYS1hYWFhLWFhYWEtYWFhYS1hYWFhYWFhYWFhYWEiLCJyb2xlIjoiSFJfQURNSU4iLCJ0eXBlIjoidXNlciIsInRlbmFudElkIjoiMTExMTExMTEtMTExMS0xMTExLTExMTEtMTExMTExMTExMTExIiwiaWF0IjoxNzc4NTE4NjI5LCJleHAiOjE3NzkxMjM0Mjl9.PKG0TLxzKbnpuK9uPIV790-CZeQyCnqOShTZQpf512c\"},{\"key\":\"Accept\",\"value\":\"*/*\"},{\"key\":\"Host\",\"value\":\"localhost:5000\"},{\"key\":\"Accept-Encoding\",\"value\":\"gzip, deflate, br\"},{\"key\":\"Connection\",\"value\":\"keep-alive\"},{\"key\":\"Cookie\",\"value\":\"jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJ1c2VyMDAwMS0wMDAwLTAwMDAtMDAwMC0wMDAwMDAwMDAwMDEiLCJyb2xlIjoiSFJfQURNSU4iLCJ0eXBlIjoidXNlciIsInRlbmFudElkIjoiYmJiYmJiYmItMDAwMC0wMDAwLTAwMDAtMDAwMDAwMDAwMDAxIiwiaWF0IjoxNzgyNjc2MjA4LCJleHAiOjE3ODMyODEwMDh9.Idx-pSCbBr5ntXPqEIpEvLx-slr7jZikOYSxO_2_wKM\"}],\"httpVersion\":\"1.1\"},\"response\":{\"statusCode\":200,\"headers\":[{\"key\":\"Content-Security-Policy\",\"value\":\"default-src 'self';style-src 'self' 'unsafe-inline';script-src 'self';img-src 'self' data: https:;base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';object-src 'none';script-src-attr 'none';upgrade-insecure-requests\"},{\"key\":\"Cross-Origin-Opener-Policy\",\"value\":\"same-origin\"},{\"key\":\"Cross-Origin-Resource-Policy\",\"value\":\"same-origin\"},{\"key\":\"Origin-Agent-Cluster\",\"value\":\"?1\"},{\"key\":\"Referrer-Policy\",\"value\":\"no-referrer\"},{\"key\":\"Strict-Transport-Security\",\"value\":\"max-age=31536000; includeSubDomains; preload\"},{\"key\":\"X-Content-Type-Options\",\"value\":\"nosniff\"},{\"key\":\"X-DNS-Prefetch-Control\",\"value\":\"off\"},{\"key\":\"X-Download-Options\",\"value\":\"noopen\"},{\"key\":\"X-Frame-Options\",\"value\":\"DENY\"},{\"key\":\"X-Permitted-Cross-Domain-Policies\",\"value\":\"none\"},{\"key\":\"X-XSS-Protection\",\"value\":\"1; mode=block\"},{\"key\":\"Vary\",\"value\":\"Origin, Accept-Encoding\"},{\"key\":\"Access-Control-Allow-Credentials\",\"value\":\"true\"},{\"key\":\"Content-Type\",\"value\":\"application/json; charset=utf-8\"},{\"key\":\"ETag\",\"value\":\"W/\\\"729-uy2BrGqSpXzTg8vky1yDqGSUr50\\\"\"},{\"key\":\"Content-Encoding\",\"value\":\"br\"},{\"key\":\"Date\",\"value\":\"Sun, 28 Jun 2026 19:57:15 GMT\"},{\"key\":\"Connection\",\"value\":\"keep-alive\"},{\"key\":\"Keep-Alive\",\"value\":\"timeout=5\"},{\"key\":\"Transfer-Encoding\",\"value\":\"chunked\"}],\"httpVersion\":\"1.1\",\"downloadedBytes\":660},\"timings\":{\"start\":1782676634717,\"requestStart\":1782676634718,\"offset\":{\"request\":1.0351040000095963,\"socket\":2.0985609999625012,\"lookup\":2.3693839999614283,\"connect\":2.67910499998834,\"response\":655.91277299996,\"end\":658.2097379999468,\"done\":659.2685859999619}},\"session\":{\"id\":\"4336bee9-09d9-4c94-b6d1-a507393f4183\",\"reused\":false}}]}},\"responseValidation\":{\"schema\":{\"valid\":true,\"message\":\"\",\"errors\":null},\"responseCode\":{\"valid\":true}},\"passed\":true,\"timings\":{\"started\":1782676634709,\"preProcessorsStarted\":1782676634710,\"preProcessorsCompleted\":1782676634710,\"postProcessorsStarted\":1782676635379,\"postProcessorsCompleted\":1782676635379,\"completed\":1782676635382},\"metaInfo\":{\"httpApiId\":38714876,\"httpApiName\":\"Get All Notfications\",\"httpApiPath\":\"http://localhost:5000/api/v1/notifications\",\"httpApiMethod\":\"get\",\"httpApiCaseName\":\"Success\",\"moduleId\":1202799,\"serverId\":\"\"},\"socketSession\":{\"addresses\":{\"local\":\"::1\",\"remote\":\"::1\"},\"httpVersion\":\"1.1\",\"tls\":{\"protocol\":\"\",\"cipherName\":\"\"},\"cert\":{\"subjectCN\":\"\",\"issuerCN\":\"\",\"validUntil\":\"\"}}}",
+                    "visibility": "INHERITED",
+                    "moduleId": 1202799,
+                    "categoryId": 0,
+                    "tagIds": [],
+                    "apiTestDataList": [],
+                    "preProcessors": [],
+                    "postProcessors": [],
+                    "inheritPostProcessors": {},
+                    "inheritPreProcessors": {}
+                  }
+                ],
+                "mocks": [],
+                "customApiFields": "{}",
+                "advancedSettings": {
+                  "disabledSystemHeaders": {}
+                },
+                "mockScript": {},
+                "codeSamples": [],
+                "commonResponseStatus": {},
+                "responseChildren": [],
+                "visibility": "INHERITED",
+                "moduleId": 1202799,
+                "oasExtensions": "",
+                "type": "http",
+                "preProcessors": [],
+                "postProcessors": [],
+                "inheritPostProcessors": {},
+                "inheritPreProcessors": {}
+              }
+            },
+            {
+              "name": "Unread Count",
+              "api": {
+                "id": "38716902",
+                "method": "get",
+                "path": "http://localhost:5000/api/v1/notifications/unread-count",
+                "parameters": {},
+                "auth": {},
+                "securityScheme": {},
+                "commonParameters": {
+                  "query": [],
+                  "body": [],
+                  "cookie": [],
+                  "header": []
+                },
+                "responses": [
+                  {
+                    "id": "149516042",
+                    "code": 200,
+                    "name": "Success",
+                    "jsonSchema": {
+                      "type": "object",
+                      "properties": {}
+                    },
+                    "itemSchema": {},
+                    "contentType": "json"
+                  }
+                ],
+                "responseExamples": [],
+                "requestBody": {
+                  "type": "none",
+                  "parameters": [],
+                  "required": true,
+                  "mediaType": "",
+                  "examples": [],
+                  "oasExtensions": ""
+                },
+                "description": "",
+                "tags": [],
+                "status": "developing",
+                "serverId": "",
+                "operationId": "",
+                "sourceUrl": "",
+                "ordering": 20,
+                "cases": [],
+                "mocks": [],
+                "customApiFields": "{}",
+                "advancedSettings": {
+                  "disabledSystemHeaders": {}
+                },
+                "mockScript": {},
+                "codeSamples": [],
+                "commonResponseStatus": {},
+                "responseChildren": [],
+                "visibility": "INHERITED",
+                "moduleId": 1202799,
+                "oasExtensions": "",
+                "type": "http",
+                "preProcessors": [],
+                "postProcessors": [],
+                "inheritPostProcessors": {},
+                "inheritPreProcessors": {}
+              }
+            },
+            {
+              "name": "Mark all seen",
+              "api": {
+                "id": "38716935",
+                "method": "patch",
+                "path": "http://localhost:5000/api/v1/notifications/mark-all-seen",
+                "parameters": {},
+                "auth": {},
+                "securityScheme": {},
+                "commonParameters": {
+                  "query": [],
+                  "body": [],
+                  "cookie": [],
+                  "header": []
+                },
+                "responses": [
+                  {
+                    "id": "177019749",
+                    "code": 200,
+                    "name": "Success",
+                    "headers": [],
+                    "jsonSchema": {
+                      "type": "object",
+                      "properties": {}
+                    },
+                    "itemSchema": {},
+                    "description": "",
+                    "contentType": "json",
+                    "mediaType": ""
+                  }
+                ],
+                "responseExamples": [],
+                "requestBody": {
+                  "type": "none",
+                  "parameters": [],
+                  "required": true,
+                  "mediaType": "",
+                  "examples": [],
+                  "oasExtensions": ""
+                },
+                "description": "",
+                "tags": [],
+                "status": "developing",
+                "serverId": "",
+                "operationId": "",
+                "sourceUrl": "",
+                "ordering": 30,
+                "cases": [],
+                "mocks": [],
+                "customApiFields": "{}",
+                "advancedSettings": {
+                  "disabledSystemHeaders": {}
+                },
+                "mockScript": {},
+                "codeSamples": [],
+                "commonResponseStatus": {},
+                "responseChildren": [],
+                "visibility": "INHERITED",
+                "moduleId": 1202799,
+                "oasExtensions": "",
+                "type": "http",
+                "preProcessors": [],
+                "postProcessors": [],
+                "inheritPostProcessors": {},
+                "inheritPreProcessors": {}
+              }
+            },
+            {
+              "name": "Mark one as seen",
+              "api": {
+                "id": "38716938",
+                "method": "patch",
+                "path": "http://localhost:5000/api/v1/notifications/1ce1d610-6253-4e09-8182-474d08f30523/seen",
+                "parameters": {},
+                "auth": {},
+                "securityScheme": {},
+                "commonParameters": {
+                  "query": [],
+                  "body": [],
+                  "cookie": [],
+                  "header": []
+                },
+                "responses": [
+                  {
+                    "id": "176902510",
+                    "code": 200,
+                    "name": "Success",
+                    "headers": [],
+                    "jsonSchema": {
+                      "type": "object",
+                      "properties": {}
+                    },
+                    "itemSchema": {},
+                    "description": "",
+                    "contentType": "json",
+                    "mediaType": ""
+                  }
+                ],
+                "responseExamples": [],
+                "requestBody": {
+                  "type": "none",
+                  "parameters": [],
+                  "required": true,
+                  "mediaType": "",
+                  "examples": [],
+                  "oasExtensions": ""
+                },
+                "description": "",
+                "tags": [],
+                "status": "developing",
+                "serverId": "",
+                "operationId": "",
+                "sourceUrl": "",
+                "ordering": 40,
+                "cases": [],
+                "mocks": [],
+                "customApiFields": "{}",
+                "advancedSettings": {
+                  "disabledSystemHeaders": {}
+                },
+                "mockScript": {},
+                "codeSamples": [],
+                "commonResponseStatus": {},
+                "responseChildren": [],
+                "visibility": "INHERITED",
+                "moduleId": 1202799,
+                "oasExtensions": "",
+                "type": "http",
+                "preProcessors": [],
+                "postProcessors": [],
+                "inheritPostProcessors": {},
+                "inheritPreProcessors": {}
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "socketCollection": [],
+  "docCollection": [],
+  "webSocketCollection": [],
+  "socketIOCollection": [],
+  "mcpClientCollection": [],
+  "responseCollection": [],
+  "schemaCollection": [],
+  "securitySchemeCollection": [],
+  "oasComponentCollection": [],
+  "requestCollection": [
+    {
+      "name": "Root",
+      "children": [],
+      "ordering": [
+        "requestFolder.10025382"
+      ],
+      "items": []
+    }
+  ],
+  "environments": [],
+  "commonScripts": [],
+  "globalVariables": [],
+  "commonParameters": null,
+  "customFunctions": [],
+  "projectTestCaseCategories": [
+    {
+      "id": 1203737,
+      "name": "Positive",
+      "description": "Valid inputs and correct expected results, representing typical usage."
+    },
+    {
+      "id": 1203738,
+      "name": "Negative",
+      "description": "Negative, invalid inputs such as missing fields, wrong types, unsupported methods, etc."
+    },
+    {
+      "id": 1203739,
+      "name": "Boundary",
+      "description": "Extreme or edge conditions, such as maximum string length, empty values, zero, null, etc."
+    },
+    {
+      "id": 1203740,
+      "name": "Security",
+      "description": "Test cases that may expose API security risks."
+    },
+    {
+      "id": 1203741,
+      "name": "Other",
+      "description": "Test cases not classified under existing categories."
+    }
+  ],
+  "projectTestCaseTags": [
+    {
+      "id": 5170073,
+      "name": "Required Fields Only",
+      "description": "Send only the required fields with valid values, omitting all optional fields, to test minimal valid requests."
+    },
+    {
+      "id": 5170074,
+      "name": "Valid Semantic",
+      "description": "Use values that are syntactically correct and also make sense in the business logic or domain context."
+    },
+    {
+      "id": 5170075,
+      "name": "Enum Combination Coverage",
+      "description": "For all enum-type parameters, apply orthogonal design to systematically construct test case combinations of parameters and their enum values, dedicated to testing enum coverage."
+    },
+    {
+      "id": 5170076,
+      "name": "Other Positive Case",
+      "description": "Provide realistic and valid inputs that match the API specification, producing the correct and expected result."
+    },
+    {
+      "id": 5170077,
+      "name": "Missing Required Fields",
+      "description": "Omit one or more required fields in the request body or parameters."
+    },
+    {
+      "id": 5170078,
+      "name": "Invalid Values",
+      "description": "Provide values that are within the correct type and format, but logically invalid for the field."
+    },
+    {
+      "id": 5170079,
+      "name": "Type Errors",
+      "description": "Use values with incorrect data types, such as sending a string instead of an integer."
+    },
+    {
+      "id": 5170080,
+      "name": "Format Errors",
+      "description": "Provide values in an incorrect format, e.g., wrong date pattern, malformed email address."
+    },
+    {
+      "id": 5170081,
+      "name": "Semantic Errors",
+      "description": "Use syntactically correct and properly formatted values that are logically impossible or violate domain rules."
+    },
+    {
+      "id": 5170082,
+      "name": "Other Negative Case",
+      "description": "Provide invalid or unexpected inputs that should trigger error handling or rejection by the API."
+    },
+    {
+      "id": 5170083,
+      "name": "Null",
+      "description": "Must be the JSON literal `null` (not empty, not \"null\")."
+    },
+    {
+      "id": 5170084,
+      "name": "Zero",
+      "description": "Must be the numeric literal 0."
+    },
+    {
+      "id": 5170085,
+      "name": "Empty Values",
+      "description": "Must be \"\"."
+    },
+    {
+      "id": 5170086,
+      "name": "Max Values",
+      "description": "Provide the exact minimum and maximum allowed values for numeric or date fields."
+    },
+    {
+      "id": 5170087,
+      "name": "Min Values",
+      "description": "Provide the exact minimum and maximum allowed values for numeric or date fields."
+    },
+    {
+      "id": 5170088,
+      "name": "Overflow",
+      "description": "Provide values just beyond the allowed minimum or maximum boundaries."
+    },
+    {
+      "id": 5170089,
+      "name": "Underflow",
+      "description": "Provide values just beyond the allowed minimum or maximum boundaries."
+    },
+    {
+      "id": 5170090,
+      "name": "Overly Long Strings",
+      "description": "Provide strings longer than the maximum allowed length, or shorter than the minimum required length."
+    },
+    {
+      "id": 5170091,
+      "name": "Overly Short Strings",
+      "description": "Provide strings longer than the maximum allowed length, or shorter than the minimum required length."
+    },
+    {
+      "id": 5170092,
+      "name": "Broken Object Level Authorization",
+      "description": "Users access or manipulate data objects without proper authorization."
+    },
+    {
+      "id": 5170093,
+      "name": "Access Control",
+      "description": "Restricting resources and actions users can access based on roles, permissions, or attributes."
+    },
+    {
+      "id": 5170094,
+      "name": "Auth Failures",
+      "description": "Authentication is weak, misconfigured, or bypassed, allowing unauthorized access."
+    },
+    {
+      "id": 5170095,
+      "name": "SQL Injection",
+      "description": "Insert malicious SQL code into input fields to test for SQL injection vulnerabilities."
+    },
+    {
+      "id": 5170096,
+      "name": "XSS Injection",
+      "description": "Inject JavaScript or HTML tags to test for cross-site scripting vulnerabilities."
+    },
+    {
+      "id": 5170097,
+      "name": "Fuzzy Input",
+      "description": "Send large or randomly generated payloads to test input validation and stability."
+    },
+    {
+      "id": 5170098,
+      "name": "Command Injection",
+      "description": "Insert shell commands into inputs to test for command execution vulnerabilities."
+    },
+    {
+      "id": 5170099,
+      "name": "JSON Injection",
+      "description": "Insert malicious or unexpected JSON structures to test parsing and validation."
+    },
+    {
+      "id": 5170100,
+      "name": "NoSQL Injection",
+      "description": "Provide NoSQL-specific malicious queries or operators to test for injection vulnerabilities."
+    },
+    {
+      "id": 5170101,
+      "name": "Other",
+      "description": "Test cases not classified under existing categories."
+    }
+  ],
+  "projectAssociations": [],
+  "moduleSettings": [
+    {
+      "id": "1202799",
+      "name": "Default module",
+      "description": "API endpoints for managing company assets, assignments, transfers, and depreciation.",
+      "moduleVariables": [],
+      "openApiInfo": {}
+    }
+  ]
+}

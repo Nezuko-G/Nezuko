@@ -150,15 +150,17 @@ export const tasksApi = {
         return list.map(normalizeTask);
     },
 
-    /** GET /project/tasks/report/overdue — Manager / HR */
+    /** GET /project/tasks/overdue-report — Manager / HR */
     getOverdueReport: async (): Promise<OverdueReportGroup[]> => {
         const res = await api.get(t.overdueReport);
         const payload = res.data?.data ?? res.data;
-        const rawGroups: Record<string, unknown>[] = Array.isArray(payload)
-            ? payload
+        const rawGroups: Record<string, unknown>[] = Array.isArray(payload?.report)
+            ? payload.report
             : Array.isArray(payload?.groups)
                 ? payload.groups
-                : [];
+                : Array.isArray(payload)
+                    ? payload
+                    : [];
 
         return rawGroups.map((g) => ({
             assignee: { id: g.assigneeId, name: g.assigneeName } as User,

@@ -7,6 +7,7 @@ import { useState } from "react";
 
 import { LanguageSwitcher } from "../../../components/i18n/LanguageSwitcher";
 import { useAuthStore } from "@/hooks/useAuthStore";
+import { useUnreadCount } from "@/app/(hr-system)/notifications/hooks/useNotifications";
 
 export default function Navbar() {
   const locale = useLocale();
@@ -15,6 +16,7 @@ export default function Navbar() {
   const avatarBase64 = useAuthStore((s) => s.avatarBase64);
   const firstName = useAuthStore((s) => s.firstName);
   const lastName = useAuthStore((s) => s.lastName);
+  const { data: unreadCount } = useUnreadCount();
 
   const initials =
     firstName && lastName
@@ -62,13 +64,20 @@ export default function Navbar() {
           </div>
 
           {/* Notifications */}
-          <button className="relative p-2 hover:bg-white/10 rounded-full transition-colors group">
+          <Link
+            href="/notifications"
+            className="relative p-2 hover:bg-white/10 rounded-full transition-colors group"
+          >
             <Bell
               size={20}
               className="group-hover:text-primary transition-colors"
             />
-            <span className="absolute top-1.5 end-1.5 w-2 h-2 bg-status-error rounded-full ring-2 ring-secondary" />
-          </button>
+            {unreadCount != null && unreadCount > 0 && (
+              <span className="absolute -top-0.5 -end-0.5 min-w-[18px] h-[18px] flex items-center justify-center bg-status-error text-white text-[10px] font-bold rounded-full ring-2 ring-secondary px-1">
+                {unreadCount > 99 ? "99+" : unreadCount}
+              </span>
+            )}
+          </Link>
 
           {/* Avatar */}
           <Link
