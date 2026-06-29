@@ -149,12 +149,31 @@ export default function Navbar() {
             </div>
           )}
 
-          <Link
-            href="/book-demo"
-            className="bg-primary hover:bg-primary/90 text-secondary font-black py-2 px-3 md:py-3 md:px-6 rounded-full transition-all active:scale-95 text-[11px] md:text-xs text-nowrap wrap-break-word"
-          >
-            {t("demo")}
-          </Link>
+          {isHydrated ? (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.3 }}
+            >
+              {token ? (
+                <Link
+                  href="/profile"
+                  className="bg-primary hover:bg-primary/90 text-secondary font-black py-2 px-3 md:py-3 md:px-6 rounded-full transition-all active:scale-95 text-[11px] md:text-xs text-nowrap wrap-break-word"
+                >
+                  {t("hr_system")}
+                </Link>
+              ) : (
+                <Link
+                  href="/book-demo"
+                  className="bg-primary hover:bg-primary/90 text-secondary font-black py-2 px-3 md:py-3 md:px-6 rounded-full transition-all active:scale-95 text-[11px] md:text-xs text-nowrap wrap-break-word"
+                >
+                  {t("demo")}
+                </Link>
+              )}
+            </motion.div>
+          ) : (
+            <div className="h-9 md:h-12 w-24 md:w-32 rounded-full bg-current/20 animate-pulse" />
+          )}
           <button
             className="lg:hidden p-1"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
@@ -241,6 +260,26 @@ export default function Navbar() {
             <div className="h-3.5 w-14 rounded bg-current/20 animate-pulse" />
           </div>
         )}
+
+        {isHydrated ? (
+          token ? (
+            <Link
+              href="/profile"
+              className="bg-primary hover:bg-primary/90 text-secondary font-black py-2.5 px-6 rounded-full transition-all active:scale-95 text-xs text-nowrap"
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
+              {t("hr_system")}
+            </Link>
+          ) : (
+            <Link
+              href="/book-demo"
+              className="bg-primary hover:bg-primary/90 text-secondary font-black py-2.5 px-6 rounded-full transition-all active:scale-95 text-xs text-nowrap"
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
+              {t("demo")}
+            </Link>
+          )
+        ) : null}
 
         <div className="pt-2 w-full flex justify-center border-t border-white/10">
           <LanguageSwitcher currentLocale={locale} />
