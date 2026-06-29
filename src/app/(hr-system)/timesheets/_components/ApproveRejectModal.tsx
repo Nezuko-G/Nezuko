@@ -16,7 +16,6 @@ export function ApproveRejectModal({ timesheet, onClose }: Props) {
   const tt = useTranslations("timesheet.table");
   const reviewMutation = useReviewTimesheet();
   const [status, setStatus] = useState<"APPROVED" | "REJECTED">("APPROVED");
-  const [reviewNote, setReviewNote] = useState("");
 
   async function handleSubmit() {
     try {

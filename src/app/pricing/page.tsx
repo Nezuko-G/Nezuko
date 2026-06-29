@@ -320,7 +320,7 @@ export default function PricingPage() {
                             {/* Right */}
                             <div className="flex-1 flex flex-col items-center gap-6">
                                 {/* Paymob logo card */}
-                                <div className="relative w-[140px] max-w-xs h-32 rounded-2xl overflow-hidden bg-white flex items-center justify-center shadow-2xl">
+                                <div className="relative w-35 max-w-xs h-32 rounded-2xl overflow-hidden bg-white flex items-center justify-center shadow-2xl">
                                     <Image
                                         src="https://i.ibb.co/m5v0BBPG/images.png"
                                         alt="Paymob"
@@ -330,14 +330,6 @@ export default function PricingPage() {
                                         unoptimized
                                         onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; }}
                                     />
-                                    {/* Fallback always rendered underneath */}
-                                    {/* <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
-                                        <div className="flex items-center gap-1.5">
-                                            <div className="w-3 h-3 rounded-full bg-primary" />
-                                            <span className="text-[#0f172a] font-black text-2xl tracking-tight">paymob</span>
-                                        </div>
-                                        <span className="text-[#0f172a]/30 text-xs mt-1">{t("payment.tagline")}</span>
-                                    </div> */}
                                 </div>
 
                                 {/* Payment method badges */}
@@ -379,7 +371,7 @@ export default function PricingPage() {
                                     whileInView={{ opacity: 1, y: 0 }}
                                     viewport={{ once: true }}
                                     transition={{ duration: 0.5, delay: i * 0.15 }}
-                                    className="bg-white rounded-[2rem] border border-gray-100 shadow-xl p-8 flex flex-col justify-between min-h-[300px]"
+                                    className="bg-white rounded-4xl border border-gray-100 shadow-xl p-8 flex flex-col justify-between min-h-75"
                                 >
                                     <div>
                                         <div className="flex gap-0.5 mb-5">
@@ -443,7 +435,7 @@ export default function PricingPage() {
                             </h2>
                             <p className="text-gray-500 text-lg">{t("faq.subtitle")}</p>
                         </motion.div>
-                        <div className="bg-white rounded-[2rem] border border-gray-100 shadow-lg px-6 md:px-10 py-2">
+                        <div className="bg-white rounded-4xl border border-gray-100 shadow-lg px-6 md:px-10 py-2">
                             {faqs.map((item, i) => (
                                 <FaqRow key={i} q={item.q} a={item.a} index={i} dark={false} />
                             ))}

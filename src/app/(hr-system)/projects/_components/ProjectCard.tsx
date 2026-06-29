@@ -2,7 +2,7 @@
 
 import { useTranslations } from "next-intl";
 import Link from "next/link";
-import { CalendarDays, AlertTriangle, ListTodo } from "lucide-react";
+import { CalendarDays, ListTodo } from "lucide-react";
 import { ProjectStatusBadge } from "./Badges";
 import type { Project } from "../types/project.types";
 
@@ -16,9 +16,6 @@ interface ProjectCardProps {
 
 export function ProjectCard({
   project,
-  canManage = false,
-  onEdit,
-  onCancel,
 }: ProjectCardProps) {
   const t = useTranslations("projects");
 

@@ -20,7 +20,7 @@ interface MyTasksPageProps {
 
 const PRIORITY_ORDER: Record<string, number> = { URGENT: 0, HIGH: 1, MEDIUM: 2, LOW: 3 };
 
-export function MyTasksPage({ currentUserId }: MyTasksPageProps) {
+export function MyTasksPage({ }: MyTasksPageProps) {
   const tp = useTranslations("projects");
   const { role } = useAuthStore();
   const canEdit = role !== "EMPLOYEE";
@@ -103,7 +103,6 @@ export function OverdueReportPage({ currentUserId }: OverdueReportPageProps) {
   const { data: groups, isLoading, isError } = useOverdueReport();
   const [selectedTaskId, setSelectedTaskId] = useState<string>();
   const [editingTask, setEditingTask] = useState<Task>();
-  const queryClient = useQueryClient();
   const updateTask = useUpdateTask(editingTask?.id ?? "");
 
   return (

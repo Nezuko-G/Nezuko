@@ -32,10 +32,10 @@ export default function BridgeSection() {
           {t("title")}
         </h2>
 
-        <div className="relative flex items-center justify-center w-full h-[150px] md:h-[280px] mb-8 md:mb-16">
+        <div className="relative flex items-center justify-center w-full h-37.5 md:h-70 mb-8 md:mb-16">
           <div className="relative w-full h-full flex items-center justify-center scale-[0.55] sm:scale-75 md:scale-100 origin-center">
             
-            <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center w-[350px] md:w-[500px]">
+            <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center w-87.5 md:w-125">
               <motion.div
                 className={cn(
                   "absolute w-full border-t-2 transition-colors duration-500",
@@ -65,7 +65,7 @@ export default function BridgeSection() {
                 opacity: isConnected ? 1 : 0.4
               }}
               transition={{ type: "spring", stiffness: 70, damping: 14 }}
-              className="absolute z-10 flex flex-col items-center bg-card p-4 rounded-[2rem] shadow-xl border border-gray-100"
+              className="absolute z-10 flex flex-col items-center bg-card p-4 rounded-4xl shadow-xl border border-gray-100"
             >
               <div className="w-38 h-38 rounded-2xl bg-gray-100 flex items-center justify-center mb-3 overflow-hidden">
                  <UserCircle2 size={80} className="text-gray-400" />
@@ -80,7 +80,7 @@ export default function BridgeSection() {
                 opacity: isConnected ? 1 : 0.4
               }}
               transition={{ type: "spring", stiffness: 70, damping: 14 }}
-              className="absolute z-10 flex flex-col items-center bg-card p-4 rounded-[2rem] shadow-xl border border-gray-100"
+              className="absolute z-10 flex flex-col items-center bg-card p-4 rounded-4xl shadow-xl border border-gray-100"
             >
               <div className="w-38 h-38 rounded-2xl bg-gray-100 flex items-center justify-center mb-3 overflow-hidden">
                  <Briefcase size={80} className="text-gray-400" />

@@ -5,8 +5,7 @@ import { useTranslations } from "next-intl";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, EffectCoverflow } from "swiper/modules";
 
-import "swiper/css";
-import "swiper/css/effect-coverflow";
+
 
 export default function GallerySection() {
   const t = useTranslations("landing.gallery");
@@ -53,11 +52,11 @@ export default function GallerySection() {
             768: { slidesPerView: 1.8 },
             1024: { slidesPerView: 2.5 },
           }}
-          className="w-full !pb-14"
+          className="w-full pb-14!"
         >
           {images.map((imgUrl, index) => (
             <SwiperSlide key={index} className="transition-all duration-500">
-              <div className="w-full aspect-[16/10] bg-card rounded-[2.5rem] border border-gray-100 shadow-2xl overflow-hidden relative group">
+              <div className="w-full aspect-16/10 bg-card rounded-[2.5rem] border border-gray-100 shadow-2xl overflow-hidden relative group">
                 <Image 
                   src={imgUrl} 
                   alt={t("screen_title")} 

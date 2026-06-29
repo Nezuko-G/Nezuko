@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useQuery } from "@tanstack/react-query";
 import { getReportTypes, getReportPreview, getReportHistory, downloadReportCsv, downloadReportPdf } from "@/lib/api/endpoints/reports";
 import { useState } from "react";

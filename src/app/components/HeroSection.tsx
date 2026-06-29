@@ -23,7 +23,7 @@ export default function HeroSection() {
 
       <div className="w-full max-w-6xl mx-auto mt-20 grid grid-cols-1 md:grid-cols-3 gap-6 items-end z-10">
         
-        <div className="relative bg-card rounded-2xl h-[250px] shadow-xl overflow-hidden border border-gray-100/10">
+        <div className="relative bg-card rounded-2xl h-62.5 shadow-xl overflow-hidden border border-gray-100/10">
           <Image 
             src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=600"
             alt={t("placeholders.chart")}
@@ -32,7 +32,7 @@ export default function HeroSection() {
           />
         </div>
 
-        <div className="bg-content rounded-t-[40px] h-[350px] shadow-2xl relative overflow-hidden border border-gray-100/10">
+        <div className="bg-content rounded-t-[40px] h-87.5 shadow-2xl relative overflow-hidden border border-gray-100/10">
           <Image 
             src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=800"
             alt={t("placeholders.main_image")}
@@ -42,7 +42,7 @@ export default function HeroSection() {
           />
         </div>
 
-        <div className="relative bg-card rounded-2xl h-[250px] shadow-xl overflow-hidden border border-gray-100/10">
+        <div className="relative bg-card rounded-2xl h-62.5 shadow-xl overflow-hidden border border-gray-100/10">
           <Image 
             src="https://images.unsplash.com/photo-1633356122544-f134324a6cee?q=80&w=600"
             alt={t("placeholders.icon_3d")}

@@ -184,9 +184,9 @@ export function SelectWithSearch<T>({
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -4 }}
             transition={{ duration: 0.12 }}
-            className="absolute z-50 left-0 top-full mt-1 w-[260px] bg-white border border-gray-200 rounded-xl shadow-xl overflow-hidden"
+            className="absolute z-50 left-0 top-full mt-1 w-65 bg-white border border-gray-200 rounded-xl shadow-xl overflow-hidden"
           >
-            <div ref={listRef} className="max-h-[200px] overflow-y-auto">
+            <div ref={listRef} className="max-h-50 overflow-y-auto">
               {filtered.length === 0 && debouncedQuery.trim() ? (
                 <div className="px-3 py-4 text-sm text-gray-400 text-center">
                   {noResultsText}

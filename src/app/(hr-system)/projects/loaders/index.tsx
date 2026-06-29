@@ -170,7 +170,7 @@ export function OverdueReportLoader({ groups = 3 }: { groups?: number }) {
         <tbody>
           {Array.from({ length: groups }).map((_, i) => (
             <Fragment key={i}>
-              <tr className="bg-primary/[0.04] border-b border-gray-100">
+              <tr className="bg-primary/4 border-b border-gray-100">
                 <td colSpan={5} className="px-4 py-2.5 border-s-[3px] border-primary/15">
                   <Skeleton className="h-4 w-36" />
                 </td>

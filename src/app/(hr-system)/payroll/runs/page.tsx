@@ -73,7 +73,7 @@ export default function PayrollRunsPage() {
     ];
 
     return (
-        <div className="min-h-screen bg-[var(--color-background)] p-6 lg:p-8">
+        <div className="min-h-screen bg-background p-6 lg:p-8">
             <div className="max-w-7xl mx-auto">
                 <PageHeader
                     title={t('runs.title')}
@@ -81,7 +81,7 @@ export default function PayrollRunsPage() {
                     action={
                         <button
                             onClick={() => setCreateOpen(true)}
-                            className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[var(--color-primary)] hover:bg-[var(--color-primary-hover)] text-[var(--color-secondary)] font-semibold text-sm transition-colors shadow-sm cursor-pointer"
+                            className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-primary hover:bg-primary-hover text-secondary font-semibold text-sm transition-colors shadow-sm cursor-pointer"
                         >
                             <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                                 <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
@@ -98,8 +98,8 @@ export default function PayrollRunsPage() {
                             key={s}
                             onClick={() => setStatusFilter(s)}
                             className={`px-3.5 py-1.5 rounded-full text-sm font-semibold transition-colors cursor-pointer ${statusFilter === s
-                                    ? 'bg-[var(--color-secondary)] text-white'
-                                    : 'bg-white border border-gray-200 text-[var(--color-content-muted)] hover:border-gray-300'
+                                    ? 'bg-secondary text-white'
+                                    : 'bg-white border border-gray-200 text-content-muted hover:border-gray-300'
                                 }`}
                         >
                             {t(`runs.filters.${s}`)}
@@ -117,7 +117,7 @@ export default function PayrollRunsPage() {
                                         (h) => (
                                             <th
                                                 key={h}
-                                                className="px-4 py-3 text-left text-xs font-semibold text-[var(--color-content-muted)] uppercase tracking-wide whitespace-nowrap"
+                                                className="px-4 py-3 text-left text-xs font-semibold text-content-muted uppercase tracking-wide whitespace-nowrap"
                                             >
                                                 {h}
                                             </th>
@@ -144,24 +144,24 @@ export default function PayrollRunsPage() {
                                             key={run.id}
                                             className="border-b border-gray-50 hover:bg-gray-50/50 transition-colors"
                                         >
-                                            <td className="px-4 py-3.5 font-semibold text-[var(--color-content-dark)] whitespace-nowrap">
+                                            <td className="px-4 py-3.5 font-semibold text-content-dark whitespace-nowrap">
                                                 {formatMonthYear(run.month, run.year, t)}
                                             </td>
                                             <td className="px-4 py-3.5">
                                                 <PayrollStatusBadge status={run.status} />
                                             </td>
-                                            <td className="px-4 py-3.5 text-[var(--color-content-muted)]">
+                                            <td className="px-4 py-3.5 text-content-muted">
                                                 {run._count.entries}
                                             </td>
-                                            <td className="px-4 py-3.5 text-[var(--color-content)] whitespace-nowrap">
+                                            <td className="px-4 py-3.5 text-content whitespace-nowrap">
                                                 {run.creator.firstName} {run.creator.lastName}
                                             </td>
-                                            <td className="px-4 py-3.5 text-[var(--color-content)] whitespace-nowrap">
+                                            <td className="px-4 py-3.5 text-content whitespace-nowrap">
                                                 {run.approver
                                                     ? `${run.approver.firstName} ${run.approver.lastName}`
                                                     : <span className="text-gray-300">—</span>}
                                             </td>
-                                            <td className="px-4 py-3.5 text-[var(--color-content-muted)] whitespace-nowrap">
+                                            <td className="px-4 py-3.5 text-content-muted whitespace-nowrap">
                                                 {run.paidAt
                                                     ? new Date(run.paidAt).toLocaleDateString()
                                                     : <span className="text-gray-300">—</span>}
@@ -170,7 +170,7 @@ export default function PayrollRunsPage() {
                                                 <div className="flex items-center gap-2">
                                                     <button
                                                         onClick={() => router.push(`/payroll/runs/${run.id}`)}
-                                                        className="px-3 py-1.5 rounded-lg text-xs font-semibold bg-gray-100 hover:bg-gray-200 text-[var(--color-content)] transition-colors cursor-pointer"
+                                                        className="px-3 py-1.5 rounded-lg text-xs font-semibold bg-gray-100 hover:bg-gray-200 text-content transition-colors cursor-pointer"
                                                     >
                                                         {t('runs.actions.view')}
                                                     </button>

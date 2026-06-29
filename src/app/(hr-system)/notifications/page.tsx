@@ -72,14 +72,14 @@ export default function NotificationsPage() {
 
       <div className="overflow-x-auto rounded-2xl border border-gray-100 bg-card shadow-sm flex flex-col">
         {isLoading ? (
-          <div className="flex-1 flex flex-col items-center justify-center gap-3 min-h-[400px]">
+          <div className="flex-1 flex flex-col items-center justify-center gap-3 min-h-100">
             <Loader2 className="animate-spin text-primary" size={36} />
             <p className="text-sm font-bold text-content-muted animate-pulse">
               {t("loading")}
             </p>
           </div>
         ) : isError ? (
-          <div className="flex-1 flex items-center justify-center text-status-error font-bold min-h-[200px]">
+          <div className="flex-1 flex items-center justify-center text-status-error font-bold min-h-50">
             {t("errors.fetch")}
           </div>
         ) : (

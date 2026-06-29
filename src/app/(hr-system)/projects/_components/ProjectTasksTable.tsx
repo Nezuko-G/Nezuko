@@ -105,12 +105,12 @@ export default function ProjectTasksTable({
                   </td>
                 )}
                 <td className="px-4 py-3">
-                  <span className="text-sm text-content-muted truncate max-w-[120px] block">
+                  <span className="text-sm text-content-muted truncate max-w-30 block">
                     {task.createdBy?.name ?? "—"}
                   </span>
                 </td>
                 <td className="px-4 py-3">
-                  <span className="text-sm text-content-muted truncate max-w-[120px] block">
+                  <span className="text-sm text-content-muted truncate max-w-30 block">
                     {task.assignee?.name ?? "—"}
                   </span>
                 </td>
@@ -172,7 +172,7 @@ export default function ProjectTasksTable({
                     className="bg-gray-50/40 border-b border-gray-50 last:border-0"
                   >
                     <td />
-                    <td className="px-4 py-2.5 max-w-[200px] truncate">
+                    <td className="px-4 py-2.5 max-w-50 truncate">
                       <div className="flex items-center gap-2 ms-5 border-s-2 border-gray-200 ps-3">
                         <button
                           onClick={() => onViewDetail?.(sub)}
@@ -190,12 +190,12 @@ export default function ProjectTasksTable({
                       </td>
                     )}
                     <td className="px-4 py-2.5">
-                      <span className="text-sm text-content-muted truncate max-w-[100px] block">
+                      <span className="text-sm text-content-muted truncate max-w-25 block">
                         {sub.createdBy?.name ?? "—"}
                       </span>
                     </td>
                     <td className="px-4 py-2.5">
-                      <span className="text-sm text-content-muted truncate max-w-[100px] block">
+                      <span className="text-sm text-content-muted truncate max-w-25 block">
                         {sub.assignee?.name ?? "—"}
                       </span>
                     </td>

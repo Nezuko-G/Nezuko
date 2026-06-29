@@ -24,7 +24,7 @@ import type { Task, UpdateTaskPayload } from "../types/project.types";
 const MANAGE_ROLES = ["HR_ADMIN", "MANAGER", "TENANT_OWNER"] as const;
 
 export default function ProjectDetailPage() {
-    const { id: currentUserId, role } = useAuthStore();
+    const { role } = useAuthStore();
     const canManage = MANAGE_ROLES.includes(role as typeof MANAGE_ROLES[number]);
     const { id } = useParams<{ id: string }>();
     const t = useTranslations("projects");
@@ -92,7 +92,7 @@ export default function ProjectDetailPage() {
                     )}
                 </div>
                 {canManage && (
-                    <div className="flex items-center gap-2 flex-shrink-0">
+                    <div className="flex items-center gap-2 shrink-0">
                         <button
                             onClick={() => setFormOpen(true)}
                             className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-gray-200 text-sm font-medium hover:bg-gray-50 transition-colors"

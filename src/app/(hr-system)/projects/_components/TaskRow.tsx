@@ -2,7 +2,7 @@
 
 import { useTranslations } from "next-intl";
 import { useState } from "react";
-import { ChevronDown, ChevronRight, Plus, AlertCircle } from "lucide-react";
+import { ChevronDown, ChevronRight, Plus } from "lucide-react";
 import { TaskStatusBadge, PriorityBadge } from "./Badges";
 import type { Task } from "../types/project.types";
 import { TaskStatus } from "../types/project.types";

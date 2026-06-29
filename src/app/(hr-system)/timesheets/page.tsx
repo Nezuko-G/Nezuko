@@ -39,6 +39,7 @@ export default function TimesheetsPage() {
   }), [statusFilter, fromDate, toDate, debouncedSearch, page, manage]);
 
   const { data, isLoading, isError, error, refetch, isFetching } = useTimesheets(filters);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const timesheets = data?.timesheets ?? [];
   const meta = data?.meta ?? null;
   const lastPage = meta?.totalPages || 1;

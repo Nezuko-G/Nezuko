@@ -64,7 +64,7 @@ function OverdueTaskRow({
         </button>
       </td>
       <td className="px-4 py-3">
-        <span title={task.project?.name} className="text-sm text-content-muted truncate max-w-[120px] block">
+        <span title={task.project?.name} className="text-sm text-content-muted truncate max-w-30 block">
           {task.project?.name ?? "—"}
         </span>
       </td>

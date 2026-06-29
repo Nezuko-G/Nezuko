@@ -117,10 +117,10 @@ export const AddIncentiveModal = ({ open, onClose, onSuccess }: AddIncentiveModa
 
         {/* Header */}
         <div className="flex items-center justify-between mb-5">
-          <h2 className="text-lg font-bold text-[var(--color-content-dark)]">
+          <h2 className="text-lg font-bold text-content-dark">
             {t('addIncentiveModal.title')}
           </h2>
-          <button onClick={handleClose} className="p-2 rounded-xl hover:bg-gray-100 text-[var(--color-content-muted)] transition-colors">
+          <button onClick={handleClose} className="p-2 rounded-xl hover:bg-gray-100 text-content-muted transition-colors">
             <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
             </svg>
@@ -131,21 +131,21 @@ export const AddIncentiveModal = ({ open, onClose, onSuccess }: AddIncentiveModa
 
           {/* Employee Selector */}
           <div>
-            <label className="block text-sm font-semibold text-[var(--color-content-dark)] mb-1.5">
+            <label className="block text-sm font-semibold text-content-dark mb-1.5">
               {t('addIncentiveModal.employee')} <span className="text-red-500">*</span>
             </label>
 
             {selectedEmployee ? (
-              <div className="flex items-center gap-2 px-3 py-2 rounded-xl bg-[var(--color-primary-light)] border border-[var(--color-primary)]">
-                <div className="w-7 h-7 rounded-full bg-[var(--color-secondary)] text-[var(--color-primary)] text-xs font-bold flex items-center justify-center shrink-0">
+              <div className="flex items-center gap-2 px-3 py-2 rounded-xl bg-primary-light border border-primary">
+                <div className="w-7 h-7 rounded-full bg-secondaryext-xs font-bold flex items-center justify-center shrink-0">
                   {selectedEmployee.firstName[0]}{selectedEmployee.lastName[0]}
                 </div>
                 <div className="min-w-0 flex-1">
-                  <p className="text-sm font-semibold text-[var(--color-secondary)] truncate">
+                  <p className="text-sm font-semibold text-secondary truncate">
                     {selectedEmployee.firstName} {selectedEmployee.lastName}
                   </p>
                   {selectedEmployee.department?.name && (
-                    <p className="text-xs text-[var(--color-content-muted)] truncate">
+                    <p className="text-xs text-content-muted truncate">
                       {selectedEmployee.department.name}
                       {selectedEmployee.jobTitle ? ` · ${selectedEmployee.jobTitle}` : ''}
                     </p>
@@ -171,17 +171,17 @@ export const AddIncentiveModal = ({ open, onClose, onSuccess }: AddIncentiveModa
                     placeholder={t('addIncentiveModal.searchPlaceholder')}
                     value={search}
                     onChange={(e) => setSearch(e.target.value)}
-                    className="w-full pl-9 pr-3 py-2.5 rounded-xl border border-gray-200 bg-gray-50 text-sm focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)] focus:border-transparent transition"
+                    className="w-full pl-9 pr-3 py-2.5 rounded-xl border border-gray-200 bg-gray-50 text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition"
                   />
                 </div>
 
                 <div className="border border-gray-200 rounded-xl overflow-hidden max-h-44 overflow-y-auto">
                   {empLoading ? (
                     <div className="flex items-center justify-center py-6">
-                      <div className="w-5 h-5 border-2 border-[var(--color-primary)] border-t-transparent rounded-full animate-spin" />
+                      <div className="w-5 h-5 border-2 border-primary border-t-transparent rounded-full animate-spin" />
                     </div>
                   ) : filtered.length === 0 ? (
-                    <p className="text-center text-sm text-[var(--color-content-muted)] py-6">
+                    <p className="text-center text-sm text-content-muted py-6">
                       {search
                         ? t('addIncentiveModal.noMatch')
                         : t('addIncentiveModal.noEmployees')}
@@ -196,14 +196,14 @@ export const AddIncentiveModal = ({ open, onClose, onSuccess }: AddIncentiveModa
                         }}
                         className="w-full flex items-center gap-3 px-3 py-2.5 hover:bg-gray-50 transition-colors border-b border-gray-50 last:border-0 text-left cursor-pointer"
                       >
-                        <div className="w-7 h-7 rounded-full bg-[var(--color-secondary)] text-[var(--color-primary)] text-xs font-bold flex items-center justify-center shrink-0">
+                        <div className="w-7 h-7 rounded-full bg-secondary text-primary text-xs font-bold flex items-center justify-center shrink-0">
                           {emp.firstName[0]}{emp.lastName[0]}
                         </div>
                         <div className="min-w-0">
-                          <p className="text-sm font-semibold text-[var(--color-content-dark)] truncate">
+                          <p className="text-sm font-semibold text-content-dark truncate">
                             {emp.firstName} {emp.lastName}
                           </p>
-                          <p className="text-xs text-[var(--color-content-muted)] truncate">
+                          <p className="text-xs text-content-muted truncate">
                             {emp.department?.name ?? t('payslipDetail.noDepartment')}
                             {emp.jobTitle ? ` · ${emp.jobTitle}` : ''}
                           </p>
@@ -218,13 +218,13 @@ export const AddIncentiveModal = ({ open, onClose, onSuccess }: AddIncentiveModa
 
           {/* Type */}
           <div>
-            <label className="block text-sm font-semibold text-[var(--color-content-dark)] mb-1.5">
+            <label className="block text-sm font-semibold text-content-dark mb-1.5">
               {t('addIncentiveModal.type')} <span className="text-red-500">*</span>
             </label>
             <select
               value={form.type}
               onChange={(e) => setForm((f) => ({ ...f, type: e.target.value as IncentiveType }))}
-              className="w-full rounded-xl border border-gray-200 bg-gray-50 px-3 py-2.5 text-sm text-[var(--color-content-dark)] focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)] focus:border-transparent transition"
+              className="w-full rounded-xl border border-gray-200 bg-gray-50 px-3 py-2.5 text-sm text-content-dark focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition"
             >
               {INCENTIVE_TYPES.map((type) => (
                 <option key={type} value={type}>{t(`incentiveType.${type}`)}</option>
@@ -234,7 +234,7 @@ export const AddIncentiveModal = ({ open, onClose, onSuccess }: AddIncentiveModa
 
           {/* Amount */}
           <div>
-            <label className="block text-sm font-semibold text-[var(--color-content-dark)] mb-1.5">
+            <label className="block text-sm font-semibold text-content-dark mb-1.5">
               {t('addIncentiveModal.amount')} <span className="text-red-500">*</span>
             </label>
             <input
@@ -244,13 +244,13 @@ export const AddIncentiveModal = ({ open, onClose, onSuccess }: AddIncentiveModa
               placeholder="0.00"
               value={form.amount}
               onChange={(e) => setForm((f) => ({ ...f, amount: e.target.value }))}
-              className="w-full rounded-xl border border-gray-200 bg-gray-50 px-3 py-2.5 text-sm text-[var(--color-content-dark)] focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)] focus:border-transparent transition"
+              className="w-full rounded-xl border border-gray-200 bg-gray-50 px-3 py-2.5 text-sm text-content-dark focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition"
             />
           </div>
 
           {/* Description */}
           <div>
-            <label className="block text-sm font-semibold text-[var(--color-content-dark)] mb-1.5">
+            <label className="block text-sm font-semibold text-content-dark mb-1.5">
               {t('addIncentiveModal.description')}
             </label>
             <textarea
@@ -258,20 +258,20 @@ export const AddIncentiveModal = ({ open, onClose, onSuccess }: AddIncentiveModa
               placeholder={t('addIncentiveModal.descriptionPlaceholder')}
               value={form.description}
               onChange={(e) => setForm((f) => ({ ...f, description: e.target.value }))}
-              className="w-full rounded-xl border border-gray-200 bg-gray-50 px-3 py-2.5 text-sm text-[var(--color-content-dark)] focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)] focus:border-transparent transition resize-none"
+              className="w-full rounded-xl border border-gray-200 bg-gray-50 px-3 py-2.5 text-sm text-content-dark focus:outline-none focus:ring-2 focus:ring-primaryransparent transition resize-none"
             />
           </div>
 
           {/* Effective Date */}
           <div>
-            <label className="block text-sm font-semibold text-[var(--color-content-dark)] mb-1.5">
+            <label className="block text-sm font-semibold text-content-dark mb-1.5">
               {t('addIncentiveModal.effectiveDate')} <span className="text-red-500">*</span>
             </label>
             <input
               type="date"
               value={form.effectiveDate}
               onChange={(e) => setForm((f) => ({ ...f, effectiveDate: e.target.value }))}
-              className="w-full rounded-xl border border-gray-200 bg-gray-50 px-3 py-2.5 text-sm text-[var(--color-content-dark)] focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)] focus:border-transparent transition"
+              className="w-full rounded-xl border border-gray-200 bg-gray-50 px-3 py-2.5 text-sm text-content-dark focus:outline-none focus:ring-2 focus:ring-primaryransparent transition"
             />
           </div>
         </div>
@@ -289,14 +289,14 @@ export const AddIncentiveModal = ({ open, onClose, onSuccess }: AddIncentiveModa
           <button
             onClick={handleClose}
             disabled={loading}
-            className="px-4 py-2 rounded-xl text-sm font-semibold border border-gray-200 text-[var(--color-content)] hover:bg-gray-50 transition-colors disabled:opacity-50"
+            className="px-4 py-2 rounded-xl text-sm font-semibold border border-gray-200 text-content50 transition-colors disabled:opacity-50"
           >
             {t('addIncentiveModal.cancelBtn')}
           </button>
           <button
             onClick={handleSubmit}
             disabled={loading}
-            className="px-4 py-2 rounded-xl text-sm font-semibold bg-[var(--color-primary)] hover:bg-[var(--color-primary-hover)] text-[var(--color-secondary)] transition-colors disabled:opacity-50"
+            className="px-4 py-2 rounded-xl text-sm font-semibold bg-primary hover:bg-primary-hoverlor-secondary)] transition-colors disabled:opacity-50"
           >
             {loading ? t('addIncentiveModal.addingBtn') : t('addIncentiveModal.addBtn')}
           </button>

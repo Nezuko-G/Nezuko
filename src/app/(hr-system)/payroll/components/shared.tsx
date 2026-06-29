@@ -99,13 +99,13 @@ export const ConfirmModal = ({
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
             <div className="absolute inset-0 bg-black/40 backdrop-blur-sm" onClick={onClose} />
             <div className="relative bg-white rounded-2xl shadow-2xl w-full max-w-md p-6 animate-in fade-in slide-in-from-bottom-4 duration-200">
-                <h3 className="text-lg font-bold text-[var(--color-content-dark)] mb-2">{title}</h3>
-                <p className="text-sm text-[var(--color-content-muted)] mb-6">{description}</p>
+                <h3 className="text-lg font-bold text-content-dark mb-2">{title}</h3>
+                <p className="text-sm text-content-muted mb-6">{description}</p>
                 <div className="flex gap-3 justify-end">
                     <button
                         onClick={onClose}
                         disabled={loading}
-                        className="px-4 py-2 rounded-xl text-sm font-semibold border border-gray-200 text-[var(--color-content)] hover:bg-gray-50 transition-colors disabled:opacity-50"
+                        className="px-4 py-2 rounded-xl text-sm font-semibold border border-gray-200 text-content hover:bg-gray-50 transition-colors disabled:opacity-50"
                     >
                         {t('shared.confirmModal.cancel')}
                     </button>
@@ -137,10 +137,10 @@ export const Drawer = ({ open, onClose, title, children }: DrawerProps) => {
             <div className="absolute inset-0 bg-black/30 backdrop-blur-sm" onClick={onClose} />
             <div className="relative bg-white w-full max-w-lg h-full overflow-y-auto shadow-2xl animate-in slide-in-from-right duration-300">
                 <div className="sticky top-0 bg-white border-b border-gray-100 px-6 py-4 flex items-center justify-between z-10">
-                    <h2 className="text-lg font-bold text-[var(--color-content-dark)]">{title}</h2>
+                    <h2 className="text-lg font-bold text-content-dark">{title}</h2>
                     <button
                         onClick={onClose}
-                        className="p-2 rounded-xl hover:bg-gray-100 text-[var(--color-content-muted)] transition-colors"
+                        className="p-2 rounded-xl hover:bg-gray-100 text-content-muted transition-colors"
                     >
                         <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                             <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
@@ -183,8 +183,8 @@ export const PageHeader = ({
 }) => (
     <div className="flex items-start justify-between mb-8">
         <div>
-            <h1 className="text-2xl font-bold text-[var(--color-content-dark)] tracking-tight">{title}</h1>
-            {subtitle && <p className="mt-1 text-sm text-[var(--color-content-muted)]">{subtitle}</p>}
+            <h1 className="text-2xl font-bold text-content-dark tracking-tight">{title}</h1>
+            {subtitle && <p className="mt-1 text-sm text-content-muted">{subtitle}</p>}
         </div>
         {action && <div>{action}</div>}
     </div>
@@ -192,7 +192,7 @@ export const PageHeader = ({
 
 
 export const EmptyState = ({ message }: { message: string }) => (
-    <div className="flex flex-col items-center justify-center py-16 text-[var(--color-content-muted)]">
+    <div className="flex flex-col items-center justify-center py-16 text-content-muted">
         <svg className="w-12 h-12 mb-3 opacity-30" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
         </svg>
@@ -215,5 +215,5 @@ export const TableSkeleton = ({ rows = 5, cols = 6 }: { rows?: number; cols?: nu
 
 
 export const NetSalaryCell = ({ amount }: { amount: number }) => (
-    <span className="font-bold text-[var(--color-primary-hover)]">{formatCurrency(amount)}</span>
+    <span className="font-bold text-primary-hover">{formatCurrency(amount)}</span>
 );
