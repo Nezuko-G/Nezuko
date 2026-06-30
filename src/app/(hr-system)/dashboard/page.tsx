@@ -1,5 +1,8 @@
-import DashboardPage from "./components/dashboard";
+import DashboardClient from "./components/dashboard";
+import { getDashboard } from "./api/dashboard.api";
 
-export default function Page() {
-  return <DashboardPage />; 
+export default async function Page() {
+  const data = await getDashboard();
+
+  return <DashboardClient initialData={data} />;
 }

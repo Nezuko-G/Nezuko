@@ -18,7 +18,7 @@ export function onResponse(response: AxiosResponse): AxiosFormattedResponse {
 
 export async function onResponseError(
   error: AxiosError
-): Promise<AxiosFormattedResponse | any> {
+): Promise<AxiosFormattedResponse> {
   const originalRequest = error.config as InternalAxiosRequestConfig & { _retry?: boolean };
   const status = error.response?.status;
   const responseData = error.response?.data as Record<string, unknown> | undefined;
