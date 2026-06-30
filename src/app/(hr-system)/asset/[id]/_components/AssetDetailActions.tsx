@@ -2,7 +2,7 @@
 
 import { useTranslations } from "next-intl";
 import { useAssetUIStore } from "@/app/(hr-system)/asset/hooks/useAssetUIStore";
-import { Asset } from "@/types/dto/asset.dto";
+import { Asset } from "../../types/asset.dto";
 import { ArrowRightLeft, CornerDownLeft, Edit2, UserPlus } from "lucide-react";
 
 export default function AssetDetailActions({ asset }: { asset: Asset }) {

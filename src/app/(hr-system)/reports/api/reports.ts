@@ -1,7 +1,7 @@
 import { z } from "zod";
 import apiClient from "@/lib/axios/core/instance";
-import { apis } from "../config";
-import { ReportTypeDTO, ReportPreviewDTO, ReportHistoryItemDTO } from "@/types/dto/report.dto";
+import { apis } from "@/lib/api/config";
+import { ReportTypeDTO, ReportPreviewDTO, ReportHistoryItemDTO } from "../types/report.dto";
 
 interface ApiResponse<T> {
   data: T;

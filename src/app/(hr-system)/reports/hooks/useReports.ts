@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useQuery } from "@tanstack/react-query";
-import { getReportTypes, getReportPreview, getReportHistory, downloadReportCsv, downloadReportPdf } from "@/lib/api/endpoints/reports";
+import { getReportTypes, getReportPreview, getReportHistory, downloadReportCsv, downloadReportPdf } from "../api/reports";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { useTranslations } from "next-intl";

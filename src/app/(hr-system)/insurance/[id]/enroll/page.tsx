@@ -10,7 +10,7 @@ import {
   useCostPreview,
 } from "@/app/(hr-system)/insurance/hooks/useInsurance";
 import { useEmployees } from "@/hooks/use-employee";
-import { EnrollEmployeeDTO } from "@/types/dto/insurance.dto";
+import { EnrollEmployeeDTO } from "../../types/insurance.dto";
 import { EmployeeSummary } from "@/app/(hr-system)/employees/types/employees.dto";
 import { Loader2, ChevronRight, Calculator } from "lucide-react";
 

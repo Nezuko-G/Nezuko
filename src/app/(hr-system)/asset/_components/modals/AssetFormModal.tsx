@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { useTranslations } from "next-intl";
 import { useAssetUIStore } from "@/app/(hr-system)/asset/hooks/useAssetUIStore";
-import { AssetConditionEnum } from "@/types/dto/asset.dto";
+import { AssetConditionEnum } from "../../types/asset.dto";
 import { useAssetMutations } from "@/app/(hr-system)/asset/hooks/useAssets";
 import { X, Loader2 } from "lucide-react";
 import { z } from "zod";

@@ -5,7 +5,7 @@ import {
   createDepartment,
   updateDepartment,
   deleteDepartment,
-} from "@/lib/api/endpoints/departments";
+} from "../api/departments";
 import { useDepartmentUIStore } from "./useDepartmentUIStore";
 
 export const useDepartments = (params: { page?: number; limit?: number; search?: string; parentId?: string }) => {

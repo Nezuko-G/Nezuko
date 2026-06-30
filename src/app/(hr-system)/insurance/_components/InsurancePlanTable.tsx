@@ -1,7 +1,7 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { InsurancePlan } from "@/types/dto/insurance.dto";
+import { InsurancePlan } from "../types/insurance.dto";
 import { useInsuranceUIStore } from "@/app/(hr-system)/insurance/hooks/useInsuranceUIStore";
 import {
   Pencil,

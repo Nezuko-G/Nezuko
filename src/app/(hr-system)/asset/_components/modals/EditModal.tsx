@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useTranslations } from "next-intl";
 import { useAssetUIStore } from "@/app/(hr-system)/asset/hooks/useAssetUIStore";
-import { UpdateAssetDTO } from "@/types/dto/asset.dto";
+import { UpdateAssetDTO } from "../../types/asset.dto";
 import { useAssetMutations } from "@/app/(hr-system)/asset/hooks/useAssets";
 import { X, Loader2, ChevronDown } from "lucide-react";
 import { z } from "zod";

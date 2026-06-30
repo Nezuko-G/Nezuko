@@ -1,7 +1,7 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { Department } from "@/types/dto/department.dto";
+import { Department } from "../types/department.dto";
 import { useDepartmentUIStore } from "@/app/(hr-system)/departments/hooks/useDepartmentUIStore";
 import { useAuthStore } from "@/hooks/useAuthStore";
 import { Pencil, CornerDownRight } from "lucide-react";

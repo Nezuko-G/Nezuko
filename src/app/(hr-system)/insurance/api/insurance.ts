@@ -1,11 +1,11 @@
 import { z } from "zod";
 import apiClient from "@/lib/axios/core/instance";
-import { apis } from "../../../../lib/api/config";
+import { apis } from "@/lib/api/config";
 import { 
   InsurancePlanDTO, CreateInsurancePlanDTO, UpdateInsurancePlanDTO, 
   InsuranceEnrollmentDTO, EnrollEmployeeDTO, 
   CoverageReportItemDTO, CostPreviewDTO, CreateDependentDTO 
-} from "@/types/dto/insurance.dto";
+} from "../types/insurance.dto";
 
 interface ApiResponse<T> {
   data: T;
