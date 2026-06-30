@@ -26,7 +26,8 @@ import {
   RadialBarChart,
   RadialBar,
 } from "recharts";
-import { useDashboard } from "../hooks/useDashboard";
+import { DashboardResponse } from "../types/dashboard.dto";
+
 
 const PIE_COLORS = ["#00FFB9", "#00cc94", "#000028", "#1a1a3d"];
 
@@ -194,64 +195,16 @@ function AttendanceRing({ percentage }: { percentage: number }) {
   );
 }
 
-function DashboardSkeleton() {
-  return (
-    <div className="min-h-screen bg-background">
-      <div className="mx-auto max-w-6xl px-4 pt-4">
-        <div className="h-16 w-full animate-pulse rounded-3xl bg-gray-200" />
-      </div>
-      <div className="mx-auto max-w-6xl animate-pulse px-4 pb-12 pt-6">
-        <div className="mb-8 grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-6">
-          {Array.from({ length: 6 }).map((_, i) => (
-            <div key={i} className="h-36 rounded-2xl border-2 border-gray-200 bg-gray-100" />
-          ))}
-        </div>
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-          <div className="h-72 rounded-2xl border-2 border-gray-200 bg-gray-100" />
-          <div className="h-72 rounded-2xl border-2 border-gray-200 bg-gray-100" />
-          <div className="col-span-full h-72 rounded-2xl border-2 border-gray-200 bg-gray-100" />
-        </div>
-      </div>
-    </div>
-  );
-}
+type Props = {
+  initialData: DashboardResponse;
+};
 
-function DashboardError({ message, onRetry }: { message: string; onRetry: () => void }) {
-  return (
-    <div className="flex min-h-[60vh] flex-col items-center justify-center gap-4 text-center">
-      <div className="flex h-14 w-14 items-center justify-center rounded-full border-2 border-status-error/30 bg-status-error/10">
-        <AlertCircle size={24} className="text-status-error" />
-      </div>
-      <p className="text-sm text-content-muted">{message}</p>
-      <button
-        onClick={onRetry}
-        className="rounded-full border-2 border-secondary/20 bg-secondary px-6 py-2 text-sm font-semibold text-primary transition hover:bg-secondary-hover"
-      >
-        Try Again
-      </button>
-    </div>
-  );
-}
-
-export default function DashboardPage() {
+export default function DashboardClient({ initialData }: Props) {
   const t = useTranslations("dashboard");
-  const { data, isLoading, isError, error, refetch } = useDashboard();
 
-  if (isLoading) return <DashboardSkeleton />;
-
-  if (isError || !data) {
-    return (
-      <main className="min-h-screen bg-background">
-        <DashboardError
-          message={(error as Error)?.message ?? "Failed to load dashboard"}
-          onRetry={() => refetch()}
-        />
-      </main>
-    );
-  }
-
-  const { keyMetrics, charts, insights } = data.data;
+  const { keyMetrics, charts, insights } = initialData.data;
   const attendancePct = insights.attendanceOverview.presentPercentage;
+
 
   const metricCards = [
     {
