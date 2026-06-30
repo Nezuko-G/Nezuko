@@ -18,8 +18,9 @@ export function useLogin() {
       password: string;
     }) => login(data),
     onSuccess: async (response) => {
+
       const user = response?.data?.user || response?.user;
-      const role = user?.role;
+       const role = response?.data?.user?.role || response?.user?.role;
 
       if (user?.avatarUrl) {
         try {
@@ -45,7 +46,12 @@ export function useLogin() {
         });
       }
 
-      setRole(role || "EMPLOYEE");
+      localStorage.setItem(
+         "auth",
+         JSON.stringify({ isAuthenticated: true, role: role || "" }),
+       );
+ 
+       setRole(role || "EMPLOYEE");
 
       if (role === "EMPLOYEE") {
         router.push("/profile");
