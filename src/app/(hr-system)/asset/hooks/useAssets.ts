@@ -5,7 +5,7 @@ import {
   getAssets, getAsset, getAssetHistory, getDepreciationReport,
   createAsset, updateAsset, assignAsset, returnAsset, transferAsset, 
   getEmployeeAssets, getMyAssets
-} from "@/lib/api/endpoints/assets";
+} from "../api/assets";
 import { useAssetUIStore } from "./useAssetUIStore";
 
 export const useAssets = (params: { page?: number; limit?: number; search?: string; status?: string }) => {

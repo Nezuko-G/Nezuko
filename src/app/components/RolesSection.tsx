@@ -41,8 +41,8 @@ export default function RolesSection() {
       </div>
 
       <div className="relative w-full flex overflow-x-hidden py-10 group">
-        <div className="absolute top-0 bottom-0 left-0 w-32 md:w-64 bg-gradient-to-r from-background to-transparent z-20 pointer-events-none" />
-        <div className="absolute top-0 bottom-0 right-0 w-32 md:w-64 bg-gradient-to-l from-background to-transparent z-20 pointer-events-none" />
+        <div className="absolute top-0 bottom-0 left-0 w-32 md:w-64 bg-linear-to-r from-background to-transparent z-20 pointer-events-none" />
+        <div className="absolute top-0 bottom-0 right-0 w-32 md:w-64 bg-linear-to-l from-background to-transparent z-20 pointer-events-none" />
 
         <motion.div
           className="flex gap-8 px-4"
@@ -56,7 +56,7 @@ export default function RolesSection() {
           {duplicatedRoles.map((role, index) => (
             <div
               key={`${role.id}-${index}`}
-              className="relative w-[350px] md:w-[400px] h-[500px] shrink-0 bg-[#F4F5F7] rounded-[40px] overflow-hidden border border-gray-200/50 hover:shadow-2xl transition-all cursor-pointer flex flex-col justify-end"
+              className="relative w-87.5 md:w-100 h-125 shrink-0 bg-[#F4F5F7] rounded-[40px] overflow-hidden border border-gray-200/50 hover:shadow-2xl transition-all cursor-pointer flex flex-col justify-end"
             >
               <div className="absolute top-0 left-0 right-0 h-[90%] bg-gray-200">
                 <Image 
@@ -65,7 +65,7 @@ export default function RolesSection() {
                   fill
                   className="object-cover object-top"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#F4F5F7] via-[#F4F5F7]/40 to-transparent" />
+                <div className="absolute inset-0 bg-linear-to-t from-[#F4F5F7] via-[#F4F5F7]/40 to-transparent" />
               </div>
 
               <div className="relative z-10 p-10 pt-0">

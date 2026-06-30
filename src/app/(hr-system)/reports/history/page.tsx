@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import { useTranslations } from "next-intl";
@@ -10,7 +11,6 @@ import {
   Clock,
   Download,
   ChevronRight,
-  RefreshCw,
 } from "lucide-react";
 import { useRouter } from "@/i18n/navigation";
 import RoleGuard from "@/components/RoleGuard/RoleGuard";
@@ -58,7 +58,7 @@ export default function ReportHistoryPage() {
         </div>
 
         <div
-          className={`overflow-x-auto rounded-2xl border border-gray-100 bg-card shadow-sm flex flex-col ${isLoading || !history || history.length === 0 ? "min-h-[400px]" : ""}`}
+          className={`overflow-x-auto rounded-2xl border border-gray-100 bg-card shadow-sm flex flex-col ${isLoading || !history || history.length === 0 ? "min-h-100" : ""}`}
         >
           {isLoading ? (
             <div className="flex-1 flex items-center justify-center">

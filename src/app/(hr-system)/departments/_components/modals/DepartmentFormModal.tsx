@@ -9,7 +9,7 @@ import {
   useDepartmentMutations,
   useDepartments,
 } from "@/app/(hr-system)/departments/hooks/useDepartments";
-import { CreateDepartmentDTO } from "@/types/dto/department.dto";
+import { CreateDepartmentDTO } from "../../types/department.dto";
 import { useEmployees } from "@/hooks/use-employee";
 import { X, Loader2 } from "lucide-react";
 import { z } from "zod";

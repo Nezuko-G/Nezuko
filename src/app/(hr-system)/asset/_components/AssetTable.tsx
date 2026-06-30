@@ -1,7 +1,7 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { AssetDTO } from "@/types/dto/asset.dto";
+import { AssetDTO } from "../types/asset.dto";
 import { useAssetUIStore } from "@/app/(hr-system)/asset/hooks/useAssetUIStore";
 import { useAuthStore } from "@/hooks/useAuthStore";
 import { ArrowRightLeft, CornerDownLeft, UserPlus, Pencil } from "lucide-react";

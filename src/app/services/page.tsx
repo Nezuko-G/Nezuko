@@ -1,18 +1,16 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { motion, AnimatePresence } from "framer-motion";
 import {
-    Check,
     ChevronDown,
     ChevronUp,
     Star,
     ArrowRight,
-    Upload,
-    X,
+
 } from "lucide-react";
 
 import Navbar from "@/components/layout/Navbar";
@@ -105,79 +103,6 @@ function FaqRow({
     );
 }
 
-function PortalScreenshot({ label, sub, uploaded }: { label: string; sub: string; uploaded: string }) {
-    const [img, setImg] = useState<string | null>(null);
-    const inputRef = useRef<HTMLInputElement>(null);
-
-    function handleFile(file: File) {
-        if (!file.type.startsWith("image/")) return;
-        const reader = new FileReader();
-        reader.onload = (e) => setImg(e.target?.result as string);
-        reader.readAsDataURL(file);
-    }
-
-    function onDrop(e: React.DragEvent) {
-        e.preventDefault();
-        const file = e.dataTransfer.files[0];
-        if (file) handleFile(file);
-    }
-
-    return (
-        <div
-            onDrop={onDrop}
-            onDragOver={(e) => e.preventDefault()}
-            onClick={() => !img && inputRef.current?.click()}
-            className={`relative w-full rounded-2xl overflow-hidden border transition-all
-        ${img
-                    ? "border-white/10 cursor-default"
-                    : "border-dashed border-white/20 hover:border-primary/60 cursor-pointer bg-white/[0.03] hover:bg-white/[0.06]"
-                }`}
-            style={{ minHeight: 320 }}
-        >
-            <input
-                ref={inputRef}
-                type="file"
-                accept="image/*"
-                className="hidden"
-                onChange={(e) => {
-                    const file = e.target.files?.[0];
-                    if (file) handleFile(file);
-                }}
-            />
-
-            {img ? (
-                <>
-                    <Image
-                        src={img}
-                        alt="Portal screenshot"
-                        fill
-                        className="object-cover rounded-2xl"
-                        unoptimized
-                    />
-                    {/* Remove button */}
-                    <button
-                        onClick={(e) => { e.stopPropagation(); setImg(null); }}
-                        className="absolute top-3 right-3 w-8 h-8 rounded-full bg-black/60 flex items-center justify-center text-white/70 hover:text-white transition z-10"
-                    >
-                        <X size={14} />
-                    </button>
-                    {/* Uploaded badge */}
-                    <span className="absolute bottom-3 left-3 bg-primary/90 text-white text-xs font-bold px-3 py-1 rounded-full z-10">
-                        {uploaded}
-                    </span>
-                </>
-            ) : (
-                <div className="flex flex-col items-center justify-center gap-3 h-full py-16 px-8 text-center">
-                    <div className="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center">
-                        <Upload size={22} className="text-white/30" />
-                    </div>
-                    <p className="text-white/60 text-sm font-semibold">{label}</p>
-                    <p className="text-white/25 text-xs">{sub}</p>
-                </div>
-            )}
-        </div>
-    );
-}
 
 export default function ServicesPage() {
     const t = useTranslations("services");
@@ -368,7 +293,7 @@ export default function ServicesPage() {
                                     whileInView={{ opacity: 1, y: 0 }}
                                     viewport={{ once: true }}
                                     transition={{ duration: 0.5, delay: i * 0.15 }}
-                                    className="bg-white rounded-[2rem] border border-gray-100 shadow-xl p-8 flex flex-col justify-between min-h-[280px]"
+                                    className="bg-white rounded-4xl border border-gray-100 shadow-xl p-8 flex flex-col justify-between min-h-70"
                                 >
                                     <div>
                                         <div className="flex gap-0.5 mb-5">
@@ -417,7 +342,7 @@ export default function ServicesPage() {
                             </h2>
                             <p className="text-gray-500 text-lg">{t("faq.subtitle")}</p>
                         </motion.div>
-                        <div className="bg-white rounded-[2rem] border border-gray-100 shadow-lg px-6 md:px-10 py-2">
+                        <div className="bg-white rounded-4xl border border-gray-100 shadow-lg px-6 md:px-10 py-2">
                             {faqs.map((item, i) => (
                                 <FaqRow key={i} q={item.q} a={item.a} index={i} dark={false} />
                             ))}

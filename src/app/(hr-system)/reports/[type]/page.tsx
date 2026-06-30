@@ -46,6 +46,7 @@ export default function ReportGeneratorPage() {
       searchParams.forEach((value, key) => {
         initialFilters[key] = value;
       });
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setFilters(initialFilters);
     }
   }, [searchParams]);
@@ -132,7 +133,7 @@ export default function ReportGeneratorPage() {
         className={`rounded-2xl border border-gray-100 shadow-sm overflow-hidden flex flex-col ${isPreviewLoading || previewData.length === 0 ? "bg-card" : ""}`}
       >
         {isPreviewLoading ? (
-          <div className="flex-1 flex items-center justify-center min-h-[400px]">
+          <div className="flex-1 flex items-center justify-center min-h-100">
             <Loader2 className="animate-spin text-primary" size={36} />
           </div>
         ) : (

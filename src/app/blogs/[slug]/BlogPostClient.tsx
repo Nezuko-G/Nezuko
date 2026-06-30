@@ -135,7 +135,7 @@ export default function BlogPostClient({
                         transition={{ duration: 0.6, delay: 0.25 }}
                         className="max-w-5xl mx-auto px-4 md:px-6"
                     >
-                        <div className="relative h-64 md:h-[480px] rounded-t-[2rem] overflow-hidden">
+                        <div className="relative h-64 md:h-120 rounded-t-4xl overflow-hidden">
                             <Image
                                 src={meta.coverImg}
                                 alt={post.title}
@@ -144,7 +144,7 @@ export default function BlogPostClient({
                                 priority
                                 unoptimized
                             />
-                            <div className="absolute inset-0 bg-gradient-to-t from-[#000028]/40 to-transparent" />
+                            <div className="absolute inset-0 bg-linear-to-t from-secondary/40 to-transparent" />
                         </div>
                     </motion.div>
                 </div>

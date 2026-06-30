@@ -1,7 +1,7 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { Eye, CheckCheck } from "lucide-react";
+import { Eye } from "lucide-react";
 import { NotificationItem } from "@/app/(hr-system)/notifications/api/notifications";
 import { cn } from "@/lib/utils";
 
@@ -58,7 +58,7 @@ export default function NotificationTable({
 
   if (notifications.length === 0) {
     return (
-      <div className="flex-1 flex items-center justify-center min-h-[300px]">
+      <div className="flex-1 flex items-center justify-center min-h-75">
         <p className="text-content-muted font-semibold text-sm">
           {t("empty")}
         </p>
@@ -84,7 +84,7 @@ export default function NotificationTable({
             key={notification.id}
             className={cn(
               "border-b border-gray-50 last:border-0 transition-colors",
-              !notification.isSeen && "bg-primary/[0.02]",
+              !notification.isSeen && "bg-primary/2",
             )}
           >
             <td className="px-5 py-4">

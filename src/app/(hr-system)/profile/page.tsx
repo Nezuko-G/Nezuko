@@ -1,9 +1,10 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 "use client";
 
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
-import { ArrowLeft, AlertCircle, LogOut } from "lucide-react";
+import { ArrowLeft, AlertCircle } from "lucide-react";
 import { useProfile, useUpdateAvatar } from "./hooks/useProfile";
 import { useAuthStore } from "@/hooks/useAuthStore";
 import { fetchImageAsBase64, isAvatarStale } from "@/lib/avatar";

@@ -1,8 +1,8 @@
 import { z } from 'zod'
 import apiClient from 'axios'
-import { UserDTO } from '@/types/dto/user.dto'
-import { mapUserFromDTO } from '@/lib/mappers/user.mapper'
-import { apis } from '../config'
+import { UserDTO } from '../types/user.dto'
+import { mapUserFromDTO } from '../mappers/user.mapper'
+import { apis } from '@/lib/api/config'
 
 
 

@@ -9,7 +9,7 @@ import {
 import { X, Loader2, AlertTriangle, UserPlus } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { CreateDependentDTO } from "@/types/dto/insurance.dto";
+import { CreateDependentDTO } from "../../types/insurance.dto";
 import { z } from "zod";
 
 export default function InsuranceModalsContainer() {

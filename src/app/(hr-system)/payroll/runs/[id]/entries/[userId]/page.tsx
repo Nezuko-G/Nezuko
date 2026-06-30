@@ -38,22 +38,22 @@ export default function PayslipPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-[var(--color-background)] flex items-center justify-center">
-        <div className="w-8 h-8 border-2 border-[var(--color-primary)] border-t-transparent rounded-full animate-spin" />
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <div className="w-8 h-8 border-2 border-primary border-t-transparent rounded-full animate-spin" />
       </div>
     );
   }
 
   if (error || !entry || !run) {
     return (
-      <div className="min-h-screen bg-[var(--color-background)] flex items-center justify-center">
-        <p className="text-[var(--color-content-muted)]">{error || 'Payslip not found.'}</p>
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <p className="text-content-muted">{error || 'Payslip not found.'}</p>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-[var(--color-background)] p-6 lg:p-8">
+    <div className="min-h-screen bg-background p-6 lg:p-8">
       <div className="max-w-lg mx-auto">
         <PageHeader
           title={t('runDetail.payslipTitle', { monthYear: formatMonthYear(run.month, run.year, t) })}

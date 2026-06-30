@@ -6,7 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useTranslations } from "next-intl";
 import { useInsuranceUIStore } from "@/app/(hr-system)/insurance/hooks/useInsuranceUIStore";
 import { useInsuranceMutations } from "@/app/(hr-system)/insurance/hooks/useInsurance";
-import { CreateInsurancePlanDTO } from "@/types/dto/insurance.dto";
+import { CreateInsurancePlanDTO } from "../../types/insurance.dto";
 import { X, Loader2 } from "lucide-react";
 import { z } from "zod";
 

@@ -1,6 +1,6 @@
 import { z } from "zod";
-import type { User } from "@/types/dto/user.dto";
-import { UserDTO } from "@/types/dto/user.dto";
+import type { User } from "../types/user.dto";
+import { UserDTO } from "../types/user.dto";
 
 type UserDTOType = z.infer<typeof UserDTO>;
 

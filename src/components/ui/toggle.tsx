@@ -27,7 +27,7 @@ export default function Toggle({ checked, onChange, disabled }: ToggleProps) {
         className={cn(
           "inline-block h-5 w-5 rounded-full bg-white shadow-sm transition-transform",
           checked
-            ? "translate-x-[22px] rtl:-translate-x-[22px]"
+            ? "translate-x-5.5 rtl:-translate-x-5.5"
             : "translate-x-0.5 rtl:-translate-x-0.5",
         )}
       />

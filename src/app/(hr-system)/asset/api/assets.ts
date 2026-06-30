@@ -2,16 +2,16 @@
 
 import { z } from 'zod';
 import apiClient from '@/lib/axios/core/instance';
-import { apis } from '../config';
+import { apis } from '@/lib/api/config';
 import { 
   AssetDTO, AssetHistoryDTO,
   CreateAssetDTO, UpdateAssetDTO, 
   AssignAssetDTO, ReturnAssetDTO, TransferAssetDTO 
-} from '@/types/dto/asset.dto';
+} from '../types/asset.dto';
 import { 
   mapAssetFromDTO, mapAssetsFromDTO, 
   mapAssetHistoryFromDTO, mapDepreciationReport
-} from '@/lib/mappers/asset.mapper';
+} from '../mappers/asset.mapper';
 
 interface ApiResponse<T> {
   success: boolean;

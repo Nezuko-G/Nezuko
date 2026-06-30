@@ -7,8 +7,6 @@ import {
   PayrollStatusBadge,
   Drawer,
   formatMonthYear,
-  formatCurrency,
-  NetSalaryCell,
   PageHeader,
   EmptyState,
   TableSkeleton,
@@ -64,7 +62,7 @@ export default function MyPayslipPage() {
   const filtered = runs.filter((r) => yearFilter === 'ALL' || r.year === yearFilter);
 
   return (
-    <div className="min-h-screen bg-[var(--color-background)] p-6 lg:p-8">
+    <div className="min-h-screen bg-background p-6 lg:p-8">
       <div className="max-w-4xl mx-auto">
         <PageHeader
           title="My Payslips"
@@ -76,7 +74,7 @@ export default function MyPayslipPage() {
           <div className="flex gap-2 mb-6 flex-wrap">
             <button
               onClick={() => setYearFilter('ALL')}
-              className={`px-3.5 py-1.5 rounded-full text-sm font-semibold transition-colors ${yearFilter === 'ALL' ? 'bg-[var(--color-secondary)] text-white' : 'bg-white border border-gray-200 text-[var(--color-content-muted)] hover:border-gray-300'}`}
+              className={`px-3.5 py-1.5 rounded-full text-sm font-semibold transition-colors ${yearFilter === 'ALL' ? 'bg-secondary text-white' : 'bg-white border border-gray-200 text-content-muted hover:border-gray-300'}`}
             >
               All Years
             </button>
@@ -84,7 +82,7 @@ export default function MyPayslipPage() {
               <button
                 key={y}
                 onClick={() => setYearFilter(y)}
-                className={`px-3.5 py-1.5 rounded-full text-sm font-semibold transition-colors ${yearFilter === y ? 'bg-[var(--color-secondary)] text-white' : 'bg-white border border-gray-200 text-[var(--color-content-muted)] hover:border-gray-300'}`}
+                className={`px-3.5 py-1.5 rounded-full text-sm font-semibold transition-colors ${yearFilter === y ? 'bg-secondary text-white' : 'bg-white border border-gray-200 text-content-muted hover:border-gray-300'}`}
               >
                 {y}
               </button>
@@ -99,7 +97,7 @@ export default function MyPayslipPage() {
               <thead>
                 <tr className="border-b border-gray-100 bg-gray-50/60">
                   {['Month / Year', 'Base Salary', 'Net Salary', 'Status'].map((h) => (
-                    <th key={h} className="px-4 py-3 text-left text-xs font-semibold text-[var(--color-content-muted)] uppercase tracking-wide whitespace-nowrap">
+                    <th key={h} className="px-4 py-3 text-left text-xs font-semibold text-content-muted uppercase tracking-wide whitespace-nowrap">
                       {h}
                     </th>
                   ))}
@@ -125,10 +123,10 @@ export default function MyPayslipPage() {
                       onClick={() => handleRowClick(run)}
                       className="border-b border-gray-50 hover:bg-gray-50/60 cursor-pointer transition-colors"
                     >
-                      <td className="px-4 py-3.5 font-semibold text-[var(--color-content-dark)]">
+                      <td className="px-4 py-3.5 font-semibold text-content-dark">
                         {formatMonthYear(run.month, run.year)}
                       </td>
-                      <td className="px-4 py-3.5 text-[var(--color-content)]">—</td>
+                      <td className="px-4 py-3.5 text-content">—</td>
                       <td className="px-4 py-3.5">—</td>
                       <td className="px-4 py-3.5">
                         <PayrollStatusBadge status={run.status} />
@@ -141,7 +139,7 @@ export default function MyPayslipPage() {
           </div>
         </div>
 
-        <p className="mt-3 text-xs text-[var(--color-content-muted)] text-center">
+        <p className="mt-3 text-xs text-content-muted text-center">
           Click any row to view your full payslip breakdown.
         </p>
       </div>
@@ -154,7 +152,7 @@ export default function MyPayslipPage() {
       >
         {entryLoading && (
           <div className="flex items-center justify-center py-16">
-            <div className="w-6 h-6 border-2 border-[var(--color-primary)] border-t-transparent rounded-full animate-spin" />
+            <div className="w-6 h-6 border-2 border-primary border-t-transparent rounded-full animate-spin" />
           </div>
         )}
         {!entryLoading && entry && selectedRun && (

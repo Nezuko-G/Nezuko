@@ -90,7 +90,7 @@ export default function ProfileHeader({ data, avatarBase64, onUpload, isUploadin
 
     return (
         <div className="w-full lg:w-64 shrink-0 bg-card rounded-2xl border border-gray-200 shadow-sm overflow-hidden self-start">
-            <div className="h-1.5 bg-gradient-to-r from-primary/40 via-primary to-primary/40" />
+            <div className="h-1.5 bg-linear-to-r from-primary/40 via-primary to-primary/40" />
 
             <div className="px-6 pt-6 pb-5 flex flex-col items-center gap-3">
                 <div className="relative w-20 h-20 group">
@@ -103,7 +103,7 @@ export default function ProfileHeader({ data, avatarBase64, onUpload, isUploadin
                             className="w-20 h-20 rounded-full object-cover ring-4 ring-white shadow-sm"
                         />
                     ) : (
-                        <div className="w-20 h-20 rounded-full bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center text-primary font-extrabold text-2xl ring-4 ring-white shadow-sm">
+                        <div className="w-20 h-20 rounded-full bg-linear-to-br from-primary/20 to-primary/5 flex items-center justify-center text-primary font-extrabold text-2xl ring-4 ring-white shadow-sm">
                             {initials}
                         </div>
                     )}

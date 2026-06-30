@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { AssetDTO, DepreciationItem } from "@/types/dto/asset.dto";
+import { AssetDTO, DepreciationItem } from "../types/asset.dto";
 
 export const mapAssetFromDTO = (dto: z.infer<typeof AssetDTO>) => {
   return {

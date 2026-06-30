@@ -20,7 +20,7 @@ export default function MenaSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="w-full bg-[#121212] rounded-[2.5rem] rounded-br-[120px] md:rounded-br-[250px] flex flex-col md:flex-row items-center overflow-hidden min-h-[600px]"
+          className="w-full bg-[#121212] rounded-[2.5rem] rounded-br-[120px] md:rounded-br-[250px] flex flex-col md:flex-row items-center overflow-hidden min-h-150"
         >
           <div className="flex-1 p-10 md:p-20 flex flex-col justify-center">
             <Wallet className="text-gray-400 mb-8" size={56} />
@@ -31,7 +31,7 @@ export default function MenaSection() {
               {t("f1_desc")}
             </p>
           </div>
-          <div className="flex-1 relative w-full h-[400px] md:h-[600px]">
+          <div className="flex-1 relative w-full h-100 md:h-150">
             <Image
               src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1000"
               alt="Salary Data"
@@ -46,9 +46,9 @@ export default function MenaSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="w-full bg-[#F4F5F7] rounded-[2.5rem] rounded-tl-[120px] md:rounded-tl-[250px] flex flex-col-reverse md:flex-row items-center overflow-hidden min-h-[600px]"
+          className="w-full bg-[#F4F5F7] rounded-[2.5rem] rounded-tl-[120px] md:rounded-tl-[250px] flex flex-col-reverse md:flex-row items-center overflow-hidden min-h-150"
         >
-          <div className="flex-1 relative w-full h-[400px] md:h-[600px] bg-white/50 p-10 flex items-center justify-center">
+          <div className="flex-1 relative w-full h-100 md:h-150 bg-white/50 p-10 flex items-center justify-center">
             <Image
               src="https://images.unsplash.com/photo-1611162617474-5b21e879e113?q=80&w=1000"
               alt="Compliance Integrations"

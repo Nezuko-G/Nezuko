@@ -1,7 +1,7 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { User, Briefcase, Shield, Calendar, Phone, Tag, DollarSign, CheckCircle, Clock, Mail, Hash, MapPin, PhoneCall, MapPinned, Building, Contact, AlertCircle } from "lucide-react";
+import { User, Briefcase, Shield,  MapPin, PhoneCall } from "lucide-react";
 
 interface Props {
     data: {

@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { useDebounce } from "use-debounce";
 import { useTranslations } from "next-intl";
-import { AlertCircle, RefreshCw, Loader2, ChevronLeft, ChevronRight } from "lucide-react";
+import { AlertCircle, RefreshCw, ChevronLeft, ChevronRight } from "lucide-react";
 import { useLeaveRequests } from "@/app/(hr-system)/leave/hooks/useLeaveRequests";
 import { useAuthStore } from "@/hooks/useAuthStore";
 import { LeaveRequestForm } from "./_components/LeaveRequestForm";

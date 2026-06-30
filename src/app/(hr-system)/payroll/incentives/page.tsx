@@ -61,7 +61,7 @@ export default function IncentivesPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-[var(--color-background)] p-6 lg:p-8">
+    <div className="min-h-screen bg-background p-6 lg:p-8">
       <div className="max-w-7xl mx-auto">
         <PageHeader
           title={t('incentives.title')}
@@ -69,7 +69,7 @@ export default function IncentivesPage() {
           action={
             <button
               onClick={() => setAddOpen(true)}
-              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[var(--color-primary)] hover:bg-[var(--color-primary-hover)] text-[var(--color-secondary)] font-semibold text-sm transition-colors shadow-sm cursor-pointer"
+              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-primary hover:bg-primary-hover text-secondary font-semibold text-sm transition-colors shadow-sm cursor-pointer"
             >
               <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
@@ -86,8 +86,8 @@ export default function IncentivesPage() {
               key={type}
               onClick={() => setTypeFilter(type)}
               className={`px-3.5 py-1.5 rounded-full text-sm font-semibold transition-colors cursor-pointer ${typeFilter === type
-                  ? 'bg-[var(--color-secondary)] text-white'
-                  : 'bg-white border border-gray-200 text-[var(--color-content-muted)] hover:border-gray-300'
+                  ? 'bg-secondary text-white'
+                  : 'bg-white border border-gray-200 text-content-muted hover:border-gray-300'
                 }`}
             >
               {t(`incentiveType.${type}`)}
@@ -102,7 +102,7 @@ export default function IncentivesPage() {
               <thead>
                 <tr className="border-b border-gray-100 bg-gray-50/60">
                   {tableHeaders.map((h) => (
-                    <th key={h} className="px-4 py-3 text-left text-xs font-semibold text-[var(--color-content-muted)] uppercase tracking-wide whitespace-nowrap">
+                    <th key={h} className="px-4 py-3 text-left text-xs font-semibold text-content-muted uppercase tracking-wide whitespace-nowrap">
                       {h}
                     </th>
                   ))}
@@ -127,7 +127,7 @@ export default function IncentivesPage() {
                     return (
                       <tr key={inc.id} className="border-b border-gray-50 hover:bg-gray-50/50 transition-colors">
                         <td className="px-4 py-3.5">
-                          <p className="font-semibold text-[var(--color-content-dark)]">
+                          <p className="font-semibold text-content-dark">
                             {inc.user.firstName} {inc.user.lastName}
                           </p>
                         </td>
@@ -139,13 +139,13 @@ export default function IncentivesPage() {
                             {inc.type === 'DEDUCTION' ? '-' : '+'}{formatCurrency(inc.amount)}
                           </span>
                         </td>
-                        <td className="px-4 py-3.5 text-[var(--color-content-muted)] max-w-[180px] truncate">
+                        <td className="px-4 py-3.5 text-content-muted max-w-45 truncate">
                           {inc.description || <span className="text-gray-300">—</span>}
                         </td>
-                        <td className="px-4 py-3.5 text-[var(--color-content)] whitespace-nowrap">
+                        <td className="px-4 py-3.5 text-content whitespace-nowrap">
                           {new Date(inc.effectiveDate).toLocaleDateString()}
                         </td>
-                        <td className="px-4 py-3.5 text-[var(--color-content-muted)]">
+                        <td className="px-4 py-3.5 text-content-muted">
                           {inc.payrollEntry ? (
                             <span className="text-xs bg-gray-100 text-gray-500 px-2 py-0.5 rounded-full">
                               {t('incentives.linkedBadge')}

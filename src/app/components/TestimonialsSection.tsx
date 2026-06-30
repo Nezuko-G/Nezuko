@@ -35,7 +35,7 @@ export default function TestimonialsSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.5, delay: index * 0.2 }}
-              className="bg-card p-10 rounded-[2.5rem] shadow-xl border border-gray-100 flex flex-col justify-between min-h-[450px]"
+              className="bg-card p-10 rounded-[2.5rem] shadow-xl border border-gray-100 flex flex-col justify-between min-h-112.5"
             >
               <div>
                 <Quote className="text-primary opacity-40 mb-8" size={48} />

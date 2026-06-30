@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/set-state-in-effect */
 "use client";
 
 import { useTranslations } from "next-intl";
@@ -45,7 +46,6 @@ export function ProjectForm({
 
     useEffect(() => {
         if (project) {
-            // eslint-disable-next-line react-hooks/set-state-in-effect
             setForm({
                 name: project.name,
                 description: project.description ?? "",

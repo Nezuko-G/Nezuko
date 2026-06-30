@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { Department } from "@/types/dto/department.dto";
+import { Department } from "../types/department.dto";
 
 type ModalType = "CREATE" | "EDIT" | null;
 

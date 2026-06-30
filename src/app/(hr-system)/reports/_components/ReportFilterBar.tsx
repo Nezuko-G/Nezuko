@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import { useState, useEffect } from "react";
@@ -32,6 +33,7 @@ export default function ReportFilterBar({
 
   useEffect(() => {
     if (initialFilters) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setFilters(initialFilters);
     }
   }, [initialFilters]);
@@ -60,7 +62,7 @@ export default function ReportFilterBar({
     <div className="bg-card p-4 rounded-3xl border border-gray-100 shadow-sm space-y-4">
       <div className="flex flex-wrap items-end gap-4">
         {supportedFilters.includes("startDate") && (
-          <div className="space-y-1.5 flex-1 min-w-[200px]">
+          <div className="space-y-1.5 flex-1 min-w-50">
             <label className="text-xs font-bold text-content-dark">
               {t("startDate")}
             </label>
@@ -74,7 +76,7 @@ export default function ReportFilterBar({
         )}
 
         {supportedFilters.includes("endDate") && (
-          <div className="space-y-1.5 flex-1 min-w-[200px]">
+          <div className="space-y-1.5 flex-1 min-w-50">
             <label className="text-xs font-bold text-content-dark">
               {t("endDate")}
             </label>
@@ -88,7 +90,7 @@ export default function ReportFilterBar({
         )}
 
         {supportedFilters.includes("departmentId") && (
-          <div className="space-y-1.5 flex-1 min-w-[200px]">
+          <div className="space-y-1.5 flex-1 min-w-50">
             <label className="text-xs font-bold text-content-dark">
               {t("department")}
             </label>
@@ -111,7 +113,7 @@ export default function ReportFilterBar({
         )}
 
         {supportedFilters.includes("userId") && (
-          <div className="space-y-1.5 flex-1 min-w-[200px]">
+          <div className="space-y-1.5 flex-1 min-w-50">
             <label className="text-xs font-bold text-content-dark">
               {t("employee")}
             </label>
@@ -136,7 +138,7 @@ export default function ReportFilterBar({
         <button
           onClick={handleGenerate}
           disabled={isLoading}
-          className="px-6 py-2.5 bg-primary text-white rounded-xl text-sm font-bold hover:bg-primary/90 disabled:opacity-50 flex items-center justify-center gap-2 shadow-sm shrink-0 h-[42px] min-w-[140px]"
+          className="px-6 py-2.5 bg-primary text-white rounded-xl text-sm font-bold hover:bg-primary/90 disabled:opacity-50 flex items-center justify-center gap-2 shadow-sm shrink-0 h-10.5 min-w-35"
         >
           {isLoading ? (
             <Loader2 size={16} className="animate-spin" />

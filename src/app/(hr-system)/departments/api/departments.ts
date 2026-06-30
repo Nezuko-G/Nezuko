@@ -1,7 +1,7 @@
 import { z } from "zod";
 import apiClient from "@/lib/axios/core/instance";
-import { apis } from "../config";
-import { DepartmentDTO, CreateDepartmentDTO, UpdateDepartmentDTO } from "@/types/dto/department.dto";
+import { apis } from "@/lib/api/config";
+import { DepartmentDTO, CreateDepartmentDTO, UpdateDepartmentDTO } from "../types/department.dto";
 
 interface ApiResponse<T> {
   success: boolean;

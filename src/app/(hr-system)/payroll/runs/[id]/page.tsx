@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 'use client';
 
 import { useEffect, useState } from 'react';
@@ -61,7 +62,7 @@ export default function PayrollRunDetailPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-[var(--color-background)] p-6 lg:p-8">
+      <div className="min-h-screen bg-background p-6 lg:p-8">
         <div className="max-w-7xl mx-auto animate-pulse">
           <div className="h-8 w-64 bg-gray-200 rounded-lg mb-3" />
           <div className="h-4 w-40 bg-gray-100 rounded-lg mb-8" />
@@ -75,8 +76,8 @@ export default function PayrollRunDetailPage() {
 
   if (!run) {
     return (
-      <div className="min-h-screen bg-[var(--color-background)] p-6 lg:p-8 flex items-center justify-center">
-        <p className="text-[var(--color-content-muted)]">{t('runs.empty')}</p>
+      <div className="min-h-screen bg-background p-6 lg:p-8 flex items-center justify-center">
+        <p className="text-content-muted">{t('runs.empty')}</p>
       </div>
     );
   }
@@ -93,12 +94,12 @@ export default function PayrollRunDetailPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-[var(--color-background)] p-6 lg:p-8">
+    <div className="min-h-screen bg-background p-6 lg:p-8">
       <div className="max-w-7xl mx-auto">
         {/* Back */}
         <button
           onClick={() => router.push('/payroll/runs')}
-          className="inline-flex items-center gap-1.5 text-sm text-[var(--color-content-muted)] hover:text-[var(--color-content-dark)] mb-5 transition-colors cursor-pointer"
+          className="inline-flex items-center gap-1.5 text-sm text-content-muted hover:text-content-dark mb-5 transition-colors cursor-pointer"
         >
           <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
             <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
@@ -110,12 +111,12 @@ export default function PayrollRunDetailPage() {
         <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-6">
           <div>
             <div className="flex items-center gap-3 mb-1">
-              <h1 className="text-2xl font-bold text-[var(--color-content-dark)]">
+              <h1 className="text-2xl font-bold text-content-dark">
                 {formatMonthYear(run.month, run.year, t)}
               </h1>
               <PayrollStatusBadge status={run.status} />
             </div>
-            <div className="flex flex-wrap gap-4 text-xs text-[var(--color-content-muted)] mt-1">
+            <div className="flex flex-wrap gap-4 text-xs text-content-muted mt-1">
               <span>{t('runDetail.createdBy', { name: `${run.creator.firstName} ${run.creator.lastName}` })}</span>
               {run.approver && (
                 <span>
@@ -166,7 +167,7 @@ export default function PayrollRunDetailPage() {
             placeholder={t('runDetail.searchPlaceholder')}
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="w-full pl-9 pr-3 py-2.5 rounded-xl border border-gray-200 bg-white text-sm focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)] focus:border-transparent transition"
+            className="w-full pl-9 pr-3 py-2.5 rounded-xl border border-gray-200 bg-white text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition"
           />
         </div>
 
@@ -177,7 +178,7 @@ export default function PayrollRunDetailPage() {
               <thead>
                 <tr className="border-b border-gray-100 bg-gray-50/60">
                   {headers.map((h) => (
-                    <th key={h} className="px-4 py-3 text-left text-xs font-semibold text-[var(--color-content-muted)] uppercase tracking-wide whitespace-nowrap">
+                    <th key={h} className="px-4 py-3 text-left text-xs font-semibold text-content-muted uppercase tracking-wide whitespace-nowrap">
                       {h}
                     </th>
                   ))}
@@ -199,17 +200,17 @@ export default function PayrollRunDetailPage() {
                     >
                       <td className="px-4 py-3.5">
                         <div className="flex items-center gap-2.5">
-                          <div className="w-7 h-7 rounded-full bg-[var(--color-secondary)] text-[var(--color-primary)] text-xs font-bold flex items-center justify-center shrink-0">
+                          <div className="w-7 h-7 rounded-full bg-secondary text-primary text-xs font-bold flex items-center justify-center shrink-0">
                             {entry.user.firstName[0]}{entry.user.lastName[0]}
                           </div>
                           <div className="min-w-0">
-                            <p className="font-semibold text-[var(--color-content-dark)] truncate">{entry.user.firstName} {entry.user.lastName}</p>
-                            <p className="text-xs text-[var(--color-content-muted)] truncate">{entry.user.department?.name ?? t('payslipDetail.noDepartment')}</p>
+                            <p className="font-semibold text-content-dark truncate">{entry.user.firstName} {entry.user.lastName}</p>
+                            <p className="text-xs text-content-muted truncate">{entry.user.department?.name ?? t('payslipDetail.noDepartment')}</p>
                           </div>
                         </div>
                       </td>
-                      <td className="px-4 py-3.5 text-[var(--color-content)]">{formatCurrency(entry.baseSalary)}</td>
-                      <td className="px-4 py-3.5 text-[var(--color-content)]">{entry.overtimeHours}h</td>
+                      <td className="px-4 py-3.5 text-content">{formatCurrency(entry.baseSalary)}</td>
+                      <td className="px-4 py-3.5 text-content">{entry.overtimeHours}h</td>
                       <td className="px-4 py-3.5 text-emerald-600">{formatCurrency(entry.overtimePay)}</td>
                       <td className="px-4 py-3.5 text-emerald-600">{formatCurrency(entry.totalIncentives)}</td>
                       <td className="px-4 py-3.5 text-red-500">{formatCurrency(entry.totalDeductions)}</td>

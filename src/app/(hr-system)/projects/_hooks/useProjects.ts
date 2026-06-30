@@ -9,12 +9,10 @@ import {
 import { projectsApi } from "../api/api";
 import type {
     Project,
-    Task,
     ProjectProgress,
     CreateProjectPayload,
     UpdateProjectPayload,
     ProjectFilters,
-    PaginatedResponse,
     PaginatedTasksResponse,
 } from "../types/project.types";
 import { ProjectStatus } from "../types/project.types";

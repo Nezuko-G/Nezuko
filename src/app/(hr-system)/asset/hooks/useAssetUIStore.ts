@@ -1,6 +1,6 @@
 import { create } from "zustand";
 import { z } from "zod";
-import { AssetDTO } from "@/types/dto/asset.dto";
+import { AssetDTO } from "../types/asset.dto";
 
 type ModalType = "ASSIGN" | "RETURN" | "TRANSFER" | "EDIT" | "CREATE" | null;
 type AssetType = z.infer<typeof AssetDTO>;

@@ -196,8 +196,8 @@ export default function BlogsPage() {
                 transition={{ duration: 0.7, delay: 0.2 }}
               >
                 <Link href={`/blogs/${featured.slug}`} className="group block">
-                  <div className="relative rounded-[2rem] overflow-hidden border border-white/10 shadow-2xl">
-                    <div className="relative h-64 md:h-[420px] w-full">
+                  <div className="relative rounded-4xl overflow-hidden border border-white/10 shadow-2xl">
+                    <div className="relative h-64 md:h-105 w-full">
                       <Image
                         src={featured.coverImg}
                         alt={featuredData.title}
@@ -205,7 +205,7 @@ export default function BlogsPage() {
                         className="object-cover transition-transform duration-700 group-hover:scale-105"
                         unoptimized
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-[#000028] via-[#000028]/60 to-transparent" />
+                      <div className="absolute inset-0 bg-linear-to-t from-secondary via-secondary/60 to-transparent" />
                     </div>
                     <div className="absolute bottom-0 left-0 right-0 p-8 md:p-12">
                       <div className="flex items-center gap-3 mb-4">
@@ -319,7 +319,7 @@ export default function BlogsPage() {
                             href={`/blogs/${post.slug}`}
                             className="group block h-full"
                           >
-                            <div className="bg-white rounded-[1.5rem] border border-gray-100 shadow-sm overflow-hidden h-full flex flex-col hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+                            <div className="bg-white rounded-3xl border border-gray-100 shadow-sm overflow-hidden h-full flex flex-col hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
                               <div className="relative h-48 overflow-hidden">
                                 <Image
                                   src={post.coverImg}

@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { InsurancePlan, Dependent } from "@/types/dto/insurance.dto";
+import { InsurancePlan, Dependent } from "../types/insurance.dto";
 
 type DrawerType = "CREATE_PLAN" | "EDIT_PLAN" | null;
 type ModalType = "DEACTIVATE_PLAN" | "ADD_DEPENDENT" | "REMOVE_DEPENDENT" | null;

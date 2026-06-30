@@ -44,7 +44,7 @@ export default function LoginForm() {
 
   return (
     <div className="flex min-h-screen flex-col md:flex-row">
-      <div className="hidden md:flex md:w-1/2 min-h-[300px] bg-secondary text-white p-12 flex-col justify-between overflow-hidden relative pb-0">
+      <div className="hidden md:flex md:w-1/2 min-h-75 bg-secondary text-white p-12 flex-col justify-between overflow-hidden relative pb-0">
         <div>
           <h1 className="text-2xl font-bold mb-8">{t("brand")}</h1>
           <div className="space-y-1">
@@ -56,7 +56,7 @@ export default function LoginForm() {
           <p className="mt-4 text-gray-400">{t("tagline")}</p>
         </div>
 
-        <div className="relative flex justify-center items-end h-[420px]">
+        <div className="relative flex justify-center items-end h-105">
           <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-80 h-80 rounded-full border border-white/10" />
           <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-64 h-64 rounded-full border border-white/10" />
           <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-48 h-48 rounded-full border border-white/10" />
@@ -90,7 +90,7 @@ export default function LoginForm() {
             {t("brand")}
           </h1>
 
-          <div className="w-full max-w-md bg-white shadow-lg rounded-2xl p-6 min-h-[450px] flex flex-col">
+          <div className="w-full max-w-md bg-white shadow-lg rounded-2xl p-6 min-h-112.5 flex flex-col">
             {loginMutation.error && (
               <div className="mb-4 bg-red-50 border border-red-200 text-red-600 text-sm px-4 py-3 rounded-lg">
                 {loginMutation.error?.message || "Login failed"}
