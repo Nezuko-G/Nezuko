@@ -1,50 +1,39 @@
 "use client";
 
-import { useState, useEffect, useSyncExternalStore } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
-import { useRouter, usePathname } from "next/navigation";
-import { ChevronDown, Menu, X, LogOut } from "lucide-react";
+import Image from "next/image";
+import { usePathname } from "next/navigation";
+import { Menu, X, LogOut } from "lucide-react";
 import { motion } from "framer-motion";
 import { useTranslations, useLocale } from "next-intl";
 import { LanguageSwitcher } from "@/components/i18n/LanguageSwitcher";
 import { cn } from "@/lib/utils";
 import { useAuthStore } from "@/hooks/useAuthStore";
+import { logout } from "@/app/(auth)/login/api/users";
 
 export default function Navbar() {
   const t = useTranslations("common.navbar");
   const locale = useLocale();
-  const router = useRouter();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const pathname = usePathname();
 
-  const isHydrated = useSyncExternalStore(
-    () => () => {},
-    () => true,
-    () => false,
-  );
-
-  function getAuthSnapshot() {
-    try {
-      const raw = localStorage.getItem("auth");
-      if (raw) {
-        return (JSON.parse(raw) as { isAuthenticated?: boolean }).isAuthenticated === true;
-      }
-    } catch {}
-    return false;
-  }
-
-  const token = useSyncExternalStore(
-    () => () => {},
-    getAuthSnapshot,
-    () => false,
-  );
-
+  const avatarUrl = useAuthStore((s) => s.avatarUrl);
+  const firstName = useAuthStore((s) => s.firstName);
+  const isHydrated = useAuthStore((s) => s.isHydrated);
+  const token = useAuthStore((s) => !!s.id);
   const clearAuth = useAuthStore((s) => s.clearAuth);
 
-  function handleLogout() {
-    clearAuth();
-    router.push("/login");
+  async function handleLogout() {
+    try {
+      await logout();
+    } catch (error) {
+      console.error(error);
+    } finally {
+      clearAuth();
+      window.location.href = "/login";
+    }
   }
 
   useEffect(() => {
@@ -80,9 +69,7 @@ export default function Navbar() {
               href="/blogs"
               className={cn(
                 "transition-colors",
-                pathname === "/blogs"
-                  ? "text-primary"
-                  : "hover:text-primary",
+                pathname === "/blogs" ? "text-primary" : "hover:text-primary",
               )}
             >
               {t("blogs")}
@@ -102,85 +89,115 @@ export default function Navbar() {
               href="/pricing"
               className={cn(
                 "transition-colors",
-                pathname === "/pricing"
-                  ? "text-primary"
-                  : "hover:text-primary",
+                pathname === "/pricing" ? "text-primary" : "hover:text-primary",
               )}
             >
               {t("pricing")}
             </Link>
+            {token && (
+              <Link
+                href="/dashboard"
+                className={cn(
+                  "transition-colors",
+                  pathname === "/dashboard"
+                    ? "text-primary"
+                    : "hover:text-primary",
+                )}
+              >
+                {t("dashboard")}
+              </Link>
+            )}
           </div>
         </div>
 
         <div className="flex-1 flex justify-end">
           <div className="flex items-center gap-3 md:gap-6">
-          <div className="hidden md:block">
-            <LanguageSwitcher currentLocale={locale} />
-          </div>
-
-          {isHydrated ? (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.3 }}
-              className={token ? "hidden lg:flex items-center gap-1.5" : "hidden lg:block"}
-            >
-              {token ? (
-                <button
-                  onClick={handleLogout}
-                  className="font-bold text-xs hover:text-primary transition-colors uppercase flex items-center gap-1.5"
-                >
-                  <LogOut size={14} className="ltr:rotate-180"/>
-                  {t("logout")}
-                </button>
-              ) : (
-                <Link
-                  href="/login"
-                  className="font-bold text-xs hover:text-primary transition-colors uppercase"
-                >
-                  {t("login")}
-                </Link>
-              )}
-            </motion.div>
-          ) : (
-            <div className="hidden lg:flex items-center gap-1.5">
-              <div className="h-3.5 w-3.5 rounded bg-current/20 animate-pulse" />
-              <div className="h-3.5 w-14 rounded bg-current/20 animate-pulse" />
+            <div className="hidden md:block">
+              <LanguageSwitcher currentLocale={locale} />
             </div>
-          )}
 
-          {isHydrated ? (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.3 }}
+            {isHydrated ? (
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.3 }}
+                className={
+                  token
+                    ? "hidden lg:flex items-center gap-1.5"
+                    : "hidden lg:block"
+                }
+              >
+                {token ? (
+                  <button
+                    onClick={handleLogout}
+                    className="font-bold text-xs hover:text-primary transition-colors uppercase flex items-center gap-1.5"
+                  >
+                    <LogOut size={14} className="ltr:rotate-180" />
+                    {t("logout")}
+                  </button>
+                ) : (
+                  <Link
+                    href="/login"
+                    className="font-bold text-xs hover:text-primary transition-colors uppercase"
+                  >
+                    {t("login")}
+                  </Link>
+                )}
+              </motion.div>
+            ) : (
+              <div className="hidden lg:flex items-center gap-1.5">
+                <div className="h-3.5 w-3.5 rounded bg-current/20 animate-pulse" />
+                <div className="h-3.5 w-14 rounded bg-current/20 animate-pulse" />
+              </div>
+            )}
+
+            {isHydrated ? (
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.3 }}
+              >
+                {token ? (
+                  <Link
+                    href="/profile"
+                    className="relative flex h-10 w-10 items-center justify-center overflow-hidden rounded-full border-2 border-primary bg-primary/10 transition-all hover:border-primary/80 active:scale-95"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    {avatarUrl ? (
+                      <Image
+                        src={avatarUrl}
+                        alt={firstName || "Profile"}
+                        fill
+                        sizes="40px"
+                        className="object-cover"
+                        unoptimized
+                      />
+                    ) : (
+                      <span className="text-sm font-black uppercase text-secondary">
+                        {firstName?.charAt(0) || "U"}
+                      </span>
+                    )}
+                  </Link>
+                ) : (
+                  <Link
+                    href="/book-demo"
+                    className="text-nowrap rounded-full bg-primary px-6 py-2.5 text-xs font-black text-secondary transition-all hover:bg-primary/90 active:scale-95"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    {t("demo")}
+                  </Link>
+                )}
+              </motion.div>
+            ) : (
+              <div className="h-10 w-10 rounded-full bg-current/20 animate-pulse" />
+            )}
+            <button
+              className="lg:hidden p-1"
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             >
-              {token ? (
-                <Link
-                  href="/profile"
-                  className="bg-primary hover:bg-primary/90 text-secondary font-black py-2 px-3 md:py-3 md:px-6 rounded-full transition-all active:scale-95 text-[11px] md:text-xs text-nowrap wrap-break-word"
-                >
-                  {t("hr_system")}
-                </Link>
-              ) : (
-                <Link
-                  href="/book-demo"
-                  className="bg-primary hover:bg-primary/90 text-secondary font-black py-2 px-3 md:py-3 md:px-6 rounded-full transition-all active:scale-95 text-[11px] md:text-xs text-nowrap wrap-break-word"
-                >
-                  {t("demo")}
-                </Link>
-              )}
-            </motion.div>
-          ) : (
-            <div className="h-9 md:h-12 w-24 md:w-32 rounded-full bg-current/20 animate-pulse" />
-          )}
-          <button
-            className="lg:hidden p-1"
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          >
-            {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
-        </div>
+              {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
+          </div>
         </div>
       </nav>
 
@@ -228,6 +245,20 @@ export default function Navbar() {
         >
           {t("pricing")}
         </Link>
+        {token && (
+          <Link
+            href="/dashboard"
+            className={cn(
+              "font-bold transition-colors",
+              pathname === "/dashboard"
+                ? "text-primary"
+                : "text-white hover:text-primary",
+            )}
+            onClick={() => setIsMobileMenuOpen(false)}
+          >
+            {t("dashboard")}
+          </Link>
+        )}
         {isHydrated ? (
           <motion.div
             initial={{ opacity: 0 }}
@@ -265,15 +296,27 @@ export default function Navbar() {
           token ? (
             <Link
               href="/profile"
-              className="bg-primary hover:bg-primary/90 text-secondary font-black py-2.5 px-6 rounded-full transition-all active:scale-95 text-xs text-nowrap"
+              className="relative flex h-10 w-10 items-center justify-center overflow-hidden rounded-full border-2 border-primary bg-primary/10 transition-all hover:border-primary/80 active:scale-95"
               onClick={() => setIsMobileMenuOpen(false)}
             >
-              {t("hr_system")}
+              {avatarUrl ? (
+                <Image
+                  src={avatarUrl}
+                  alt={firstName || "Profile"}
+                  fill
+                  sizes="40px"
+                  className="object-cover"
+                />
+              ) : (
+                <span className="text-sm font-black uppercase text-secondary">
+                  {firstName?.charAt(0) || "U"}
+                </span>
+              )}
             </Link>
           ) : (
             <Link
               href="/book-demo"
-              className="bg-primary hover:bg-primary/90 text-secondary font-black py-2.5 px-6 rounded-full transition-all active:scale-95 text-xs text-nowrap"
+              className="text-nowrap rounded-full bg-primary px-6 py-2.5 text-xs font-black text-secondary transition-all hover:bg-primary/90 active:scale-95"
               onClick={() => setIsMobileMenuOpen(false)}
             >
               {t("demo")}

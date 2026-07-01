@@ -111,7 +111,8 @@
     "TODO": "To Do",
     "IN_PROGRESS": "In Progress",
     "DONE": "Done",
-    "CANCELLED": "Cancelled"
+    "CANCELLED": "Cancelled",
+    "BLOCKED": "Blocked"
   },
   "error": {
     "title": "Oops! Something went wrong",

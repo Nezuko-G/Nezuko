@@ -29,9 +29,11 @@ export interface ProfileData {
     emergencyRelation?: string | null;
 }
 
-export async function getMe(): Promise<ProfileData> {
-    const response = await api.get(apis.auth.me);
-    return response.data.data as ProfileData;
+export async function getMe(customHeaders?: Record<string, string>): Promise<ProfileData> {
+    const response = await api.get(apis.auth.me, {
+        headers: customHeaders,
+    });
+    return response.data?.data || response.data;
 }
 
 export async function updateAvatar(file: File): Promise<{ avatarUrl: string }> {

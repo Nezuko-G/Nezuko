@@ -10,7 +10,8 @@
     "logout": "Logout",
     "demo": "Request a Demo",
     "hr_system": "HR-System",
-    "blogs":"blogs"
+    "blogs":"blogs",
+    "dashboard":"Dashboard"
   },
   "footer": {
     "desc": "A new-age platform for growing businesses to scale HR processes and control spend.",
