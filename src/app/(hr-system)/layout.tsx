@@ -1,20 +1,38 @@
-import Sidebar from "./_components/Sidebar";
-import Navbar from "./_components/Navbar";
+import Navbar from "./_components/Navbar"; 
+import Sidebar from "./_components/Sidebar"; 
+import { cookies } from "next/headers"; 
+import { AuthHydrator } from "@/components/providers/AuthHydrator";
+import { getMe } from "@/app/(hr-system)/profile/api/profile.api";
+import { redirect } from "next/navigation";
 
-export default function DashboardLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default async function DashboardLayout({ children }: { children: React.ReactNode }) {
+let user = null;
+  
+  try {
+    const cookieStore = await cookies();
+    const cookieString = cookieStore.toString();
+
+    user = await getMe({ Cookie: cookieString });
+
+    if (!user) {
+      redirect("/login");
+    }
+
+} catch (error) {
+    redirect("/login");
+  }
+
   return (
-      <div className="flex h-screen bg-background overflow-hidden font-sans">
-        <Sidebar />
-        <div className="flex flex-col flex-1 w-full overflow-hidden">
-          <Navbar />
-          <main className="flex-1 overflow-y-auto ">
-            {children}
-          </main>
-        </div>
+    <div className="flex h-screen overflow-hidden bg-background">
+      <AuthHydrator user={user} />
+      
+      <Sidebar />
+      <div className="flex flex-col flex-1 w-full overflow-hidden">
+        <Navbar user={user} />
+        <main className="flex-1 overflow-y-auto">
+          {children}
+        </main>
       </div>
+    </div>
   );
 }
