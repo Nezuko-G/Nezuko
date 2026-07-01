@@ -1,6 +1,7 @@
 export const apis = {
   auth: {
     login: "/auth/login",
+    logout: "/auth/logout",
     emailSignup: "/auth/email-signup",
     forgetPassword: "/auth/forget-password",
     refresh: "/auth/refresh",
