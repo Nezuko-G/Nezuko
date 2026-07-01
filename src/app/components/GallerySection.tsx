@@ -5,17 +5,20 @@ import { useTranslations } from "next-intl";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, EffectCoverflow } from "swiper/modules";
 
-
+import "swiper/css";
+import "swiper/css/effect-coverflow";
 
 export default function GallerySection() {
   const t = useTranslations("landing.gallery");
 
-  const images = [
+  const baseImages = [
     "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1000",
     "https://images.unsplash.com/photo-1543286386-713bdd548da4?q=80&w=1000",
     "https://images.unsplash.com/photo-1551434678-e076c223a692?q=80&w=1000",
-    "https://images.unsplash.com/photo-1551434678-e076c223a692?q=80&w=1000"
+    "https://images.unsplash.com/photo-1551434678-e076c223a692?q=80&w=1000",
   ];
+
+  const images = [...baseImages, ...baseImages];
 
   return (
     <section className="w-full py-32 bg-background overflow-hidden">
@@ -57,16 +60,17 @@ export default function GallerySection() {
           {images.map((imgUrl, index) => (
             <SwiperSlide key={index} className="transition-all duration-500">
               <div className="w-full aspect-16/10 bg-card rounded-[2.5rem] border border-gray-100 shadow-2xl overflow-hidden relative group">
-                <Image 
-                  src={imgUrl} 
-                  alt={t("screen_title")} 
+                <Image
+                  src={imgUrl}
+                  alt={`${t("screen_title")} ${index + 1}`}
                   fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                   className="object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-500"
                 />
-                
+
                 <div className="absolute inset-0 bg-black/20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10">
                   <div className="bg-white/90 backdrop-blur-sm px-6 py-3 rounded-full text-secondary font-black text-lg shadow-xl">
-                    {t("screen_title")} {index + 1}
+                    {t("screen_title")} {(index % 4) + 1}
                   </div>
                 </div>
               </div>

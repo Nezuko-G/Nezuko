@@ -1,10 +1,13 @@
 import type { Metadata } from "next";
+import { cookies } from "next/headers";
 import "./globals.css";
 import { NextIntlClientProvider } from 'next-intl'
 import { getLocale, getMessages } from 'next-intl/server'
 import { getDir } from '@/i18n/routing'
 import { Providers } from '@/components/providers/Providers'
 import { LocaleProvider } from '@/components/i18n/LocaleProvider'
+import { getMe } from "@/app/(hr-system)/profile/api/profile.api";
+import { AuthHydrator } from "@/components/providers/AuthHydrator"; 
 
 export const metadata: Metadata = {
   title: {
@@ -44,6 +47,7 @@ export const metadata: Metadata = {
   },
 };
 
+
 export default async function RootLayout({
   children,
 }: {
@@ -53,15 +57,24 @@ export default async function RootLayout({
   const messages = await getMessages()
   const dir = getDir(locale)
 
+  let user = null;
+  try {
+    const cookieStore = await cookies(); 
+    
+        user = await getMe({ Cookie: cookieStore.toString() }); 
+  } catch (error) {
+    user = null;
+  }
+
   return (
-    <html lang={locale} dir={dir} suppressHydrationWarning>
+   <html lang={locale} dir={dir} suppressHydrationWarning>
       <head />
       <body className="antialiased">
+        <AuthHydrator user={user} />
+
         <NextIntlClientProvider locale={locale} messages={messages}>
           <Providers>
-            <LocaleProvider>
-              {children}
-            </LocaleProvider>
+            <LocaleProvider>{children}</LocaleProvider>
           </Providers>
         </NextIntlClientProvider>
       </body>

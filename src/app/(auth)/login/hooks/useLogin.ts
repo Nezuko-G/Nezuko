@@ -1,15 +1,11 @@
 "use client";
 
 import { useMutation } from "@tanstack/react-query";
-import { useRouter } from "@/i18n/navigation";
 import { login } from "../api/auth.api";
 import { useAuthStore } from "@/hooks/useAuthStore";
-import { fetchImageAsBase64 } from "@/lib/avatar";
 
 export function useLogin() {
-  const setRole = useAuthStore((s) => s.setRole);
   const setUserData = useAuthStore((s) => s.setUserData);
-  const router = useRouter();
 
   return useMutation({
     mutationFn: (data: {
@@ -17,46 +13,24 @@ export function useLogin() {
       userEmail: string;
       password: string;
     }) => login(data),
-    onSuccess: async (response) => {
-
+    onSuccess: (response) => {
       const user = response?.data?.user || response?.user;
-       const role = response?.data?.user?.role || response?.user?.role;
+      const role = response?.data?.user?.role || response?.user?.role;
 
-      if (user?.avatarUrl) {
-        try {
-          const base64 = await fetchImageAsBase64(user.avatarUrl);
-          setUserData({
-            id: user.id,
-            firstName: user.firstName ?? "",
-            lastName: user.lastName ?? "",
-            avatarBase64: base64,
-          });
-        } catch {
-          setUserData({
-            id: user.id,
-            firstName: user.firstName ?? "",
-            lastName: user.lastName ?? "",
-          });
-        }
-      } else if (user?.firstName) {
+      if (user) {
         setUserData({
           id: user.id,
-          firstName: user.firstName,
+          firstName: user.firstName ?? "",
           lastName: user.lastName ?? "",
+          avatarUrl: user.avatarUrl || null,
+          role: role || "EMPLOYEE",
         });
       }
 
-      localStorage.setItem(
-         "auth",
-         JSON.stringify({ isAuthenticated: true, role: role || "" }),
-       );
- 
-       setRole(role || "EMPLOYEE");
-
       if (role === "EMPLOYEE") {
-        router.push("/profile");
+        window.location.href = "/profile";
       } else {
-        router.push("/dashboard");
+        window.location.href = "/dashboard";
       }
     },
   });

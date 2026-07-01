@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { useTranslations, useLocale } from "next-intl";
 import Image from "next/image";
 import { Bell, MessageSquare, X, Menu, User } from "lucide-react";
@@ -6,17 +6,18 @@ import { Link } from "@/i18n/navigation";
 import { useState } from "react";
 
 import { LanguageSwitcher } from "../../../components/i18n/LanguageSwitcher";
-import { useAuthStore } from "@/hooks/useAuthStore";
 import { useUnreadCount } from "@/app/(hr-system)/notifications/hooks/useNotifications";
+import type { ProfileData } from "@/app/(hr-system)/profile/api/profile.api"; 
 
-export default function Navbar() {
+export default function Navbar({ user }: { user: ProfileData | null }) {
   const locale = useLocale();
   const t = useTranslations("dashboard.navbar");
   const [menuOpen, setMenuOpen] = useState(false);
-  const avatarBase64 = useAuthStore((s) => s.avatarBase64);
-  const firstName = useAuthStore((s) => s.firstName);
-  const lastName = useAuthStore((s) => s.lastName);
   const { data: unreadCount } = useUnreadCount();
+
+  const firstName = user?.firstName;
+  const lastName = user?.lastName;
+  const avatarUrl = user?.avatarUrl;
 
   const initials =
     firstName && lastName
@@ -39,8 +40,6 @@ export default function Navbar() {
           <h1 className="text-base md:text-xl font-bold tracking-tight truncate">
             {t("title")}
           </h1>
-
-
         </div>
 
         {/* Spacer */}
@@ -48,7 +47,6 @@ export default function Navbar() {
 
         {/* Right: Actions */}
         <div className="flex items-center gap-1 sm:gap-2 md:gap-3 shrink-0">
-
           {/* AI Chat */}
           <Link
             href="/chatbot"
@@ -73,7 +71,7 @@ export default function Navbar() {
               className="group-hover:text-primary transition-colors"
             />
             {unreadCount != null && unreadCount > 0 && (
-              <span className="absolute -top-0.5 -end-0.5 min-w-[18px] h-[18px] flex items-center justify-center bg-status-error text-white text-[10px] font-bold rounded-full ring-2 ring-secondary px-1">
+              <span className="absolute -top-0.5 -end-0.5 min-w-4.5 h-4.5 flex items-center justify-center bg-status-error text-white text-[10px] font-bold rounded-full ring-2 ring-secondary px-1">
                 {unreadCount > 99 ? "99+" : unreadCount}
               </span>
             )}
@@ -84,9 +82,9 @@ export default function Navbar() {
             href="/profile"
             className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-zinc-800 border-2 border-primary/20 overflow-hidden shrink-0 cursor-pointer hover:border-primary transition-colors flex items-center justify-center"
           >
-            {avatarBase64 ? (
+            {avatarUrl ? (
               <Image
-                src={avatarBase64}
+                src={avatarUrl}
                 alt={t("profile")}
                 width={40}
                 height={40}
@@ -116,7 +114,9 @@ export default function Navbar() {
 
           {/* Language Switcher (Mobile) */}
           <div className="flex items-center justify-between hover:bg-white/10 px-3 py-2.5 rounded-lg transition-colors w-full">
-            <span className="text-sm font-medium text-white">{t("language")}</span>
+            <span className="text-sm font-medium text-white">
+              {t("language")}
+            </span>
             <LanguageSwitcher currentLocale={locale} />
           </div>
         </div>

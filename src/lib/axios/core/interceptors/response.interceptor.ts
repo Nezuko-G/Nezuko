@@ -26,21 +26,20 @@ export async function onResponseError(
     ? responseData.message 
     : error.message;
 
-  // Handle 401 with token refresh
+  const isServer = typeof window === "undefined";
+
   if (status === 401 && originalRequest && !originalRequest._retry) {
+    
+    if (isServer) {
+        return Promise.reject({ data: null, error: errorMessage, status: 401, all: error });
+    }
+
     if (isRefreshing && refreshPromise) {
-      // Wait for existing refresh to complete
       try {
         await refreshPromise;
         return api(originalRequest);
       } catch {
-        // Refresh failed - return error
-        return Promise.resolve({
-          data: null,
-          error: errorMessage,
-          status: 401,
-          all: error,
-        });
+        return Promise.reject({ data: null, error: errorMessage, status: 401, all: error });
       }
     }
 
@@ -65,17 +64,11 @@ export async function onResponseError(
     if (success) {
       return api(originalRequest);
     }
-    // Refresh failed - return error as resolved response
-    return Promise.resolve({
-      data: null,
-      error: errorMessage,
-      status: 401,
-      all: error,
-    });
+    
+    return Promise.reject({ data: null, error: errorMessage, status: 401, all: error });
   }
 
-  // Non-401 errors (403, 404, 500, etc.)
-  return Promise.resolve({
+  return Promise.reject({
     data: null,
     error: errorMessage,
     status: status ?? (error.code as unknown as number),
