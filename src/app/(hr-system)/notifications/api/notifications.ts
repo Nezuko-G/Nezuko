@@ -33,10 +33,12 @@ export interface NotificationItem {
   };
 }
 
+export type NotificationFilter = "ALL" | "SEEN" | "UNSEEN";
+
 export async function getNotifications(params?: {
   page?: number;
   limit?: number;
-  isSeen?: boolean;
+  filter?: NotificationFilter;
 }) {
   const response = await apiClient.get<ApiResponse<{ notifications: NotificationItem[] }>>(
     apis.notifications.base,

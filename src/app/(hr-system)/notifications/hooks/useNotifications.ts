@@ -4,6 +4,7 @@ import {
   getUnreadCount,
   markAllSeen,
   markSeen,
+  type NotificationFilter,
 } from "@/app/(hr-system)/notifications/api/notifications";
 import toast from "react-hot-toast";
 import { useTranslations } from "next-intl";
@@ -11,7 +12,7 @@ import { useTranslations } from "next-intl";
 export function useNotifications(params?: {
   page?: number;
   limit?: number;
-  isSeen?: boolean;
+  filter?: NotificationFilter;
 }) {
   return useQuery({
     queryKey: ["notifications", params],

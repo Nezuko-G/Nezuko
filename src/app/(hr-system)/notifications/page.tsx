@@ -11,7 +11,11 @@ import NotificationTable from "@/app/(hr-system)/notifications/_components/Notif
 import { Loader2, ChevronLeft, ChevronRight, CheckCheck } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-const FILTERS = ["all", "read", "unread"] as const;
+const FILTERS = [
+  { apiValue: "ALL", uiValue: "all" as const },
+  { apiValue: "SEEN", uiValue: "read" as const },
+  { apiValue: "UNSEEN", uiValue: "unread" as const },
+];
 
 export default function NotificationsPage() {
   const t = useTranslations("notifications");
@@ -19,12 +23,13 @@ export default function NotificationsPage() {
   const [page, setPage] = useState(1);
   const limit = 10;
 
-  const params: { page: number; limit: number; isSeen?: boolean } = {
+  const params: { page: number; limit: number; filter?: "ALL" | "SEEN" | "UNSEEN" } = {
     page,
     limit,
   };
-  if (filter === "read") params.isSeen = true;
-  if (filter === "unread") params.isSeen = false;
+  if (filter === "read") params.filter = "SEEN";
+  else if (filter === "unread") params.filter = "UNSEEN";
+  else params.filter = "ALL";
 
   const { data, isLoading, isError } = useNotifications(params);
   const { markSeen, markAllSeen, isPending } = useNotificationMutations();
@@ -53,19 +58,19 @@ export default function NotificationsPage() {
       <div className="flex gap-2">
         {FILTERS.map((f) => (
           <button
-            key={f}
+            key={f.apiValue}
             onClick={() => {
-              setFilter(f);
+              setFilter(f.uiValue);
               setPage(1);
             }}
             className={cn(
               "px-4 py-1.5 rounded-full text-sm font-bold transition-colors border",
-              filter === f
+              filter === f.uiValue
                 ? "bg-primary text-secondary border-primary"
                 : "bg-card text-content-muted border-gray-200 hover:border-primary hover:text-primary",
             )}
           >
-            {t(`filters.${f}`)}
+            {t(`filters.${f.uiValue}`)}
           </button>
         ))}
       </div>
