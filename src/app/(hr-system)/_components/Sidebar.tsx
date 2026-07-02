@@ -53,7 +53,7 @@ export default function Sidebar() {
   return (
     <aside className="w-20 bg-secondary min-h-screen flex flex-col items-center py-6 gap-6 sticky top-0 shrink-0 z-20">
       <Link
-        href="/dashboard"
+        href={role === "EMPLOYEE" ? "/profile" : "/dashboard"}
         className="w-10 h-10 bg-primary rounded-lg flex items-center justify-center mb-4 transition-transform hover:scale-105"
       >
         <span className="text-secondary font-black text-xl">N</span>

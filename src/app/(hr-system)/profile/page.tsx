@@ -72,6 +72,7 @@ export default function ProfilePage() {
     const avatarBase64 = useAuthStore((s) => s.avatarBase64);
     const setAvatarBase64 = useAuthStore((s) => s.setAvatarBase64);
     const setUserData = useAuthStore((s) => s.setUserData);
+    const role = useAuthStore((s) => s.role);
 
     useEffect(() => {
         if (data?.avatarUrl && (isAvatarStale(useAuthStore.getState().avatarUpdatedAt) || !avatarBase64)) {
@@ -92,12 +93,14 @@ export default function ProfilePage() {
 
     return (
         <div className="p-4 md:p-5 max-w-6xl mx-auto flex flex-col gap-6">
-            <button
-                onClick={() => router.push("/dashboard")}
-                className="flex items-center gap-2 text-content-muted hover:text-secondary text-sm font-semibold transition w-fit"
-            >
-                <ArrowLeft size={16} /> {t("back")}
-            </button>
+            {role !== "EMPLOYEE" && (
+                <button
+                    onClick={() => router.push("/dashboard")}
+                    className="flex items-center gap-2 text-content-muted hover:text-secondary text-sm font-semibold transition w-fit"
+                >
+                    <ArrowLeft size={16} /> {t("back")}
+                </button>
+            )}
 
             <div className="flex flex-col lg:flex-row gap-6">
                 <ProfileHeader
