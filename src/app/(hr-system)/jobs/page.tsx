@@ -2,14 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { useTranslations, useLocale } from "next-intl";
-import {
-  Plus,
-  Loader2,
-  ChevronRight,
-  ChevronLeft,
-  Search,
-  FilterX,
-} from "lucide-react";
+import { Plus, Loader2, Search, FilterX } from "lucide-react";
 import { useJobsList } from "./hooks/useJobs";
 import JobTable from "./_components/JobTable";
 import JobAuthPopup from "./_components/JobAuthPopup";
@@ -17,6 +10,7 @@ import RoleGuard from "@/components/RoleGuard/RoleGuard";
 import { useRouter } from "@/i18n/navigation";
 import { useDebounce } from "use-debounce";
 import { JobFilters } from "./types/job.dto";
+import { Pagination } from "../_components/Pagination";
 
 export default function JobsPage() {
   const t = useTranslations("jobs.list");
@@ -164,13 +158,13 @@ export default function JobsPage() {
         </div>
       </div>
 
-      <div className="overflow-x-auto rounded-2xl border border-gray-100 bg-card shadow-sm flex flex-col min-h-[350px]">
+      <div className="w-full flex flex-col gap-4">
         {isLoading ? (
-          <div className="flex-1 flex flex-col items-center justify-center gap-3">
+          <div className="overflow-x-auto rounded-2xl border border-gray-100 bg-card shadow-sm flex items-center justify-center min-h-87.5">
             <Loader2 className="animate-spin text-primary" size={36} />
           </div>
         ) : isError && (error as any)?.response?.status !== 401 ? (
-          <div className="flex-1 flex items-center justify-center text-status-error font-bold">
+          <div className="overflow-x-auto rounded-2xl border border-gray-100 bg-card shadow-sm flex items-center justify-center text-status-error font-bold min-h-50">
             {t("errors.fetch")}
           </div>
         ) : (
@@ -179,29 +173,13 @@ export default function JobsPage() {
               <JobTable jobs={jobs} />
             </div>
 
-            {jobs.length > 0 && (
-              <div className="px-6 py-4 border-t border-gray-50 flex items-center justify-center gap-4 bg-gray-50/50">
-                <p className="text-sm text-content-muted font-bold">
-                  {t("pagination", { current: page, total: lastPage })}
-                </p>
-                <div className="flex items-center gap-1.5">
-                  <button
-                    disabled={page <= 1}
-                    onClick={() => setPage((p) => p - 1)}
-                    className="h-8 w-8 flex items-center justify-center rounded-lg border border-gray-200 bg-white hover:bg-gray-50 text-content-dark transition disabled:opacity-50"
-                  >
-                    <ChevronLeft size={16} />
-                  </button>
-                  <button
-                    disabled={page >= lastPage}
-                    onClick={() => setPage((p) => p + 1)}
-                    className="h-8 w-8 flex items-center justify-center rounded-lg border border-gray-200 bg-white hover:bg-gray-50 text-content-dark transition disabled:opacity-50"
-                  >
-                    <ChevronRight size={16} />
-                  </button>
-                </div>
-              </div>
-            )}
+            <Pagination
+              currentPage={page}
+              totalPages={lastPage}
+              onPageChange={setPage}
+              label={t("pagination", { current: page, total: lastPage })}
+              className="mt-auto"
+            />
           </>
         )}
       </div>
