@@ -106,13 +106,15 @@
     "COMPLETED": "مكتمل",
     "PLANNING": "قيد التخطيط",
     "ON_HOLD": "معلق",
-    "CANCELLED": "ملغى"
+    "CANCELLED": "ملغى",
+    "BLOCKED": "محظور"
   },
   "taskStatus": {
     "TODO": "للتنفيذ",
     "IN_PROGRESS": "قيد التنفيذ",
     "DONE": "مكتمل",
-    "CANCELLED": "ملغى"
+    "CANCELLED": "ملغى",
+    "BLOCKED": "محظور"
   },
   "error": {
     "title": "عذراً! حدث خطأ ما",

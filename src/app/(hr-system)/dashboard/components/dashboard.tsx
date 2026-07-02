@@ -196,13 +196,13 @@ function AttendanceRing({ percentage }: { percentage: number }) {
 }
 
 type Props = {
-  initialData: DashboardResponse;
+  data: DashboardResponse;
 };
 
-export default function DashboardClient({ initialData }: Props) {
+export default function DashboardClient({ data }: Props) {
   const t = useTranslations("dashboard");
 
-  const { keyMetrics, charts, insights } = initialData.data;
+  const { keyMetrics, charts, insights } = data.data;
   const attendancePct = insights.attendanceOverview.presentPercentage;
 
 
