@@ -30,7 +30,7 @@ export default function EmployeeProfilePage() {
     const { data, isLoading } = useEmployee(id);
     const { data: tasks = [], isLoading: tasksLoading } = useEmployeeTasks(id);
 
-    const [selectedTaskId, setSelectedTaskId] = useState<string>();
+    const [selectedTask, setSelectedTask] = useState<Task>();
     const [editingTask, setEditingTask] = useState<Task>();
     const [subTaskParent, setSubTaskParent] = useState<Task | null>(null);
 
@@ -139,7 +139,7 @@ export default function EmployeeProfilePage() {
                                 tasks={tasks}
                                 canManage={canManage}
                                 showProject={true}
-                                onViewDetail={(task) => setSelectedTaskId(task.id)}
+                                onViewDetail={(task) => setSelectedTask(task)}
                                 onEdit={setEditingTask}
                                 onAddSubTask={setSubTaskParent}
                             />
@@ -149,12 +149,12 @@ export default function EmployeeProfilePage() {
             </div>
 
             {/* Task Detail */}
-            {selectedTaskId && (
+            {selectedTask && (
                 <TaskDetailPopover
-                    taskId={selectedTaskId}
-                    onClose={() => setSelectedTaskId(undefined)}
+                    task={selectedTask}
+                    onClose={() => setSelectedTask(undefined)}
                     onEdit={(task) => {
-                        setSelectedTaskId(undefined);
+                        setSelectedTask(undefined);
                         setEditingTask(task);
                     }}
                 />

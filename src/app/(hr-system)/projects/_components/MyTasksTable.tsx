@@ -48,6 +48,7 @@ export default function MyTasksTable({
             <th className="px-4 py-4 text-start w-8" />
             <th className="px-4 py-4 text-start">{t("fields.title")}</th>
             <th className="px-4 py-4 text-start whitespace-nowrap">{t("fields.project")}</th>
+            <th className="px-4 py-4 text-start whitespace-nowrap">{t("fields.assignee")}</th>
             <th className="px-4 py-4 text-start whitespace-nowrap">{t("fields.createdBy")}</th>
             <th className="px-4 py-4 text-center whitespace-nowrap">{t("fields.priority")}</th>
             <th className="px-4 py-4 text-center whitespace-nowrap">{t("fields.schedule")}</th>
@@ -90,6 +91,11 @@ export default function MyTasksTable({
                   <td className="px-4 py-3">
                     <span className="text-sm text-content-muted whitespace-nowrap">
                       {task.project?.name ?? "—"}
+                    </span>
+                  </td>
+                  <td className="px-4 py-3">
+                    <span className="text-sm text-content-muted truncate max-w-30 block">
+                      {task.assignee?.name ?? "—"}
                     </span>
                   </td>
                   <td className="px-4 py-3">
@@ -147,6 +153,11 @@ export default function MyTasksTable({
                     <td className="px-4 py-2.5">
                       <span className="text-sm text-content-muted whitespace-nowrap">
                         {sub.project?.name ?? "—"}
+                      </span>
+                    </td>
+                    <td className="px-4 py-2.5">
+                      <span className="text-sm text-content-muted truncate max-w-25 block">
+                        {sub.assignee?.name ?? "—"}
                       </span>
                     </td>
                     <td className="px-4 py-2.5">
