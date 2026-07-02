@@ -1,5 +1,6 @@
 {
     "title": "Employees",
+    "subtitle": "Manage employee information, including personal details, job info, and documents.",
     "addEmployee": "Add Employee",
     "searchPlaceholder": "Search by name, email or code...",
     "allDepartments": "All Departments",

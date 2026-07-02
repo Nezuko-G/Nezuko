@@ -1,6 +1,7 @@
 {
   "list": {
     "title": "Assets",
+    "subtitle": "Manage company assets and their lifecycle",
     "registerBtn": "Add Asset",
     "reportBtn": "Depreciation Report",
     "myAssetsBtn": "My Assets",
