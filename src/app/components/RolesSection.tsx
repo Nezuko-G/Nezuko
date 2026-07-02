@@ -11,22 +11,22 @@ export default function RolesSection() {
     { 
       id: "admin", 
       ...t.raw("items.admin"), 
-      img: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=600" 
+      img: "/team/nagy.png" 
     },
     { 
       id: "manager", 
       ...t.raw("items.manager"), 
-      img: "https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=600" 
+      img: "/team/abdo.png" 
     },
     { 
       id: "chro", 
       ...t.raw("items.chro"), 
-      img: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=600" 
+      img: "/team/selim.png" 
     },
     { 
       id: "payroll", 
       ...t.raw("items.payroll"), 
-      img: "https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=600" 
+      img: "/team/naguib.png" 
     },
   ];
 
