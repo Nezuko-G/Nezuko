@@ -11,11 +11,14 @@ import { Pagination } from "@/app/(hr-system)/_components/Pagination";
 import RoleGuard from "@/components/RoleGuard/RoleGuard";
 import { useAssetUIStore } from "@/app/(hr-system)/asset/hooks/useAssetUIStore";
 import { useRouter } from "@/i18n/navigation";
+import { useAssetMutations } from "@/app/(hr-system)/asset/hooks/useAssets";
 
 export default function AssetsPage() {
   const t = useTranslations("assets.list");
   const { openModal } = useAssetUIStore();
   const router = useRouter();
+
+  const { deleteAsset } = useAssetMutations();
 
   const [status, setStatus] = useState("");
   const [search, setSearch] = useState("");
@@ -116,7 +119,18 @@ export default function AssetsPage() {
         ) : (
           <>
             <div className="flex-1">
-              <AssetTable assets={assetsList} />
+              <AssetTable
+                assets={assetsList}
+                onDelete={(id) => {
+                  if (
+                    window.confirm(
+                      "Are you sure you want to delete this asset?",
+                    )
+                  ) {
+                    deleteAsset.mutate({ id });
+                  }
+                }}
+              />
             </div>
           </>
         )}

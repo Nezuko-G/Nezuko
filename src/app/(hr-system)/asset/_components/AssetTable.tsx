@@ -4,7 +4,13 @@ import { useTranslations } from "next-intl";
 import { AssetDTO } from "../types/asset.dto";
 import { useAssetUIStore } from "@/app/(hr-system)/asset/hooks/useAssetUIStore";
 import { useAuthStore } from "@/hooks/useAuthStore";
-import { ArrowRightLeft, CornerDownLeft, UserPlus, Pencil } from "lucide-react";
+import {
+  ArrowRightLeft,
+  CornerDownLeft,
+  UserPlus,
+  Pencil,
+  Trash2,
+} from "lucide-react";
 import { useRouter } from "@/i18n/navigation";
 import { z } from "zod";
 import { cn } from "@/lib/utils";
@@ -14,11 +20,13 @@ type Asset = z.infer<typeof AssetDTO>;
 interface AssetTableProps {
   assets: Asset[];
   isReadOnly?: boolean;
+  onDelete?: (id: string) => void;
 }
 
 export default function AssetTable({
   assets,
   isReadOnly = false,
+  onDelete,
 }: AssetTableProps) {
   const t = useTranslations("assets.list");
   const { openModal } = useAssetUIStore();
@@ -172,6 +180,16 @@ export default function AssetTable({
                         className="p-1.5 rounded-lg hover:bg-gray-100 text-content-muted hover:text-secondary transition-colors"
                       >
                         <Pencil size={15} />
+                      </button>
+                      <button
+                        title={t("actions.delete")}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          if (onDelete) onDelete(asset.id);
+                        }}
+                        className="p-1.5 rounded-lg hover:bg-status-error/10 text-content-muted hover:text-status-error transition-colors"
+                      >
+                        <Trash2 size={15} />
                       </button>
                     </div>
                   </td>
