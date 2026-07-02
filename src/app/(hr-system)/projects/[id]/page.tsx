@@ -33,7 +33,7 @@ export default function ProjectDetailPage() {
     const [cancelOpen, setCancelOpen] = useState(false);
     const [taskFormOpen, setTaskFormOpen] = useState(false);
     const [editingTask, setEditingTask] = useState<Task>();
-    const [selectedTaskId, setSelectedTaskId] = useState<string>();
+    const [selectedTask, setSelectedTask] = useState<Task>();
     const [taskPage, setTaskPage] = useState(1);
     const [subTaskParent, setSubTaskParent] = useState<Task | null>(null);
     const [searchQuery, setSearchQuery] = useState("");
@@ -209,7 +209,7 @@ export default function ProjectDetailPage() {
                         <ProjectTasksTable
                             tasks={tasks}
                             canManage={canManage}
-                            onViewDetail={(task) => setSelectedTaskId(task.id)}
+                            onViewDetail={(task) => setSelectedTask(task)}
                             onEdit={setEditingTask}
                             onAddSubTask={setSubTaskParent}
                         />
@@ -302,12 +302,12 @@ export default function ProjectDetailPage() {
             )}
 
             {/* Task Detail Popover */}
-            {selectedTaskId && (
+            {selectedTask && (
                 <TaskDetailPopover
-                    taskId={selectedTaskId}
-                    onClose={() => setSelectedTaskId(undefined)}
+                    task={selectedTask}
+                    onClose={() => setSelectedTask(undefined)}
                     onEdit={(task) => {
-                        setSelectedTaskId(undefined);
+                        setSelectedTask(undefined);
                         setEditingTask(task);
                     }}
                 />

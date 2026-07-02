@@ -1,21 +1,19 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { X, Loader2, Calendar, User, Clock, AlertCircle, GitBranch, FileText } from "lucide-react";
-import { useTaskById } from "../_hooks/useTasks";
+import { X, Calendar, User, Clock, AlertCircle, GitBranch, FileText } from "lucide-react";
 import { TaskStatusBadge, PriorityBadge } from "./Badges";
 import { TaskStatus, TaskPriority } from "../types/project.types";
 import type { Task } from "../types/project.types";
 
 interface TaskDetailPopoverProps {
-  taskId: string;
+  task: Task;
   onClose: () => void;
   onEdit?: (task: Task) => void;
 }
 
-export function TaskDetailPopover({ taskId, onClose, onEdit }: TaskDetailPopoverProps) {
+export function TaskDetailPopover({ task, onClose, onEdit }: TaskDetailPopoverProps) {
   const t = useTranslations("projects.tasks");
-  const { data: task, isLoading, isError } = useTaskById(taskId);
 
   return (
     <div
@@ -41,13 +39,6 @@ export function TaskDetailPopover({ taskId, onClose, onEdit }: TaskDetailPopover
 
         {/* Body */}
         <div className="flex-1 overflow-y-auto px-6 py-4">
-          {isLoading ? (
-            <div className="flex items-center justify-center py-12">
-              <Loader2 size={24} className="animate-spin text-primary" />
-            </div>
-          ) : isError || !task ? (
-            <p className="text-sm text-status-error">{t("errors.loadFailed")}</p>
-          ) : (
             <div className="flex flex-col gap-4">
               {/* Title & badges */}
               <div className="flex flex-col gap-1.5">
@@ -154,6 +145,30 @@ export function TaskDetailPopover({ taskId, onClose, onEdit }: TaskDetailPopover
                     <span className="text-sm text-content-dark font-medium">{task.createdBy.name}</span>
                   </div>
                 )}
+
+                {task.createdAt && (
+                  <div className="flex flex-col gap-1">
+                    <span className="text-xs font-medium text-content-muted flex items-center gap-1">
+                      <Calendar size={12} />
+                      {t("fields.createdAt") ?? "Created At"}
+                    </span>
+                    <span className="text-sm text-content-dark font-medium">
+                      {new Date(task.createdAt).toLocaleDateString(undefined, { dateStyle: "medium" })}
+                    </span>
+                  </div>
+                )}
+
+                {task.updatedAt && (
+                  <div className="flex flex-col gap-1">
+                    <span className="text-xs font-medium text-content-muted flex items-center gap-1">
+                      <Calendar size={12} />
+                      {t("fields.updatedAt") ?? "Updated At"}
+                    </span>
+                    <span className="text-sm text-content-dark font-medium">
+                      {new Date(task.updatedAt).toLocaleDateString(undefined, { dateStyle: "medium" })}
+                    </span>
+                  </div>
+                )}
               </div>
 
               {/* Parent task link */}
@@ -198,7 +213,6 @@ export function TaskDetailPopover({ taskId, onClose, onEdit }: TaskDetailPopover
                   </div>
                 )}
             </div>
-          )}
         </div>
 
         {/* Footer actions */}
@@ -209,7 +223,7 @@ export function TaskDetailPopover({ taskId, onClose, onEdit }: TaskDetailPopover
           >
             {t("actions.discard")}
           </button>
-          {task && onEdit && (
+          {onEdit && (
             <button
               onClick={() => onEdit(task)}
               className="px-4 py-2 rounded-xl text-sm font-semibold text-secondary bg-primary hover:bg-primary-hover transition-colors"

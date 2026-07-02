@@ -25,7 +25,7 @@ export function MyTasksPage({ }: MyTasksPageProps) {
   const { role } = useAuthStore();
   const canEdit = role !== "EMPLOYEE";
   const { data: tasks, isLoading, isError } = useMyTasks();
-  const [selectedTaskId, setSelectedTaskId] = useState<string>();
+  const [selectedTask, setSelectedTask] = useState<Task>();
   const [editingTask, setEditingTask] = useState<Task>();
   const queryClient = useQueryClient();
   const { mutate: updateTask, isPending: taskUpdating } = useMutation({
@@ -60,16 +60,16 @@ export function MyTasksPage({ }: MyTasksPageProps) {
       ) : (
         <MyTasksTable
           tasks={sorted}
-          onViewDetail={(task) => setSelectedTaskId(task.id)}
+          onViewDetail={(task) => setSelectedTask(task)}
         />
       )}
 
-      {selectedTaskId && (
+      {selectedTask && (
         <TaskDetailPopover
-          taskId={selectedTaskId}
-          onClose={() => setSelectedTaskId(undefined)}
+          task={selectedTask}
+          onClose={() => setSelectedTask(undefined)}
           onEdit={canEdit ? (task) => {
-            setSelectedTaskId(undefined);
+            setSelectedTask(undefined);
             setEditingTask(task);
           } : undefined}
         />
@@ -101,7 +101,7 @@ interface OverdueReportPageProps {
 export function OverdueReportPage({ currentUserId }: OverdueReportPageProps) {
   const tp = useTranslations("projects");
   const { data: groups, isLoading, isError } = useOverdueReport();
-  const [selectedTaskId, setSelectedTaskId] = useState<string>();
+  const [selectedTask, setSelectedTask] = useState<Task>();
   const [editingTask, setEditingTask] = useState<Task>();
   const updateTask = useUpdateTask(editingTask?.id ?? "");
 
@@ -119,16 +119,16 @@ export function OverdueReportPage({ currentUserId }: OverdueReportPageProps) {
         <OverdueTasksTable
           groups={groups}
           currentUserId={currentUserId}
-          onViewDetail={(task) => setSelectedTaskId(task.id)}
+          onViewDetail={(task) => setSelectedTask(task)}
         />
       )}
 
-      {selectedTaskId && (
+      {selectedTask && (
         <TaskDetailPopover
-          taskId={selectedTaskId}
-          onClose={() => setSelectedTaskId(undefined)}
+          task={selectedTask}
+          onClose={() => setSelectedTask(undefined)}
           onEdit={(task) => {
-            setSelectedTaskId(undefined);
+            setSelectedTask(undefined);
             setEditingTask(task);
           }}
         />
