@@ -36,8 +36,5 @@ export const useAuthStore = create<AuthState>((set) => ({
 
   clearAuth: () => {
     set({ id: null, role: "EMPLOYEE", isHydrated: false, avatarUrl: null, firstName: null, lastName: null });
-    if (typeof window !== "undefined") {
-      localStorage.removeItem("auth");
-    }
   },
 }));

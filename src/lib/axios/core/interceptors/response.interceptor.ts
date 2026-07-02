@@ -64,7 +64,11 @@ export async function onResponseError(
     if (success) {
       return api(originalRequest);
     }
-    
+
+    if (typeof window !== "undefined") {
+      window.location.href = "/login";
+    }
+
     return Promise.reject({ data: null, error: errorMessage, status: 401, all: error });
   }
 
