@@ -1,5 +1,5 @@
 import { useTranslations } from "next-intl";
-import { Button } from "@/components/ui/button"; 
+import { Button } from "@/components/ui/button"; // بنستخدم الـ Button بتاع صاحبك
 
 export default function CTASection() {
   const t = useTranslations("landing.cta");

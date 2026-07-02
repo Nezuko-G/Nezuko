@@ -16,6 +16,7 @@ import {
   Gift,
   CheckSquare,
   AlertTriangle,
+  FilePlus,
   LucideIcon
 } from "lucide-react";
 import { Link, usePathname } from "@/i18n/navigation";

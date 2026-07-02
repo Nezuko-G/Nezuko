@@ -1,11 +1,13 @@
 import { z } from 'zod'
+import apiClient from 'axios'
 import { UserDTO } from '../types/user.dto'
 import { mapUserFromDTO } from '../mappers/user.mapper'
 import { apis } from '@/lib/api/config'
-import api from "@/lib/axios/core/instance"
 
-export async function login(email: string, password: string) {                                                                 
-  const response = await api.post(apis.auth.login, { email, password })
+
+
+export async function login(email: string, password: string) {                                                                            
+  const response = await apiClient.post(apis.auth.login, { email, password })
   const validated = z.object({
     accessToken: z.string(),
     refreshToken: z.string(),
@@ -19,5 +21,4 @@ export async function login(email: string, password: string) {
 }
 
 export async function logout() {
-  await api.post(apis.auth.logout)
 }

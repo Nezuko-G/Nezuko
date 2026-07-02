@@ -112,8 +112,7 @@
     "TODO": "للتنفيذ",
     "IN_PROGRESS": "قيد التنفيذ",
     "DONE": "مكتمل",
-    "CANCELLED": "ملغى",
-    "BLOCKED": "محجوز"
+    "CANCELLED": "ملغى"
   },
   "error": {
     "title": "عذراً! حدث خطأ ما",
