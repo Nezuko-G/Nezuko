@@ -6,8 +6,9 @@ import { getMe } from "@/app/(hr-system)/profile/api/profile.api";
 import { redirect } from "next/navigation";
 
 export default async function DashboardLayout({ children }: { children: React.ReactNode }) {
-let user = null;
-  
+  let user = null;
+  let shouldRedirect = false;
+
   try {
     const cookieStore = await cookies();
     const cookieString = cookieStore.toString();
@@ -15,10 +16,16 @@ let user = null;
     user = await getMe({ Cookie: cookieString });
 
     if (!user) {
-      redirect("/login");
+      shouldRedirect = true;
     }
+  } catch (error: unknown) {
+    const err = error as { status?: number };
+    if (err?.status === 401) {
+      shouldRedirect = true;
+    }
+  }
 
-} catch (error) {
+  if (shouldRedirect) {
     redirect("/login");
   }
 

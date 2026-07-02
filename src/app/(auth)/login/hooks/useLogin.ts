@@ -3,9 +3,11 @@
 import { useMutation } from "@tanstack/react-query";
 import { login } from "../api/auth.api";
 import { useAuthStore } from "@/hooks/useAuthStore";
+import { useRouter } from "@/i18n/navigation";
 
 export function useLogin() {
   const setUserData = useAuthStore((s) => s.setUserData);
+  const router = useRouter();
 
   return useMutation({
     mutationFn: (data: {
@@ -28,9 +30,9 @@ export function useLogin() {
       }
 
       if (role === "EMPLOYEE") {
-        window.location.href = "/profile";
+        router.replace("/profile");
       } else {
-        window.location.href = "/dashboard";
+        router.replace("/dashboard");
       }
     },
   });

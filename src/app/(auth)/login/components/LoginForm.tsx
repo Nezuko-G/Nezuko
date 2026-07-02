@@ -4,16 +4,14 @@ import Image from "next/image";
 import LangSwitcher from "./LangSwitcher";
 import { useTranslations } from "next-intl";
 // import { useLocale } from "next-intl";
-import { Link, useRouter } from "@/i18n/navigation";
-import { useState, useEffect } from "react";
+import { Link } from "@/i18n/navigation";
+import { useState } from "react";
 import { ArrowLeft } from "lucide-react";
 import { useLogin } from "../hooks/useLogin";
 import { useAuthStore } from "@/hooks/useAuthStore";
 
 export default function LoginForm() {
   const t = useTranslations("auth");
-  const router = useRouter();
-  // const locale = useLocale();
   const isAuthenticated = useAuthStore((s) => s.id !== null);
 
   const [form, setForm] = useState({
@@ -23,10 +21,6 @@ export default function LoginForm() {
 });
 
   const loginMutation = useLogin();
-
-  useEffect(() => {
-    if (isAuthenticated) router.replace("/profile");
-  }, [isAuthenticated, router]);
 
   if (isAuthenticated) return null;
 

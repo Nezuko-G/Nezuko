@@ -7,7 +7,7 @@ import { getDir } from '@/i18n/routing'
 import { Providers } from '@/components/providers/Providers'
 import { LocaleProvider } from '@/components/i18n/LocaleProvider'
 import { getMe } from "@/app/(hr-system)/profile/api/profile.api";
-import { AuthHydrator } from "@/components/providers/AuthHydrator"; 
+import { AuthHydrator } from "@/components/providers/AuthHydrator";
 
 export const metadata: Metadata = {
   title: {
@@ -59,10 +59,9 @@ export default async function RootLayout({
 
   let user = null;
   try {
-    const cookieStore = await cookies(); 
-    
-        user = await getMe({ Cookie: cookieStore.toString() }); 
-  } catch (error) {
+    const cookieStore = await cookies();
+    user = await getMe({ Cookie: cookieStore.toString() });
+  } catch {
     user = null;
   }
 
@@ -71,7 +70,6 @@ export default async function RootLayout({
       <head />
       <body className="antialiased">
         <AuthHydrator user={user} />
-
         <NextIntlClientProvider locale={locale} messages={messages}>
           <Providers>
             <LocaleProvider>{children}</LocaleProvider>
