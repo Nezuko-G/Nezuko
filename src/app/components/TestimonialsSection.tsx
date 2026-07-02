@@ -9,9 +9,9 @@ export default function TestimonialsSection() {
   const t = useTranslations("landing.testimonials");
 
   const testimonials = [
-    { id: "1", ...t.raw("items.1"), img: "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=200&q=80" },
-    { id: "2", ...t.raw("items.2"), img: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=200&q=80" },
-    { id: "3", ...t.raw("items.3"), img: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=200&q=80" },
+    { id: "1", ...t.raw("items.1"), img: "/team/nagy.png" },
+    { id: "2", ...t.raw("items.2"), img: "/team/naguib.png" },
+    { id: "3", ...t.raw("items.3"), img: "/team/selim.png" },
   ];
 
   return (

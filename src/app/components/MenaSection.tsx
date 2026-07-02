@@ -33,7 +33,7 @@ export default function MenaSection() {
           </div>
           <div className="flex-1 relative w-full h-100 md:h-150">
             <Image
-              src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1000"
+              src="/home/second.png"
               alt="Salary Data"
               fill
               className="object-cover object-left"
@@ -50,7 +50,7 @@ export default function MenaSection() {
         >
           <div className="flex-1 relative w-full h-100 md:h-150 bg-white/50 p-10 flex items-center justify-center">
             <Image
-              src="https://images.unsplash.com/photo-1611162617474-5b21e879e113?q=80&w=1000"
+              src="/home/fourth.png"
               alt="Compliance Integrations"
               fill
               className="object-cover"
