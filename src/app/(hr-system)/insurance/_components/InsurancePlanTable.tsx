@@ -3,22 +3,18 @@
 import { useTranslations } from "next-intl";
 import { InsurancePlan } from "../types/insurance.dto";
 import { useInsuranceUIStore } from "@/app/(hr-system)/insurance/hooks/useInsuranceUIStore";
-import {
-  Pencil,
-  ShieldOff,
-  Users,
-  ChevronLeft,
-  ChevronRight,
-} from "lucide-react";
+import { Pencil, ShieldOff, Users } from "lucide-react";
 import InsurancePlanTypeBadge from "./InsurancePlanTypeBadge";
 import { useRouter } from "@/i18n/navigation";
 import { cn } from "@/lib/utils";
 import { Dispatch, SetStateAction } from "react";
+import { Pagination } from "@/app/(hr-system)/_components/Pagination";
 
 interface InsurancePlanTableProps {
   plans: InsurancePlan[];
   page: number;
   lastPage: number;
+  isLoading: boolean;
   setPage: Dispatch<SetStateAction<number>>;
 }
 
@@ -27,6 +23,7 @@ export default function InsurancePlanTable({
   page,
   lastPage,
   setPage,
+  isLoading
 }: InsurancePlanTableProps) {
   const t = useTranslations("insurance.plans.table");
   const tStatus = useTranslations("insurance.plans.status");
@@ -34,105 +31,95 @@ export default function InsurancePlanTable({
   const router = useRouter();
 
   return (
-    <div className="overflow-x-auto rounded-2xl border border-gray-100 bg-card shadow-sm flex flex-col h-full">
-      <table className="w-full text-sm text-start">
-        <thead>
-          <tr className="border-b border-gray-100 text-content-muted text-xs font-bold uppercase tracking-wider">
-            <th className="px-5 py-4 text-start">{t("name")}</th>
-            <th className="px-5 py-4 text-center">{t("type")}</th>
-            <th className="px-5 py-4 text-center">{t("salaryPercentage")}</th>
-            <th className="px-5 py-4 text-center">{t("maxDependents")}</th>
-            <th className="px-5 py-4 text-center">{t("status")}</th>
-            <th className="px-5 py-4 text-end pl-8">{t("actions")}</th>
-          </tr>
-        </thead>
-        <tbody className="divide-y divide-gray-50">
-          {plans.map((plan) => (
-            <tr
-              key={plan.id}
-              className="border-b border-gray-50 last:border-0 hover:bg-gray-50/60 transition-colors"
-            >
-              <td className="px-5 py-4">
-                <p className="font-semibold text-secondary">{plan.name}</p>
-              </td>
-              <td className="px-5 py-4 text-center">
-                <InsurancePlanTypeBadge type={plan.type} />
-              </td>
-              <td className="px-5 py-4 text-center font-semibold text-content-dark">
-                {plan.salaryPercentage}%
-              </td>
-              <td className="px-5 py-4 text-center">
-                <span className="px-2.5 py-1 bg-gray-50 text-content-dark border border-gray-100 rounded-md font-semibold text-xs inline-flex items-center gap-1">
-                  <Users size={14} className="text-content-muted" />
-                  {plan.maxDependents}
-                </span>
-              </td>
-              <td className="px-5 py-4 text-center">
-                <span
-                  className={cn(
-                    "px-2.5 py-1 rounded-md text-xs font-bold",
-                    plan.isActive
-                      ? "bg-status-success/10 text-status-success"
-                      : "bg-gray-100 text-content-muted",
-                  )}
-                >
-                  {plan.isActive ? tStatus("active") : tStatus("inactive")}
-                </span>
-              </td>
-              <td className="px-5 py-4">
-                <div className="flex items-center justify-end gap-2 ps-3">
-                  <button
-                    onClick={() => router.push(`/insurance/${plan.id}/enroll`)}
-                    className="px-2.5 py-1 text-xs font-bold text-primary bg-primary/10 hover:bg-primary hover:text-white rounded-md transition-all"
-                  >
-                    {t("enroll")}
-                  </button>
-                  <button
-                    onClick={() => openDrawer("EDIT_PLAN", plan)}
-                    className="p-1.5 rounded-lg hover:bg-gray-100 text-content-muted hover:text-secondary transition-colors"
-                    title={t("edit") || "Edit"}
-                  >
-                    <Pencil size={15} />
-                  </button>
-                  {plan.isActive && (
-                    <button
-                      onClick={() => openModal("DEACTIVATE_PLAN", { plan })}
-                      className="p-1.5 rounded-lg hover:bg-status-error/10 text-content-muted hover:text-status-error transition-colors"
-                      title={t("deactivate") || "Deactivate"}
-                    >
-                      <ShieldOff size={15} />
-                    </button>
-                  )}
-                </div>
-              </td>
+    <div className="flex flex-col gap-4 h-full">
+      <div className="overflow-x-auto rounded-2xl border border-gray-100 bg-card shadow-sm flex flex-col">
+        <table className="w-full text-sm text-start">
+          <thead>
+            <tr className="border-b border-gray-100 text-content-muted text-xs font-bold uppercase tracking-wider">
+              <th className="px-5 py-4 text-start">{t("name")}</th>
+              <th className="px-5 py-4 text-center">{t("type")}</th>
+              <th className="px-5 py-4 text-center">{t("salaryPercentage")}</th>
+              <th className="px-5 py-4 text-center">{t("maxDependents")}</th>
+              <th className="px-5 py-4 text-center">{t("status")}</th>
+              <th className="px-5 py-4 text-end pl-8">{t("actions")}</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody className="divide-y divide-gray-50">
+            {plans.map((plan) => (
+              <tr
+                key={plan.id}
+                className="border-b border-gray-50 last:border-0 hover:bg-gray-50/60 transition-colors"
+              >
+                <td className="px-5 py-4">
+                  <p className="font-semibold text-secondary">{plan.name}</p>
+                </td>
+                <td className="px-5 py-4 text-center">
+                  <InsurancePlanTypeBadge type={plan.type} />
+                </td>
+                <td className="px-5 py-4 text-center font-semibold text-content-dark">
+                  {plan.salaryPercentage}%
+                </td>
+                <td className="px-5 py-4 text-center">
+                  <span className="px-2.5 py-1 bg-gray-50 text-content-dark border border-gray-100 rounded-md font-semibold text-xs inline-flex items-center gap-1">
+                    <Users size={14} className="text-content-muted" />
+                    {plan.maxDependents}
+                  </span>
+                </td>
+                <td className="px-5 py-4 text-center">
+                  <span
+                    className={cn(
+                      "px-2.5 py-1 rounded-md text-xs font-bold",
+                      plan.isActive
+                        ? "bg-status-success/10 text-status-success"
+                        : "bg-gray-100 text-content-muted",
+                    )}
+                  >
+                    {plan.isActive ? tStatus("active") : tStatus("inactive")}
+                  </span>
+                </td>
+                <td className="px-5 py-4">
+                  <div className="flex items-center justify-end gap-2 ps-3">
+                    <button
+                      onClick={() =>
+                        router.push(`/insurance/${plan.id}/enroll`)
+                      }
+                      className="px-2.5 py-1 text-xs font-bold text-primary bg-primary/10 hover:bg-primary hover:text-white rounded-md transition-all"
+                    >
+                      {t("enroll")}
+                    </button>
+                    <button
+                      onClick={() => openDrawer("EDIT_PLAN", plan)}
+                      className="p-1.5 rounded-lg hover:bg-gray-100 text-content-muted hover:text-secondary transition-colors"
+                      title={t("edit") || "Edit"}
+                    >
+                      <Pencil size={15} />
+                    </button>
+                    {plan.isActive && (
+                      <button
+                        onClick={() => openModal("DEACTIVATE_PLAN", { plan })}
+                        className="p-1.5 rounded-lg hover:bg-status-error/10 text-content-muted hover:text-status-error transition-colors"
+                        title={t("deactivate") || "Deactivate"}
+                      >
+                        <ShieldOff size={15} />
+                      </button>
+                    )}
+                  </div>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
 
-      {lastPage > 1 && (
-        <div className="px-6 py-4 border-t border-gray-50 flex items-center justify-center gap-4 bg-gray-50/50 mt-auto">
-          <p className="text-sm text-content-muted font-bold">
-            {t("pagination", { current: page, total: lastPage })}
-          </p>
-          <div className="flex items-center gap-1.5">
-            <button
-              disabled={page <= 1}
-              onClick={() => setPage((p) => p - 1)}
-              className="h-8 w-8 flex items-center justify-center rounded-lg border border-gray-200 bg-white hover:bg-gray-50 text-content-dark transition disabled:opacity-50"
-            >
-              <ChevronLeft size={16} />
-            </button>
-            <button
-              disabled={page >= lastPage}
-              onClick={() => setPage((p) => p + 1)}
-              className="h-8 w-8 flex items-center justify-center rounded-lg border border-gray-200 bg-white hover:bg-gray-50 text-content-dark transition disabled:opacity-50"
-            >
-              <ChevronRight size={16} />
-            </button>
-          </div>
-        </div>
+      {!isLoading && plans.length > 0 && (
+        <Pagination
+          currentPage={page}
+          totalPages={lastPage}
+          onPageChange={setPage}
+          label={t("pagination", { current: page, total: lastPage })}
+        />
       )}
+
     </div>
   );
 }

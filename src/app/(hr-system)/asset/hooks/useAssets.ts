@@ -4,7 +4,8 @@ import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { 
   getAssets, getAsset, getAssetHistory, getDepreciationReport,
   createAsset, updateAsset, assignAsset, returnAsset, transferAsset, 
-  getEmployeeAssets, getMyAssets
+  getEmployeeAssets, getMyAssets,
+  deleteAsset
 } from "../api/assets";
 import { useAssetUIStore } from "./useAssetUIStore";
 
@@ -92,12 +93,18 @@ export function useAssetMutations() {
     onSuccess: onSuccessAction,
   });
 
+  const deleteMutation = useMutation({
+    mutationFn: deleteAsset,
+    onSuccess: onSuccessAction
+  });
+
   return {
     assignAsset: assignMutation,
     returnAsset: returnMutation,
     transferAsset: transferMutation,
     createAsset: createMutation,
     updateAsset: updateMutation,
+    deleteAsset: deleteMutation,
     getEmployeeAssets: useEmployeeAssets,
     getMyAssets: useMyAssets,
     isLoading: 

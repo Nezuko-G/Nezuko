@@ -23,8 +23,9 @@
       "actions": "Actions",
       "enroll": "Enroll Employee",
       "edit": "Edit",
-      "deactivate": "Deactivate"
-    },
+      "deactivate": "Deactivate",
+      "pagination": "Page {current} of {total}"
+    },  
     "errors": {
       "fetch": "Failed to load plans"
     }

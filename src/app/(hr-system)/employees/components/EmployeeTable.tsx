@@ -1,13 +1,14 @@
 "use client";
 
+import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
-import { Eye, Pencil, UserX, ChevronLeft, ChevronRight } from "lucide-react";
+import { Eye, Pencil, UserX } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useEmployees } from "../hooks/useEmployees";
 import { useDepartments } from "@/app/(hr-system)/departments/hooks/useDepartments";
+import { Pagination } from "@/app/(hr-system)/_components/Pagination";
 import type { EmployeeSummary } from "../types/employees.dto";
-import { useState } from "react";
 
 interface Props {
   onAddClick: () => void;
@@ -55,28 +56,34 @@ export default function EmployeeTable({ onAddClick, onTerminate }: Props) {
 
   return (
     <div className="flex flex-col gap-4">
-      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
-        <h1 className="text-2xl font-extrabold text-secondary">{t("title")}</h1>
+      <div className="flex flex-col items-start justify-between gap-3 sm:flex-row sm:items-center">
+        <div>
+          <h1 className="text-2xl font-extrabold text-secondary">
+            {t("title")}
+          </h1>
+          <p className="mt-1 text-sm text-content-muted">{t("subtitle")}</p>
+        </div>
+
         <button
           onClick={onAddClick}
-          className="px-4 py-2 rounded-xl bg-primary text-secondary font-bold text-sm shadow hover:opacity-90 transition"
+          className="rounded-xl bg-primary px-4 py-2 text-sm font-bold text-secondary shadow transition hover:opacity-90"
         >
           + {t("addEmployee")}
         </button>
       </div>
 
-      <div className="flex flex-col sm:flex-row gap-2">
+      <div className="flex flex-col gap-2 sm:flex-row">
         <input
           type="text"
           placeholder={t("searchPlaceholder")}
           value={search}
           onChange={handleSearchChange}
-          className="flex-1 px-4 py-2 rounded-xl border border-gray-200 bg-card text-content text-sm focus:outline-none focus:ring-2 focus:ring-primary/30"
+          className="flex-1 rounded-xl border border-gray-200 bg-card px-4 py-2 text-sm text-content focus:outline-none focus:ring-2 focus:ring-primary/30"
         />
         <select
           value={departmentId}
           onChange={handleDepartmentChange}
-          className="px-3 py-2 rounded-xl border border-gray-200 bg-card text-content text-sm focus:outline-none"
+          className="rounded-xl border border-gray-200 bg-card px-3 py-2 text-sm text-content focus:outline-none"
         >
           <option value="">{t("allDepartments")}</option>
           {departments.map((d) => (
@@ -88,7 +95,7 @@ export default function EmployeeTable({ onAddClick, onTerminate }: Props) {
         <select
           value={status}
           onChange={handleStatusChange}
-          className="px-3 py-2 rounded-xl border border-gray-200 bg-card text-content text-sm focus:outline-none"
+          className="rounded-xl border border-gray-200 bg-card px-3 py-2 text-sm text-content focus:outline-none"
         >
           <option value="">{t("allStatuses")}</option>
           <option value="ACTIVE">{t("status.active")}</option>
@@ -99,7 +106,7 @@ export default function EmployeeTable({ onAddClick, onTerminate }: Props) {
       <div className="overflow-x-auto rounded-2xl border border-gray-100 bg-card shadow-sm">
         <table className="w-full text-sm">
           <thead>
-            <tr className="border-b border-gray-100 text-content-muted text-xs font-bold uppercase tracking-wider">
+            <tr className="border-b border-gray-100 text-xs font-bold uppercase tracking-wider text-content-muted">
               <th className="px-5 py-4 text-left">{t("table.employee")}</th>
               <th className="px-5 py-4 text-left">{t("table.code")}</th>
               <th className="px-5 py-4 text-left">{t("table.department")}</th>
@@ -135,20 +142,20 @@ export default function EmployeeTable({ onAddClick, onTerminate }: Props) {
                   <tr
                     key={emp.id}
                     className={cn(
-                      "border-b border-gray-50 last:border-0 transition-colors",
+                      "border-b border-gray-50 transition-colors last:border-0",
                       isTerminated ? "opacity-50" : "hover:bg-gray-50/60",
                     )}
                   >
                     <td className="px-5 py-4">
                       <div className="flex items-center gap-3">
-                        <div className="w-9 h-9 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold text-xs shrink-0">
+                        <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-primary/10 text-xs font-bold text-primary">
                           {initials}
                         </div>
                         <div>
                           <p className="font-semibold text-secondary">
                             {emp.firstName} {emp.lastName}
                           </p>
-                          <p className="text-content-muted text-xs">
+                          <p className="text-xs text-content-muted">
                             {emp.email}
                           </p>
                         </div>
@@ -160,7 +167,7 @@ export default function EmployeeTable({ onAddClick, onTerminate }: Props) {
                       </span>
                     </td>
                     <td className="px-5 py-4">
-                      <span className="px-2 py-1 rounded-md bg-primary/10 text-primary text-xs font-semibold">
+                      <span className="rounded-md bg-primary/10 px-2 py-1 text-xs font-semibold text-primary">
                         {emp.department?.name ?? "—"}
                       </span>
                     </td>
@@ -172,7 +179,7 @@ export default function EmployeeTable({ onAddClick, onTerminate }: Props) {
                     <td className="px-5 py-4">
                       <span
                         className={cn(
-                          "px-2 py-1 rounded-md text-xs font-bold",
+                          "rounded-md px-2 py-1 text-xs font-bold",
                           isTerminated
                             ? "bg-status-error/10 text-status-error"
                             : "bg-status-success/10 text-status-success",
@@ -185,7 +192,7 @@ export default function EmployeeTable({ onAddClick, onTerminate }: Props) {
                       <div className="flex items-center justify-end gap-2">
                         <button
                           onClick={() => router.push(`/employees/${emp.id}`)}
-                          className="p-1.5 rounded-lg hover:bg-gray-100 text-content-muted hover:text-secondary transition"
+                          className="rounded-lg p-1.5 text-content-muted transition hover:bg-gray-100 hover:text-secondary"
                           title={t("actions.view")}
                         >
                           <Eye size={15} />
@@ -196,14 +203,14 @@ export default function EmployeeTable({ onAddClick, onTerminate }: Props) {
                               onClick={() =>
                                 router.push(`/employees/${emp.id}`)
                               }
-                              className="p-1.5 rounded-lg hover:bg-gray-100 text-content-muted hover:text-secondary transition"
+                              className="rounded-lg p-1.5 text-content-muted transition hover:bg-gray-100 hover:text-secondary"
                               title={t("actions.edit")}
                             >
                               <Pencil size={15} />
                             </button>
                             <button
                               onClick={() => onTerminate(emp)}
-                              className="p-1.5 rounded-lg hover:bg-status-error/10 text-content-muted hover:text-status-error transition"
+                              className="rounded-lg p-1.5 text-content-muted transition hover:bg-status-error/10 hover:text-status-error"
                               title={t("actions.terminate")}
                             >
                               <UserX size={15} />
@@ -221,27 +228,12 @@ export default function EmployeeTable({ onAddClick, onTerminate }: Props) {
       </div>
 
       {!isLoading && employees.length > 0 && (
-        <div className="px-6 py-4 border-t border-gray-50 flex items-center justify-center gap-4 bg-gray-50/50">
-          <p className="text-sm text-content-muted font-bold">
-            {t("pagination", { current: page, total: totalPages })}
-          </p>
-          <div className="flex ltr:flex-row-reverse rtl:flex-row items-center gap-1.5">
-            <button
-              disabled={page >= totalPages}
-              onClick={() => setPage((p) => p + 1)}
-              className="h-8 w-8 flex items-center justify-center rounded-lg border border-gray-200 hover:bg-gray-50 text-content-dark transition disabled:opacity-50"
-            >
-              <ChevronRight size={16} />
-            </button>
-            <button
-              disabled={page <= 1}
-              onClick={() => setPage((p) => p - 1)}
-              className="h-8 w-8 flex items-center justify-center rounded-lg border border-gray-200 hover:bg-gray-50 text-content-dark transition disabled:opacity-50"
-            >
-              <ChevronLeft size={16} />
-            </button>
-          </div>
-        </div>
+        <Pagination
+          currentPage={page}
+          totalPages={totalPages}
+          onPageChange={setPage}
+          label={t("pagination", { current: page, total: totalPages })}
+        />
       )}
     </div>
   );

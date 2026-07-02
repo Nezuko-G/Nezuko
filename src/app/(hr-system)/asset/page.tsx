@@ -3,26 +3,22 @@
 import { useState } from "react";
 import { useDebounce } from "use-debounce";
 import { useTranslations } from "next-intl";
-import {
-  FileText,
-  Plus,
-  Loader2,
-  ChevronLeft,
-  ChevronRight,
-  Briefcase,
-} from "lucide-react";
+import { FileText, Plus, Loader2, Briefcase } from "lucide-react";
 import AssetTable from "./_components/AssetTable";
 import { useAssets } from "@/app/(hr-system)/asset/hooks/useAssets";
 import AssetModalsContainer from "./_components/modals/AssetModalsContainer";
+import { Pagination } from "@/app/(hr-system)/_components/Pagination";
 import RoleGuard from "@/components/RoleGuard/RoleGuard";
 import { useAssetUIStore } from "@/app/(hr-system)/asset/hooks/useAssetUIStore";
 import { useRouter } from "@/i18n/navigation";
-import { useDepartments } from "@/app/(hr-system)/departments/hooks/useDepartments";
+import { useAssetMutations } from "@/app/(hr-system)/asset/hooks/useAssets";
 
 export default function AssetsPage() {
   const t = useTranslations("assets.list");
   const { openModal } = useAssetUIStore();
   const router = useRouter();
+
+  const { deleteAsset } = useAssetMutations();
 
   const [status, setStatus] = useState("");
   const [search, setSearch] = useState("");
@@ -37,18 +33,19 @@ export default function AssetsPage() {
     search: debouncedSearch || undefined,
   });
 
-  const { data: departmentsData } = useDepartments({});
-  const departments = departmentsData?.data || [];
-
   const assetsList = data?.data || [];
   const meta = data?.meta;
   const lastPage = meta?.totalPages || 1;
 
   return (
-    <div className="flex flex-col gap-4 w-full max-w-6xl mx-auto p-4 md:p-8 text-right">
+    <div className="flex flex-col gap-4 w-full max-w-6xl mx-auto p-4 md:p-8">
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
-        <h1 className="text-2xl font-extrabold text-secondary">{t("title")}</h1>
-
+        <div>
+          <h1 className="text-2xl font-extrabold text-secondary">
+            {t("title")}
+          </h1>
+          <p className="mt-1 text-sm text-content-muted">{t("subtitle")}</p>
+        </div>
         <div className="flex flex-wrap items-center gap-2 w-full sm:w-auto justify-end">
           <button
             onClick={() => router.push("/asset/me")}
@@ -122,35 +119,31 @@ export default function AssetsPage() {
         ) : (
           <>
             <div className="flex-1">
-              <AssetTable assets={assetsList} />
+              <AssetTable
+                assets={assetsList}
+                onDelete={(id) => {
+                  if (
+                    window.confirm(
+                      "Are you sure you want to delete this asset?",
+                    )
+                  ) {
+                    deleteAsset.mutate({ id });
+                  }
+                }}
+              />
             </div>
-
-            {lastPage > 1 && (
-              <div className="px-6 py-4 border-t border-gray-50 flex items-center justify-center gap-4 bg-gray-50/50">
-                <p className="text-sm text-content-muted font-bold">
-                  {t("pagination", { current: page, total: lastPage })}
-                </p>
-                <div className="flex ltr:flex-row-reverse rtl:flex-row items-center gap-1.5">
-                  <button
-                    disabled={page >= lastPage}
-                    onClick={() => setPage((p) => p + 1)}
-                    className="h-8 w-8 flex items-center justify-center rounded-lg border border-gray-200 hover:bg-gray-50 text-content-dark transition disabled:opacity-50"
-                  >
-                    <ChevronRight size={16} />
-                  </button>
-                  <button
-                    disabled={page <= 1}
-                    onClick={() => setPage((p) => p - 1)}
-                    className="h-8 w-8 flex items-center justify-center rounded-lg border border-gray-200 hover:bg-gray-50 text-content-dark transition disabled:opacity-50"
-                  >
-                    <ChevronLeft size={16} />
-                  </button>
-                </div>
-              </div>
-            )}
           </>
         )}
       </div>
+
+      {!isLoading && assetsList.length > 0 && (
+        <Pagination
+          currentPage={page}
+          totalPages={lastPage}
+          onPageChange={setPage}
+          label={t("pagination", { current: page, total: lastPage })}
+        />
+      )}
 
       <AssetModalsContainer />
     </div>

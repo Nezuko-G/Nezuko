@@ -23,7 +23,9 @@
       "actions": "الإجراءات",
       "enroll": "تسجيل موظف",
       "edit": "تعديل",
-      "deactivate": "إلغاء التنشيط"
+      "deactivate": "إلغاء التنشيط",
+      "pagination": "صفحة {current} من {total}"
+
     },
     "errors": {
       "fetch": "فشل تحميل الخطط"

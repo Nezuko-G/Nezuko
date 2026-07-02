@@ -4,7 +4,7 @@ import { z } from 'zod';
 import apiClient from '@/lib/axios/core/instance';
 import { apis } from '@/lib/api/config';
 import { 
-  AssetDTO, AssetHistoryDTO,
+  AssetDTO,
   CreateAssetDTO, UpdateAssetDTO, 
   AssignAssetDTO, ReturnAssetDTO, TransferAssetDTO 
 } from '../types/asset.dto';
@@ -63,6 +63,11 @@ export async function updateAsset({ id, data }: { id: string, data: z.infer<type
   const validated = UpdateAssetDTO.parse(data);
   const response = await apiClient.patch<ApiResponse<z.infer<typeof AssetDTO>>>(`${apis.assets.base}/${id}`, validated);
   return mapAssetFromDTO(response.data.data);
+}
+
+export async function deleteAsset({ id }: { id: string }) {
+  const response = await apiClient.delete(`${apis.assets.base}/${id}`);
+  return response.data;
 }
 
 export async function assignAsset({ id, data }: { id: string, data: z.infer<typeof AssignAssetDTO> }) {

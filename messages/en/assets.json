@@ -1,6 +1,7 @@
 {
   "list": {
     "title": "Assets",
+    "subtitle": "Manage company assets and their lifecycle",
     "registerBtn": "Add Asset",
     "reportBtn": "Depreciation Report",
     "myAssetsBtn": "My Assets",
@@ -37,7 +38,8 @@
       "assign": "Assign Asset",
       "return": "Return Asset",
       "transfer": "Transfer Custody",
-      "edit": "Edit Details"
+      "edit": "Edit Details",
+      "delete": "Delete Asset"
     },
     "history": {
       "title": "Custody History",

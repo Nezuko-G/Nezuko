@@ -30,6 +30,7 @@
     "title": "Payroll Runs",
     "subtitle": "Manage monthly payroll runs, approve entries, and mark payments.",
     "createBtn": "Create Payroll Run",
+    "pagination": "Page {current} of {total}",
     "filters": {
       "ALL": "All",
       "DRAFT": "Draft",

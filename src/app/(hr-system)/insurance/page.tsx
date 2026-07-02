@@ -2,13 +2,7 @@
 
 import { useState } from "react";
 import { useTranslations } from "next-intl";
-import {
-  Plus,
-  Loader2,
-  FileBarChart,
-  ChevronLeft,
-  ChevronRight,
-} from "lucide-react";
+import { Plus, Loader2, FileBarChart } from "lucide-react";
 import { useInsurancePlans } from "@/app/(hr-system)/insurance/hooks/useInsurance";
 import { useInsuranceUIStore } from "@/app/(hr-system)/insurance/hooks/useInsuranceUIStore";
 import InsurancePlanTable from "./_components/InsurancePlanTable";
@@ -46,8 +40,12 @@ export default function InsurancePlansPage() {
   return (
     <div className="flex flex-col gap-4 w-full max-w-6xl mx-auto p-4 md:p-8 text-start">
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
-        <h1 className="text-2xl font-extrabold text-secondary">{t("title")}</h1>
-
+        <div>
+          <h1 className="text-2xl font-extrabold text-secondary">
+            {t("title")}
+          </h1>
+          <p className="mt-1 text-sm text-content-muted">{t("subtitle")}</p>
+        </div>
         <div className="flex flex-wrap items-center gap-2 w-full sm:w-auto justify-end">
           <RoleGuard allowedRoles={["HR_ADMIN", "TENANT_OWNER"]}>
             <button
@@ -107,26 +105,25 @@ export default function InsurancePlansPage() {
         </select>
       </div>
 
-      <div className="overflow-x-auto rounded-2xl border border-gray-100 bg-card shadow-sm flex flex-col">
+      <div className="w-full">
         {isLoading ? (
-          <div className="flex-1 flex flex-col items-center justify-center gap-3 min-h-100">
+          <div className="overflow-x-auto rounded-2xl border border-gray-100 bg-card shadow-sm flex items-center justify-center min-h-100">
             <Loader2 className="animate-spin text-primary" size={36} />
           </div>
         ) : isError ? (
-          <div className="flex-1 flex items-center justify-center text-status-error font-bold min-h-50">
+          <div className="overflow-x-auto rounded-2xl border border-gray-100 bg-card shadow-sm flex items-center justify-center text-status-error font-bold min-h-50">
             {t("errors.fetch")}
           </div>
         ) : (
-          <>
-            <div className="flex-1">
-              <InsurancePlanTable
-                plans={plansList}
-                page={page}
-                lastPage={lastPage}
-                setPage={setPage}
-              />
-            </div>
-          </>
+          <div className="flex-1">
+            <InsurancePlanTable
+              plans={plansList}
+              page={page}
+              lastPage={lastPage}
+              setPage={setPage}
+              isLoading={isLoading}
+            />
+          </div>
         )}
       </div>
 
