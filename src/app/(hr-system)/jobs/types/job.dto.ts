@@ -46,7 +46,7 @@ export interface JobResponse {
   duration: string;
   slug: string;
   jobId: string;
-  company: string;
+  company?: string;
   organization: string;
   jobType: string;
   employmentType: string;
