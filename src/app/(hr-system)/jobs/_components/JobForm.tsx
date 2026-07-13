@@ -12,7 +12,6 @@ interface JobFormProps {
   isPending: boolean;
 }
 
-// 💡 شيلنا الـ company من الـ Initial Data
 const defaultData: CreateJobInput = {
   title: { en: "", ar: "" },
   description: { en: "", ar: "" },
@@ -107,7 +106,6 @@ export default function JobForm({
       ).toISOString();
     }
 
-    // 💡 بننضف الداتا قبل ما تتبعت للباك إند
     delete payload._id;
     delete payload.createdAt;
     delete payload.updatedAt;
@@ -115,7 +113,7 @@ export default function JobForm({
     delete payload.slug;
     delete payload.is_active;
     delete payload.is_deleted;
-    delete payload.company; // زيادة تأكيد بنشيلها لو جات من أي مكان بالغلط
+    delete payload.company; 
 
     onSubmit(payload as CreateJobInput);
   };
@@ -165,8 +163,6 @@ export default function JobForm({
             />
           </div>
 
-          {/* 💡 شيلنا الـ Input بتاع الـ Company من هنا */}
-
           <div className="space-y-1.5">
             <label className="text-xs font-bold text-content-dark">
               {t("fields.organization")}
@@ -192,7 +188,6 @@ export default function JobForm({
         </div>
       </div>
 
-      {/* باقي الكود بتاع الـ Details والـ Classification متسب زي ما هو... */}
       <div className="space-y-4">
         <h3 className="text-lg font-extrabold text-secondary">
           {t("sections.details")}
