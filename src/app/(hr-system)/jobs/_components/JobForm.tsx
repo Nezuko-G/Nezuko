@@ -12,13 +12,13 @@ interface JobFormProps {
   isPending: boolean;
 }
 
+// 💡 شيلنا الـ company من الـ Initial Data
 const defaultData: CreateJobInput = {
   title: { en: "", ar: "" },
   description: { en: "", ar: "" },
   locationDetails: { en: "", ar: "" },
   duration: { en: "", ar: "" },
   jobId: "",
-  company: "",
   organization: "",
   fieldOfWork: "",
   experienceLevel: "",
@@ -102,8 +102,12 @@ export default function JobForm({
     e.preventDefault();
     const payload = { ...formData } as Record<string, unknown>;
     if (payload.expirationDate) {
-      payload.expirationDate = new Date(payload.expirationDate as string).toISOString();
+      payload.expirationDate = new Date(
+        payload.expirationDate as string,
+      ).toISOString();
     }
+
+    // 💡 بننضف الداتا قبل ما تتبعت للباك إند
     delete payload._id;
     delete payload.createdAt;
     delete payload.updatedAt;
@@ -111,6 +115,8 @@ export default function JobForm({
     delete payload.slug;
     delete payload.is_active;
     delete payload.is_deleted;
+    delete payload.company; // زيادة تأكيد بنشيلها لو جات من أي مكان بالغلط
+
     onSubmit(payload as CreateJobInput);
   };
 
@@ -158,17 +164,9 @@ export default function JobForm({
               className="w-full px-4 py-2.5 rounded-xl border border-gray-200 bg-gray-50 focus:ring-2 focus:ring-primary/20 outline-none transition-all font-medium text-sm"
             />
           </div>
-          <div className="space-y-1.5">
-            <label className="text-xs font-bold text-content-dark">
-              {t("fields.company")}
-            </label>
-            <input
-              required
-              value={formData.company}
-              onChange={(e) => handleChange("company", e.target.value)}
-              className="w-full px-4 py-2.5 rounded-xl border border-gray-200 bg-gray-50 focus:ring-2 focus:ring-primary/20 outline-none transition-all font-medium text-sm"
-            />
-          </div>
+
+          {/* 💡 شيلنا الـ Input بتاع الـ Company من هنا */}
+
           <div className="space-y-1.5">
             <label className="text-xs font-bold text-content-dark">
               {t("fields.organization")}
@@ -194,6 +192,7 @@ export default function JobForm({
         </div>
       </div>
 
+      {/* باقي الكود بتاع الـ Details والـ Classification متسب زي ما هو... */}
       <div className="space-y-4">
         <h3 className="text-lg font-extrabold text-secondary">
           {t("sections.details")}

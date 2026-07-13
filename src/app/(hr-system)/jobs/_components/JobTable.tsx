@@ -19,7 +19,7 @@ export default function JobTable({ jobs }: JobTableProps) {
   const toggleMutation = useToggleJobStatus();
 
   return (
-    <table className="w-full text-sm text-right border-collapse">
+    <table className="w-full text-sm text-right border-gray-100 bg-card border-collapse">
       <thead>
         <tr className="border-b border-gray-100 text-content-muted text-xs font-bold uppercase tracking-wider">
           <th className="px-6 py-4 text-right">{t("title")}</th>
