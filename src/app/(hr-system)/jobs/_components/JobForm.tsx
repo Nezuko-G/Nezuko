@@ -19,6 +19,7 @@ const defaultData: CreateJobInput = {
   duration: { en: "", ar: "" },
   jobId: "",
   organization: "",
+  company: "",
   fieldOfWork: "",
   experienceLevel: "",
   keywords: [],
