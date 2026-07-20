@@ -77,19 +77,19 @@
     "items": {
       "1": {
         "quote": "Nezuko has completely transformed our HR department. Efficiency increased by 40% and we now manage payroll in minutes instead of days.",
-        "name": "Sarah Ahmed",
+        "name": "Ahmed Nagy",
         "role": "HR Manager",
         "company": "Tech Ahead"
       },
       "2": {
         "quote": "Finally, our payroll and finances are perfectly synchronized. No more manual data entry errors.",
-        "name": "Khaled Mansour",
+        "name": "Ahmed Nagib",
         "role": "CFO",
         "company": "Global Innovate"
       },
       "3": {
         "quote": "Real-time workforce data allows me to make proactive decisions for our company's future with complete confidence.",
-        "name": "Ayesha Khan",
+        "name": "Abdelrahman Selim",
         "role": "CEO",
         "company": "Future Builders"
       }

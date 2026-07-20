@@ -351,7 +351,7 @@ export default function ServicesPage() {
                 </Section>
 
                 {/* ══════ BOTTOM CTA ══════ */}
-                <Section dark>
+                {/* <Section dark>
                     <motion.div
                         initial={{ opacity: 0, y: 24 }}
                         whileInView={{ opacity: 1, y: 0 }}
@@ -388,7 +388,7 @@ export default function ServicesPage() {
                             </div>
                         </div>
                     </motion.div>
-                </Section>
+                </Section> */}
 
             </main>
 
