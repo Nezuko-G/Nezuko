@@ -375,7 +375,7 @@ export default function BlogsPage() {
         </Section>
 
         {/* ══════ NEWSLETTER CTA ══════ */}
-        <Section dark>
+        {/* <Section dark>
           <motion.div
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -412,7 +412,7 @@ export default function BlogsPage() {
               </p>
             </div>
           </motion.div>
-        </Section>
+        </Section> */}
       </main>
 
       <Footer />

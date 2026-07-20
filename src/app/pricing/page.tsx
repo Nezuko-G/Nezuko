@@ -444,14 +444,14 @@ export default function PricingPage() {
                 </Section>
 
                 {/* ══════ 9 — BOTTOM CTA (dark) ══════ */}
-                <Section dark>
+                
+                {/* <Section dark>
                     <motion.div
                         initial={{ opacity: 0, y: 24 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         className="max-w-4xl mx-auto text-center relative overflow-hidden"
                     >
-                        {/* Decorative blobs */}
                         <div className="absolute inset-0 opacity-10 pointer-events-none">
                             <div className="absolute -top-20 -right-20 w-72 h-72 rounded-full bg-primary blur-3xl" />
                             <div className="absolute -bottom-20 -left-20 w-56 h-56 rounded-full bg-primary blur-3xl" />
@@ -483,7 +483,7 @@ export default function PricingPage() {
                             </div>
                         </div>
                     </motion.div>
-                </Section>
+                </Section> */}
 
             </main>
 
