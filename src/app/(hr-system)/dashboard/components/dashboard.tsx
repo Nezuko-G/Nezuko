@@ -35,6 +35,7 @@ const BAR_COLORS: Record<string, string> = {
   TODO: "#1a1a3d",
   IN_PROGRESS: "#f59e0b",
   DONE: "#00FFB9",
+  IN_REVIEW: "#a855f7",
   CANCELLED: "#ef4444",
 };
 

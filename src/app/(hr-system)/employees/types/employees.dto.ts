@@ -4,6 +4,7 @@ export const EmployeeRoleEnum = z.enum([
     "HR_ADMIN",
     "MANAGER",
     "EMPLOYEE",
+    "TENANT_OWNER",
 ]);
 
 export const EmployeeStatusEnum = z.enum([

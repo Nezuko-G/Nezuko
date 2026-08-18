@@ -112,6 +112,7 @@
     "TODO": "To Do",
     "IN_PROGRESS": "In Progress",
     "DONE": "Done",
+    "IN_REVIEW": "In Review",
     "CANCELLED": "Cancelled",
     "BLOCKED": "Blocked"
   },
