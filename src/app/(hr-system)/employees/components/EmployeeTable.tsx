@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 import { Eye, Pencil, UserX } from "lucide-react";
@@ -24,6 +24,11 @@ export default function EmployeeTable({ onAddClick, onTerminate }: Props) {
   const [status, setStatus] = useState("");
   const [page, setPage] = useState(1);
   const limit = 10;
+
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const { data: employeesData, isLoading } = useEmployees({
     page,
@@ -172,8 +177,10 @@ export default function EmployeeTable({ onAddClick, onTerminate }: Props) {
                       </span>
                     </td>
                     <td className="px-5 py-4 text-content-muted">
-                      {emp.hireDate
-                        ? new Date(emp.hireDate).toLocaleDateString()
+                      {emp.hireDate && !isNaN(new Date(emp.hireDate).getTime())
+                        ? mounted
+                          ? new Date(emp.hireDate).toLocaleDateString()
+                          : new Date(emp.hireDate).toISOString().split("T")[0]
                         : "—"}
                     </td>
                     <td className="px-5 py-4">

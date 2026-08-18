@@ -33,10 +33,10 @@ export default function LoginForm() {
   }, [isAuth, router]);
 
   const [form, setForm] = useState({
-    companyEmail: "contact@nezuko.com",
-    userEmail: "hr@nezuko.com",
-    password: "Admin@1234"
-});
+    companyEmail: "",
+    userEmail: "",
+    password: ""
+  });
 
   const loginMutation = useLogin();
 
@@ -68,6 +68,7 @@ export default function LoginForm() {
             src="https://i.ibb.co/r2p3NPDQ/image-1776524184625-webp-image-removebg-preview.png"
             alt="hero"
             fill
+            sizes="(max-width: 768px) 100vw, 50vw"
             className="object-contain object-bottom"
             style={{
               filter: "drop-shadow(0px 0px 50px rgba(99, 179, 237, 0.4))",

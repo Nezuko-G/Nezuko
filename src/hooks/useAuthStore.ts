@@ -16,6 +16,7 @@ interface AuthState {
   setUserData: (data: { id?: string; firstName: string; lastName: string; avatarBase64?: string }) => void;
   clearAvatar: () => void;
   clearAuth: () => void;
+  hydrate: () => void;
 }
 
 const ALL_ROLES: UserRole[] = ["HR_ADMIN", "MANAGER", "EMPLOYEE", "TENANT_OWNER"];
@@ -39,17 +40,28 @@ function getInitialAuth(): StoredAuth {
   }
 }
 
-const stored = getInitialAuth();
-const avatar = readAvatarFromStorage();
-
 export const useAuthStore = create<AuthState>((set) => ({
-  id: stored.id ?? null,
-  role: (stored.role && ALL_ROLES.includes(stored.role) ? stored.role : "EMPLOYEE") as UserRole,
-  isHydrated: typeof window !== "undefined",
-  avatarBase64: avatar.base64,
-  avatarUpdatedAt: avatar.updatedAt,
-  firstName: stored.firstName ?? null,
-  lastName: stored.lastName ?? null,
+  id: null,
+  role: "EMPLOYEE" as UserRole,
+  isHydrated: false,
+  avatarBase64: null,
+  avatarUpdatedAt: null,
+  firstName: null,
+  lastName: null,
+
+  hydrate: () => {
+    const stored = getInitialAuth();
+    const avatar = readAvatarFromStorage();
+    set({
+      id: stored.id ?? null,
+      role: (stored.role && ALL_ROLES.includes(stored.role) ? stored.role : "EMPLOYEE") as UserRole,
+      isHydrated: true,
+      avatarBase64: avatar.base64,
+      avatarUpdatedAt: avatar.updatedAt,
+      firstName: stored.firstName ?? null,
+      lastName: stored.lastName ?? null,
+    });
+  },
 
   setRole: (role) => {
     set({ role });
